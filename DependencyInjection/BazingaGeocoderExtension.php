@@ -33,14 +33,14 @@ class BazingaGeocoderExtension extends Extension
         $loader->load('services.xml');
 
         if (isset($config['adapter']['class']) && !empty($config['adapter']['class'])) {
-            $container->setParameter('bazinga.geocoder.adapter.class', $config['adapter']);
+            $container->setParameter('bazinga_geocoder.geocoder.adapter.class', $config['adapter']);
         }
 
         if (isset($config['providers']['bing_maps'])) {
             $bingMapsParams = $config['providers']['bing_maps'];
 
             $container
-                ->getDefinition('bazinga.provider.bing_maps')
+                ->getDefinition('bazinga_geocoder.provider.bing_maps')
                 ->replaceArgument(1, $bingMapsParams['api_key'])
                 ->replaceArgument(2, $bingMapsParams['locale'])
                 ;
@@ -50,7 +50,7 @@ class BazingaGeocoderExtension extends Extension
             $bingMapsParams = $config['providers']['bing_maps'];
 
             $container
-                ->getDefinition('bazinga.provider.ip_info_db')
+                ->getDefinition('bazinga_geocoder.provider.ip_info_db')
                 ->replaceArgument(1, $bingMapsParams['api_key'])
                 ;
         }
@@ -59,7 +59,7 @@ class BazingaGeocoderExtension extends Extension
             $bingMapsParams = $config['providers']['yahoo'];
 
             $container
-                ->getDefinition('bazinga.provider.bing_maps')
+                ->getDefinition('bazinga_geocoder.provider.bing_maps')
                 ->replaceArgument(1, $bingMapsParams['api_key'])
                 ->replaceArgument(2, $bingMapsParams['locale'])
                 ;
@@ -69,7 +69,7 @@ class BazingaGeocoderExtension extends Extension
             $bingMapsParams = $config['providers']['google_maps'];
 
             $container
-                ->getDefinition('bazinga.provider.bing_maps')
+                ->getDefinition('bazinga_geocoder.provider.bing_maps')
                 ->replaceArgument(1, $bingMapsParams['api_key'])
                 ;
         }

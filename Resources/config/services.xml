@@ -4,52 +4,52 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="bazinga.geocoder.class">Geocoder\Geocoder</parameter>
-        <parameter key="bazinga.geocoder.adapter.class">Geocoder\HttpAdapter\CurlHttpAdapter</parameter>
-        <parameter key="bazinga.geocoder.provider.bing_maps.class">Geocoder\Provider\BingMapsProvider</parameter>
-        <parameter key="bazinga.geocoder.provider.free_geo_ip.class">Geocoder\Provider\FreeGeoIpProvider</parameter>
-        <parameter key="bazinga.geocoder.provider.google_maps.class">Geocoder\Provider\GoogleMapsProvider</parameter>
-        <parameter key="bazinga.geocoder.provider.host_ip.class">Geocoder\Provider\HostIpProvider</parameter>
-        <parameter key="bazinga.geocoder.provider.ip_info_db.class">Geocoder\Provider\IpInfoDbProvider</parameter>
-        <parameter key="bazinga.geocoder.provider.yahoo.class">Geocoder\Provider\YahooProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.class">Geocoder\Geocoder</parameter>
+        <parameter key="bazinga_geocoder.geocoder.adapter.class">Geocoder\HttpAdapter\CurlHttpAdapter</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.bing_maps.class">Geocoder\Provider\BingMapsProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.free_geo_ip.class">Geocoder\Provider\FreeGeoIpProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.google_maps.class">Geocoder\Provider\GoogleMapsProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.host_ip.class">Geocoder\Provider\HostIpProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.ip_info_db.class">Geocoder\Provider\IpInfoDbProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.yahoo.class">Geocoder\Provider\YahooProvider</parameter>
     </parameters>
 
     <services>
-        <service id="bazinga.geocoder" class="%bazinga.geocoder.class%" />
+        <service id="bazinga_geocoder.geocoder" class="%bazinga_geocoder.geocoder.class%" />
 
         <!-- Adapters -->
-        <service id="bazinga.geocoder.adapter" class="%bazinga.geocoder.adapter.class%" />
+        <service id="bazinga_geocoder.geocoder.adapter" class="%bazinga_geocoder.geocoder.adapter.class%" />
 
         <!-- Providers -->
-        <service id="bazinga.provider.free_geo_ip" class="%bazinga.geocoder.provider.free_geo_ip.class%">
-            <argument type="service" id="bazinga.geocoder.adapter" />
-            <tag name="geocoder.provider" />
+        <service id="bazinga_geocoder.provider.free_geo_ip" class="%bazinga_geocoder.geocoder.provider.free_geo_ip.class%">
+            <argument type="service" id="bazinga_geocoder.geocoder.adapter" />
+            <tag name="bazinga_geocoder.provider" />
         </service>
-        <service id="bazinga.provider.google_maps" class="%bazinga.geocoder.provider.google_maps.class%">
-            <argument type="service" id="bazinga.geocoder.adapter" />
+        <service id="bazinga_geocoder.provider.google_maps" class="%bazinga_geocoder.geocoder.provider.google_maps.class%">
+            <argument type="service" id="bazinga_geocoder.geocoder.adapter" />
             <argument></argument>
-            <tag name="geocoder.provider" />
+            <tag name="bazinga_geocoder.provider" />
         </service>
-        <service id="bazinga.provider.host_ip" class="%bazinga.geocoder.provider.host_ip.class%">
-            <argument type="service" id="bazinga.geocoder.adapter" />
-            <tag name="geocoder.provider" />
+        <service id="bazinga_geocoder.provider.host_ip" class="%bazinga_geocoder.geocoder.provider.host_ip.class%">
+            <argument type="service" id="bazinga_geocoder.geocoder.adapter" />
+            <tag name="bazinga_geocoder.provider" />
         </service>
-        <service id="bazinga.provider.ip_info_db" class="%bazinga.geocoder.provider.ip_info_db.class%">
-            <argument type="service" id="bazinga.geocoder.adapter" />
+        <service id="bazinga_geocoder.provider.ip_info_db" class="%bazinga_geocoder.geocoder.provider.ip_info_db.class%">
+            <argument type="service" id="bazinga_geocoder.geocoder.adapter" />
             <argument></argument>
-            <tag name="geocoder.provider" />
+            <tag name="bazinga_geocoder.provider" />
         </service>
-        <service id="bazinga.provider.yahoo" class="%bazinga.geocoder.provider.yahoo.class%">
-            <argument type="service" id="bazinga.geocoder.adapter" />
+        <service id="bazinga_geocoder.provider.yahoo" class="%bazinga_geocoder.geocoder.provider.yahoo.class%">
+            <argument type="service" id="bazinga_geocoder.geocoder.adapter" />
             <argument></argument>
             <argument></argument>
-            <tag name="geocoder.provider" />
+            <tag name="bazinga_geocoder.provider" />
         </service>
-        <service id="bazinga.provider.bing_maps" class="%bazinga.geocoder.provider.bing_maps.class%">
-            <argument type="service" id="bazinga.geocoder.adapter" />
+        <service id="bazinga_geocoder.provider.bing_maps" class="%bazinga_geocoder.geocoder.provider.bing_maps.class%">
+            <argument type="service" id="bazinga_geocoder.geocoder.adapter" />
             <argument></argument>
             <argument></argument>
-            <tag name="geocoder.provider" />
+            <tag name="bazinga_geocoder.provider" />
         </service>
     </services>
 </container>

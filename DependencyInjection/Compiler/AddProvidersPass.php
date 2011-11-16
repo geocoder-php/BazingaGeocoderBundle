@@ -31,19 +31,19 @@ class AddProvidersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('bazinga.geocoder')) {
+        if (!$container->hasDefinition('bazinga_geocoder.geocoder')) {
             return;
         }
 
         $this->container = $container;
 
         $array = array();
-        foreach ($this->container->findTaggedServiceIds('geocoder.provider') as $providerId => $attributes) {
+        foreach ($this->container->findTaggedServiceIds('bazinga_geocoder.provider') as $providerId => $attributes) {
             $array[] = new Reference($providerId);
         }
 
         $this->container
-            ->getDefinition('bazinga.geocoder')
+            ->getDefinition('bazinga_geocoder.geocoder')
             ->addMethodCall('registerProviders', array($array))
             ;
     }
