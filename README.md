@@ -49,6 +49,55 @@ Register the bundle in `app/AppKernel.php`:
     }
 
 
+Usage
+-----
+
+This bundle registers a `bazinga_geocoder.geocoder` service which is an instance of `Geocoder`. You'll be able to do whatever you want with it.
+
+#### Killer Feature ####
+
+You can fake the `REMOTE_ADDR` HTTP parameter through this bundle in order to get information in your development environment, for instance:
+
+``` php
+<?php
+
+// ...
+
+    /**
+     * @Template()
+     */
+    public function indexAction()
+    {
+        // Retrieve information from the current user (by its IP address)
+        $result = $this->geocoder
+            ->using('yahoo')
+            ->geocode($this->getRequest()->server->get('REMOTE_ADDR'));
+
+        // Find the 5 nearest objects from the current user.
+        $objects = ObjectQuery::create()
+            ->filterByDistanceFrom($result->getLatitude(), $result->getLongitude(), 15)
+            ->limit(5)
+            ->find();
+
+        return array(
+            'geocoded'        => $result,
+            'nearest_objects' => $objects
+        );
+    }
+```
+
+In the example, we'll retrieve information from the user's IP address, and 5 objects nears him.
+But it won't work on your local environment, that's why this bundle provides an easy way to fake this behavior by using a `fake_ip` parameter.
+
+``` yaml
+# app/config/config_dev.yml
+bazinga_geocoder:
+    fake_ip:    123.345.643.133
+```
+
+If set, the parameter will replace the `REMOTE_ADDR` value by the given one.
+
+
 Reference Configuration
 -----------------------
 
@@ -60,6 +109,7 @@ You'll find the reference configuration below:
 # app/config/config*.yml
 
 bazinga_geocoder:
+    fake_ip:    999.999.999.999
     adapter:
         class:  \Your\CustomAdapter
     providers:

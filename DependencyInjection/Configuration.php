@@ -31,6 +31,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+            ->scalarNode('fake_ip')->defaultNull()->end()
             ->arrayNode('adapter')
                 ->children()
                     ->scalarNode('class')->defaultNull()->end()

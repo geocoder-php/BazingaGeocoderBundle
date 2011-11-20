@@ -12,6 +12,8 @@
         <parameter key="bazinga_geocoder.geocoder.provider.host_ip.class">Geocoder\Provider\HostIpProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.ip_info_db.class">Geocoder\Provider\IpInfoDbProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.yahoo.class">Geocoder\Provider\YahooProvider</parameter>
+
+        <parameter key="bazinga_geocoder.event_listener.fake_request.class">Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener</parameter>
     </parameters>
 
     <services>
@@ -50,6 +52,12 @@
             <argument></argument>
             <argument></argument>
             <tag name="bazinga_geocoder.provider" />
+        </service>
+
+        <!-- Listener -->
+        <service id="bazinga_geocoder.event_listener.fake_request" class="%bazinga_geocoder.event_listener.fake_request.class%">
+            <argument></argument>
+            <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
         </service>
     </services>
 </container>
