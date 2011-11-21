@@ -71,14 +71,5 @@ class BazingaGeocoderExtension extends Extension
                 ->replaceArgument(2, $bingMapsParams['locale'])
                 ;
         }
-
-        if (isset($config['providers']['google_maps'])) {
-            $bingMapsParams = $config['providers']['google_maps'];
-
-            $container
-                ->getDefinition('bazinga_geocoder.provider.bing_maps')
-                ->replaceArgument(1, $bingMapsParams['api_key'])
-                ;
-        }
     }
 }
