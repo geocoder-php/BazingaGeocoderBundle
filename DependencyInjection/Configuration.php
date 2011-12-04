@@ -62,6 +62,13 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('locale')->defaultNull()->end()
                     ->end()
                 ->end()
+                ->arrayNode('cloudmade')
+                    ->children()
+                        ->scalarNode('api_key')
+                            ->isRequired()->cannotBeEmpty()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
             ;
 

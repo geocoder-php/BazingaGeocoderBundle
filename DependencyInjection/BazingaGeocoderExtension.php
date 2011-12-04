@@ -54,21 +54,30 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['ip_info_db'])) {
-            $bingMapsParams = $config['providers']['bing_maps'];
+            $ipInfoDbParams = $config['providers']['ip_info_db'];
 
             $container
                 ->getDefinition('bazinga_geocoder.provider.ip_info_db')
-                ->replaceArgument(1, $bingMapsParams['api_key'])
+                ->replaceArgument(1, $ipInfoDbParams['api_key'])
                 ;
         }
 
         if (isset($config['providers']['yahoo'])) {
-            $bingMapsParams = $config['providers']['yahoo'];
+            $yahooParams = $config['providers']['yahoo'];
 
             $container
-                ->getDefinition('bazinga_geocoder.provider.bing_maps')
-                ->replaceArgument(1, $bingMapsParams['api_key'])
-                ->replaceArgument(2, $bingMapsParams['locale'])
+                ->getDefinition('bazinga_geocoder.provider.yahoo')
+                ->replaceArgument(1, $yahooParams['api_key'])
+                ->replaceArgument(2, $yahooParams['locale'])
+                ;
+        }
+
+        if (isset($config['providers']['cloudmade'])) {
+            $cloudMadeParams = $config['providers']['cloudmade'];
+
+            $container
+                ->getDefinition('bazinga_geocoder.provider.cloudmade')
+                ->replaceArgument(1, $cloudMadeParams['api_key'])
                 ;
         }
     }
