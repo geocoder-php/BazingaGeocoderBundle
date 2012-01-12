@@ -44,7 +44,7 @@ Register the bundle in `app/AppKernel.php`:
     {
         return array(
             // ...
-            new Bazinga\Bundle\GeocoderBundle\GeocoderBundle(),
+            new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
         );
     }
 
