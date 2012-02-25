@@ -22,7 +22,7 @@
         <service id="bazinga_geocoder.geocoder" class="%bazinga_geocoder.geocoder.class%" />
 
         <!-- Adapters -->
-        <service id="bazinga_geocoder.geocoder.adapter" class="%bazinga_geocoder.geocoder.adapter.class%" />
+        <service id="bazinga_geocoder.geocoder.adapter" class="%bazinga_geocoder.geocoder.adapter.class%" public="false" />
 
         <!-- Providers -->
         <service id="bazinga_geocoder.provider.free_geo_ip" class="%bazinga_geocoder.geocoder.provider.free_geo_ip.class%" public="false">
