@@ -80,5 +80,14 @@ class BazingaGeocoderExtension extends Extension
                 ->replaceArgument(1, $cloudMadeParams['api_key'])
                 ;
         }
+        
+        if (isset($config['providers']['google_maps'])) {
+            $googleMapsParams = $config['providers']['google_maps'];
+
+            $container
+                ->getDefinition('bazinga_geocoder.provider.google_maps')
+                ->replaceArgument(1, $googleMapsParams['locale'])
+                ;
+        }
     }
 }
