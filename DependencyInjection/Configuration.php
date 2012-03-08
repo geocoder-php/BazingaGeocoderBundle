@@ -69,6 +69,16 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('google_maps')
+                    ->children()
+                        ->scalarNode('locale')->defaultNull()->end()
+                    ->end()
+                ->end()
+                ->arrayNode('openstreetmaps')
+                    ->children()
+                        ->scalarNode('locale')->defaultNull()->end()
+                    ->end()
+                ->end()
             ->end()
             ;
 
