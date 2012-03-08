@@ -74,6 +74,11 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('locale')->defaultNull()->end()
                     ->end()
                 ->end()
+                ->arrayNode('openstreetmaps')
+                    ->children()
+                        ->scalarNode('locale')->defaultNull()->end()
+                    ->end()
+                ->end()
             ->end()
             ;
 

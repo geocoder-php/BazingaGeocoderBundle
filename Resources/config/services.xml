@@ -62,6 +62,7 @@
         </service>
         <service id="bazinga_geocoder.provider.openstreetmaps" class="%bazinga_geocoder.geocoder.provider.openstreetmaps.class%" public="false">
             <argument type="service" id="bazinga_geocoder.geocoder.adapter" />
+            <argument></argument>
             <tag name="bazinga_geocoder.provider" />
         </service>
 

@@ -89,5 +89,14 @@ class BazingaGeocoderExtension extends Extension
                 ->replaceArgument(1, $googleMapsParams['locale'])
                 ;
         }
+        
+        if (isset($config['providers']['openstreetmaps'])) {
+            $openstreetMapsParams = $config['providers']['openstreetmaps'];
+
+            $container
+                ->getDefinition('bazinga_geocoder.provider.openstreetmaps')
+                ->replaceArgument(1, $openstreetMapsParams['locale'])
+                ;
+        }
     }
 }
