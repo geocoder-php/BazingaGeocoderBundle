@@ -40,7 +40,7 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['adapter']['class']) && !empty($config['adapter']['class'])) {
-            $container->setParameter('bazinga_geocoder.geocoder.adapter.class', $config['adapter']);
+            $container->setParameter('bazinga_geocoder.geocoder.adapter.class', $config['adapter']['class']);
         }
 
         if (isset($config['providers']['bing_maps'])) {
@@ -80,7 +80,7 @@ class BazingaGeocoderExtension extends Extension
                 ->replaceArgument(1, $cloudMadeParams['api_key'])
                 ;
         }
-        
+
         if (isset($config['providers']['google_maps'])) {
             $googleMapsParams = $config['providers']['google_maps'];
 
@@ -89,7 +89,7 @@ class BazingaGeocoderExtension extends Extension
                 ->replaceArgument(1, $googleMapsParams['locale'])
                 ;
         }
-        
+
         if (isset($config['providers']['openstreetmaps'])) {
             $openstreetMapsParams = $config['providers']['openstreetmaps'];
 
