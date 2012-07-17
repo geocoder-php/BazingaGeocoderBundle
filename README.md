@@ -117,7 +117,7 @@ bazinga_geocoder:
             api_key:    XXXXXXXXX
             locale:     xx_XX
         google_maps:
-            api_key:    XXXXXXXXX
+            locale:     xx_XX
         ip_info_db:
             api_key:    XXXXXXXXX
         yahoo:
