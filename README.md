@@ -101,7 +101,7 @@ If set, the parameter will replace the `REMOTE_ADDR` value by the given one.
 Reference Configuration
 -----------------------
 
-There is no required configuration in order to use the Geocoder service but some providers need information (API key for instance).
+You have to define the providers you want to use in your configuration. Some of them need information (API key for instance).
 
 You'll find the reference configuration below:
 
@@ -123,6 +123,12 @@ bazinga_geocoder:
         yahoo:
             api_key:    XXXXXXXXX
             locale:     xx_XX
+        cloudmade:
+            api_key:    XXXXXXXXX
+        free_geo_ip: ~
+        openstreetmaps: ~
+        host_ip: ~
+        geoip: ~
 ```
 
 

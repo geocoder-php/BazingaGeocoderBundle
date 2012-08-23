@@ -23,8 +23,12 @@ use Symfony\Component\Config\Definition\Processor;
  */
 class BazingaGeocoderExtension extends Extension
 {
+    protected $container;
+
     public function load(array $configs, ContainerBuilder $container)
     {
+        $this->container = $container;
+
         $processor      = new Processor();
         $configuration  = new Configuration();
         $config         = $processor->processConfiguration($configuration, $configs);
@@ -43,60 +47,75 @@ class BazingaGeocoderExtension extends Extension
             $container->setParameter('bazinga_geocoder.geocoder.adapter.class', $config['adapter']['class']);
         }
 
+        if (isset($config['providers']['free_geo_ip'])) {
+            $this->addProvider('free_geo_ip');
+        }
+
+        if (isset($config['providers']['host_ip'])) {
+            $this->addProvider('host_ip');
+        }
+
         if (isset($config['providers']['bing_maps'])) {
             $bingMapsParams = $config['providers']['bing_maps'];
 
-            $container
-                ->getDefinition('bazinga_geocoder.provider.bing_maps')
-                ->replaceArgument(1, $bingMapsParams['api_key'])
-                ->replaceArgument(2, $bingMapsParams['locale'])
-                ;
+            $this->addProvider('bing_maps', array(
+                $bingMapsParams['api_key'],
+                $bingMapsParams['locale'],
+            ));
         }
 
         if (isset($config['providers']['ip_info_db'])) {
             $ipInfoDbParams = $config['providers']['ip_info_db'];
 
-            $container
-                ->getDefinition('bazinga_geocoder.provider.ip_info_db')
-                ->replaceArgument(1, $ipInfoDbParams['api_key'])
-                ;
+            $this->addProvider('ip_info_db', array($ipInfoDbParams['api_key']));
         }
 
         if (isset($config['providers']['yahoo'])) {
             $yahooParams = $config['providers']['yahoo'];
 
-            $container
-                ->getDefinition('bazinga_geocoder.provider.yahoo')
-                ->replaceArgument(1, $yahooParams['api_key'])
-                ->replaceArgument(2, $yahooParams['locale'])
-                ;
+            $this->addProvider('yahoo', array(
+                $yahooParams['api_key'],
+                $yahooParams['locale'],
+            ));
         }
 
         if (isset($config['providers']['cloudmade'])) {
             $cloudMadeParams = $config['providers']['cloudmade'];
 
-            $container
-                ->getDefinition('bazinga_geocoder.provider.cloudmade')
-                ->replaceArgument(1, $cloudMadeParams['api_key'])
-                ;
+            $this->addProvider('cloudmade', array($cloudMadeParams['api_key']));
         }
 
         if (isset($config['providers']['google_maps'])) {
             $googleMapsParams = $config['providers']['google_maps'];
 
-            $container
-                ->getDefinition('bazinga_geocoder.provider.google_maps')
-                ->replaceArgument(1, $googleMapsParams['locale'])
-                ;
+            $this->addProvider('google_maps', array($googleMapsParams['locale']));
         }
 
         if (isset($config['providers']['openstreetmaps'])) {
             $openstreetMapsParams = $config['providers']['openstreetmaps'];
 
-            $container
-                ->getDefinition('bazinga_geocoder.provider.openstreetmaps')
-                ->replaceArgument(1, $openstreetMapsParams['locale'])
-                ;
+            $this->addProvider('openstreetmaps', array($openstreetMapsParams['locale']));
         }
+
+        if (isset($config['providers']['geoip'])) {
+            $this->addProvider('geoip');
+        }
+    }
+
+    protected function addProvider($name, array $arguments = array())
+    {
+        $provider = new Definition(
+            '%bazinga_geocoder.geocoder.provider.'.$name.'.class%',
+            array_merge(
+                array(new Reference('bazinga_geocoder.geocoder.adapter')),
+                $arguments
+            )
+        );
+
+        $provider
+            ->setPublic(false)
+            ->addTag('bazinga_geocoder.provider');
+
+        $this->container->setDefinition('bazinga_geocoder.provider.'.$name, $provider);
     }
 }
