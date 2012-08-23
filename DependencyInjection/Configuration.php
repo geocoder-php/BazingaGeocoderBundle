@@ -79,6 +79,10 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('locale')->defaultNull()->end()
                     ->end()
                 ->end()
+                ->arrayNode('host_ip')->end()
+                ->arrayNode('geoip')->end()
+                ->arrayNode('free_geo_ip')->end()
+
             ->end()
             ;
 
