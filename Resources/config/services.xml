@@ -17,6 +17,13 @@
         <parameter key="bazinga_geocoder.geocoder.provider.geoip.class">Geocoder\Provider\GeoipProvider</parameter>
 
         <parameter key="bazinga_geocoder.event_listener.fake_request.class">Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener</parameter>
+
+        <parameter key="bazinga_geocoder.dumper_manager.class">Bazinga\Bundle\GeocoderBundle\DumperManager</parameter>
+        <parameter key="bazinga_geocoder.dumper.geojson.class">Geocoder\Dumper\GeoJsonDumper</parameter>
+        <parameter key="bazinga_geocoder.dumper.gpx.class">Geocoder\Dumper\GpxDumper</parameter>
+        <parameter key="bazinga_geocoder.dumper.kmp.class">Geocoder\Dumper\KmlDumper</parameter>
+        <parameter key="bazinga_geocoder.dumper.wkp.class">Geocoder\Dumper\WkpDumper</parameter>
+        <parameter key="bazinga_geocoder.dumper.wkt.class">Geocoder\Dumper\WktDumper</parameter>
     </parameters>
 
     <services>
@@ -24,6 +31,26 @@
 
         <!-- Adapters -->
         <service id="bazinga_geocoder.geocoder.adapter" class="%bazinga_geocoder.geocoder.adapter.class%" public="false" />
+
+        <!-- Dumpers -->
+        <service id="bazinga_geocoder.dumper_manager" class="%bazinga_geocoder.dumper_manager.class">
+            <argument type="collection" /><!-- Placeholder -->
+        </service>
+        <service id="bazinga_geocoder.dumper.geojson" class="%bazinga_geocoder.dumper.geojson.class%">
+            <tag name="geocoder.dumper" alias="geojson" />
+        </service>
+        <service id="bazinga_geocoder.dumper.gpx" class="%bazinga_geocoder.dumper.gpx.class%">
+            <tag name="geocoder.dumper" alias="gpx" />
+        </service>
+        <service id="bazinga_geocoder.dumper.kmp" class="%bazinga_geocoder.dumper.kmp.class%">
+            <tag name="geocoder.dumper" alias="kmp" />
+        </service>
+        <service id="bazinga_geocoder.dumper.wkp" class="%bazinga_geocoder.dumper.wkp.class%">
+            <tag name="geocoder.dumper" alias="wkp" />
+        </service>
+        <service id="bazinga_geocoder.dumper.wkt" class="%bazinga_geocoder.dumper.wkt%">
+            <tag name="geocoder.dumper" alias="wkt" />
+        </service>
 
         <!-- Listener -->
         <service id="bazinga_geocoder.event_listener.fake_request" class="%bazinga_geocoder.event_listener.fake_request.class%">
