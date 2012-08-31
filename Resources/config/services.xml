@@ -33,7 +33,7 @@
         <service id="bazinga_geocoder.geocoder.adapter" class="%bazinga_geocoder.geocoder.adapter.class%" public="false" />
 
         <!-- Dumpers -->
-        <service id="bazinga_geocoder.dumper_manager" class="%bazinga_geocoder.dumper_manager.class">
+        <service id="bazinga_geocoder.dumper_manager" class="%bazinga_geocoder.dumper_manager.class%">
             <argument type="collection" /><!-- Placeholder -->
         </service>
         <service id="bazinga_geocoder.dumper.geojson" class="%bazinga_geocoder.dumper.geojson.class%">
@@ -48,7 +48,7 @@
         <service id="bazinga_geocoder.dumper.wkp" class="%bazinga_geocoder.dumper.wkp.class%">
             <tag name="geocoder.dumper" alias="wkp" />
         </service>
-        <service id="bazinga_geocoder.dumper.wkt" class="%bazinga_geocoder.dumper.wkt%">
+        <service id="bazinga_geocoder.dumper.wkt" class="%bazinga_geocoder.dumper.wkt.class%">
             <tag name="geocoder.dumper" alias="wkt" />
         </service>
 
