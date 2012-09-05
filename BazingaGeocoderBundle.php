@@ -14,6 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddProvidersPass;
+use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddDumperPass;
 
 /**
  * @author William Durand <william.durand1@gmail.com>
@@ -28,5 +29,6 @@ class BazingaGeocoderBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new AddProvidersPass());
+        $container->addCompilerPass(new AddDumperPass());
     }
 }
