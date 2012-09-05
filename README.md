@@ -97,6 +97,49 @@ bazinga_geocoder:
 
 If set, the parameter will replace the `REMOTE_ADDR` value by the given one.
 
+## Dumpers ##
+
+If you need to dump your geocoded data to a specific format, you can use the __Dumper__ component.
+The following dumper's are supported:
+
+ * Geojson
+ * GPX
+ * KMP
+ * WKP
+ * WKT
+
+Here a little example:
+
+```php
+<?php
+
+public function geocodeAction()
+{
+    $result = $this->container->get('bazinga_geocoder.geocoder')
+        ->geocode($this->container->get('request')->server->get('REMOTE_ADDR'));
+
+    $body = $this->container->get('bazinga_geocoder.dumper_manager')
+        ->get('geojson')
+        ->dump($result);
+
+    $response = new Response();
+    $response->setContent($body);
+
+    return $response;
+}
+```
+
+To register a new dumper, you must tag it with _geocoder.dumper_.
+Geocoder detect and register it automaticly.
+
+A little example:
+
+```xml
+<service id="some.dumper" class="%some.dumper.class">
+    <tag name="geocoder.dumper" alias="custom" />
+</service>
+```
+
 
 Reference Configuration
 -----------------------
