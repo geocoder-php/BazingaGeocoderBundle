@@ -100,6 +100,15 @@ class BazingaGeocoderExtension extends Extension
         if (isset($config['providers']['geoip'])) {
             $this->addProvider('geoip');
         }
+
+        if (isset($config['provider']['cache'])) {
+            $params = $config['provider']['cache'];
+
+            $cache = new Reference($params['adapter']);
+            $fallback = new Reference('bazinga_geocoder.geocoder.provider'.$params['provider']);
+
+            $this->addProvider('cache', array($cache, $fallback));
+        }
     }
 
     protected function addProvider($name, array $arguments = array())

@@ -15,6 +15,7 @@
         <parameter key="bazinga_geocoder.geocoder.provider.cloudmade.class">Geocoder\Provider\CloudMadeProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.openstreetmaps.class">Geocoder\Provider\OpenStreetMapsProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.geoip.class">Geocoder\Provider\GeoipProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.cache.class">Bazinga\Bundle\GeocoderBundle\Provider\CacheProvider</parameter>
 
         <parameter key="bazinga_geocoder.event_listener.fake_request.class">Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener</parameter>
 
