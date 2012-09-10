@@ -34,17 +34,23 @@ class CacheProvider implements ProviderInterface
     private $lifetime;
 
     /**
+     * @var string|null
+     */
+    private $locale;
+
+    /**
      * Constructor
      *
      * @param Cache             $cache     The cache interface
      * @param ProviderInterface $fallback  The fallback provider
      * @param integer           $lifetime  The cache lifetime
      */
-    public function __construct(Cache $cache, ProviderInterface $fallback, $lifetime = 0)
+    public function __construct(Cache $cache, ProviderInterface $fallback, $lifetime = 0, $locale = null)
     {
         $this->cache = $cache;
         $this->fallback = $fallback;
         $this->lifetime = $lifetime;
+        $this->locale = $locale;
     }
 
     /**
@@ -52,7 +58,7 @@ class CacheProvider implements ProviderInterface
      */
     public function getGeocodedData($address)
     {
-        $key = crc32($address);
+        $key = crc32($this->locale.$address);
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
@@ -69,7 +75,7 @@ class CacheProvider implements ProviderInterface
      */
     public function getReversedData(array $coordinates)
     {
-        $key = crc32(serialize($coordinates));
+        $key = crc32(serialize($this->locale.$coordinates));
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
