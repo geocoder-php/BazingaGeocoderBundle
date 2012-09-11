@@ -75,7 +75,7 @@ class CacheProvider implements ProviderInterface
      */
     public function getReversedData(array $coordinates)
     {
-        $key = crc32(serialize($this->locale.$coordinates));
+        $key = crc32(serialize($this->locale . json_encode($coordinates)));
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
