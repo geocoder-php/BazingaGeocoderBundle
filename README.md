@@ -1,41 +1,25 @@
 BazingaGeocoderBundle
 =====================
 
-Integration of the [**Geocoder**](http://github.com/willdurand/Geocoder) library into Symfony2.
+[![Build
+Status](https://secure.travis-ci.org/willdurand/BazingaGeocoderBundle.png)](http://travis-ci.org/willdurand/BazingaGeocoderBundle)
+
+Integration of the [**Geocoder**](http://github.com/willdurand/Geocoder) library
+into Symfony2.
 
 
 Installation
 ------------
 
-Install this bundle as usual:
+Using Composer, just add the following configuration to your `composer.json`:
 
-> git submodule add git://github.com/willdurand/BazingaGeocoderBundle.git vendor/bundles/Bazinga/Bundle/GeocoderBundle
-
-Add the [Geocoder](https://github.com/willdurand/Geocoder) library:
-
-> git submodule add git://github.com/willdurand/Geocoder.git vendor/geocoder
-
-As an alternative, you can also manage your vendors via Symfony2's own `bin/vendor` command.
-Add the following lines to your deps file (located in the root of the Symfony project:
-
-    [BazingaGeocoderBundle]
-        git=https://github.com/willdurand/BazingaGeocoderBundle.git
-        target=/bundles/Bazinga/Bundle/GeocoderBundle
-    [geocoder]
-        git=https://github.com/willdurand/Geocoder.git
-
-Update your vendor directory with:
-
-    php bin/vendors install
-
-Then register the namespace in `app/autoload.php`:
-
-    // app/autoload.php
-    $loader->registerNamespaces(array(
-        // ...
-        'Bazinga'       => __DIR__.'/../vendor/bundles',
-        'Geocoder'      => __DIR__.'/../vendor/geocoder/src',
-    ));
+```json
+{
+    "require": {
+        "willdurand/geocoder-bundle": "*"
+    }
+}
+```
 
 Register the bundle in `app/AppKernel.php`:
 
@@ -52,11 +36,13 @@ Register the bundle in `app/AppKernel.php`:
 Usage
 -----
 
-This bundle registers a `bazinga_geocoder.geocoder` service which is an instance of `Geocoder`. You'll be able to do whatever you want with it.
+This bundle registers a `bazinga_geocoder.geocoder` service which is an instance
+of `Geocoder`. You'll be able to do whatever you want with it.
 
 #### Killer Feature ####
 
-You can fake the `REMOTE_ADDR` HTTP parameter through this bundle in order to get information in your development environment, for instance:
+You can fake the `REMOTE_ADDR` HTTP parameter through this bundle in order to get
+information in your development environment, for instance:
 
 ``` php
 <?php
@@ -86,8 +72,10 @@ You can fake the `REMOTE_ADDR` HTTP parameter through this bundle in order to ge
     }
 ```
 
-In the example, we'll retrieve information from the user's IP address, and 5 objects nears him.
-But it won't work on your local environment, that's why this bundle provides an easy way to fake this behavior by using a `fake_ip` parameter.
+In the example, we'll retrieve information from the user's IP address, and 5
+objects nears him.
+But it won't work on your local environment, that's why this bundle provides
+an easy way to fake this behavior by using a `fake_ip` parameter.
 
 ``` yaml
 # app/config/config_dev.yml
@@ -99,8 +87,8 @@ If set, the parameter will replace the `REMOTE_ADDR` value by the given one.
 
 ## Dumpers ##
 
-If you need to dump your geocoded data to a specific format, you can use the __Dumper__ component.
-The following dumper's are supported:
+If you need to dump your geocoded data to a specific format, you can use the
+__Dumper__ component. The following dumper's are supported:
 
  * Geojson
  * GPX
@@ -108,7 +96,7 @@ The following dumper's are supported:
  * WKP
  * WKT
 
-Here a little example:
+Here is an example:
 
 ```php
 <?php
@@ -144,7 +132,8 @@ A little example:
 Reference Configuration
 -----------------------
 
-You have to define the providers you want to use in your configuration. Some of them need information (API key for instance).
+You have to define the providers you want to use in your configuration.
+Some of them need information (API key for instance).
 
 You'll find the reference configuration below:
 
@@ -172,6 +161,12 @@ bazinga_geocoder:
         openstreetmaps: ~
         host_ip: ~
         geoip: ~
+        # Caching Layer
+        cache:
+            provider: openstreetmaps
+            cache: some_service_id
+            lifetime: 86400
+            locale: %locale%
 ```
 
 
@@ -179,6 +174,7 @@ Credits
 -------
 
 * William Durand <william.durand1@gmail.com>
+* [All contributors](https://github.com/willdurand/BazingaGeocoderBundle/contributors)
 
 
 License
