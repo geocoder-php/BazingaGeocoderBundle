@@ -20,6 +20,7 @@ bazinga_geocoder:
             api_key: 123
         google_maps:
             locale: en_US
+            region: en_US
         openstreetmaps:
             locale: en_US
         host_ip: ~
