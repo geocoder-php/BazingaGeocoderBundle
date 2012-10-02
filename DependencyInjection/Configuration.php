@@ -94,6 +94,7 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('google_maps')
                     ->children()
                         ->scalarNode('locale')->defaultNull()->end()
+                        ->scalarNode('region')->defaultNull()->end()
                     ->end()
                 ->end()
                 ->arrayNode('openstreetmaps')
