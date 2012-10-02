@@ -1,0 +1,27 @@
+bazinga_geocoder:
+    fake_ip: 33.33.33.11
+    adapter:
+        class: Geocoder\HttpAdapter\CurlHttpAdapter
+    providers:
+        bing_maps:
+            api_key: 123
+            locale: en_US
+        cache:
+            adapter: doctrine.apc.cache
+            provider: bing_maps
+            locale: en_US
+            lifetime: 86400
+        ip_info_db:
+            api_key: 123
+        yahoo:
+            api_key: 123
+            locale: en_US
+        cloudmade:
+            api_key: 123
+        google_maps:
+            locale: en_US
+        openstreetmaps:
+            locale: en_US
+        host_ip: ~
+        geoip: ~
+        free_geo_ip: ~
