@@ -88,7 +88,7 @@ class BazingaGeocoderExtension extends Extension
         if (isset($config['providers']['google_maps'])) {
             $googleMapsParams = $config['providers']['google_maps'];
 
-            $this->addProvider('google_maps', array($googleMapsParams['locale']));
+            $this->addProvider('google_maps', array($googleMapsParams['locale'], $googleMapsParams['region']));
         }
 
         if (isset($config['providers']['openstreetmaps'])) {
