@@ -11,15 +11,21 @@
     }
   ],
   "require": {
-    "symfony/framework-bundle": "2.1.*",
-    "willdurand/geocoder": "1.0.*,1.1.*",
-    "symfony/console": "2.1.*"
+    "symfony/framework-bundle": ">=2.1,<2.3-dev",
+    "willdurand/geocoder": ">=1.0,<1.2-dev",
+    "symfony/console": ">=2.1,<2.3-dev"
   },
   "require-dev": {
-      "symfony/yaml": "2.1.*"
+    "symfony/yaml": ">=2.1,<2.3-dev"
   },
   "autoload": {
     "psr-0": { "Bazinga\\Bundle\\GeocoderBundle": "" }
   },
-  "target-dir": "Bazinga/Bundle/GeocoderBundle"
+  "target-dir": "Bazinga/Bundle/GeocoderBundle",
+  "minimum-stability": "dev",
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.1.x-dev"
+    }
+  }
 }
