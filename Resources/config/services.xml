@@ -23,7 +23,7 @@
         <parameter key="bazinga_geocoder.dumper.geojson.class">Geocoder\Dumper\GeoJsonDumper</parameter>
         <parameter key="bazinga_geocoder.dumper.gpx.class">Geocoder\Dumper\GpxDumper</parameter>
         <parameter key="bazinga_geocoder.dumper.kmp.class">Geocoder\Dumper\KmlDumper</parameter>
-        <parameter key="bazinga_geocoder.dumper.wkp.class">Geocoder\Dumper\WkpDumper</parameter>
+        <parameter key="bazinga_geocoder.dumper.wkb.class">Geocoder\Dumper\WkbDumper</parameter>
         <parameter key="bazinga_geocoder.dumper.wkt.class">Geocoder\Dumper\WktDumper</parameter>
     </parameters>
 
@@ -46,8 +46,8 @@
         <service id="bazinga_geocoder.dumper.kmp" class="%bazinga_geocoder.dumper.kmp.class%">
             <tag name="geocoder.dumper" alias="kmp" />
         </service>
-        <service id="bazinga_geocoder.dumper.wkp" class="%bazinga_geocoder.dumper.wkp.class%">
-            <tag name="geocoder.dumper" alias="wkp" />
+        <service id="bazinga_geocoder.dumper.wkb" class="%bazinga_geocoder.dumper.wkb.class%">
+            <tag name="geocoder.dumper" alias="wkb" />
         </service>
         <service id="bazinga_geocoder.dumper.wkt" class="%bazinga_geocoder.dumper.wkt.class%">
             <tag name="geocoder.dumper" alias="wkt" />
