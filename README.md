@@ -93,7 +93,7 @@ __Dumper__ component. The following dumper's are supported:
  * Geojson
  * GPX
  * KMP
- * WKP
+ * WKB
  * WKT
 
 Here is an example:
