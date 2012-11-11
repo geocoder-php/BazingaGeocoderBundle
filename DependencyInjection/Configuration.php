@@ -106,6 +106,25 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('geoip')->end()
                 ->arrayNode('free_geo_ip')->end()
 
+                ->arrayNode('mapquest')->end()
+                ->arrayNode('oiorest')->end()
+                ->arrayNode('geocoder_ca')->end()
+                ->arrayNode('geocoder_us')->end()
+                ->arrayNode('ign_openls')
+                    ->children()
+                        ->scalarNode('api_key')
+                            ->isRequired()->cannotBeEmpty()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('data_science_toolkit')->end()
+                ->arrayNode('yandex')
+                    ->children()
+                        ->scalarNode('locale')->defaultNull()->end()
+                        ->scalarNode('toponym')->defaultNull()->end()
+                    ->end()
+                ->end()
+
             ->end()
             ;
 
