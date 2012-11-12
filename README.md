@@ -150,6 +150,7 @@ bazinga_geocoder:
             locale:     xx_XX
         google_maps:
             locale:     xx_XX
+            region:     xx_XX
         ip_info_db:
             api_key:    XXXXXXXXX
         yahoo:
@@ -158,9 +159,20 @@ bazinga_geocoder:
         cloudmade:
             api_key:    XXXXXXXXX
         free_geo_ip: ~
-        openstreetmaps: ~
+        openstreetmaps:
+            locale:     xx_XX
         host_ip: ~
         geoip: ~
+        mapquest: ~
+        oiorest: ~
+        geocoder_ca: ~
+        geocoder_us: ~
+        ign_openls:
+            api_key:    XXXXXXXXX
+        data_science_toolkit: ~
+        yandex:
+            locale:     xx-XX
+            toponym:    XXXXXXXXX
         # Caching Layer
         cache:
             provider: openstreetmaps

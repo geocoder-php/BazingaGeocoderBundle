@@ -26,3 +26,13 @@ bazinga_geocoder:
         host_ip: ~
         geoip: ~
         free_geo_ip: ~
+        mapquest: ~
+        oiorest: ~
+        geocoder_ca: ~
+        geocoder_us: ~
+        ign_openls:
+            api_key: 123
+        data_science_toolkit: ~
+        yandex:
+            locale: en-US
+            toponym: locality
