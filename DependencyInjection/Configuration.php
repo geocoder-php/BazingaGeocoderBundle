@@ -124,6 +124,15 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('toponym')->defaultNull()->end()
                     ->end()
                 ->end()
+                ->arrayNode('geo_ips')->end()
+                ->arrayNode('geo_plugin')->end()
+                ->arrayNode('maxmind')
+                    ->children()
+                        ->scalarNode('api_key')
+                            ->isRequired()->cannotBeEmpty()
+                        ->end()
+                    ->end()
+                ->end()
 
             ->end()
             ;
