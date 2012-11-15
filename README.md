@@ -173,6 +173,10 @@ bazinga_geocoder:
         yandex:
             locale:     xx-XX
             toponym:    XXXXXXXXX
+        geo_ips: ~
+        geo_plugin: ~
+        maxmind:
+            api_key:    XXXXXXXXX
         # Caching Layer
         cache:
             provider: openstreetmaps

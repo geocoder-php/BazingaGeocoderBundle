@@ -133,6 +133,20 @@ class BazingaGeocoderExtension extends Extension
             $this->addProvider('yandex', array($yandexParams['locale'], $yandexParams['toponym']));
         }
 
+        if (isset($config['providers']['geo_ips'])) {
+            $this->addProvider('geo_ips');
+        }
+
+        if (isset($config['providers']['geo_plugin'])) {
+            $this->addProvider('geo_plugin');
+        }
+
+        if (isset($config['providers']['maxmind'])) {
+            $maxmindParams = $config['providers']['maxmind'];
+
+            $this->addProvider('maxmind', array($maxmindParams['api_key']));
+        }
+
         if (isset($config['provider']['cache'])) {
             $params = $config['provider']['cache'];
 
