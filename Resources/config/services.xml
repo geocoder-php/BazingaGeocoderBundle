@@ -22,6 +22,9 @@
         <parameter key="bazinga_geocoder.geocoder.provider.ign_openls.class">Geocoder\Provider\IGNOpenLSProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.data_science_toolkit.class">Geocoder\Provider\DataScienceToolkitProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.yandex.class">Geocoder\Provider\YandexProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.geo_ips.class">Geocoder\Provider\GeoIPsProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.geo_plugin.class">Geocoder\Provider\GeoPluginProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.maxmind.class">Geocoder\Provider\MaxMindProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.cache.class">Bazinga\Bundle\GeocoderBundle\Provider\CacheProvider</parameter>
 
         <parameter key="bazinga_geocoder.event_listener.fake_request.class">Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener</parameter>
