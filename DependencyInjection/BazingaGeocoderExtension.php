@@ -118,7 +118,7 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['ign_openls'])) {
-            $ignOpenlsParams = $config['providers']['ign_opels'];
+            $ignOpenlsParams = $config['providers']['ign_openls'];
 
             $this->addProvider('ign_openls', array($ignOpenlsParams['api_key']));
         }
@@ -134,7 +134,7 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['geo_ips'])) {
-            $this->addProvider('geo_ips');
+            $this->addProvider('geo_ips', array($config['providers']['geo_ips']['api_key']));
         }
 
         if (isset($config['providers']['geo_plugin'])) {
@@ -149,11 +149,23 @@ class BazingaGeocoderExtension extends Extension
 
         if (isset($config['provider']['cache'])) {
             $params = $config['provider']['cache'];
+        }
 
+        if (isset($config['providers']['cache'])) {
+            $params = $config['providers']['cache'];
             $cache = new Reference($params['adapter']);
-            $fallback = new Reference('bazinga_geocoder.geocoder.provider'.$params['provider']);
+            $fallback = new Reference('bazinga_geocoder.provider.'.$params['provider']);
 
-            $this->addProvider('cache', array($cache, $fallback));
+            $provider = new Definition('%bazinga_geocoder.geocoder.provider.cache.class%');
+            $provider->setArguments(array($cache, $fallback, $params['lifetime']));
+
+            if (isset($params['locale'])) {
+                $provider->addArgument($params['locale']);
+            }
+
+            $provider->setPublic(false)->addTag('bazinga_geocoder.provider');
+
+            $container->setDefinition('bazinga_geocoder.provider.cache', $provider);
         }
     }
 
