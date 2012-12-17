@@ -24,7 +24,7 @@ bazinga_geocoder:
         openstreetmaps:
             locale: en_US
         host_ip: ~
-        geoip: ~
+        # geoip: ~
         free_geo_ip: ~
         mapquest: ~
         oiorest: ~
@@ -36,7 +36,8 @@ bazinga_geocoder:
         yandex:
             locale: en-US
             toponym: locality
-        geo_ips: ~
+        geo_ips:
+            api_key: 123
         geo_plugin: ~
         maxmind:
             api_key: 123
