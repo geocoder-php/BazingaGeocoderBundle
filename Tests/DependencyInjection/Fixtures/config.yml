@@ -36,7 +36,8 @@ bazinga_geocoder:
         yandex:
             locale: en-US
             toponym: locality
-        geo_ips: ~
+        geo_ips:
+            api_key: 123
         geo_plugin: ~
         maxmind:
             api_key: 123

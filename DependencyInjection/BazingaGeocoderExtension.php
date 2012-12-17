@@ -118,7 +118,7 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['ign_openls'])) {
-            $ignOpenlsParams = $config['providers']['ign_opels'];
+            $ignOpenlsParams = $config['providers']['ign_openls'];
 
             $this->addProvider('ign_openls', array($ignOpenlsParams['api_key']));
         }
@@ -134,7 +134,7 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['geo_ips'])) {
-            $this->addProvider('geo_ips');
+            $this->addProvider('geo_ips', array($config['providers']['geo_ips']['api_key']));
         }
 
         if (isset($config['providers']['geo_plugin'])) {
