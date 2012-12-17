@@ -147,11 +147,11 @@ class BazingaGeocoderExtension extends Extension
             $this->addProvider('maxmind', array($maxmindParams['api_key']));
         }
 
-        if (isset($config['provider']['cache'])) {
-            $params = $config['provider']['cache'];
+        if (isset($config['providers']['cache'])) {
+            $params = $config['providers']['cache'];
 
             $cache = new Reference($params['adapter']);
-            $fallback = new Reference('bazinga_geocoder.geocoder.provider'.$params['provider']);
+            $fallback = new Reference('bazinga_geocoder.provider.'.$params['provider']);
 
             $this->addProvider('cache', array($cache, $fallback));
         }
