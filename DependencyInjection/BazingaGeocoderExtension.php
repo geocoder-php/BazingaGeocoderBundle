@@ -157,7 +157,12 @@ class BazingaGeocoderExtension extends Extension
             $fallback = new Reference('bazinga_geocoder.provider.'.$params['provider']);
 
             $provider = new Definition('%bazinga_geocoder.geocoder.provider.cache.class%');
-            $provider->setArguments(array($cache, $fallback));
+            $provider->setArguments(array($cache, $fallback, $params['lifetime']));
+
+            if (isset($params['locale'])) {
+                $provider->addArgument($params['locale']);
+            }
+
             $provider->setPublic(false)->addTag('bazinga_geocoder.provider');
 
             $container->setDefinition('bazinga_geocoder.provider.cache', $provider);
