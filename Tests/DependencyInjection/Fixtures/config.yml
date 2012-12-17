@@ -20,8 +20,23 @@ bazinga_geocoder:
             api_key: 123
         google_maps:
             locale: en_US
+            region: en_US
         openstreetmaps:
             locale: en_US
         host_ip: ~
         # geoip: ~
         free_geo_ip: ~
+        mapquest: ~
+        oiorest: ~
+        geocoder_ca: ~
+        geocoder_us: ~
+        ign_openls:
+            api_key: 123
+        data_science_toolkit: ~
+        yandex:
+            locale: en-US
+            toponym: locality
+        geo_ips: ~
+        geo_plugin: ~
+        maxmind:
+            api_key: 123

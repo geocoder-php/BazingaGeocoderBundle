@@ -88,7 +88,7 @@ class BazingaGeocoderExtension extends Extension
         if (isset($config['providers']['google_maps'])) {
             $googleMapsParams = $config['providers']['google_maps'];
 
-            $this->addProvider('google_maps', array($googleMapsParams['locale']));
+            $this->addProvider('google_maps', array($googleMapsParams['locale'], $googleMapsParams['region']));
         }
 
         if (isset($config['providers']['openstreetmaps'])) {
@@ -101,9 +101,58 @@ class BazingaGeocoderExtension extends Extension
             $this->addProvider('geoip');
         }
 
+        if (isset($config['providers']['mapquest'])) {
+            $this->addProvider('mapquest');
+        }
+
+        if (isset($config['providers']['oiorest'])) {
+            $this->addProvider('oiorest');
+        }
+
+        if (isset($config['providers']['geocoder_ca'])) {
+            $this->addProvider('geocoder_ca');
+        }
+
+        if (isset($config['providers']['geocoder_us'])) {
+            $this->addProvider('geocoder_us');
+        }
+
+        if (isset($config['providers']['ign_openls'])) {
+            $ignOpenlsParams = $config['providers']['ign_opels'];
+
+            $this->addProvider('ign_openls', array($ignOpenlsParams['api_key']));
+        }
+
+        if (isset($config['providers']['data_science_toolkit'])) {
+            $this->addProvider('data_science_toolkit');
+        }
+
+        if (isset($config['providers']['yandex'])) {
+            $yandexParams = $config['providers']['yandex'];
+
+            $this->addProvider('yandex', array($yandexParams['locale'], $yandexParams['toponym']));
+        }
+
+        if (isset($config['providers']['geo_ips'])) {
+            $this->addProvider('geo_ips');
+        }
+
+        if (isset($config['providers']['geo_plugin'])) {
+            $this->addProvider('geo_plugin');
+        }
+
+        if (isset($config['providers']['maxmind'])) {
+            $maxmindParams = $config['providers']['maxmind'];
+
+            $this->addProvider('maxmind', array($maxmindParams['api_key']));
+        }
+
+        if (isset($config['provider']['cache'])) {
+            $params = $config['provider']['cache'];
+        }
+
         if (isset($config['providers']['cache'])) {
             $params = $config['providers']['cache'];
-
             $cache = new Reference($params['adapter']);
             $fallback = new Reference('bazinga_geocoder.provider.'.$params['provider']);
 
