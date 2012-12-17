@@ -49,7 +49,17 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
             'google_maps'    => 'Geocoder\\Provider\\GoogleMapsProvider',
             'openstreetmaps' => 'Geocoder\\Provider\\OpenStreetMapsProvider',
             'host_ip'        => 'Geocoder\\Provider\\HostIpProvider',
-            'free_geo_ip'    => 'Geocoder\\Provider\\FreeGeoIpProvider'
+            'free_geo_ip'    => 'Geocoder\\Provider\\FreeGeoIpProvider',
+            'map_quest'      => 'Geocoder\\Provider\\MapQuestProvider',
+            'oio_rest'       => 'Geocoder\\Provider\\OIORestProvider',
+            'geocoder_ca'    => 'Geocoder\\Provider\\GeocoderCaProvider',
+            'geocoder_us'    => 'Geocoder\\Provider\\GeocoderUsProvider',
+            'ign_openls'     => 'Geocoder\\Provider\\IGNOpenLSProvider',
+            'data_science_toolkit' => 'Geocoder\\Provider\\DataScienceToolkitProvider',
+            'yandex'         => 'Geocoder\\Provider\\YandexProvider',
+            'geo_ips'        => 'Geocoder\\Provider\\GeoIpsProvider',
+            'geo_plugin'     => 'Geocoder\\Provider\\GeoPluginProvider',
+            'maxmind'        => 'Geocoder\\Provider\\MaxmindProvider',
         ) as $name => $class) {
             $this->assertInstanceOf($class, $providers[$name], sprintf('-> Assert that %s is instance of %s', $name, $class));
         }
