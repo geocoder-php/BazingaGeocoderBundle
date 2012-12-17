@@ -23,5 +23,5 @@ bazinga_geocoder:
         openstreetmaps:
             locale: en_US
         host_ip: ~
-        geoip: ~
+        # geoip: ~
         free_geo_ip: ~
