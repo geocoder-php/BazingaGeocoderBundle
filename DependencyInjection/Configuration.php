@@ -95,6 +95,7 @@ class Configuration implements ConfigurationInterface
                     ->children()
                         ->scalarNode('locale')->defaultNull()->end()
                         ->scalarNode('region')->defaultNull()->end()
+                        ->booleanNode('use_ssl')->defaultFalse()->end()
                     ->end()
                 ->end()
                 ->arrayNode('openstreetmaps')
