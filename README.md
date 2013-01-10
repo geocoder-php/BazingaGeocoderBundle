@@ -173,7 +173,8 @@ bazinga_geocoder:
         yandex:
             locale:     xx-XX
             toponym:    XXXXXXXXX
-        geo_ips: ~
+        geo_ips: 
+            api_key:    XXXXXXXXX
         geo_plugin: ~
         maxmind:
             api_key:    XXXXXXXXX
