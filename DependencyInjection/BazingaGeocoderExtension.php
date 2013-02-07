@@ -167,6 +167,27 @@ class BazingaGeocoderExtension extends Extension
 
             $container->setDefinition('bazinga_geocoder.provider.cache', $provider);
         }
+
+        if (isset($config['providers']['chain'])) {
+
+            $chainProvider = new Definition(
+                '%bazinga_geocoder.geocoder.provider.chain.class%'
+            );
+
+            $this->container->setDefinition('bazinga_geocoder.provider.chain', $chainProvider);
+
+            $chainProvider
+                ->setPublic(false)
+                ->addTag('bazinga_geocoder.provider');
+
+            if (isset($config['providers']['chain']['providers'])) {
+                foreach ($config['providers']['chain']['providers'] as $name) {
+                    if ($this->container->hasDefinition('bazinga_geocoder.provider.'.$name)) {
+                        $chainProvider->addMethodCall('addProvider', array($this->container->getDefinition('bazinga_geocoder.provider.'.$name)));
+                    }
+                }
+            }
+        }
     }
 
     protected function addProvider($name, array $arguments = array())

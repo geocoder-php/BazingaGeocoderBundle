@@ -138,6 +138,14 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
+                ->arrayNode('chain')
+                    ->fixXmlConfig('provider')
+                    ->children()
+                        ->arrayNode('providers')
+                            ->prototype('scalar')->end()
+                        ->end()
+                    ->end()
+                ->end()
 
             ->end()
             ;
