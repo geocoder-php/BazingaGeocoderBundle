@@ -41,3 +41,5 @@ bazinga_geocoder:
         geo_plugin: ~
         maxmind:
             api_key: 123
+        chain:
+            providers: [free_geo_ip, host_ip]
