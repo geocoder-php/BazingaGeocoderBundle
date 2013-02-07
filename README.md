@@ -184,6 +184,8 @@ bazinga_geocoder:
             cache: some_service_id
             lifetime: 86400
             locale: %locale%
+        chain:
+            providers: [free_geo_ip, host_ip]
 ```
 
 
