@@ -11,12 +11,12 @@
     }
   ],
   "require": {
-    "symfony/framework-bundle": "dev-master",
+    "symfony/framework-bundle": ">=2.1,<2.4-dev",
     "willdurand/geocoder": "~1.0",
-    "symfony/console": ">=2.1,<2.3-dev"
+    "symfony/console": ">=2.1,<2.4-dev"
   },
   "require-dev": {
-    "symfony/yaml": ">=2.1,<2.3-dev"
+    "symfony/yaml": ">=2.1,<2.4-dev"
   },
   "autoload": {
     "psr-0": { "Bazinga\\Bundle\\GeocoderBundle": "" }
