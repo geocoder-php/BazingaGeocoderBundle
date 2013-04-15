@@ -39,6 +39,16 @@ Usage
 This bundle registers a `bazinga_geocoder.geocoder` service which is an instance
 of `Geocoder`. You'll be able to do whatever you want with it.
 
+**NOTE:** When using `Request::getClientIp()` with Symfony 2.1+, ensure you have a trusted proxy set in your 
+`config.yml`:
+
+``` yaml
+# app/config/config.yml
+framework:
+    trusted_proxies: ['127.0.0.1']
+    # ...
+```
+
 #### Killer Feature ####
 
 You can fake the `REMOTE_ADDR` HTTP parameter through this bundle in order to get
