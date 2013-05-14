@@ -151,6 +151,24 @@ class BazingaGeocoderExtension extends Extension
             $this->addProvider('maxmind', array($maxmindParams['api_key']));
         }
 
+        if (isset($config['providers']['maxmind_binary'])) {
+            $maxmindBinaryParams = $config['providers']['maxmind_binary'];
+            
+            $provider = new Definition(
+                '%bazinga_geocoder.geocoder.provider.maxmind_binary.class%',
+                array(
+                    $config['providers']['maxmind_binary']['binary_file'],
+                    $config['providers']['maxmind_binary']['open_flag'],
+                )
+            );
+
+            $provider
+                ->setPublic(false)
+                ->addTag('bazinga_geocoder.provider');
+
+            $this->container->setDefinition('bazinga_geocoder.provider.maxmind_binary', $provider);
+        }
+
         if (isset($config['providers']['cache'])) {
             $params = $config['providers']['cache'];
             $cache = new Reference($params['adapter']);
