@@ -41,5 +41,7 @@ bazinga_geocoder:
         geo_plugin: ~
         maxmind:
             api_key: 123
+        maxmind_binary:
+            binary_file: /path/to/maxmind.dat
         chain:
             providers: [free_geo_ip, host_ip]
