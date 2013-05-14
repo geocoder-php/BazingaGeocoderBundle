@@ -41,9 +41,9 @@ class CacheProvider implements ProviderInterface
     /**
      * Constructor
      *
-     * @param Cache             $cache     The cache interface
-     * @param ProviderInterface $provider  The fallback provider
-     * @param integer           $lifetime  The cache lifetime
+     * @param Cache             $cache    The cache interface
+     * @param ProviderInterface $provider The fallback provider
+     * @param integer           $lifetime The cache lifetime
      */
     public function __construct(Cache $cache, ProviderInterface $provider, $lifetime = 0, $locale = null)
     {

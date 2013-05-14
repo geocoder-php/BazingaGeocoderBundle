@@ -27,7 +27,7 @@ class AddProvidersPass implements CompilerPassInterface
     /**
      * Get all providers based on their tag ('geocoder.provider') and register them.
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container    The container.
+     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container.
      */
     public function process(ContainerBuilder $container)
     {

@@ -7,7 +7,6 @@
  * @license    MIT License
  */
 
-
 namespace Bazinga\Bundle\GeocoderBundle;
 
 use Geocoder\Dumper\DumperInterface;

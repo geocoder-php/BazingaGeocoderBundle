@@ -16,9 +16,11 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testLoad()
     {
-        $configs = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
+        $configs   = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
         $container = new ContainerBuilder();
         $extension = new BazingaGeocoderExtension();
+
+        $container->setParameter('fixtures_dir', __DIR__ . '/Fixtures');
 
         $container->set('doctrine.apc.cache', new ArrayCache());
 
@@ -38,7 +40,7 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($dumperManager->has($name));
         }
 
-        $geocoder = $container->get('bazinga_geocoder.geocoder');
+        $geocoder  = $container->get('bazinga_geocoder.geocoder');
         $providers = $geocoder->getProviders();
         foreach (array(
             'bing_maps'            => 'Geocoder\\Provider\\BingMapsProvider',
@@ -61,6 +63,7 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
             'geo_plugin'           => 'Geocoder\\Provider\\GeoPluginProvider',
             'maxmind'              => 'Geocoder\\Provider\\MaxmindProvider',
             'chain'                => 'Geocoder\\Provider\\ChainProvider',
+            'maxmind_binary'       => 'Geocoder\\Provider\\MaxmindBinaryProvider',
         ) as $name => $class) {
             $this->assertInstanceOf($class, $providers[$name], sprintf('-> Assert that %s is instance of %s', $name, $class));
         }

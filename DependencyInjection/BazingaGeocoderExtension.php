@@ -152,8 +152,6 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['maxmind_binary'])) {
-            $maxmindBinaryParams = $config['providers']['maxmind_binary'];
-            
             $provider = new Definition(
                 '%bazinga_geocoder.geocoder.provider.maxmind_binary.class%',
                 array(
@@ -170,24 +168,27 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['cache'])) {
-            $params = $config['providers']['cache'];
-            $cache = new Reference($params['adapter']);
+            $params   = $config['providers']['cache'];
+            $cache    = new Reference($params['adapter']);
             $fallback = new Reference('bazinga_geocoder.provider.'.$params['provider']);
 
-            $provider = new Definition('%bazinga_geocoder.geocoder.provider.cache.class%');
-            $provider->setArguments(array($cache, $fallback, $params['lifetime']));
+            $provider = new Definition(
+                '%bazinga_geocoder.geocoder.provider.cache.class%',
+                array($cache, $fallback, $params['lifetime'])
+            );
 
             if (isset($params['locale'])) {
                 $provider->addArgument($params['locale']);
             }
 
-            $provider->setPublic(false)->addTag('bazinga_geocoder.provider');
+            $provider
+                ->setPublic(false)
+                ->addTag('bazinga_geocoder.provider');
 
             $container->setDefinition('bazinga_geocoder.provider.cache', $provider);
         }
 
         if (isset($config['providers']['chain'])) {
-
             $chainProvider = new Definition(
                 '%bazinga_geocoder.geocoder.provider.chain.class%'
             );
