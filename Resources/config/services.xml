@@ -25,6 +25,7 @@
         <parameter key="bazinga_geocoder.geocoder.provider.geo_ips.class">Geocoder\Provider\GeoIPsProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.geo_plugin.class">Geocoder\Provider\GeoPluginProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.maxmind.class">Geocoder\Provider\MaxMindProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.maxmind_binary.class">Geocoder\Provider\MaxMindBinaryProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.cache.class">Bazinga\Bundle\GeocoderBundle\Provider\CacheProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.chain.class">Geocoder\Provider\ChainProvider</parameter>
 
