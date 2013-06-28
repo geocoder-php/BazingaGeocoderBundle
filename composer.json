@@ -11,19 +11,18 @@
     }
   ],
   "require": {
-    "symfony/framework-bundle": ">=2.0,<2.4-dev",
+    "symfony/framework-bundle": "~2.0",
     "willdurand/geocoder": "~1.0",
-    "symfony/console": ">=2.0,<2.4-dev"
+    "symfony/console": "~2.0"
   },
   "require-dev": {
-    "symfony/yaml": ">=2.0,<2.4-dev",
+    "symfony/yaml": "~2.0",
     "maxromanovsky/php-maxmind-geoip": "~1.12"
   },
   "autoload": {
     "psr-0": { "Bazinga\\Bundle\\GeocoderBundle": "" }
   },
   "target-dir": "Bazinga/Bundle/GeocoderBundle",
-  "minimum-stability": "dev",
   "extra": {
     "branch-alias": {
       "dev-master": "1.2.x-dev"

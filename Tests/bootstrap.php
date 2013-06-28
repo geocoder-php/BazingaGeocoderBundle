@@ -6,3 +6,6 @@ wget http://getcomposer.org/composer.phar
 php composer.phar install --dev
 ");
 }
+
+require_once __DIR__ . '/../vendor/maxromanovsky/php-maxmind-geoip/geoip.inc';
+require_once __DIR__ . '/../vendor/maxromanovsky/php-maxmind-geoip/geoipcity.inc';
