@@ -137,6 +137,31 @@ A little example:
     <tag name="geocoder.dumper" alias="custom" />
 </service>
 ```
+Cache Provider
+---------------
+
+Sometimes you have to cache the results from a provider. For this case the bundle provides
+a cache provider. The cache provider wraps another provider and delegate all calls
+to this provider and cache the return value. 
+
+__Configuration example:__
+
+```yaml
+services:
+    acme_cache_adapter:
+        class: "Doctrine\Common\Cache\ApcCache"
+
+bazinga_geocoder:
+    providers:
+        cache:
+            adapter:  acme_cache_adapter
+            provider: google_maps
+        google_maps: ~
+```
+
+> Tip: If you want to configure the cache adapter, 
+> we recommend the [liip/doctrine-cache-bundle](https://github.com/liip/LiipDoctrineCacheBundle.git).
+
 
 
 Reference Configuration
@@ -191,9 +216,9 @@ bazinga_geocoder:
         # Caching Layer
         cache:
             provider: openstreetmaps
-            cache: some_service_id
+            adapter:  some_service_id
             lifetime: 86400
-            locale: %locale%
+            locale:   %locale%
         chain:
             providers: [free_geo_ip, host_ip]
 ```
