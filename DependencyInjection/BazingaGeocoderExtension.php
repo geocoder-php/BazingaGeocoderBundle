@@ -167,6 +167,21 @@ class BazingaGeocoderExtension extends Extension
             $this->container->setDefinition('bazinga_geocoder.provider.maxmind_binary', $provider);
         }
 
+        if (isset($config['providers']['sypexgeo'])) {
+            $provider = new Definition('%bazinga_geocoder.geocoder.provider.sypexgeo.class%', array(
+                new Definition('SxGeo\Geocoder', array(
+                    $config['providers']['sypexgeo']['binary_file'],
+                    $config['providers']['sypexgeo']['open_flag'],
+                ))
+            ));
+
+            $provider
+                ->setPublic(false)
+                ->addTag('bazinga_geocoder.provider');
+
+            $this->container->setDefinition('bazinga_geocoder.provider.sypexgeo', $provider);
+        }
+
         if (isset($config['providers']['cache'])) {
             $params   = $config['providers']['cache'];
             $cache    = new Reference($params['adapter']);
