@@ -90,7 +90,7 @@ information in your development environment, for instance:
 In the example, we'll retrieve information from the user's IP address, and 5
 objects nears him.
 But it won't work on your local environment, that's why this bundle provides
-an easy way to fake this behavior by using a `fake_ip` parameter.
+an easy way to fake this behavior by using a `fake_ip` configuration.
 
 ``` yaml
 # app/config/config_dev.yml
@@ -99,6 +99,19 @@ bazinga_geocoder:
 ```
 
 If set, the parameter will replace the `REMOTE_ADDR` value by the given one.
+
+
+Additionally if it interferes with your current
+listeners, You can set up different fake ip listener priority.
+
+
+``` yaml
+# app/config/config_dev.yml
+bazinga_geocoder:
+    fake_ip: 
+        ip: 123.345.643.133
+        priority: 128
+```
 
 ### Dumpers
 

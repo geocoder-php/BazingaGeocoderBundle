@@ -34,6 +34,9 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
             'Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener',
             $container->get('bazinga_geocoder.event_listener.fake_request')
         );
+        $this->assertNotNull(
+            $container->get('bazinga_geocoder.event_listener.fake_request')->getFakeIp()
+        );
 
         $dumperManager = $container->get('bazinga_geocoder.dumper_manager');
         foreach (array('geojson', 'gpx', 'kmp', 'wkb', 'wkt') as $name) {
@@ -67,5 +70,31 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
         ) as $name => $class) {
             $this->assertInstanceOf($class, $providers[$name], sprintf('-> Assert that %s is instance of %s', $name, $class));
         }
+    }
+
+    public function testLoadingFakeIpOldWay()
+    {
+        $configs   = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/old_fake_ip.yml'));
+        $container = new ContainerBuilder();
+        $extension = new BazingaGeocoderExtension();
+
+        $container->setParameter('fixtures_dir', __DIR__ . '/Fixtures');
+
+        $container->set('doctrine.apc.cache', new ArrayCache());
+
+        $container->addCompilerPass(new AddDumperPass());
+        $container->addCompilerPass(new AddProvidersPass());
+
+        $extension->load($configs, $container);
+        $container->compile();
+
+        $this->assertInstanceOf(
+            'Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener',
+            $container->get('bazinga_geocoder.event_listener.fake_request')
+        );
+
+        $this->assertNotNull(
+            $container->get('bazinga_geocoder.event_listener.fake_request')->getFakeIp()
+        );
     }
 }
