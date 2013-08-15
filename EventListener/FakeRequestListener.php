@@ -38,4 +38,9 @@ class FakeRequestListener
             $event->getRequest()->server->set('REMOTE_ADDR', $this->fakeIp);
         }
     }
+
+    public function getFakeIp()
+    {
+        return $this->fakeIp;
+    }
 }
