@@ -30,7 +30,7 @@
 {% endblock %}
 
 {% block panel %}
-    <h2>Gocoder requests</h2>
+    <h2>Geocoder Requests</h2>
 
     {% if not collector.requestsCount %}
         <p><em>No requests.</em></p>
@@ -67,13 +67,12 @@
     function geo_explain(link) {
         "use strict";
 
-        var imgs = link.children,
-                target = link.getAttribute('data-target-id');
+        var imgs   = link.children,
+            target = link.getAttribute('data-target-id');
 
         Sfjs.toggle(target, imgs[0], imgs[1]);
 
         return false;
     }
     //]]></script>
-
 {% endblock %}

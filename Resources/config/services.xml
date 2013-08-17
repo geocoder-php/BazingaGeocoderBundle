@@ -45,6 +45,7 @@
     </parameters>
 
     <services>
+        <service id="geocoder" alias="bazinga_geocoder.geocoder" />
         <service id="bazinga_geocoder.geocoder" class="%bazinga_geocoder.geocoder.class%" />
 
         <!-- Adapters -->

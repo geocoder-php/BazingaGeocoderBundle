@@ -21,7 +21,7 @@ class Configuration implements ConfigurationInterface
     /**
      * Generates the configuration tree builder.
      *
-     * @return \Symfony\Component\Config\Definition\Builder\TreeBuilder The tree builder
+     * @return TreeBuilder The tree builder
      */
     public function getConfigTreeBuilder()
     {
@@ -35,7 +35,13 @@ class Configuration implements ConfigurationInterface
                 ->ifString()
                     ->then(function($value) { return array('ip' => $value); })
                 ->end()
+                ->treatFalseLike(array('enabled' => false))
+                ->treatTrueLike(array('enabled' => true))
+                ->treatNullLike(array('enabled' => true))
                 ->children()
+                    ->booleanNode('enabled')
+                        ->defaultTrue()
+                    ->end()
                     ->scalarNode('ip')->defaultNull()->end()
                     ->scalarNode('priority')->defaultValue(0)->end()
                 ->end()
@@ -114,7 +120,6 @@ class Configuration implements ConfigurationInterface
                 ->arrayNode('host_ip')->end()
                 ->arrayNode('geoip')->end()
                 ->arrayNode('free_geo_ip')->end()
-
                 ->arrayNode('mapquest')->end()
                 ->arrayNode('oiorest')->end()
                 ->arrayNode('geocoder_ca')->end()
@@ -166,7 +171,7 @@ class Configuration implements ConfigurationInterface
                 ->end()
 
             ->end()
-            ;
+        ;
 
         return $treeBuilder;
     }

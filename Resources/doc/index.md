@@ -42,7 +42,8 @@ Usage
 -----
 
 This bundle registers a `bazinga_geocoder.geocoder` service which is an instance
-of `Geocoder`. You'll be able to do whatever you want with it.
+of `Geocoder`. You'll be able to do whatever you want with it but be sure to
+configure at least **one provider** first.
 
 **NOTE:** When using `Request::getClientIp()` with Symfony 2.1+, ensure you have
 a trusted proxy set in your `config.yml`:
@@ -67,14 +68,15 @@ information in your development environment, for instance:
     /**
      * @Template()
      */
-    public function indexAction()
+    public function indexAction(Request $request)
     {
         // Retrieve information from the current user (by its IP address)
-        $result = $this->geocoder
+        $result = $this->container
+            ->get('bazinga_geocoder.geocoder')
             ->using('yahoo')
-            ->geocode($this->getRequest()->server->get('REMOTE_ADDR'));
+            ->geocode($request->server->get('REMOTE_ADDR'));
 
-        // Find the 5 nearest objects from the current user.
+        // Find the 5 nearest objects (15km) from the current user.
         $objects = ObjectQuery::create()
             ->filterByDistanceFrom($result->getLatitude(), $result->getLongitude(), 15)
             ->limit(5)
@@ -129,12 +131,14 @@ Here is an example:
 ```php
 <?php
 
-public function geocodeAction()
+public function geocodeAction(Request $request)
 {
-    $result = $this->container->get('bazinga_geocoder.geocoder')
-        ->geocode($this->container->get('request')->server->get('REMOTE_ADDR'));
+    $result = $this->container
+        ->get('bazinga_geocoder.geocoder')
+        ->geocode($request->server->get('REMOTE_ADDR'));
 
-    $body = $this->container->get('bazinga_geocoder.dumper_manager')
+    $body = $this->container
+        ->get('bazinga_geocoder.dumper_manager')
         ->get('geojson')
         ->dump($result);
 
@@ -196,8 +200,8 @@ Toolbar](https://raw.github.com/willdurand/BazingaGeocoderBundle/master/Resource
 Reference Configuration
 -----------------------
 
-You have to define the providers you want to use in your configuration.
-Some of them need information (API key for instance).
+You MUST define the providers you want to use in your configuration.  Some of
+them need information (API key for instance).
 
 You'll find the reference configuration below:
 
@@ -205,51 +209,57 @@ You'll find the reference configuration below:
 # app/config/config*.yml
 
 bazinga_geocoder:
-    fake_ip:    999.999.999.999
+    fake_ip:
+        enabled:              true
+        ip:                   ~
+        priority:             0
     adapter:
-        class:  \Your\CustomAdapter
+        class:                ~
     providers:
         bing_maps:
-            api_key:    XXXXXXXXX
-            locale:     xx_XX
-        google_maps:
-            locale:     xx_XX
-            region:     xx_XX
-        ip_info_db:
-            api_key:    XXXXXXXXX
-        yahoo:
-            api_key:    XXXXXXXXX
-            locale:     xx_XX
-        cloudmade:
-            api_key:    XXXXXXXXX
-        free_geo_ip: ~
-        openstreetmaps:
-            locale:     xx_XX
-        host_ip: ~
-        geoip: ~
-        mapquest: ~
-        oiorest: ~
-        geocoder_ca: ~
-        geocoder_us: ~
-        ign_openls:
-            api_key:    XXXXXXXXX
-        data_science_toolkit: ~
-        yandex:
-            locale:     xx-XX
-            toponym:    XXXXXXXXX
-        geo_ips:
-            api_key:    XXXXXXXXX
-        geo_plugin: ~
-        maxmind:
-            api_key:    XXXXXXXXX
-        # Caching Layer
+            api_key:              ~ # Required
+            locale:               ~
         cache:
-            provider: openstreetmaps
-            adapter:  some_service_id
-            lifetime: 86400
-            locale:   %locale%
+            adapter:              ~ # Required
+            provider:             ~ # Required
+            locale:               ~
+            lifetime:             86400
+        ip_info_db:
+            api_key:              ~ # Required
+        yahoo:
+            api_key:              ~ # Required
+            locale:               ~
+        cloudmade:
+            api_key:              ~ # Required
+        google_maps:
+            locale:               ~
+            region:               ~
+            use_ssl:              false
+        openstreetmaps:
+            locale:               ~
+        host_ip:              []
+        geoip:                []
+        free_geo_ip:          []
+        mapquest:             []
+        oiorest:              []
+        geocoder_ca:          []
+        geocoder_us:          []
+        ign_openls:
+            api_key:              ~ # Required
+        data_science_toolkit:  []
+        yandex:
+            locale:               ~
+            toponym:              ~
+        geo_ips:
+            api_key:              ~
+        geo_plugin:           []
+        maxmind:
+            api_key:              ~ # Required
+        maxmind_binary:
+            binary_file:          ~ # Required
+            open_flag:            ~
         chain:
-            providers: [free_geo_ip, host_ip]
+            providers:            []
 ```
 
 
