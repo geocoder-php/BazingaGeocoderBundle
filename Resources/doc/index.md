@@ -108,7 +108,7 @@ listeners, You can set up different fake ip listener priority.
 ``` yaml
 # app/config/config_dev.yml
 bazinga_geocoder:
-    fake_ip: 
+    fake_ip:
         ip: 123.345.643.133
         priority: 128
 ```
@@ -165,6 +165,8 @@ to this provider and cache the return value.
 __Configuration example:__
 
 ```yaml
+# app/config/config*.yml
+
 services:
     acme_cache_adapter:
         class: "Doctrine\Common\Cache\ApcCache"
@@ -181,12 +183,14 @@ bazinga_geocoder:
 > we recommend the [liip/doctrine-cache-bundle](https://github.com/liip/LiipDoctrineCacheBundle.git).
 
 
-### Symfony2 Profiler integration
+### Symfony2 Profiler Integration
 
-Geocoder bundle additionally integrates with Syfmony2 profiler. You can check number of queries executed
-by each provider, total execution time and geocoding results.
+Geocoder bundle additionally integrates with Symfony2 profiler. You can
+check number of queries executed by each provider, total execution time
+and geocoding results.
 
-![Example Toolbar](http://i.imgur.com/3Vy5GBW.png)
+![Example
+Toolbar](https://raw.github.com/willdurand/BazingaGeocoderBundle/master/Resources/doc/toolbar.png)
 
 
 Reference Configuration
@@ -247,3 +251,15 @@ bazinga_geocoder:
         chain:
             providers: [free_geo_ip, host_ip]
 ```
+
+
+Testing
+-------
+
+Setup the test suite using [Composer](http://getcomposer.org/):
+
+    $ composer install --dev
+
+Run it using PHPUnit:
+
+    $ phpunit
