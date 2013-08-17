@@ -181,6 +181,14 @@ bazinga_geocoder:
 > we recommend the [liip/doctrine-cache-bundle](https://github.com/liip/LiipDoctrineCacheBundle.git).
 
 
+### Symfony2 Profiler integration
+
+Geocoder bundle additionally integrates with Syfmony2 profiler. You can check number of queries executed
+by each provider, total execution time and geocoding results.
+
+![Example Toolbar](http://i.imgur.com/3Vy5GBW.png)
+
+
 Reference Configuration
 -----------------------
 
