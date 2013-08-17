@@ -69,11 +69,20 @@ HELP
         $max += 2;
 
         foreach ($data as $key => $value) {
+            $key = $this->humanize($key);
+
             $output->writeln(sprintf(
                 '<comment>%s</comment>: %s',
                 str_pad($key, $max, ' ', STR_PAD_RIGHT),
-                $value
+                is_array($value) ? json_encode($value) : $value
             ));
         }
+    }
+
+    private function humanize($text)
+    {
+        $text = preg_replace('/([A-Z][a-z]+)|([A-Z][A-Z]+)|([^A-Za-z ]+)/', ' \1', $text);
+
+        return ucfirst(strtolower($text));
     }
 }
