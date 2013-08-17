@@ -1,0 +1,79 @@
+{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+
+{% block toolbar %}
+    {% set icon %}
+        <img src="{{ asset('bundles/bazingageocoder/images/geocoder_marker.png') }}" />
+        <span class="sf-toolbar-status">{{ collector.requestscount }}</span>
+    {% endset %}
+    {% set text %}
+        <div class="sf-toolbar-info-piece">
+            <b>Requests</b>
+            <span>{{ collector.requestsCount }}</span>
+        </div>
+        <div class="sf-toolbar-info-piece">
+            <b>Total time</b>
+            <span>{{ '%0.2f'|format(collector.time) }} ms</span>
+        </div>
+    {% endset %}
+    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endblock %}
+
+{% block menu %}
+<span class="label">
+    <span class="icon"><img src="{{ asset('bundles/bazingageocoder/images/geocoder_marker.png') }}" alt="Geocoder" /></span>
+    <strong>Geocoder</strong>
+    <span class="count">
+        <span>{{ collector.requestsCount }}</span>
+        <span>{{ '%0.0f'|format(collector.time) }} ms</span>
+    </span>
+</span>
+{% endblock %}
+
+{% block panel %}
+    <h2>Gocoder requests</h2>
+
+    {% if not collector.requestsCount %}
+        <p><em>No requests.</em></p>
+    {% else %}
+        <ul class="alt">
+            {% for i, request in collector.requests %}
+                <li class="{{ cycle(['odd', 'even'], loop.index) }}">
+
+                    <div>
+                        <a href="#" onclick="return geo_explain(this);" style="text-decoration: none;" title="Explains" data-target-id="explain-{{ i }}">
+                            <img alt="+" src="{{ asset('bundles/framework/images/blue_picto_more.gif') }}" style="display: inline;"/>
+                            <img alt="-" src="{{ asset('bundles/framework/images/blue_picto_less.gif') }}" style="display: none;"/>
+                        </a>
+                        <code>{{ request.value }} ({{request.providerClass}})</code>
+                    </div>
+
+                    <small>
+                        <strong>Time</strong>: {{ '%0.2f'|format(request.duration) }} ms
+                    </small>
+
+                    <div id="explain-{{ i }}" style="display:none; padding-top: 1em;">
+                        <small>
+                            <strong>Result:</strong>
+                        </small>
+                        <pre style="white-space: pre-wrap; white-space: -moz-pre-wrap !important; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">{{ request.result }}</pre>
+                    </div>
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <script type="text/javascript">//<![CDATA[
+    function geo_explain(link) {
+        "use strict";
+
+        var imgs = link.children,
+                target = link.getAttribute('data-target-id');
+
+        Sfjs.toggle(target, imgs[0], imgs[1]);
+
+        return false;
+    }
+    //]]></script>
+
+{% endblock %}

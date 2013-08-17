@@ -15,6 +15,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddProvidersPass;
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddDumperPass;
+use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\LoggablePass;
 
 /**
  * @author William Durand <william.durand1@gmail.com>
@@ -30,5 +31,6 @@ class BazingaGeocoderBundle extends Bundle
 
         $container->addCompilerPass(new AddProvidersPass());
         $container->addCompilerPass(new AddDumperPass());
+        $container->addCompilerPass(new LoggablePass());
     }
 }
