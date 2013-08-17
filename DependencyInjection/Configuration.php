@@ -39,7 +39,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('ip')->defaultNull()->end()
                     ->scalarNode('priority')->defaultValue(0)->end()
                 ->end()
-            ->end()            
+            ->end()
             ->arrayNode('adapter')
                 ->children()
                     ->scalarNode('class')->defaultNull()->end()

@@ -42,7 +42,7 @@ class BazingaGeocoderExtension extends Extension
 
             $tag = current($definition->getTag('kernel.event_listener'));
             $tag['priority'] = $config['fake_ip']['priority'];
-            $definition->setTags(array($tag));            
+            $definition->setTags(array($tag));
         }
 
         if (isset($config['adapter']['class']) && !empty($config['adapter']['class'])) {
