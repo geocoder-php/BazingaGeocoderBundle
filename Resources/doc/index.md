@@ -150,7 +150,7 @@ public function geocodeAction(Request $request)
 ```
 
 To register a new dumper, you must tag it with _geocoder.dumper_.
-Geocoder detect and register it automaticly.
+Geocoder detect and register it automatically.
 
 A little example:
 
