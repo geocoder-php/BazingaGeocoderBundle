@@ -7,6 +7,9 @@ project_name: BazingaGeocoderBundle
 BazingaGeocoderBundle
 =====================
 
+[![Build
+Status](https://secure.travis-ci.org/geocoder-php/BazingaGeocoderBundle.png)](http://travis-ci.org/geocoder-php/BazingaGeocoderBundle)
+
 Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) library
 into Symfony2.
 
@@ -279,3 +282,20 @@ Setup the test suite using [Composer](http://getcomposer.org/):
 Run it using PHPUnit:
 
     $ phpunit
+
+
+Credits
+-------
+
+* William Durand
+* [All
+  contributors](https://github.com/geocoder-php/BazingaGeocoderBundle/contributors)
+
+
+License
+-------
+
+This bundle is released under the MIT license. See the complete license in the
+bundle:
+
+    Resources/meta/LICENSE
