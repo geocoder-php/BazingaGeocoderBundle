@@ -17,6 +17,7 @@
   },
   "require-dev": {
     "symfony/yaml": "~2.0",
+    "doctrine/orm": ">=2.3",
     "maxromanovsky/php-maxmind-geoip": "~1.12"
   },
   "autoload": {
