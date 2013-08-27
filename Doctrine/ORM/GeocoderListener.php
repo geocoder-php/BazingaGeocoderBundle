@@ -1,6 +1,6 @@
 <?php
 
-namespace Bazinga\Bundle\GeocoderBundle\Doctrine;
+namespace Bazinga\Bundle\GeocoderBundle\Doctrine\ORM;
 
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
