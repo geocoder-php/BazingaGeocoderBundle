@@ -272,7 +272,10 @@ Testing
 
 Setup the test suite using [Composer](http://getcomposer.org/):
 
-    $ composer install --dev
+    $ composer install --dev --prefer-source
+
+**Important:** this command must be run with `--prefer-source`, otherwise the
+`Doctrine\Tests\OrmTestCase` class won't be found.
 
 Run it using PHPUnit:
 
