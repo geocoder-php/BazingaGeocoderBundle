@@ -169,7 +169,14 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-
+                ->arrayNode('tom_tom')
+                    ->children()
+                        ->scalarNode('api_key')
+                            ->isRequired()->cannotBeEmpty()
+                        ->end()
+                        ->scalarNode('locale')->defaultNull()->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 

@@ -29,6 +29,8 @@
         <parameter key="bazinga_geocoder.geocoder.provider.maxmind_binary.class">Geocoder\Provider\MaxMindBinaryProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.cache.class">Bazinga\Bundle\GeocoderBundle\Provider\CacheProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.chain.class">Geocoder\Provider\ChainProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.tom_tom.class">Geocoder\Provider\TomTomProvider</parameter>
+
 
         <parameter key="bazinga_geocoder.logger.class">Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger</parameter>
 
