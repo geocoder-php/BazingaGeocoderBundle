@@ -100,6 +100,18 @@ class BazingaGeocoderExtension extends Extension
             ));
         }
 
+        if (isset($config['providers']['google_maps_business'])) {
+            $googleMapsBusinessParams = $config['providers']['google_maps_business'];
+
+            $this->addProvider('google_maps_business', array(
+                $googleMapsBusinessParams['client_id'],
+                $googleMapsBusinessParams['api_key'],
+                $googleMapsBusinessParams['locale'],
+                $googleMapsBusinessParams['region'],
+                $googleMapsBusinessParams['use_ssl'],
+            ));
+        }
+
         if (isset($config['providers']['openstreetmaps'])) {
             $openstreetMapsParams = $config['providers']['openstreetmaps'];
 
