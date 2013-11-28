@@ -235,6 +235,11 @@ bazinga_geocoder:
             locale:               ~
             region:               ~
             use_ssl:              false
+        google_maps:
+            client_id:            ~ # Required
+            api_key:              ~
+            region:               ~
+            use_ssl:              false
         openstreetmaps:
             locale:               ~
         host_ip:              []
