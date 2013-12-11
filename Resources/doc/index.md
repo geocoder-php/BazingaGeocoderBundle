@@ -245,7 +245,8 @@ bazinga_geocoder:
         host_ip:              []
         geoip:                []
         free_geo_ip:          []
-        mapquest:             []
+        mapquest:
+            api_key:              ~ # Required
         oiorest:              []
         geocoder_ca:          []
         geocoder_us:          []
