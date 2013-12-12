@@ -135,6 +135,7 @@ class Configuration implements ConfigurationInterface
                             ->isRequired()->cannotBeEmpty()
                         ->end()
                     ->end()
+                ->end()
                 ->arrayNode('oiorest')->end()
                 ->arrayNode('geocoder_ca')->end()
                 ->arrayNode('geocoder_us')->end()
