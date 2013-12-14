@@ -25,7 +25,7 @@ bazinga_geocoder:
             api_key: 123
             locale: en_US
             region: en_US
-        openstreetmaps:
+        openstreetmap:
             locale: en_US
         host_ip: ~
         # geoip: ~
