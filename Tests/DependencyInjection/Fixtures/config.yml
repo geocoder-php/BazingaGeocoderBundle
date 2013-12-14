@@ -30,7 +30,8 @@ bazinga_geocoder:
         host_ip: ~
         # geoip: ~
         free_geo_ip: ~
-        mapquest: ~
+        mapquest:
+            api_key: 123
         oiorest: ~
         geocoder_ca: ~
         geocoder_us: ~

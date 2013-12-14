@@ -114,7 +114,9 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['mapquest'])) {
-            $this->addProvider('mapquest');
+            $mapquestParams = $config['providers']['mapquest'];
+            
+            $this->addProvider('mapquest', array($mapquestParams['api_key']));
         }
 
         if (isset($config['providers']['oiorest'])) {
