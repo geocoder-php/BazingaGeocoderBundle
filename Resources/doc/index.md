@@ -22,14 +22,16 @@ to your `composer.json` file:
 
 Register the bundle in `app/AppKernel.php`:
 
-    // app/AppKernel.php
-    public function registerBundles()
-    {
-        return array(
-            // ...
-            new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
-        );
-    }
+```php
+// app/AppKernel.php
+public function registerBundles()
+{
+    return array(
+        // ...
+        new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
+    );
+}
+```
 
 Enable the bundle's configuration in `app/config/config.yml`:
 
@@ -73,7 +75,7 @@ information in your development environment, for instance:
         // Retrieve information from the current user (by its IP address)
         $result = $this->container
             ->get('bazinga_geocoder.geocoder')
-            ->using('yahoo')
+            ->using('google_maps')
             ->geocode($request->server->get('REMOTE_ADDR'));
 
         // Find the 5 nearest objects (15km) from the current user.
@@ -173,7 +175,7 @@ __Configuration example:__
 
 services:
     acme_cache_adapter:
-        class: "Doctrine\Common\Cache\ApcCache"
+        class: "Doctrine\\Common\\Cache\\ApcCache"
 
 bazinga_geocoder:
     providers:
@@ -183,8 +185,8 @@ bazinga_geocoder:
         google_maps: ~
 ```
 
-> Tip: If you want to configure the cache adapter,
-> we recommend the [liip/doctrine-cache-bundle](https://github.com/liip/LiipDoctrineCacheBundle.git).
+> **Tip:** If you want to configure the cache adapter,
+> we recommend the [liip/doctrine-cache-bundle](https://github.com/liip/LiipDoctrineCacheBundle).
 
 
 ### Symfony2 Profiler Integration
@@ -226,9 +228,6 @@ bazinga_geocoder:
             lifetime:             86400
         ip_info_db:
             api_key:              ~ # Required
-        yahoo:
-            api_key:              ~ # Required
-            locale:               ~
         cloudmade:
             api_key:              ~ # Required
         google_maps:
@@ -240,7 +239,7 @@ bazinga_geocoder:
             api_key:              ~
             region:               ~
             use_ssl:              false
-        openstreetmaps:
+        openstreetmap:
             locale:               ~
         host_ip:              []
         geoip:                []
