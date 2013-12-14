@@ -181,7 +181,6 @@ __Configuration example:__
 
 ```yaml
 # app/config/config*.yml
-
 services:
     acme_cache_adapter:
         class: "Doctrine\\Common\\Cache\\ApcCache"
@@ -218,7 +217,6 @@ You'll find the reference configuration below:
 
 ``` yaml
 # app/config/config*.yml
-
 bazinga_geocoder:
     fake_ip:
         enabled:              true
