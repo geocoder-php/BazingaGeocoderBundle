@@ -10,6 +10,7 @@
 
 namespace Bazinga\Bundle\GeocoderBundle\Provider;
 
+use Geocoder\Geocoder;
 use Geocoder\Provider\ProviderInterface;
 use Doctrine\Common\Cache\Cache;
 
@@ -19,12 +20,12 @@ use Doctrine\Common\Cache\Cache;
 class CacheProvider implements ProviderInterface
 {
     /**
-     * @var \Doctrine\Common\Cache\Cache
+     * @var Cache
      */
     private $cache;
 
     /**
-     * @var \Geocoder\Provider\ProviderInterface
+     * @var ProviderInterface
      */
     private $provider;
 
@@ -39,6 +40,11 @@ class CacheProvider implements ProviderInterface
     private $locale;
 
     /**
+     * @var integer
+     */
+    private $maxResults = Geocoder::MAX_RESULTS;
+
+    /**
      * Constructor
      *
      * @param Cache             $cache    The cache interface
@@ -48,10 +54,10 @@ class CacheProvider implements ProviderInterface
      */
     public function __construct(Cache $cache, ProviderInterface $provider, $lifetime = 0, $locale = null)
     {
-        $this->cache = $cache;
+        $this->cache    = $cache;
         $this->provider = $provider;
         $this->lifetime = $lifetime;
-        $this->locale = $locale;
+        $this->locale   = $locale;
     }
 
     /**
@@ -94,5 +100,15 @@ class CacheProvider implements ProviderInterface
     public function getName()
     {
         return 'cache';
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setMaxResults($maxResults)
+    {
+        $this->maxResults = $maxResults;
+
+        return $this;
     }
 }
