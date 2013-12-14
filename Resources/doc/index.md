@@ -172,7 +172,6 @@ __Configuration example:__
 
 ```yaml
 # app/config/config*.yml
-
 services:
     acme_cache_adapter:
         class: "Doctrine\\Common\\Cache\\ApcCache"
