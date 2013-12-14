@@ -75,15 +75,6 @@ class BazingaGeocoderExtension extends Extension
             $this->addProvider('ip_info_db', array($ipInfoDbParams['api_key']));
         }
 
-        if (isset($config['providers']['yahoo'])) {
-            $yahooParams = $config['providers']['yahoo'];
-
-            $this->addProvider('yahoo', array(
-                $yahooParams['api_key'],
-                $yahooParams['locale'],
-            ));
-        }
-
         if (isset($config['providers']['cloudmade'])) {
             $cloudMadeParams = $config['providers']['cloudmade'];
 
