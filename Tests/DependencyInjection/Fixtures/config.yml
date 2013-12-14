@@ -15,9 +15,6 @@ bazinga_geocoder:
             lifetime: 86400
         ip_info_db:
             api_key: 123
-        yahoo:
-            api_key: 123
-            locale: en_US
         cloudmade:
             api_key: 123
         google_maps:

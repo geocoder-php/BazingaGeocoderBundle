@@ -51,7 +51,6 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
             'bing_maps'            => 'Geocoder\\Provider\\BingMapsProvider',
             'cache'                => 'Bazinga\\Bundle\\GeocoderBundle\\Provider\\CacheProvider',
             'ip_info_db'           => 'Geocoder\\Provider\\IpInfoDbProvider',
-            'yahoo'                => 'Geocoder\\Provider\\YahooProvider',
             'cloudmade'            => 'Geocoder\\Provider\\CloudMadeProvider',
             'google_maps'          => 'Geocoder\\Provider\\GoogleMapsProvider',
             'google_maps_business' => 'Geocoder\\Provider\\GoogleMapsBusinessProvider',
