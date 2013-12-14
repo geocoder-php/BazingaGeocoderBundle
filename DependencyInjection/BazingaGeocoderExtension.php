@@ -103,10 +103,10 @@ class BazingaGeocoderExtension extends Extension
             ));
         }
 
-        if (isset($config['providers']['openstreetmaps'])) {
-            $openstreetMapsParams = $config['providers']['openstreetmaps'];
+        if (isset($config['providers']['openstreetmap'])) {
+            $openstreetMapsParams = $config['providers']['openstreetmap'];
 
-            $this->addProvider('openstreetmaps', array($openstreetMapsParams['locale']));
+            $this->addProvider('openstreetmap', array($openstreetMapsParams['locale']));
         }
 
         if (isset($config['providers']['geoip'])) {

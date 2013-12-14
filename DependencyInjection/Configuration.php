@@ -113,7 +113,7 @@ class Configuration implements ConfigurationInterface
                         ->booleanNode('use_ssl')->defaultFalse()->end()
                     ->end()
                 ->end()
-                ->arrayNode('openstreetmaps')
+                ->arrayNode('openstreetmap')
                     ->children()
                         ->scalarNode('locale')->defaultNull()->end()
                     ->end()
