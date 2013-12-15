@@ -6,7 +6,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 
-use Bazinga\Bundle\GeocoderBundle\Mapping\Driver\AnnotationDriver;
+use Bazinga\Bundle\GeocoderBundle\Mapping\Driver\DriverInterface;
 use Geocoder\Geocoder;
 
 /**
@@ -18,7 +18,7 @@ class GeocoderListener implements EventSubscriber
 
     private $geocoder;
 
-    public function __construct(Geocoder $geocoder, AnnotationDriver $driver)
+    public function __construct(Geocoder $geocoder, DriverInterface $driver)
     {
         $this->driver = $driver;
         $this->geocoder = $geocoder;
@@ -69,10 +69,10 @@ class GeocoderListener implements EventSubscriber
     private function geocodeEntity($entity)
     {
         $metadata = $this->driver->loadMetadataFromObject($entity);
-        $address = $metadata->addressProperty->getValue();
+        $address = $metadata->addressProperty->getValue($entity);
         $result = $this->geocoder->geocode($address);
 
-        $metadata->latitudeProperty->setValue($result['latitude']);
-        $metadata->longitudeProperty->setValue($result['longitude']);
+        $metadata->latitudeProperty->setValue($entity, $result['latitude']);
+        $metadata->longitudeProperty->setValue($entity, $result['longitude']);
     }
 }

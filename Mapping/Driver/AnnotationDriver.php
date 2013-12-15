@@ -5,11 +5,12 @@ namespace Bazinga\Bundle\GeocoderBundle\Mapping\Driver;
 use Doctrine\Common\Annotations\Reader;
 use Bazinga\Bundle\GeocoderBundle\Mapping\Exception;
 use Bazinga\Bundle\GeocoderBundle\Mapping\Annotations;
+use Bazinga\Bundle\GeocoderBundle\Mapping\ClassMetadata;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class AnnotationDriver
+class AnnotationDriver implements DriverInterface
 {
     private $reader;
 
@@ -21,19 +22,20 @@ class AnnotationDriver
     public function isGeocodeable($object)
     {
         $reflection = new \ReflectionObject($object);
-        return !!$this->reader->getClassAnnotation($reflection, 'Bazinga\\Bundle\\Mapping\\Annotations\\Geocodeable');
+
+        return !!$this->reader->getClassAnnotation($reflection, 'Bazinga\\Bundle\\GeocoderBundle\\Mapping\\Annotations\\Geocodeable');
     }
 
     public function loadMetadataFromObject($object)
     {
         $reflection = new \ReflectionObject($object);
-        if (!$annotation = $this->reader->getClassAnnotation($reflection, 'Bazinga\\Bundle\\Mapping\\Annotations\\Geocodeable')) {
+        if (!$annotation = $this->reader->getClassAnnotation($reflection, 'Bazinga\\Bundle\\GeocoderBundle\\Mapping\\Annotations\\Geocodeable')) {
             throw new Exception\MappingException(sprintf(
                 'The class %s is not geocodeable', get_class($object)
             ));
         }
 
-        $metadata = new \Bazinga\Bundle\GeocoderBundle\Mapping\ClassMetadata();
+        $metadata = new ClassMetadata();
 
         foreach ($reflection->getProperties() as $property) {
             foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
