@@ -1,7 +1,7 @@
 BazingaGeocoderBundle
 =====================
 
-Integration of the [**Geocoder**](http://github.com/willdurand/Geocoder) library
+Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) library
 into Symfony2.
 
 
@@ -22,14 +22,16 @@ to your `composer.json` file:
 
 Register the bundle in `app/AppKernel.php`:
 
-    // app/AppKernel.php
-    public function registerBundles()
-    {
-        return array(
-            // ...
-            new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
-        );
-    }
+```php
+// app/AppKernel.php
+public function registerBundles()
+{
+    return array(
+        // ...
+        new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
+    );
+}
+```
 
 Enable the bundle's configuration in `app/config/config.yml`:
 
@@ -73,7 +75,7 @@ information in your development environment, for instance:
         // Retrieve information from the current user (by its IP address)
         $result = $this->container
             ->get('bazinga_geocoder.geocoder')
-            ->using('yahoo')
+            ->using('google_maps')
             ->geocode($request->server->get('REMOTE_ADDR'));
 
         // Find the 5 nearest objects (15km) from the current user.
@@ -170,10 +172,9 @@ __Configuration example:__
 
 ```yaml
 # app/config/config*.yml
-
 services:
     acme_cache_adapter:
-        class: "Doctrine\Common\Cache\ApcCache"
+        class: "Doctrine\\Common\\Cache\\ApcCache"
 
 bazinga_geocoder:
     providers:
@@ -183,8 +184,8 @@ bazinga_geocoder:
         google_maps: ~
 ```
 
-> Tip: If you want to configure the cache adapter,
-> we recommend the [liip/doctrine-cache-bundle](https://github.com/liip/LiipDoctrineCacheBundle.git).
+> **Tip:** If you want to configure the cache adapter,
+> we recommend the [liip/doctrine-cache-bundle](https://github.com/liip/LiipDoctrineCacheBundle).
 
 
 ### Symfony2 Profiler Integration
@@ -194,7 +195,7 @@ check number of queries executed by each provider, total execution time
 and geocoding results.
 
 ![Example
-Toolbar](https://raw.github.com/willdurand/BazingaGeocoderBundle/master/Resources/doc/toolbar.png)
+Toolbar](https://raw.github.com/geocoder-php/BazingaGeocoderBundle/master/Resources/doc/toolbar.png)
 
 
 Reference Configuration
@@ -226,21 +227,24 @@ bazinga_geocoder:
             lifetime:             86400
         ip_info_db:
             api_key:              ~ # Required
-        yahoo:
-            api_key:              ~ # Required
-            locale:               ~
         cloudmade:
             api_key:              ~ # Required
         google_maps:
             locale:               ~
             region:               ~
             use_ssl:              false
-        openstreetmaps:
+        google_maps_business:
+            client_id:            ~ # Required
+            api_key:              ~
+            region:               ~
+            use_ssl:              false
+        openstreetmap:
             locale:               ~
         host_ip:              []
         geoip:                []
         free_geo_ip:          []
-        mapquest:             []
+        mapquest:
+            api_key:              ~ # Required
         oiorest:              []
         geocoder_ca:          []
         geocoder_us:          []

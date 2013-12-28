@@ -10,11 +10,12 @@
         <parameter key="bazinga_geocoder.geocoder.provider.bing_maps.class">Geocoder\Provider\BingMapsProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.free_geo_ip.class">Geocoder\Provider\FreeGeoIpProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.google_maps.class">Geocoder\Provider\GoogleMapsProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.google_maps_business.class">Geocoder\Provider\GoogleMapsBusinessProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.host_ip.class">Geocoder\Provider\HostIpProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.ip_info_db.class">Geocoder\Provider\IpInfoDbProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.yahoo.class">Geocoder\Provider\YahooProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.cloudmade.class">Geocoder\Provider\CloudMadeProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.openstreetmaps.class">Geocoder\Provider\OpenStreetMapsProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.openstreetmap.class">Geocoder\Provider\OpenStreetMapProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.geoip.class">Geocoder\Provider\GeoipProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.mapquest.class">Geocoder\Provider\MapQuestProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.oiorest.class">Geocoder\Provider\OIORestProvider</parameter>
@@ -29,6 +30,8 @@
         <parameter key="bazinga_geocoder.geocoder.provider.maxmind_binary.class">Geocoder\Provider\MaxMindBinaryProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.cache.class">Bazinga\Bundle\GeocoderBundle\Provider\CacheProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.chain.class">Geocoder\Provider\ChainProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.tom_tom.class">Geocoder\Provider\TomTomProvider</parameter>
+
 
         <parameter key="bazinga_geocoder.logger.class">Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger</parameter>
 

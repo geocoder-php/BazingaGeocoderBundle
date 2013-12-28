@@ -42,8 +42,7 @@ class BazingaGeocoderExtension extends Extension
 
             $tag = current($definition->getTag('kernel.event_listener'));
             $tag['priority'] = $config['fake_ip']['priority'];
-            $tags = array();
-            $tags[] = array('kernel.event_listener' => $tag);
+            $tags = array('kernel.event_listener' => array($tag));
             $definition->setTags($tags);
         } else {
             $container->removeDefinition('bazinga_geocoder.event_listener.fake_request');
@@ -76,15 +75,6 @@ class BazingaGeocoderExtension extends Extension
             $this->addProvider('ip_info_db', array($ipInfoDbParams['api_key']));
         }
 
-        if (isset($config['providers']['yahoo'])) {
-            $yahooParams = $config['providers']['yahoo'];
-
-            $this->addProvider('yahoo', array(
-                $yahooParams['api_key'],
-                $yahooParams['locale'],
-            ));
-        }
-
         if (isset($config['providers']['cloudmade'])) {
             $cloudMadeParams = $config['providers']['cloudmade'];
 
@@ -101,10 +91,22 @@ class BazingaGeocoderExtension extends Extension
             ));
         }
 
-        if (isset($config['providers']['openstreetmaps'])) {
-            $openstreetMapsParams = $config['providers']['openstreetmaps'];
+        if (isset($config['providers']['google_maps_business'])) {
+            $googleMapsBusinessParams = $config['providers']['google_maps_business'];
 
-            $this->addProvider('openstreetmaps', array($openstreetMapsParams['locale']));
+            $this->addProvider('google_maps_business', array(
+                $googleMapsBusinessParams['client_id'],
+                $googleMapsBusinessParams['api_key'],
+                $googleMapsBusinessParams['locale'],
+                $googleMapsBusinessParams['region'],
+                $googleMapsBusinessParams['use_ssl'],
+            ));
+        }
+
+        if (isset($config['providers']['openstreetmap'])) {
+            $openstreetMapsParams = $config['providers']['openstreetmap'];
+
+            $this->addProvider('openstreetmap', array($openstreetMapsParams['locale']));
         }
 
         if (isset($config['providers']['geoip'])) {
@@ -112,7 +114,9 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['mapquest'])) {
-            $this->addProvider('mapquest');
+            $mapquestParams = $config['providers']['mapquest'];
+
+            $this->addProvider('mapquest', array($mapquestParams['api_key']));
         }
 
         if (isset($config['providers']['oiorest'])) {
