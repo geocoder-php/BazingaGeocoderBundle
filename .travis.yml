@@ -10,6 +10,7 @@ env:
     - SYMFONY_VERSION=2.1.*
     - SYMFONY_VERSION=2.2.*
     - SYMFONY_VERSION=2.3.*
+    - SYMFONY_VERSION=2.4.*
     - SYMFONY_VERSION=dev-master
 
 matrix:
@@ -18,8 +19,9 @@ matrix:
 
 
 before_script:
-    - curl -s http://getcomposer.org/installer | php
-    - php composer.phar require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
-    - php composer.phar update
+    - composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
+    # This command must be run with `--prefer-source`, otherwise the `Doctrine\Tests\OrmTestCase` class
+    # won't be found.
+    - composer update --prefer-source
 
 script: phpunit --coverage-text
