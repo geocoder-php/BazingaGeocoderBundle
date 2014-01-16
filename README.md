@@ -3,6 +3,10 @@ BazingaGeocoderBundle
 
 [![Build
 Status](https://secure.travis-ci.org/geocoder-php/BazingaGeocoderBundle.png)](http://travis-ci.org/geocoder-php/BazingaGeocoderBundle)
+[![Total
+Downloads](https://poser.pugx.org/willdurand/geocoder-bundle/downloads.png)](https://packagist.org/packages/willdurand/geocoder-bundle)
+[![Latest Stable
+Version](https://poser.pugx.org/willdurand/geocoder-bundle/v/stable.png)](https://packagist.org/packages/willdurand/geocoder-bundle)
 
 Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) library
 into Symfony2.
