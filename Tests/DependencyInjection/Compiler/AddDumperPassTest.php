@@ -17,7 +17,7 @@ class AddDumperPassTest extends \PHPUnit_Framework_TestCase
         $builder->setDefinition('bazinga_geocoder.dumper_manager', new Definition('Bazinga\Bundle\GeocoderBundle\DumperManager'));
 
         $dumper = new Definition('Geocoder\Dumper\GeoJsonDumper');
-        $dumper->addTag('geocoder.dumper', array('alias' => 'geojson'));
+        $dumper->addTag('bazinga_geocoder.dumper', array('alias' => 'geojson'));
 
         $builder->setDefinition('bazinga_geocoder.dumper.geojson', $dumper);
 

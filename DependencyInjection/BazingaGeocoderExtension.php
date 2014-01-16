@@ -72,13 +72,17 @@ class BazingaGeocoderExtension extends Extension
         if (isset($config['providers']['ip_info_db'])) {
             $ipInfoDbParams = $config['providers']['ip_info_db'];
 
-            $this->addProvider('ip_info_db', array($ipInfoDbParams['api_key']));
+            $this->addProvider('ip_info_db', array(
+                $ipInfoDbParams['api_key']
+            ));
         }
 
         if (isset($config['providers']['cloudmade'])) {
             $cloudMadeParams = $config['providers']['cloudmade'];
 
-            $this->addProvider('cloudmade', array($cloudMadeParams['api_key']));
+            $this->addProvider('cloudmade', array(
+                $cloudMadeParams['api_key']
+            ));
         }
 
         if (isset($config['providers']['google_maps'])) {
@@ -106,7 +110,9 @@ class BazingaGeocoderExtension extends Extension
         if (isset($config['providers']['openstreetmap'])) {
             $openstreetMapsParams = $config['providers']['openstreetmap'];
 
-            $this->addProvider('openstreetmap', array($openstreetMapsParams['locale']));
+            $this->addProvider('openstreetmap', array(
+                $openstreetMapsParams['locale']
+            ));
         }
 
         if (isset($config['providers']['geoip'])) {
@@ -114,9 +120,11 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['mapquest'])) {
-            $mapquestParams = $config['providers']['mapquest'];
+            $mapQuestParams = $config['providers']['mapquest'];
 
-            $this->addProvider('mapquest', array($mapquestParams['api_key']));
+            $this->addProvider('mapquest', array(
+                $mapQuestParams['api_key']
+            ));
         }
 
         if (isset($config['providers']['oiorest'])) {
@@ -134,7 +142,9 @@ class BazingaGeocoderExtension extends Extension
         if (isset($config['providers']['ign_openls'])) {
             $ignOpenlsParams = $config['providers']['ign_openls'];
 
-            $this->addProvider('ign_openls', array($ignOpenlsParams['api_key']));
+            $this->addProvider('ign_openls', array(
+                $ignOpenlsParams['api_key']
+            ));
         }
 
         if (isset($config['providers']['data_science_toolkit'])) {
@@ -144,11 +154,18 @@ class BazingaGeocoderExtension extends Extension
         if (isset($config['providers']['yandex'])) {
             $yandexParams = $config['providers']['yandex'];
 
-            $this->addProvider('yandex', array($yandexParams['locale'], $yandexParams['toponym']));
+            $this->addProvider('yandex', array(
+                $yandexParams['locale'],
+                $yandexParams['toponym']
+            ));
         }
 
         if (isset($config['providers']['geo_ips'])) {
-            $this->addProvider('geo_ips', array($config['providers']['geo_ips']['api_key']));
+            $geoIpsParams = $config['providers']['geo_ips'];
+
+            $this->addProvider('geo_ips', array(
+                $geoIpsParams['api_key']
+            ));
         }
 
         if (isset($config['providers']['geo_plugin'])) {
@@ -158,15 +175,19 @@ class BazingaGeocoderExtension extends Extension
         if (isset($config['providers']['maxmind'])) {
             $maxmindParams = $config['providers']['maxmind'];
 
-            $this->addProvider('maxmind', array($maxmindParams['api_key']));
+            $this->addProvider('maxmind', array(
+                $maxmindParams['api_key']
+            ));
         }
 
         if (isset($config['providers']['maxmind_binary'])) {
+            $maxmindBinaryParams = $config['providers']['maxmind_binary'];
+
             $provider = new Definition(
                 '%bazinga_geocoder.geocoder.provider.maxmind_binary.class%',
                 array(
-                    $config['providers']['maxmind_binary']['binary_file'],
-                    $config['providers']['maxmind_binary']['open_flag'],
+                    $maxmindBinaryParams['binary_file'],
+                    $maxmindBinaryParams['open_flag'],
                 )
             );
 
@@ -174,7 +195,7 @@ class BazingaGeocoderExtension extends Extension
                 ->setPublic(false)
                 ->addTag('bazinga_geocoder.provider');
 
-            $this->container->setDefinition('bazinga_geocoder.provider.maxmind_binary', $provider);
+            $container->setDefinition('bazinga_geocoder.provider.maxmind_binary', $provider);
         }
 
         if (isset($config['providers']['cache'])) {
@@ -212,7 +233,9 @@ class BazingaGeocoderExtension extends Extension
             if (isset($config['providers']['chain']['providers'])) {
                 foreach ($config['providers']['chain']['providers'] as $name) {
                     if ($this->container->hasDefinition('bazinga_geocoder.provider.'.$name)) {
-                        $chainProvider->addMethodCall('addProvider', array($this->container->getDefinition('bazinga_geocoder.provider.'.$name)));
+                        $chainProvider->addMethodCall('addProvider', array(
+                            $this->container->getDefinition('bazinga_geocoder.provider.'.$name)
+                        ));
                     }
                 }
             }

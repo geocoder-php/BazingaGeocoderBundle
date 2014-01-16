@@ -165,14 +165,14 @@ public function geocodeAction(Request $request)
 }
 ```
 
-To register a new dumper, you must tag it with _geocoder.dumper_.
-Geocoder detect and register it automatically.
+To register a new dumper, you must tag it with `bazinga_geocoder.dumper`.
+The bundles will automatically register it.
 
 A little example:
 
 ```xml
 <service id="some.dumper" class="%some.dumper.class">
-    <tag name="geocoder.dumper" alias="custom" />
+    <tag name="bazinga_geocoder.dumper" alias="custom" />
 </service>
 ```
 
@@ -181,8 +181,6 @@ A little example:
 Sometimes you have to cache the results from a provider. For this case the bundle provides
 a cache provider. The cache provider wraps another provider and delegate all calls
 to this provider and cache the return value.
-
-__Configuration example:__
 
 ```yaml
 # app/config/config*.yml

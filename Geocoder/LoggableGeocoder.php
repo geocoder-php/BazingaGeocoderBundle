@@ -39,8 +39,8 @@ class LoggableGeocoder extends Geocoder
         }
 
         $startTime = microtime(true);
-        $result = parent::geocode($value);
-        $duration = (microtime(true) - $startTime) * 1000;
+        $result    = parent::geocode($value);
+        $duration  = (microtime(true) - $startTime) * 1000;
 
         $this->logger->logRequest(
             sprintf("[Geocoding] %s", $value),
@@ -62,8 +62,8 @@ class LoggableGeocoder extends Geocoder
         }
 
         $startTime = microtime(true);
-        $result = parent::reverse($latitude, $longitude);
-        $duration = (microtime(true) - $startTime) * 1000;
+        $result    = parent::reverse($latitude, $longitude);
+        $duration  = (microtime(true) - $startTime) * 1000;
 
         $value = sprintf("[Reverse geocoding] latitude: %s, longitude: %s", $latitude, $longitude);
 

@@ -13,13 +13,12 @@ namespace Bazinga\Bundle\GeocoderBundle\Logger;
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
 
 /**
- * GeocoderLogger
  * @author Michal Dabrowski <dabrowski@brillante.pl>
  */
 class GeocoderLogger
 {
     protected $logger;
-    protected $nbRequests = 0;
+
     protected $requests = array();
 
     /**
@@ -40,18 +39,19 @@ class GeocoderLogger
      */
     public function logRequest($value, $duration, $providerClass, $result)
     {
-        ++$this->nbRequests;
-
         if (null !== $this->logger) {
             $this->requests[] = array(
-                'value' => $value,
-                'duration' => $duration,
+                'value'         => $value,
+                'duration'      => $duration,
                 'providerClass' => $providerClass,
-                'result' => $result
+                'result'        => $result
             );
 
-            $message = sprintf("%s %0.2f ms (%s)", $value, $duration, $providerClass);
-            $this->logger->info($message);
+            $this->logger->info(sprintf("%s %0.2f ms (%s)",
+                $value,
+                $duration,
+                $providerClass
+            ));
         }
     }
 

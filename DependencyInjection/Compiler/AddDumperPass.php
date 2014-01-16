@@ -30,7 +30,7 @@ class AddDumperPass implements CompilerPassInterface
         $manager = $container->findDefinition('bazinga_geocoder.dumper_manager');
 
         $dumpers = array();
-        foreach ($container->findTaggedServiceIds('geocoder.dumper') as $id => $attributes) {
+        foreach ($container->findTaggedServiceIds('bazinga_geocoder.dumper') as $id => $attributes) {
             if (!isset($attributes[0]['alias'])) {
                 throw new \RuntimeException(sprintf('No alias for service "%s" provided. Please set a alias!', $id));
             }

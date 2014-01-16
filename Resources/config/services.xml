@@ -59,19 +59,19 @@
             <argument type="collection" /><!-- Placeholder -->
         </service>
         <service id="bazinga_geocoder.dumper.geojson" class="%bazinga_geocoder.dumper.geojson.class%">
-            <tag name="geocoder.dumper" alias="geojson" />
+            <tag name="bazinga_geocoder.dumper" alias="geojson" />
         </service>
         <service id="bazinga_geocoder.dumper.gpx" class="%bazinga_geocoder.dumper.gpx.class%">
-            <tag name="geocoder.dumper" alias="gpx" />
+            <tag name="bazinga_geocoder.dumper" alias="gpx" />
         </service>
         <service id="bazinga_geocoder.dumper.kmp" class="%bazinga_geocoder.dumper.kmp.class%">
-            <tag name="geocoder.dumper" alias="kmp" />
+            <tag name="bazinga_geocoder.dumper" alias="kmp" />
         </service>
         <service id="bazinga_geocoder.dumper.wkb" class="%bazinga_geocoder.dumper.wkb.class%">
-            <tag name="geocoder.dumper" alias="wkb" />
+            <tag name="bazinga_geocoder.dumper" alias="wkb" />
         </service>
         <service id="bazinga_geocoder.dumper.wkt" class="%bazinga_geocoder.dumper.wkt.class%">
-            <tag name="geocoder.dumper" alias="wkt" />
+            <tag name="bazinga_geocoder.dumper" alias="wkt" />
         </service>
 
          <!-- Logger -->

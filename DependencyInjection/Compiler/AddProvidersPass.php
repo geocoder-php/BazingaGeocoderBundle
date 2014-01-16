@@ -25,9 +25,10 @@ class AddProvidersPass implements CompilerPassInterface
     protected $container;
 
     /**
-     * Get all providers based on their tag ('geocoder.provider') and register them.
+     * Get all providers based on their tag (`bazinga_geocoder.provider`) and
+     * register them.
      *
-     * @param \Symfony\Component\DependencyInjection\ContainerBuilder $container The container.
+     * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {
@@ -35,16 +36,14 @@ class AddProvidersPass implements CompilerPassInterface
             return;
         }
 
-        $this->container = $container;
-
         $array = array();
-        foreach ($this->container->findTaggedServiceIds('bazinga_geocoder.provider') as $providerId => $attributes) {
+        foreach ($container->findTaggedServiceIds('bazinga_geocoder.provider') as $providerId => $attributes) {
             $array[] = new Reference($providerId);
         }
 
-        $this->container
+        $container
             ->getDefinition('bazinga_geocoder.geocoder')
             ->addMethodCall('registerProviders', array($array))
-            ;
+        ;
     }
 }

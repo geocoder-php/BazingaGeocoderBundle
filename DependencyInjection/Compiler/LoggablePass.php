@@ -29,10 +29,7 @@ class LoggablePass implements CompilerPassInterface
         }
 
         $definition = $container->getDefinition('bazinga_geocoder.geocoder');
-        $definition->setClass(
-            $container->getParameter('bazinga_geocoder.geocoder.loggable_class')
-        );
+        $definition->setClass($container->getParameter('bazinga_geocoder.geocoder.loggable_class'));
         $definition->addMethodCall('setLogger', array(new Reference('bazinga_geocoder.logger')));
-
     }
 }

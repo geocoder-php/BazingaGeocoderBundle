@@ -20,7 +20,7 @@ class GeocoderListener implements EventSubscriber
 
     public function __construct(Geocoder $geocoder, DriverInterface $driver)
     {
-        $this->driver = $driver;
+        $this->driver   = $driver;
         $this->geocoder = $geocoder;
     }
 
@@ -69,8 +69,8 @@ class GeocoderListener implements EventSubscriber
     private function geocodeEntity($entity)
     {
         $metadata = $this->driver->loadMetadataFromObject($entity);
-        $address = $metadata->addressProperty->getValue($entity);
-        $result = $this->geocoder->geocode($address);
+        $address  = $metadata->addressProperty->getValue($entity);
+        $result   = $this->geocoder->geocode($address);
 
         $metadata->latitudeProperty->setValue($entity, $result['latitude']);
         $metadata->longitudeProperty->setValue($entity, $result['longitude']);

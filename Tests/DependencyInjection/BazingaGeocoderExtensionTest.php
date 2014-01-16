@@ -41,6 +41,7 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
         );
 
         $dumperManager = $container->get('bazinga_geocoder.dumper_manager');
+
         foreach (array('geojson', 'gpx', 'kmp', 'wkb', 'wkt') as $name) {
             $this->assertTrue($dumperManager->has($name));
         }
