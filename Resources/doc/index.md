@@ -117,6 +117,20 @@ bazinga_geocoder:
         priority: 128
 ```
 
+### Registering Your Own Providers
+
+If you want to use your own provider in your application, create a service,
+and tag it as `bazinga_geocoder.provider`:
+
+```xml
+<service id="acme_demo.geocoder.my_provider" class="Acme\Demo\Geocoder\Provider\MyProvider">
+    <tag name="bazinga_geocoder.provider" />
+</service>
+```
+
+The bundle will automatically register it, into the `bazinga_geocoder.geocoder`
+service.
+
 ### Dumpers
 
 If you need to dump your geocoded data to a specific format, you can use the
