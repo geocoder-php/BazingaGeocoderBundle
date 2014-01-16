@@ -20,6 +20,10 @@ to your `composer.json` file:
 }
 ```
 
+**Protip:** you should browse the
+[`willdurand/geocoder-bundle`](https://packagist.org/packages/willdurand/geocoder-bundle)
+page to choose a stable version to use, avoid the `@stable` meta constraint.
+
 Register the bundle in `app/AppKernel.php`:
 
 ```php
