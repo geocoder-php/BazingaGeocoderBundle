@@ -128,8 +128,8 @@ and tag it as `bazinga_geocoder.provider`:
 </service>
 ```
 
-The bundle will automatically register it, into the `bazinga_geocoder.geocoder`
-service.
+The bundle will automatically register your provider into the
+`bazinga_geocoder.geocoder` service.
 
 ### Dumpers
 
