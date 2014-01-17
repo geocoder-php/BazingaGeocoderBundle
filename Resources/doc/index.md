@@ -135,6 +135,10 @@ and tag it as `bazinga_geocoder.provider`:
 The bundle will automatically register your provider into the
 `bazinga_geocoder.geocoder` service.
 
+**Note:** the `bazinga_geocoder.geocoder.adapter` service represents the configured
+Geocoder's adapter. If your provider needs an HTTP adapter, you should inject this
+service into the service you have just created.
+
 ### Dumpers
 
 If you need to dump your geocoded data to a specific format, you can use the
