@@ -1,0 +1,10 @@
+bazinga_geocoder:
+    fake_ip:
+        ip: 33.33.33.11
+        priority: 128
+    adapter:
+        class: Geocoder\HttpAdapter\CurlHttpAdapter
+    providers:
+        bing_maps:
+            api_key: 123
+            locale: en_US

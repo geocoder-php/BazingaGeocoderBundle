@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <parameters>
+        <parameter key="bazinga_geocoder.doctrine.event_listener.class">Bazinga\Bundle\GeocoderBundle\Doctrine\ORM\GeocoderListener</parameter>
+    </parameters>
+
+    <services>
+        <service id="bazinga_geocoder.doctrine.event_listener" class="%bazinga_geocoder.doctrine.event_listener.class%">
+            <argument type="service" id="bazinga_geocoder.geocoder" />
+            <argument type="service" id="bazinga_geocoder.mapping.driver" />
+            <tag name="doctrine.event_subscriber" />
+        </service>
+    </services>
+</container>

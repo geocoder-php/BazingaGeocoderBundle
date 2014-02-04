@@ -240,6 +240,12 @@ class BazingaGeocoderExtension extends Extension
                 }
             }
         }
+
+        $loader->load('mapping.xml');
+
+        if ($container->hasDefinition('doctrine')) {
+            $loader->load('doctrine.xml');
+        }
     }
 
     protected function addProvider($name, array $arguments = array())
