@@ -1,7 +1,5 @@
 bazinga_geocoder:
-    fake_ip:
-        ip: 33.33.33.11
-        priority: 128
+    doctrine: true
     adapter:
         class: Geocoder\HttpAdapter\CurlHttpAdapter
     providers:

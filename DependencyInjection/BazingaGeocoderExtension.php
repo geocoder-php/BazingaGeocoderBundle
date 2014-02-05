@@ -243,7 +243,7 @@ class BazingaGeocoderExtension extends Extension
 
         $loader->load('mapping.xml');
 
-        if ($container->hasDefinition('doctrine')) {
+        if ($config['doctrine']) {
             $loader->load('doctrine.xml');
         }
     }
