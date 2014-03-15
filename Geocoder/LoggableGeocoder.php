@@ -39,17 +39,17 @@ class LoggableGeocoder extends Geocoder
         }
 
         $startTime = microtime(true);
-        $result    = parent::geocode($value);
+        $results   = parent::geocode($value);
         $duration  = (microtime(true) - $startTime) * 1000;
 
         $this->logger->logRequest(
             sprintf("[Geocoding] %s", $value),
             $duration,
             $this->getProviderClass(),
-            json_encode($result->toArray())
+            $results
         );
 
-        return $result;
+        return $results;
     }
 
     /**
@@ -62,19 +62,14 @@ class LoggableGeocoder extends Geocoder
         }
 
         $startTime = microtime(true);
-        $result    = parent::reverse($latitude, $longitude);
+        $results   = parent::reverse($latitude, $longitude);
         $duration  = (microtime(true) - $startTime) * 1000;
 
         $value = sprintf("[Reverse geocoding] latitude: %s, longitude: %s", $latitude, $longitude);
 
-        $this->logger->logRequest(
-            $value,
-            $duration,
-            $this->getProviderClass(),
-            json_encode($result->toArray())
-        );
+        $this->logger->logRequest($value, $duration, $this->getProviderClass(), $results);
 
-        return $result;
+        return $results;
     }
 
     protected function getProviderClass()
