@@ -51,6 +51,34 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
         $this->results->attach($otherResult);
     }
 
+    public function testLogNoResult()
+    {
+        $this->geocoderLogger->logRequest('copenhagen', 0.123, 'FooProvider', new Geocoded);
+
+        $requests = $this->geocoderLogger->getRequests();
+
+        $this->assertTrue(is_array($requests = $this->geocoderLogger->getRequests()));
+        $this->assertCount(1, $requests);
+        $this->assertTrue(is_array($request = $requests[0]));
+        $this->assertSame($request['value'], 'copenhagen');
+        $this->assertSame($request['duration'], 0.123);
+        $this->assertSame($request['providerClass'], 'FooProvider');
+        $this->assertSame($request['result'], '{"latitude":0,"longitude":0,"bounds":null,"streetNumber":null,"streetName":null,"zipcode":null,"city":null,"cityDistrict":null,"county":null,"countyCode":null,"region":null,"regionCode":null,"country":null,"countryCode":null,"timezone":null}');
+    }
+
+    public function testLogNoResults()
+    {
+        $this->geocoderLogger->logRequest('copenhagen', 0.123, 'FooProvider', new \SplObjectStorage);
+
+        $this->assertTrue(is_array($requests = $this->geocoderLogger->getRequests()));
+        $this->assertCount(1, $requests);
+        $this->assertTrue(is_array($request = $requests[0]));
+        $this->assertSame($request['value'], 'copenhagen');
+        $this->assertSame($request['duration'], 0.123);
+        $this->assertSame($request['providerClass'], 'FooProvider');
+        $this->assertSame($request['result'], '[]');
+    }
+
     public function testLogSingleResult()
     {
         $this->geocoderLogger->logRequest('copenhagen', 0.123, 'FooProvider', $this->result);

@@ -47,6 +47,8 @@ class GeocoderLogger
             $this->logger->info(sprintf("%s %0.2f ms (%s)", $value, $duration, $providerClass));
         }
 
+        $data = array();
+
         if ($results instanceof \SplObjectStorage) {
             foreach ($results as $result) {
                 $data[] = $result->toArray();
