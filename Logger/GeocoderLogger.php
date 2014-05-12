@@ -48,6 +48,7 @@ class GeocoderLogger
         }
 
         if ($results instanceof \SplObjectStorage) {
+            $data = array();
             foreach ($results as $result) {
                 $data[] = $result->toArray();
             }
