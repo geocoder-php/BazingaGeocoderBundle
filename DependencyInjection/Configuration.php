@@ -102,6 +102,7 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('locale')->defaultNull()->end()
                         ->scalarNode('region')->defaultNull()->end()
                         ->booleanNode('use_ssl')->defaultFalse()->end()
+                        ->scalarNode('api_key')->defaultNull()->end()
                     ->end()
                 ->end()
                 ->arrayNode('google_maps_business')

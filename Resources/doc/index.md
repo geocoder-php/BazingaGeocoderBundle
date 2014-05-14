@@ -253,6 +253,7 @@ bazinga_geocoder:
             locale:               ~
             region:               ~
             use_ssl:              false
+            api_key               ~
         google_maps_business:
             client_id:            ~ # Required
             api_key:              ~

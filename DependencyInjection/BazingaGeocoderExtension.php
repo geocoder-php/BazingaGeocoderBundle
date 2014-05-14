@@ -92,6 +92,7 @@ class BazingaGeocoderExtension extends Extension
                 $googleMapsParams['locale'],
                 $googleMapsParams['region'],
                 $googleMapsParams['use_ssl'],
+                $googleMapsParams['api_key'],
             ));
         }
 
