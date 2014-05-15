@@ -20,6 +20,7 @@ bazinga_geocoder:
         google_maps:
             locale: en_US
             region: en_US
+            api_key: 123
         google_maps_business:
             client_id: 123
             api_key: 123
