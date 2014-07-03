@@ -14,6 +14,7 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
     {
         $address = 'Paris, France';
         $coordinates = array('lat' => 48.857049,'lng' => 2.35223);
+        $cacheKey = 'geocoder_' . sha1($address);
 
         $delegate = $this->getMock('Geocoder\\Provider\\ProviderInterface');
         $delegate->expects($this->once())
@@ -24,12 +25,12 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
         $cache = $this->getMock('Doctrine\\Common\\Cache\\Cache');
         $cache->expects($this->once())
             ->method('fetch')
-            ->with(crc32($address))
+            ->with($cacheKey)
             ->will($this->returnValue(false));
 
         $cache->expects($this->once())
             ->method('save')
-            ->with(crc32($address), serialize($coordinates), 0);
+            ->with($cacheKey, serialize($coordinates), 0);
 
         $provider = new CacheProvider($cache, $delegate);
         $this->assertEquals($coordinates, $provider->getGeocodedData($address));
@@ -39,6 +40,7 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
     {
         $address = 'Paris, France';
         $coordinates = array('lat' => 48.857049,'lng' => 2.35223);
+        $cacheKey = 'geocoder_' . sha1($address);
 
         $delegate = $this->getMock('Geocoder\\Provider\\ProviderInterface');
         $delegate->expects($this->once())
@@ -51,7 +53,7 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
         $provider->getGeocodedData($address);
         $provider->getGeocodedData($address);
 
-        $this->assertTrue($cache->contains(crc32($address)));
+        $this->assertTrue($cache->contains($cacheKey));
     }
 
     public function testGetReversedData()
