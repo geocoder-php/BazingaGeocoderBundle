@@ -65,7 +65,7 @@ class CacheProvider implements ProviderInterface
      */
     public function getGeocodedData($address)
     {
-        $key = crc32($this->locale.$address);
+        $key = 'geocoder_' . sha1($this->locale . $address);
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
@@ -82,7 +82,7 @@ class CacheProvider implements ProviderInterface
      */
     public function getReversedData(array $coordinates)
     {
-        $key = crc32(serialize($this->locale . json_encode($coordinates)));
+        $key = 'geocoder_' . sha1($this->locale . json_encode($coordinates));
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
