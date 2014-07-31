@@ -236,6 +236,8 @@ class BazingaGeocoderExtension extends Extension
                         $chainProvider->addMethodCall('addProvider', array(
                             $this->container->getDefinition('bazinga_geocoder.provider.'.$name)
                         ));
+                    } else {
+                        $chainProvider->addMethodCall('addProvider', array(new Reference($name)));
                     }
                 }
             }
