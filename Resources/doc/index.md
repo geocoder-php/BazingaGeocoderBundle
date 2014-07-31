@@ -1,14 +1,20 @@
 BazingaGeocoderBundle
 =====================
 
-Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) library
-into Symfony2.
+Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder)
+library into Symfony2.
+
+* [Installation](#installation)
+* [Usage](#usage)
+* [Reference Configuration](#reference-configuration)
+* [Testing](#testing)
 
 
 Installation
 ------------
 
-Require [`willdurand/geocoder-bundle`](https://packagist.org/packages/willdurand/geocoder-bundle)
+Require
+[`willdurand/geocoder-bundle`](https://packagist.org/packages/willdurand/geocoder-bundle)
 to your `composer.json` file:
 
 
@@ -232,35 +238,36 @@ You'll find the reference configuration below:
 bazinga_geocoder:
     fake_ip:
         enabled:              true
-        ip:                   ~
+        ip:                   null
         priority:             0
     adapter:
-        class:                ~
+        class:                null
     providers:
         bing_maps:
             api_key:              ~ # Required
-            locale:               ~
+            locale:               null
         cache:
             adapter:              ~ # Required
             provider:             ~ # Required
-            locale:               ~
+            locale:               null
             lifetime:             86400
         ip_info_db:
             api_key:              ~ # Required
         cloudmade:
             api_key:              ~ # Required
         google_maps:
-            locale:               ~
-            region:               ~
+            locale:               null
+            region:               null
             use_ssl:              false
-            api_key               ~
+            api_key:              null
         google_maps_business:
             client_id:            ~ # Required
-            api_key:              ~
-            region:               ~
+            api_key:              null
+            locale:               null
+            region:               null
             use_ssl:              false
         openstreetmap:
-            locale:               ~
+            locale:               null
         host_ip:              []
         geoip:                []
         free_geo_ip:          []
@@ -273,18 +280,21 @@ bazinga_geocoder:
             api_key:              ~ # Required
         data_science_toolkit:  []
         yandex:
-            locale:               ~
-            toponym:              ~
+            locale:               null
+            toponym:              null
         geo_ips:
-            api_key:              ~
+            api_key:              null
         geo_plugin:           []
         maxmind:
             api_key:              ~ # Required
         maxmind_binary:
             binary_file:          ~ # Required
-            open_flag:            ~
+            open_flag:            null
         chain:
             providers:            []
+        tom_tom:
+            api_key:              ~ # Required
+            locale:               null
 ```
 
 
