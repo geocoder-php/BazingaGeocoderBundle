@@ -19,7 +19,7 @@ use Symfony\Component\Console\Tester\CommandTester;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class GeocoderCommandTest extends \PHPUnit_Framework_TestCase
+class GeocodeCommandTest extends \PHPUnit_Framework_TestCase
 {
     private static $address = '10 rue Gambetta, Paris, France';
 
