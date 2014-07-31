@@ -172,6 +172,7 @@ class Configuration implements ConfigurationInterface
                     ->fixXmlConfig('provider')
                     ->children()
                         ->arrayNode('providers')
+                            ->performNoDeepMerging()
                             ->prototype('scalar')->end()
                         ->end()
                     ->end()
