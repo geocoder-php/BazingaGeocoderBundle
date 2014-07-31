@@ -6,6 +6,11 @@ library into Symfony2.
 
 * [Installation](#installation)
 * [Usage](#usage)
+  * [Killer Feature](#killer-feature)
+  * [Registering Your Own Providers](#registering-your-own-providers)
+  * [Dumpers](#dumpers)
+  * [Cache Provider](#cache-provider)
+  * [Symfony2 Profiler Integration](#symfony2-profiler-integration)
 * [Reference Configuration](#reference-configuration)
 * [Testing](#testing)
 
@@ -234,7 +239,6 @@ You'll find the reference configuration below:
 
 ``` yaml
 # app/config/config*.yml
-
 bazinga_geocoder:
     fake_ip:
         enabled:              true
