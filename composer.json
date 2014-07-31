@@ -12,7 +12,7 @@
   ],
   "require": {
     "symfony/framework-bundle": "~2.1",
-    "willdurand/geocoder": "~2.3",
+    "willdurand/geocoder": "~2.5",
     "symfony/console": "~2.1"
   },
   "require-dev": {
@@ -27,7 +27,7 @@
   "target-dir": "Bazinga/Bundle/GeocoderBundle",
   "extra": {
     "branch-alias": {
-      "dev-master": "3.0-dev"
+      "dev-master": "3.1-dev"
     }
   }
 }
