@@ -243,8 +243,8 @@ class BazingaGeocoderExtension extends Extension
 
         $loader->load('mapping.xml');
 
-        if ($config['doctrine']) {
-            $loader->load('doctrine.xml');
+        if ($config['driver']) {
+            $loader->load($config['driver'] . '.xml');
         }
     }
 

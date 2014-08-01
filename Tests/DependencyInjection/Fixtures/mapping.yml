@@ -1,5 +1,5 @@
 bazinga_geocoder:
-    doctrine: true
+    driver: doctrine
     adapter:
         class: Geocoder\HttpAdapter\CurlHttpAdapter
     providers:
