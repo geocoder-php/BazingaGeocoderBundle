@@ -1,4 +1,5 @@
 bazinga_geocoder:
+    default_provider: bing_maps
     fake_ip:
         ip: 33.33.33.11
         priority: 128

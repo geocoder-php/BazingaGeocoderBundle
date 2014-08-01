@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+            ->scalarNode('default_provider')->defaultNull()->end()
             ->arrayNode('fake_ip')
                 ->beforeNormalization()
                 ->ifString()
