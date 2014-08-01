@@ -18,6 +18,8 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
     public function testLoad()
     {
         $configs   = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
+        unset($configs['bazinga_geocoder']['default_provider']);
+
         $container = new ContainerBuilder();
         $extension = new BazingaGeocoderExtension();
 
@@ -46,6 +48,8 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
             $this->assertTrue($dumperManager->has($name));
         }
 
+        $this->assertFalse($container->hasParameter('bazinga_geocoder.default_provider'));
+
         $geocoder  = $container->get('bazinga_geocoder.geocoder');
         $providers = $geocoder->getProviders();
         foreach (array(
@@ -73,6 +77,24 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
         ) as $name => $class) {
             $this->assertInstanceOf($class, $providers[$name], sprintf('-> Assert that %s is instance of %s', $name, $class));
         }
+    }
+
+    public function testDefaultProvider()
+    {
+        $configs   = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
+        $container = new ContainerBuilder();
+        $extension = new BazingaGeocoderExtension();
+
+        $container->setParameter('fixtures_dir', __DIR__ . '/Fixtures');
+
+        $container->set('doctrine.apc.cache', new ArrayCache());
+
+        $container->addCompilerPass(new AddProvidersPass());
+        $extension->load($configs, $container);
+
+        $container->compile();
+
+        $this->assertEquals('bing_maps', $container->getParameter('bazinga_geocoder.default_provider'));
     }
 
     public function testLoadingFakeIpOldWay()

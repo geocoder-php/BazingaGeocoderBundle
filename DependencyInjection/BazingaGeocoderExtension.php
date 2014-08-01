@@ -36,6 +36,10 @@ class BazingaGeocoderExtension extends Extension
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
 
+        if ($config['default_provider']) {
+            $container->setParameter('bazinga_geocoder.default_provider', $config['default_provider']);
+        }
+
         if (!empty($config['fake_ip']) && true === $config['fake_ip']['enabled']) {
             $definition = $container->getDefinition('bazinga_geocoder.event_listener.fake_request');
             $definition->replaceArgument(0, $config['fake_ip']['ip']);
