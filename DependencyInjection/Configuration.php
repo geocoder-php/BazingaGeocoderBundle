@@ -30,6 +30,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+            ->booleanNode('driver')->defaultNull()->end()
             ->arrayNode('fake_ip')
                 ->beforeNormalization()
                 ->ifString()

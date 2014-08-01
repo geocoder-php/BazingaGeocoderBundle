@@ -2,6 +2,7 @@
 
 namespace Bazinga\Bundle\GeocoderBundle\Tests\DependencyInjection;
 
+use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\Yaml\Yaml;
 use Doctrine\Common\Cache\ArrayCache;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -24,6 +25,8 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
         $container->setParameter('fixtures_dir', __DIR__ . '/Fixtures');
 
         $container->set('doctrine.apc.cache', new ArrayCache());
+        $reader = $this->getMock('Doctrine\Common\Annotations\Reader');
+        $container->set('annotations.reader', $reader);
 
         $container->addCompilerPass(new AddDumperPass());
         $container->addCompilerPass(new AddProvidersPass());
@@ -84,6 +87,8 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
         $container->setParameter('fixtures_dir', __DIR__ . '/Fixtures');
 
         $container->set('doctrine.apc.cache', new ArrayCache());
+        $reader = $this->getMock('Doctrine\Common\Annotations\Reader');
+        $container->set('annotations.reader', $reader);
 
         $container->addCompilerPass(new AddDumperPass());
         $container->addCompilerPass(new AddProvidersPass());
@@ -99,5 +104,42 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
         $this->assertNotNull(
             $container->get('bazinga_geocoder.event_listener.fake_request')->getFakeIp()
         );
+    }
+
+    public function testLoadMapping()
+    {
+        $configs = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/mapping.yml'));
+        $container = new ContainerBuilder();
+        $extension = new BazingaGeocoderExtension();
+
+        $reader = $this->getMock('Doctrine\Common\Annotations\Reader');
+        $container->set('annotations.reader', $reader);
+
+        $extension->load($configs, $container);
+        $container->compile();
+
+        $this->assertInstanceOf('Bazinga\Bundle\GeocoderBundle\Mapping\Driver\AnnotationDriver', $container->get('bazinga_geocoder.mapping.driver'));
+    }
+
+    public function testDoctrine()
+    {
+        $configs = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/mapping.yml'));
+        $container = new ContainerBuilder();
+        $extension = new BazingaGeocoderExtension();
+
+        $reader = $this->getMock('Doctrine\Common\Annotations\Reader');
+        $container->set('annotations.reader', $reader);
+
+        $container->setDefinition('doctrine', new Definition('stdClass'));
+
+        $extension->load($configs, $container);
+        $container->compile();
+
+        $listenerDefinition = $container->getDefinition('bazinga_geocoder.doctrine.event_listener');
+        $this->assertNotEmpty($listenerDefinition->getTag('doctrine.event_subscriber'));
+
+        $listener = $container->get('bazinga_geocoder.doctrine.event_listener');
+
+        $this->assertInstanceOf('Bazinga\Bundle\GeocoderBundle\Doctrine\ORM\GeocoderListener', $listener);
     }
 }
