@@ -247,6 +247,14 @@ class BazingaGeocoderExtension extends Extension
                 }
             }
         }
+
+        if (isset($config['providers']['geonames'])) {
+            $ipInfoDbParams = $config['providers']['geonames'];
+
+            $this->addProvider('geonames', array(
+                $ipInfoDbParams['username']
+            ));
+        }
     }
 
     protected function addProvider($name, array $arguments = array())

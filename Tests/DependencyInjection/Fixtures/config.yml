@@ -50,5 +50,7 @@ bazinga_geocoder:
             api_key: 123
         maxmind_binary:
             binary_file: %fixtures_dir%/maxmind.dat
+        geonames:
+            username: 123
         chain:
             providers: [free_geo_ip, host_ip]
