@@ -249,10 +249,10 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['geonames'])) {
-            $ipInfoDbParams = $config['providers']['geonames'];
+            $geonamesParams = $config['providers']['geonames'];
 
             $this->addProvider('geonames', array(
-                $ipInfoDbParams['username']
+                $geonamesParams['username']
             ));
         }
     }
