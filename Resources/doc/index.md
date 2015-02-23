@@ -216,7 +216,7 @@ bazinga_geocoder:
 ```
 
 > **Tip:** If you want to configure the cache adapter,
-> we recommend the [liip/doctrine-cache-bundle](https://github.com/liip/LiipDoctrineCacheBundle).
+> we recommend the [doctrine/doctrine-cache-bundle](https://github.com/doctrine/DoctrineCacheBundle).
 
 
 ### Symfony2 Profiler Integration
