@@ -14,7 +14,6 @@
         <parameter key="bazinga_geocoder.geocoder.provider.host_ip.class">Geocoder\Provider\HostIpProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.ip_info_db.class">Geocoder\Provider\IpInfoDbProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.yahoo.class">Geocoder\Provider\YahooProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.cloudmade.class">Geocoder\Provider\CloudMadeProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.openstreetmap.class">Geocoder\Provider\OpenStreetMapProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.geoip.class">Geocoder\Provider\GeoipProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.mapquest.class">Geocoder\Provider\MapQuestProvider</parameter>
