@@ -257,8 +257,6 @@ bazinga_geocoder:
             lifetime:             86400
         ip_info_db:
             api_key:              ~ # Required
-        cloudmade:
-            api_key:              ~ # Required
         google_maps:
             locale:               null
             region:               null

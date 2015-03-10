@@ -81,14 +81,6 @@ class BazingaGeocoderExtension extends Extension
             ));
         }
 
-        if (isset($config['providers']['cloudmade'])) {
-            $cloudMadeParams = $config['providers']['cloudmade'];
-
-            $this->addProvider('cloudmade', array(
-                $cloudMadeParams['api_key']
-            ));
-        }
-
         if (isset($config['providers']['google_maps'])) {
             $googleMapsParams = $config['providers']['google_maps'];
 
