@@ -246,6 +246,7 @@ bazinga_geocoder:
         priority:             0
     adapter:
         class:                null
+    default_provider:         ~ # Name of provider, e.g. chain
     providers:
         bing_maps:
             api_key:              ~ # Required
