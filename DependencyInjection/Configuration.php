@@ -180,6 +180,13 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('locale')->defaultNull()->end()
                     ->end()
                 ->end()
+                ->arrayNode('geonames')
+                    ->children()
+                        ->scalarNode('username')
+                            ->isRequired()->cannotBeEmpty()
+                        ->end()
+                    ->end()
+                ->end()
             ->end()
         ;
 
