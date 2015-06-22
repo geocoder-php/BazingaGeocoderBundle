@@ -7,6 +7,9 @@
         <parameter key="bazinga_geocoder.geocoder.class">Geocoder\Geocoder</parameter>
         <parameter key="bazinga_geocoder.geocoder.loggable_class">Bazinga\Bundle\GeocoderBundle\Geocoder\LoggableGeocoder</parameter>
         <parameter key="bazinga_geocoder.geocoder.adapter.class">Geocoder\HttpAdapter\CurlHttpAdapter</parameter>
+        <parameter key="bazinga_geocoder.geocoder.adapter.geoip2.class">Geocoder\HttpAdapter\GeoIP2Adapter</parameter>
+        <parameter key="bazinga_geocoder.geocoder.adapter.geoip2_database.provider.class">GeoIp2\Database\Reader</parameter>
+        <parameter key="bazinga_geocoder.geocoder.adapter.geoip2_database.provider.filename"></parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.bing_maps.class">Geocoder\Provider\BingMapsProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.free_geo_ip.class">Geocoder\Provider\FreeGeoIpProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.google_maps.class">Geocoder\Provider\GoogleMapsProvider</parameter>
@@ -16,6 +19,7 @@
         <parameter key="bazinga_geocoder.geocoder.provider.yahoo.class">Geocoder\Provider\YahooProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.openstreetmap.class">Geocoder\Provider\OpenStreetMapProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.geoip.class">Geocoder\Provider\GeoipProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.geoip2.class">Geocoder\Provider\GeoIP2Provider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.mapquest.class">Geocoder\Provider\MapQuestProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.oiorest.class">Geocoder\Provider\OIORestProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.geocoder_ca.class">Geocoder\Provider\GeocoderCaProvider</parameter>
@@ -52,6 +56,12 @@
 
         <!-- Adapters -->
         <service id="bazinga_geocoder.geocoder.adapter" class="%bazinga_geocoder.geocoder.adapter.class%" public="false" />
+        <service id="bazinga_geocoder.geocoder.adapter.geoip2_database" class="%bazinga_geocoder.geocoder.adapter.geoip2.class%" public="false">
+            <argument type="service" id="bazinga_geocoder.geocoder.adapter.geoip2_database.provider" on-invalid="null" />
+        </service>
+        <service id="bazinga_geocoder.geocoder.adapter.geoip2_database.provider" class="%bazinga_geocoder.geocoder.adapter.geoip2_database.provider.class%" public="false">
+            <argument>%bazinga_geocoder.geocoder.adapter.geoip2_database.provider.filename%</argument>
+        </service>
 
         <!-- Dumpers -->
         <service id="bazinga_geocoder.dumper_manager" class="%bazinga_geocoder.dumper_manager.class%">

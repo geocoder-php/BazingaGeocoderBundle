@@ -116,6 +116,25 @@ class BazingaGeocoderExtension extends Extension
             $this->addProvider('geoip');
         }
 
+        if (isset($config['providers']['geoip2_database'])) {
+            $geoip2DatabaseParams = $config['providers']['geoip2_database'];
+
+            $container->setParameter('bazinga_geocoder.geocoder.adapter.geoip2_database.provider.filename', $geoip2DatabaseParams['filename']);
+
+            $provider = new Definition(
+                '%bazinga_geocoder.geocoder.provider.geoip2.class%',
+                array(
+                    new Reference('bazinga_geocoder.geocoder.adapter.geoip2_database')
+                )
+            );
+
+            $provider
+                ->setPublic(false)
+                ->addTag('bazinga_geocoder.provider');
+
+            $container->setDefinition('bazinga_geocoder.provider.geoip2_database', $provider);
+        }
+
         if (isset($config['providers']['mapquest'])) {
             $mapQuestParams = $config['providers']['mapquest'];
 
