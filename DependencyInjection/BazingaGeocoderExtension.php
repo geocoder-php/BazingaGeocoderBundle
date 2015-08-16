@@ -195,6 +195,16 @@ class BazingaGeocoderExtension extends Extension
             $container->setDefinition('bazinga_geocoder.provider.maxmind_binary', $provider);
         }
 
+        if (isset($config['providers']['opencage'])) {
+            $openCageParams = $config['providers']['opencage'];
+
+            $this->addProvider('opencage', array(
+                $openCageParams['locale'],
+                $openCageParams['use_ssl'],
+                $openCageParams['api_key'],
+            ));
+        }
+
         if (isset($config['providers']['cache'])) {
             $params   = $config['providers']['cache'];
             $cache    = new Reference($params['adapter']);

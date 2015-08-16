@@ -293,6 +293,10 @@ bazinga_geocoder:
         maxmind_binary:
             binary_file:          ~ # Required
             open_flag:            null
+        opencage:
+            locale:               null
+            use_ssl:              false
+            api_key:              null
         chain:
             providers:            []
         tom_tom:
