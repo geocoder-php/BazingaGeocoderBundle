@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\Tests\Logger;
 
 use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
@@ -33,18 +32,18 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
 
         $this->geocoderLogger = new GeocoderLogger($logger);
 
-        $this->result = new Geocoded;
+        $this->result = new Geocoded();
         $this->result->fromArray(array(
-            'latitude'  => 1,
+            'latitude' => 1,
             'longitude' => 2,
         ));
 
-        $this->results = new \SplObjectStorage;
+        $this->results = new \SplObjectStorage();
         $this->results->attach($this->result);
 
-        $otherResult = new Geocoded;
+        $otherResult = new Geocoded();
         $otherResult->fromArray(array(
-            'latitude'  => 3,
+            'latitude' => 3,
             'longitude' => 4,
         ));
 
@@ -53,7 +52,7 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testLogNoResult()
     {
-        $this->geocoderLogger->logRequest('copenhagen', 0.123, 'FooProvider', new Geocoded);
+        $this->geocoderLogger->logRequest('copenhagen', 0.123, 'FooProvider', new Geocoded());
 
         $requests = $this->geocoderLogger->getRequests();
 
@@ -68,7 +67,7 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testLogNoResults()
     {
-        $this->geocoderLogger->logRequest('copenhagen', 0.123, 'FooProvider', new \SplObjectStorage);
+        $this->geocoderLogger->logRequest('copenhagen', 0.123, 'FooProvider', new \SplObjectStorage());
 
         $this->assertTrue(is_array($requests = $this->geocoderLogger->getRequests()));
         $this->assertCount(1, $requests);
@@ -138,7 +137,7 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
 
     public function testLogRequestsWithoutLogger()
     {
-        $geocoderLogger = new GeocoderLogger;
+        $geocoderLogger = new GeocoderLogger();
         $geocoderLogger->logRequest('copenhagen', 0.123, 'FooProvider', $this->result);
 
         $this->assertTrue(is_array($requests = $geocoderLogger->getRequests()));

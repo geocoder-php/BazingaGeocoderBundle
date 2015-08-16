@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -41,7 +40,7 @@ class AddProvidersPass implements CompilerPassInterface
             $array[] = new Reference($providerId);
         }
 
-        $geocoderDefinition =$container->getDefinition('bazinga_geocoder.geocoder');
+        $geocoderDefinition = $container->getDefinition('bazinga_geocoder.geocoder');
         $geocoderDefinition->addMethodCall('registerProviders', array($array));
 
         if ($container->hasParameter('bazinga_geocoder.default_provider')) {

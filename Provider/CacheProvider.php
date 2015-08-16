@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\Provider;
 
 use Geocoder\Geocoder;
@@ -30,7 +29,7 @@ class CacheProvider implements ProviderInterface
     private $provider;
 
     /**
-     * @var integer
+     * @var int
      */
     private $lifetime;
 
@@ -40,32 +39,32 @@ class CacheProvider implements ProviderInterface
     private $locale;
 
     /**
-     * @var integer
+     * @var int
      */
     private $maxResults = Geocoder::MAX_RESULTS;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param Cache             $cache    The cache interface
      * @param ProviderInterface $provider The fallback provider
-     * @param integer           $lifetime The cache lifetime
+     * @param int               $lifetime The cache lifetime
      * @param string            $locale
      */
     public function __construct(Cache $cache, ProviderInterface $provider, $lifetime = 0, $locale = null)
     {
-        $this->cache    = $cache;
+        $this->cache = $cache;
         $this->provider = $provider;
         $this->lifetime = $lifetime;
-        $this->locale   = $locale;
+        $this->locale = $locale;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getGeocodedData($address)
     {
-        $key = 'geocoder_' . sha1($this->locale . $address);
+        $key = 'geocoder_'.sha1($this->locale.$address);
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
@@ -78,11 +77,11 @@ class CacheProvider implements ProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getReversedData(array $coordinates)
     {
-        $key = 'geocoder_' . sha1($this->locale . json_encode($coordinates));
+        $key = 'geocoder_'.sha1($this->locale.json_encode($coordinates));
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
@@ -95,7 +94,7 @@ class CacheProvider implements ProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -103,7 +102,7 @@ class CacheProvider implements ProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setMaxResults($maxResults)
     {

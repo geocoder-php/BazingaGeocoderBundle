@@ -7,12 +7,10 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\Tests\Command;
 
 use Bazinga\Bundle\GeocoderBundle\Command\GeocodeCommand;
 use Geocoder\Result\Geocoded;
-
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 

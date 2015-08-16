@@ -50,7 +50,7 @@ class GeocoderListenerTest extends OrmTestCase
 
         $sm = new SchemaTool($this->em);
         $sm->createSchema(array(
-            $this->em->getClassMetadata('Bazinga\Bundle\GeocoderBundle\Tests\Doctrine\ORM\Dummy')
+            $this->em->getClassMetadata('Bazinga\Bundle\GeocoderBundle\Tests\Doctrine\ORM\Dummy'),
         ));
     }
 

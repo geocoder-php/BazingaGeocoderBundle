@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
@@ -22,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GeocodeCommand extends ContainerAwareCommand
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function configure()
     {
@@ -43,7 +42,7 @@ HELP
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
@@ -55,7 +54,7 @@ HELP
         }
 
         $result = $geocoder->geocode($input->getArgument('address'));
-        $data   = $result->toArray();
+        $data = $result->toArray();
 
         $max = 0;
 

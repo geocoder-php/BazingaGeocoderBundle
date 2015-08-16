@@ -16,7 +16,7 @@ class DumperManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function setup()
     {
-        $this->manager = new DumperManager;
+        $this->manager = new DumperManager();
     }
 
     public function testSet()

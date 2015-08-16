@@ -26,7 +26,7 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
     {
         AnnotationRegistry::registerLoader('class_exists');
 
-        $this->reader = new SimpleAnnotationReader;
+        $this->reader = new SimpleAnnotationReader();
         $this->reader->addNamespace('Bazinga\Bundle\GeocoderBundle\Mapping\Annotations');
 
         $this->driver = new AnnotationDriver($this->reader);
@@ -47,7 +47,7 @@ class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
      */
     public function testLoadMetadataFromWrongObject()
     {
-        $this->driver->loadMetadataFromObject(new Dummy2);
+        $this->driver->loadMetadataFromObject(new Dummy2());
     }
 
     public function testIsGeocodable()
@@ -78,4 +78,5 @@ class Dummy
 }
 
 class Dummy2
-{}
+{
+}

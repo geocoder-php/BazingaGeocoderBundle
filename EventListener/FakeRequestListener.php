@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\EventListener;
 
 use Symfony\Component\HttpKernel\HttpKernelInterface;

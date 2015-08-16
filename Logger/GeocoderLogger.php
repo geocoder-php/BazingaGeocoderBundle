@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\Logger;
 
 use Symfony\Component\HttpKernel\Log\LoggerInterface;
@@ -44,7 +43,7 @@ class GeocoderLogger
     public function logRequest($value, $duration, $providerClass, $results)
     {
         if (null !== $this->logger) {
-            $this->logger->info(sprintf("%s %0.2f ms (%s)", $value, $duration, $providerClass));
+            $this->logger->info(sprintf('%s %0.2f ms (%s)', $value, $duration, $providerClass));
         }
 
         $data = array();
@@ -59,10 +58,10 @@ class GeocoderLogger
         }
 
         $this->requests[] = array(
-            'value'         => $value,
-            'duration'      => $duration,
+            'value' => $value,
+            'duration' => $duration,
             'providerClass' => $providerClass,
-            'result'        => json_encode($data),
+            'result' => json_encode($data),
         );
     }
 

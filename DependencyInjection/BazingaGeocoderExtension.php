@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -19,7 +18,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * William Durand <william.durand1@gmail.com>
+ * William Durand <william.durand1@gmail.com>.
  */
 class BazingaGeocoderExtension extends Extension
 {
@@ -29,9 +28,9 @@ class BazingaGeocoderExtension extends Extension
     {
         $this->container = $container;
 
-        $processor      = new Processor();
-        $configuration  = new Configuration();
-        $config         = $processor->processConfiguration($configuration, $configs);
+        $processor = new Processor();
+        $configuration = new Configuration();
+        $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
@@ -77,7 +76,7 @@ class BazingaGeocoderExtension extends Extension
             $ipInfoDbParams = $config['providers']['ip_info_db'];
 
             $this->addProvider('ip_info_db', array(
-                $ipInfoDbParams['api_key']
+                $ipInfoDbParams['api_key'],
             ));
         }
 
@@ -108,7 +107,7 @@ class BazingaGeocoderExtension extends Extension
             $openstreetMapsParams = $config['providers']['openstreetmap'];
 
             $this->addProvider('openstreetmap', array(
-                $openstreetMapsParams['locale']
+                $openstreetMapsParams['locale'],
             ));
         }
 
@@ -120,7 +119,7 @@ class BazingaGeocoderExtension extends Extension
             $mapQuestParams = $config['providers']['mapquest'];
 
             $this->addProvider('mapquest', array(
-                $mapQuestParams['api_key']
+                $mapQuestParams['api_key'],
             ));
         }
 
@@ -140,7 +139,7 @@ class BazingaGeocoderExtension extends Extension
             $ignOpenlsParams = $config['providers']['ign_openls'];
 
             $this->addProvider('ign_openls', array(
-                $ignOpenlsParams['api_key']
+                $ignOpenlsParams['api_key'],
             ));
         }
 
@@ -153,7 +152,7 @@ class BazingaGeocoderExtension extends Extension
 
             $this->addProvider('yandex', array(
                 $yandexParams['locale'],
-                $yandexParams['toponym']
+                $yandexParams['toponym'],
             ));
         }
 
@@ -161,7 +160,7 @@ class BazingaGeocoderExtension extends Extension
             $geoIpsParams = $config['providers']['geo_ips'];
 
             $this->addProvider('geo_ips', array(
-                $geoIpsParams['api_key']
+                $geoIpsParams['api_key'],
             ));
         }
 
@@ -173,7 +172,7 @@ class BazingaGeocoderExtension extends Extension
             $maxmindParams = $config['providers']['maxmind'];
 
             $this->addProvider('maxmind', array(
-                $maxmindParams['api_key']
+                $maxmindParams['api_key'],
             ));
         }
 
@@ -206,8 +205,8 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['providers']['cache'])) {
-            $params   = $config['providers']['cache'];
-            $cache    = new Reference($params['adapter']);
+            $params = $config['providers']['cache'];
+            $cache = new Reference($params['adapter']);
             $fallback = new Reference('bazinga_geocoder.provider.'.$params['provider']);
 
             $provider = new Definition(
@@ -241,7 +240,7 @@ class BazingaGeocoderExtension extends Extension
                 foreach ($config['providers']['chain']['providers'] as $name) {
                     if ($this->container->hasDefinition('bazinga_geocoder.provider.'.$name)) {
                         $chainProvider->addMethodCall('addProvider', array(
-                            $this->container->getDefinition('bazinga_geocoder.provider.'.$name)
+                            $this->container->getDefinition('bazinga_geocoder.provider.'.$name),
                         ));
                     } else {
                         $chainProvider->addMethodCall('addProvider', array(new Reference($name)));

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -6,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle;
 
 use Geocoder\Dumper\DumperInterface;
@@ -22,7 +22,7 @@ class DumperManager
     private $dumpers;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $dumpers
      */
@@ -36,7 +36,7 @@ class DumperManager
     }
 
     /**
-     * Get a dumper
+     * Get a dumper.
      *
      * @param string $name The name of the dumper
      *
@@ -54,7 +54,7 @@ class DumperManager
     }
 
     /**
-     * Sets a dumper
+     * Sets a dumper.
      *
      * @param string          $name   The name
      * @param DumperInterface $dumper The dumper instance
@@ -65,7 +65,7 @@ class DumperManager
     }
 
     /**
-     * Remove a dumper instance from the manager
+     * Remove a dumper instance from the manager.
      *
      * @param string $name The name of the dumper
      *

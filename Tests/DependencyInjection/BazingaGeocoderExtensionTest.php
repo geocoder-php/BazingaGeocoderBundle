@@ -17,13 +17,13 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testLoad()
     {
-        $configs   = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
+        $configs = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
         unset($configs['bazinga_geocoder']['default_provider']);
 
         $container = new ContainerBuilder();
         $extension = new BazingaGeocoderExtension();
 
-        $container->setParameter('fixtures_dir', __DIR__ . '/Fixtures');
+        $container->setParameter('fixtures_dir', __DIR__.'/Fixtures');
 
         $container->set('doctrine.apc.cache', new ArrayCache());
 
@@ -50,30 +50,30 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
 
         $this->assertFalse($container->hasParameter('bazinga_geocoder.default_provider'));
 
-        $geocoder  = $container->get('bazinga_geocoder.geocoder');
+        $geocoder = $container->get('bazinga_geocoder.geocoder');
         $providers = $geocoder->getProviders();
         foreach (array(
-            'bing_maps'            => 'Geocoder\\Provider\\BingMapsProvider',
-            'cache'                => 'Bazinga\\Bundle\\GeocoderBundle\\Provider\\CacheProvider',
-            'ip_info_db'           => 'Geocoder\\Provider\\IpInfoDbProvider',
-            'google_maps'          => 'Geocoder\\Provider\\GoogleMapsProvider',
+            'bing_maps' => 'Geocoder\\Provider\\BingMapsProvider',
+            'cache' => 'Bazinga\\Bundle\\GeocoderBundle\\Provider\\CacheProvider',
+            'ip_info_db' => 'Geocoder\\Provider\\IpInfoDbProvider',
+            'google_maps' => 'Geocoder\\Provider\\GoogleMapsProvider',
             'google_maps_business' => 'Geocoder\\Provider\\GoogleMapsBusinessProvider',
-            'openstreetmap'        => 'Geocoder\\Provider\\OpenStreetMapProvider',
-            'host_ip'              => 'Geocoder\\Provider\\HostIpProvider',
-            'free_geo_ip'          => 'Geocoder\\Provider\\FreeGeoIpProvider',
-            'map_quest'            => 'Geocoder\\Provider\\MapQuestProvider',
-            'oio_rest'             => 'Geocoder\\Provider\\OIORestProvider',
-            'geocoder_ca'          => 'Geocoder\\Provider\\GeocoderCaProvider',
-            'geocoder_us'          => 'Geocoder\\Provider\\GeocoderUsProvider',
-            'ign_openls'           => 'Geocoder\\Provider\\IGNOpenLSProvider',
+            'openstreetmap' => 'Geocoder\\Provider\\OpenStreetMapProvider',
+            'host_ip' => 'Geocoder\\Provider\\HostIpProvider',
+            'free_geo_ip' => 'Geocoder\\Provider\\FreeGeoIpProvider',
+            'map_quest' => 'Geocoder\\Provider\\MapQuestProvider',
+            'oio_rest' => 'Geocoder\\Provider\\OIORestProvider',
+            'geocoder_ca' => 'Geocoder\\Provider\\GeocoderCaProvider',
+            'geocoder_us' => 'Geocoder\\Provider\\GeocoderUsProvider',
+            'ign_openls' => 'Geocoder\\Provider\\IGNOpenLSProvider',
             'data_science_toolkit' => 'Geocoder\\Provider\\DataScienceToolkitProvider',
-            'yandex'               => 'Geocoder\\Provider\\YandexProvider',
-            'geo_ips'              => 'Geocoder\\Provider\\GeoIpsProvider',
-            'geo_plugin'           => 'Geocoder\\Provider\\GeoPluginProvider',
-            'maxmind'              => 'Geocoder\\Provider\\MaxmindProvider',
-            'chain'                => 'Geocoder\\Provider\\ChainProvider',
-            'maxmind_binary'       => 'Geocoder\\Provider\\MaxmindBinaryProvider',
-            'opencage'            => 'Geocoder\\Provider\\OpenCageProvider',
+            'yandex' => 'Geocoder\\Provider\\YandexProvider',
+            'geo_ips' => 'Geocoder\\Provider\\GeoIpsProvider',
+            'geo_plugin' => 'Geocoder\\Provider\\GeoPluginProvider',
+            'maxmind' => 'Geocoder\\Provider\\MaxmindProvider',
+            'chain' => 'Geocoder\\Provider\\ChainProvider',
+            'maxmind_binary' => 'Geocoder\\Provider\\MaxmindBinaryProvider',
+            'opencage' => 'Geocoder\\Provider\\OpenCageProvider',
         ) as $name => $class) {
             $this->assertInstanceOf($class, $providers[$name], sprintf('-> Assert that %s is instance of %s', $name, $class));
         }
@@ -81,11 +81,11 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testDefaultProvider()
     {
-        $configs   = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
+        $configs = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
         $container = new ContainerBuilder();
         $extension = new BazingaGeocoderExtension();
 
-        $container->setParameter('fixtures_dir', __DIR__ . '/Fixtures');
+        $container->setParameter('fixtures_dir', __DIR__.'/Fixtures');
 
         $container->set('doctrine.apc.cache', new ArrayCache());
 
@@ -99,11 +99,11 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
 
     public function testLoadingFakeIpOldWay()
     {
-        $configs   = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/old_fake_ip.yml'));
+        $configs = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/old_fake_ip.yml'));
         $container = new ContainerBuilder();
         $extension = new BazingaGeocoderExtension();
 
-        $container->setParameter('fixtures_dir', __DIR__ . '/Fixtures');
+        $container->setParameter('fixtures_dir', __DIR__.'/Fixtures');
 
         $container->set('doctrine.apc.cache', new ArrayCache());
 

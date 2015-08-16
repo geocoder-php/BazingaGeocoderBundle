@@ -14,7 +14,7 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
     {
         $address = 'Paris, France';
         $coordinates = array('lat' => 48.857049,'lng' => 2.35223);
-        $cacheKey = 'geocoder_' . sha1($address);
+        $cacheKey = 'geocoder_'.sha1($address);
 
         $delegate = $this->getMock('Geocoder\\Provider\\ProviderInterface');
         $delegate->expects($this->once())
@@ -40,7 +40,7 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
     {
         $address = 'Paris, France';
         $coordinates = array('lat' => 48.857049,'lng' => 2.35223);
-        $cacheKey = 'geocoder_' . sha1($address);
+        $cacheKey = 'geocoder_'.sha1($address);
 
         $delegate = $this->getMock('Geocoder\\Provider\\ProviderInterface');
         $delegate->expects($this->once())
