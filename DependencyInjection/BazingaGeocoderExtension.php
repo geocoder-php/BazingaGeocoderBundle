@@ -198,9 +198,9 @@ class BazingaGeocoderExtension extends Extension
             $openCageParams = $config['providers']['opencage'];
 
             $this->addProvider('opencage', array(
-                $openCageParams['locale'],
-                $openCageParams['use_ssl'],
                 $openCageParams['api_key'],
+                $openCageParams['use_ssl'],
+                $openCageParams['locale'],
             ));
         }
 
