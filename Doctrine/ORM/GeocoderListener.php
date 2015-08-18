@@ -69,9 +69,12 @@ class GeocoderListener implements EventSubscriber
     {
         $metadata = $this->driver->loadMetadataFromObject($entity);
         $address = $metadata->addressProperty->getValue($entity);
-        $result = $this->geocoder->geocode($address);
+        $results = $this->geocoder->geocode($address);
 
-        $metadata->latitudeProperty->setValue($entity, $result['latitude']);
-        $metadata->longitudeProperty->setValue($entity, $result['longitude']);
+        if (!empty($results)) {
+            $result = $results->first();
+            $metadata->latitudeProperty->setValue($entity, $results->first()->getLatitude());
+            $metadata->longitudeProperty->setValue($entity, $results->first()->getLongitude());
+        }
     }
 }
