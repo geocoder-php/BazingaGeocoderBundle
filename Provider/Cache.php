@@ -46,10 +46,10 @@ class Cache extends AbstractProvider implements Provider
     /**
      * Constructor.
      *
-     * @param DoctrineCache     $cache    The cache interface
-     * @param Provider          $provider The fallback provider
-     * @param int               $lifetime The cache lifetime
-     * @param string            $locale
+     * @param DoctrineCache $cache    The cache interface
+     * @param Provider      $provider The fallback provider
+     * @param int           $lifetime The cache lifetime
+     * @param string        $locale
      */
     public function __construct(DoctrineCache $cache, Provider $provider, $lifetime = 0, $locale = null)
     {

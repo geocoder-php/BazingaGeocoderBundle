@@ -56,8 +56,8 @@ class DumperManager
     /**
      * Sets a dumper.
      *
-     * @param string          $name   The name
-     * @param Dumper          $dumper The dumper instance
+     * @param string $name   The name
+     * @param Dumper $dumper The dumper instance
      */
     public function set($name, Dumper $dumper)
     {

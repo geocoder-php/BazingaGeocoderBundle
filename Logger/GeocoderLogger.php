@@ -37,10 +37,10 @@ class GeocoderLogger
     }
 
     /**
-     * @param string                     $value         value to geocode
-     * @param float                      $duration      geocoding duration
-     * @param string                     $providerClass Geocoder provider class name
-     * @param AddressCollection          $results
+     * @param string            $value         value to geocode
+     * @param float             $duration      geocoding duration
+     * @param string            $providerClass Geocoder provider class name
+     * @param AddressCollection $results
      */
     public function logRequest($value, $duration, $providerClass, AddressCollection $results)
     {
