@@ -2,7 +2,7 @@
 
 namespace Bazinga\Bundle\GeocoderBundle\Tests\Provider;
 
-use Bazinga\Bundle\GeocoderBundle\Provider\CacheProvider;
+use Bazinga\Bundle\GeocoderBundle\Provider\Cache;
 use Doctrine\Common\Cache\ArrayCache;
 
 /**
@@ -10,15 +10,15 @@ use Doctrine\Common\Cache\ArrayCache;
  */
 class CacheProviderTest extends \PHPUnit_Framework_TestCase
 {
-    public function testGetGeocodedData()
+    public function testGeocode()
     {
         $address = 'Paris, France';
         $coordinates = array('lat' => 48.857049,'lng' => 2.35223);
         $cacheKey = 'geocoder_'.sha1($address);
 
-        $delegate = $this->getMock('Geocoder\\Provider\\ProviderInterface');
+        $delegate = $this->getMock('Geocoder\\Provider\\Provider');
         $delegate->expects($this->once())
-            ->method('getGeocodedData')
+            ->method('geocode')
             ->with($address)
             ->will($this->returnValue($coordinates));
 
@@ -32,54 +32,54 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
             ->method('save')
             ->with($cacheKey, serialize($coordinates), 0);
 
-        $provider = new CacheProvider($cache, $delegate);
-        $this->assertEquals($coordinates, $provider->getGeocodedData($address));
+        $provider = new Cache($cache, $delegate);
+        $this->assertEquals($coordinates, $provider->geocode($address));
     }
 
-    public function testGetCachedGeocodedData()
+    public function testCachedGeocode()
     {
         $address = 'Paris, France';
         $coordinates = array('lat' => 48.857049,'lng' => 2.35223);
         $cacheKey = 'geocoder_'.sha1($address);
 
-        $delegate = $this->getMock('Geocoder\\Provider\\ProviderInterface');
+        $delegate = $this->getMock('Geocoder\\Provider\\Provider');
         $delegate->expects($this->once())
-            ->method('getGeocodedData')
+            ->method('geocode')
             ->with($address)
             ->will($this->returnValue($coordinates));
 
-        $provider = new CacheProvider($cache = new ArrayCache(), $delegate);
+        $provider = new Cache($cache = new ArrayCache(), $delegate);
 
-        $provider->getGeocodedData($address);
-        $provider->getGeocodedData($address);
+        $provider->geocode($address);
+        $provider->geocode($address);
 
         $this->assertTrue($cache->contains($cacheKey));
     }
 
-    public function testGetReversedData()
+    public function testReverse()
     {
-        $coordinates = array(48.857049, 2.35223);
+        $coordinates = array('lat' => 48.857049, 'lon' => 2.35223);
 
-        $delegate = $this->getMock('Geocoder\\Provider\\ProviderInterface');
+        $delegate = $this->getMock('Geocoder\\Provider\\Provider');
         $delegate->expects($this->once())
-            ->method('getReversedData')
-            ->with($coordinates)
+            ->method('reverse')
+            ->with($coordinates['lat'], $coordinates['lon'])
             ->will($this->returnValue('Paris, France'));
 
         $cache = new ArrayCache();
 
-        $provider = new CacheProvider($cache, $delegate);
+        $provider = new Cache($cache, $delegate);
 
-        $this->assertEquals('Paris, France', $provider->getReversedData($coordinates));
-        $this->assertEquals('Paris, France', $provider->getReversedData($coordinates));
+        $this->assertEquals('Paris, France', $provider->reverse($coordinates['lat'], $coordinates['lon']));
+        $this->assertEquals('Paris, France', $provider->reverse($coordinates['lat'], $coordinates['lon']));
     }
 
     public function testGetName()
     {
-        $delegate = $this->getMock('Geocoder\\Provider\\ProviderInterface');
+        $delegate = $this->getMock('Geocoder\\Provider\\Provider');
         $cache = $this->getMock('Doctrine\\Common\\Cache\\Cache');
 
-        $provider = new CacheProvider($cache, $delegate);
+        $provider = new Cache($cache, $delegate);
 
         $this->assertEquals('cache', $provider->getName());
     }

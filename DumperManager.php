@@ -9,7 +9,7 @@
  */
 namespace Bazinga\Bundle\GeocoderBundle;
 
-use Geocoder\Dumper\DumperInterface;
+use Geocoder\Dumper\Dumper;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
@@ -40,7 +40,7 @@ class DumperManager
      *
      * @param string $name The name of the dumper
      *
-     * @return DumperInterface
+     * @return Dumper
      *
      * @throws \RuntimeException If no dumper was found
      */
@@ -57,9 +57,9 @@ class DumperManager
      * Sets a dumper.
      *
      * @param string          $name   The name
-     * @param DumperInterface $dumper The dumper instance
+     * @param Dumper          $dumper The dumper instance
      */
-    public function set($name, DumperInterface $dumper)
+    public function set($name, Dumper $dumper)
     {
         $this->dumpers[$name] = $dumper;
     }

@@ -276,11 +276,6 @@ bazinga_geocoder:
         free_geo_ip:          []
         mapquest:
             api_key:              ~ # Required
-        oiorest:              []
-        geocoder_ca:          []
-        geocoder_us:          []
-        ign_openls:
-            api_key:              ~ # Required
         data_science_toolkit:  []
         yandex:
             locale:               null

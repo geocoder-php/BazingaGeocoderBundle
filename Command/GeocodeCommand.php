@@ -53,8 +53,8 @@ HELP
             $geocoder->using($input->getOption('provider'));
         }
 
-        $result = $geocoder->geocode($input->getArgument('address'));
-        $data = $result->toArray();
+        $results = $geocoder->geocode($input->getArgument('address'));
+        $data = $results->first()->toArray();
 
         $max = 0;
 

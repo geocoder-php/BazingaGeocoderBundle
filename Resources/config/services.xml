@@ -4,33 +4,28 @@
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="bazinga_geocoder.geocoder.class">Geocoder\Geocoder</parameter>
+        <parameter key="bazinga_geocoder.geocoder.class">Geocoder\ProviderAggregator</parameter>
         <parameter key="bazinga_geocoder.geocoder.loggable_class">Bazinga\Bundle\GeocoderBundle\Geocoder\LoggableGeocoder</parameter>
-        <parameter key="bazinga_geocoder.geocoder.adapter.class">Geocoder\HttpAdapter\CurlHttpAdapter</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.bing_maps.class">Geocoder\Provider\BingMapsProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.free_geo_ip.class">Geocoder\Provider\FreeGeoIpProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.google_maps.class">Geocoder\Provider\GoogleMapsProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.google_maps_business.class">Geocoder\Provider\GoogleMapsBusinessProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.host_ip.class">Geocoder\Provider\HostIpProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.ip_info_db.class">Geocoder\Provider\IpInfoDbProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.yahoo.class">Geocoder\Provider\YahooProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.openstreetmap.class">Geocoder\Provider\OpenStreetMapProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.geoip.class">Geocoder\Provider\GeoipProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.mapquest.class">Geocoder\Provider\MapQuestProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.oiorest.class">Geocoder\Provider\OIORestProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.geocoder_ca.class">Geocoder\Provider\GeocoderCaProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.geocoder_us.class">Geocoder\Provider\GeocoderUsProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.ign_openls.class">Geocoder\Provider\IGNOpenLSProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.data_science_toolkit.class">Geocoder\Provider\DataScienceToolkitProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.yandex.class">Geocoder\Provider\YandexProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.geo_ips.class">Geocoder\Provider\GeoIPsProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.geo_plugin.class">Geocoder\Provider\GeoPluginProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.maxmind.class">Geocoder\Provider\MaxMindProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.maxmind_binary.class">Geocoder\Provider\MaxMindBinaryProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.opencage.class">Geocoder\Provider\OpenCageProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.cache.class">Bazinga\Bundle\GeocoderBundle\Provider\CacheProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.chain.class">Geocoder\Provider\ChainProvider</parameter>
-        <parameter key="bazinga_geocoder.geocoder.provider.tom_tom.class">Geocoder\Provider\TomTomProvider</parameter>
+        <parameter key="bazinga_geocoder.geocoder.default_adapter.class">Ivory\HttpAdapter\CurlHttpAdapter</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.bing_maps.class">Geocoder\Provider\BingMaps</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.free_geo_ip.class">Geocoder\Provider\FreeGeoIp</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.google_maps.class">Geocoder\Provider\GoogleMaps</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.google_maps_business.class">Geocoder\Provider\GoogleMapsBusiness</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.host_ip.class">Geocoder\Provider\HostIp</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.ip_info_db.class">Geocoder\Provider\IpInfoDb</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.yahoo.class">Geocoder\Provider\Yahoo</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.openstreetmap.class">Geocoder\Provider\OpenStreetMap</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.geoip.class">Geocoder\Provider\Geoip</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.mapquest.class">Geocoder\Provider\MapQuest</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.yandex.class">Geocoder\Provider\Yandex</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.geo_ips.class">Geocoder\Provider\GeoIPs</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.geo_plugin.class">Geocoder\Provider\GeoPlugin</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.maxmind.class">Geocoder\Provider\MaxMind</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.maxmind_binary.class">Geocoder\Provider\MaxMindBinary</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.opencage.class">Geocoder\Provider\OpenCage</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.cache.class">Bazinga\Bundle\GeocoderBundle\Provider\Cache</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.chain.class">Geocoder\Provider\Chain</parameter>
+        <parameter key="bazinga_geocoder.geocoder.provider.tom_tom.class">Geocoder\Provider\TomTom</parameter>
 
 
         <parameter key="bazinga_geocoder.logger.class">Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger</parameter>
@@ -40,11 +35,11 @@
         <parameter key="bazinga_geocoder.event_listener.fake_request.class">Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener</parameter>
 
         <parameter key="bazinga_geocoder.dumper_manager.class">Bazinga\Bundle\GeocoderBundle\DumperManager</parameter>
-        <parameter key="bazinga_geocoder.dumper.geojson.class">Geocoder\Dumper\GeoJsonDumper</parameter>
-        <parameter key="bazinga_geocoder.dumper.gpx.class">Geocoder\Dumper\GpxDumper</parameter>
-        <parameter key="bazinga_geocoder.dumper.kmp.class">Geocoder\Dumper\KmlDumper</parameter>
-        <parameter key="bazinga_geocoder.dumper.wkb.class">Geocoder\Dumper\WkbDumper</parameter>
-        <parameter key="bazinga_geocoder.dumper.wkt.class">Geocoder\Dumper\WktDumper</parameter>
+        <parameter key="bazinga_geocoder.dumper.geojson.class">Geocoder\Dumper\GeoJson</parameter>
+        <parameter key="bazinga_geocoder.dumper.gpx.class">Geocoder\Dumper\Gpx</parameter>
+        <parameter key="bazinga_geocoder.dumper.kmp.class">Geocoder\Dumper\Kml</parameter>
+        <parameter key="bazinga_geocoder.dumper.wkb.class">Geocoder\Dumper\Wkb</parameter>
+        <parameter key="bazinga_geocoder.dumper.wkt.class">Geocoder\Dumper\Wkt</parameter>
     </parameters>
 
     <services>
@@ -52,7 +47,7 @@
         <service id="bazinga_geocoder.geocoder" class="%bazinga_geocoder.geocoder.class%" />
 
         <!-- Adapters -->
-        <service id="bazinga_geocoder.geocoder.adapter" class="%bazinga_geocoder.geocoder.adapter.class%" public="false" />
+        <service id="bazinga_geocoder.geocoder.default_adapter" class="%bazinga_geocoder.geocoder.default_adapter.class%" public="false" />
 
         <!-- Dumpers -->
         <service id="bazinga_geocoder.dumper_manager" class="%bazinga_geocoder.dumper_manager.class%">
