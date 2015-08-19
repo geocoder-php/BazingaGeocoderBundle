@@ -16,6 +16,7 @@
     "symfony/console": "~2.1"
   },
   "require-dev": {
+    "php": ">=5.4",
     "symfony/yaml": "~2.1",
     "maxromanovsky/php-maxmind-geoip": "~1.12",
     "doctrine/cache": "~1.3",
