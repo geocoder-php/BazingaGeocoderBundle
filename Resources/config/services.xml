@@ -6,7 +6,7 @@
     <parameters>
         <parameter key="bazinga_geocoder.geocoder.class">Geocoder\Geocoder</parameter>
         <parameter key="bazinga_geocoder.geocoder.loggable_class">Bazinga\Bundle\GeocoderBundle\Geocoder\LoggableGeocoder</parameter>
-        <parameter key="bazinga_geocoder.geocoder.adapter.class">Geocoder\HttpAdapter\CurlHttpAdapter</parameter>
+        <parameter key="bazinga_geocoder.geocoder.adapter.class">Ivory\HttpAdapter\CurlHttpAdapter</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.bing_maps.class">Geocoder\Provider\BingMapsProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.free_geo_ip.class">Geocoder\Provider\FreeGeoIpProvider</parameter>
         <parameter key="bazinga_geocoder.geocoder.provider.google_maps.class">Geocoder\Provider\GoogleMapsProvider</parameter>
