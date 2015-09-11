@@ -10,10 +10,10 @@
 
 namespace Bazinga\Bundle\GeocoderBundle\Geocoder;
 
-use Geocoder\TimedGeocoder;
+use Geocoder\ProviderAggregator;
 use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
 
-class LoggableGeocoder extends TimedGeocoder
+class LoggableGeocoder extends ProviderAggregator
 {
      /**
      * @var GeocoderLogger
