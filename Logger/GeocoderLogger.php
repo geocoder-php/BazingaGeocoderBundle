@@ -52,10 +52,10 @@ class GeocoderLogger
         if ($results instanceof \SplObjectStorage) {
             $data = array();
             foreach ($results as $result) {
-                $data[] = $result->toArray();
+                $data[] = $result;
             }
         } else {
-            $data = $results->toArray();
+            $data = $results;
         }
 
         $this->requests[] = array(
