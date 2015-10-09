@@ -7,17 +7,16 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\Provider;
 
-use Geocoder\Geocoder;
-use Geocoder\Provider\ProviderInterface;
-use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Cache\Cache as DoctrineCache;
+use Geocoder\Provider\AbstractProvider;
+use Geocoder\Provider\Provider;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class CacheProvider implements ProviderInterface
+class Cache extends AbstractProvider implements Provider
 {
     /**
      * @var Cache
@@ -25,12 +24,12 @@ class CacheProvider implements ProviderInterface
     private $cache;
 
     /**
-     * @var ProviderInterface
+     * @var Provider
      */
     private $provider;
 
     /**
-     * @var integer
+     * @var int
      */
     private $lifetime;
 
@@ -40,62 +39,64 @@ class CacheProvider implements ProviderInterface
     private $locale;
 
     /**
-     * @var integer
+     * @var int
      */
-    private $maxResults = Geocoder::MAX_RESULTS;
+    private $maxResults = Provider::MAX_RESULTS;
 
     /**
-     * Constructor
+     * Constructor.
      *
-     * @param Cache             $cache    The cache interface
-     * @param ProviderInterface $provider The fallback provider
-     * @param integer           $lifetime The cache lifetime
-     * @param string            $locale
+     * @param DoctrineCache $cache    The cache interface
+     * @param Provider      $provider The fallback provider
+     * @param int           $lifetime The cache lifetime
+     * @param string        $locale
      */
-    public function __construct(Cache $cache, ProviderInterface $provider, $lifetime = 0, $locale = null)
+    public function __construct(DoctrineCache $cache, Provider $provider, $lifetime = 0, $locale = null)
     {
-        $this->cache    = $cache;
+        parent::__construct();
+
+        $this->cache = $cache;
         $this->provider = $provider;
         $this->lifetime = $lifetime;
-        $this->locale   = $locale;
+        $this->locale = $locale;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function getGeocodedData($address)
+    public function geocode($address)
     {
-        $key = 'geocoder_' . sha1($this->locale . $address);
+        $key = 'geocoder_'.sha1($this->locale.$address);
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
         }
 
-        $data = $this->provider->getGeocodedData($address);
+        $data = $this->provider->geocode($address);
         $this->cache->save($key, serialize($data), $this->lifetime);
 
         return $data;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
-    public function getReversedData(array $coordinates)
+    public function reverse($latitude, $longitude)
     {
-        $key = 'geocoder_' . sha1($this->locale . json_encode($coordinates));
+        $key = 'geocoder_'.sha1($this->locale.$latitude.$longitude);
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
         }
 
-        $data = $this->provider->getReversedData($coordinates);
+        $data = $this->provider->reverse($latitude, $longitude);
         $this->cache->save($key, serialize($data), $this->lifetime);
 
         return $data;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getName()
     {
@@ -103,7 +104,7 @@ class CacheProvider implements ProviderInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setMaxResults($maxResults)
     {

@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection;
 
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -19,7 +18,7 @@ use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
 
 /**
- * William Durand <william.durand1@gmail.com>
+ * William Durand <william.durand1@gmail.com>.
  */
 class BazingaGeocoderExtension extends Extension
 {
@@ -29,9 +28,9 @@ class BazingaGeocoderExtension extends Extension
     {
         $this->container = $container;
 
-        $processor      = new Processor();
-        $configuration  = new Configuration();
-        $config         = $processor->processConfiguration($configuration, $configs);
+        $processor = new Processor();
+        $configuration = new Configuration();
+        $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.xml');
@@ -52,9 +51,7 @@ class BazingaGeocoderExtension extends Extension
             $container->removeDefinition('bazinga_geocoder.event_listener.fake_request');
         }
 
-        if (isset($config['adapter']['class']) && !empty($config['adapter']['class'])) {
-            $container->setParameter('bazinga_geocoder.geocoder.adapter.class', $config['adapter']['class']);
-        }
+        $container->setAlias('bazinga_geocoder.geocoder.adapter', $config['adapter']);
 
         if (isset($config['providers']['free_geo_ip'])) {
             $this->addProvider('free_geo_ip');
@@ -77,7 +74,7 @@ class BazingaGeocoderExtension extends Extension
             $ipInfoDbParams = $config['providers']['ip_info_db'];
 
             $this->addProvider('ip_info_db', array(
-                $ipInfoDbParams['api_key']
+                $ipInfoDbParams['api_key'],
             ));
         }
 
@@ -108,7 +105,7 @@ class BazingaGeocoderExtension extends Extension
             $openstreetMapsParams = $config['providers']['openstreetmap'];
 
             $this->addProvider('openstreetmap', array(
-                $openstreetMapsParams['locale']
+                $openstreetMapsParams['locale'],
             ));
         }
 
@@ -120,32 +117,8 @@ class BazingaGeocoderExtension extends Extension
             $mapQuestParams = $config['providers']['mapquest'];
 
             $this->addProvider('mapquest', array(
-                $mapQuestParams['api_key']
+                $mapQuestParams['api_key'],
             ));
-        }
-
-        if (isset($config['providers']['oiorest'])) {
-            $this->addProvider('oiorest');
-        }
-
-        if (isset($config['providers']['geocoder_ca'])) {
-            $this->addProvider('geocoder_ca');
-        }
-
-        if (isset($config['providers']['geocoder_us'])) {
-            $this->addProvider('geocoder_us');
-        }
-
-        if (isset($config['providers']['ign_openls'])) {
-            $ignOpenlsParams = $config['providers']['ign_openls'];
-
-            $this->addProvider('ign_openls', array(
-                $ignOpenlsParams['api_key']
-            ));
-        }
-
-        if (isset($config['providers']['data_science_toolkit'])) {
-            $this->addProvider('data_science_toolkit');
         }
 
         if (isset($config['providers']['yandex'])) {
@@ -153,7 +126,7 @@ class BazingaGeocoderExtension extends Extension
 
             $this->addProvider('yandex', array(
                 $yandexParams['locale'],
-                $yandexParams['toponym']
+                $yandexParams['toponym'],
             ));
         }
 
@@ -161,7 +134,7 @@ class BazingaGeocoderExtension extends Extension
             $geoIpsParams = $config['providers']['geo_ips'];
 
             $this->addProvider('geo_ips', array(
-                $geoIpsParams['api_key']
+                $geoIpsParams['api_key'],
             ));
         }
 
@@ -173,7 +146,7 @@ class BazingaGeocoderExtension extends Extension
             $maxmindParams = $config['providers']['maxmind'];
 
             $this->addProvider('maxmind', array(
-                $maxmindParams['api_key']
+                $maxmindParams['api_key'],
             ));
         }
 
@@ -195,9 +168,19 @@ class BazingaGeocoderExtension extends Extension
             $container->setDefinition('bazinga_geocoder.provider.maxmind_binary', $provider);
         }
 
+        if (isset($config['providers']['opencage'])) {
+            $openCageParams = $config['providers']['opencage'];
+
+            $this->addProvider('opencage', array(
+                $openCageParams['api_key'],
+                $openCageParams['use_ssl'],
+                $openCageParams['locale'],
+            ));
+        }
+
         if (isset($config['providers']['cache'])) {
-            $params   = $config['providers']['cache'];
-            $cache    = new Reference($params['adapter']);
+            $params = $config['providers']['cache'];
+            $cache = new Reference($params['adapter']);
             $fallback = new Reference('bazinga_geocoder.provider.'.$params['provider']);
 
             $provider = new Definition(
@@ -230,11 +213,11 @@ class BazingaGeocoderExtension extends Extension
             if (isset($config['providers']['chain']['providers'])) {
                 foreach ($config['providers']['chain']['providers'] as $name) {
                     if ($this->container->hasDefinition('bazinga_geocoder.provider.'.$name)) {
-                        $chainProvider->addMethodCall('addProvider', array(
-                            $this->container->getDefinition('bazinga_geocoder.provider.'.$name)
+                        $chainProvider->addMethodCall('add', array(
+                            $this->container->getDefinition('bazinga_geocoder.provider.'.$name),
                         ));
                     } else {
-                        $chainProvider->addMethodCall('addProvider', array(new Reference($name)));
+                        $chainProvider->addMethodCall('add', array(new Reference($name)));
                     }
                 }
             }

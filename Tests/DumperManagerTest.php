@@ -16,17 +16,17 @@ class DumperManagerTest extends \PHPUnit_Framework_TestCase
 
     protected function setup()
     {
-        $this->manager = new DumperManager;
+        $this->manager = new DumperManager();
     }
 
     public function testSet()
     {
-        $this->assertNull($this->manager->set('test', $this->getMock('Geocoder\\Dumper\\DumperInterface')));
+        $this->assertNull($this->manager->set('test', $this->getMock('Geocoder\\Dumper\\Dumper')));
     }
 
     public function testGet()
     {
-        $dumper = $this->getMock('Geocoder\\Dumper\\DumperInterface');
+        $dumper = $this->getMock('Geocoder\\Dumper\\Dumper');
         $this->manager->set('test', $dumper);
 
         $this->assertEquals($dumper, $this->manager->get('test'));
@@ -43,13 +43,13 @@ class DumperManagerTest extends \PHPUnit_Framework_TestCase
     public function testHas()
     {
         $this->assertFalse($this->manager->has('test'));
-        $this->manager->set('test', $this->getMock('Geocoder\\Dumper\\DumperInterface'));
+        $this->manager->set('test', $this->getMock('Geocoder\\Dumper\\Dumper'));
         $this->assertTrue($this->manager->has('test'));
     }
 
     public function testRemove()
     {
-        $this->manager->set('test', $this->getMock('Geocoder\\Dumper\\DumperInterface'));
+        $this->manager->set('test', $this->getMock('Geocoder\\Dumper\\Dumper'));
         $this->manager->remove('test');
         $this->assertFalse($this->manager->has('test'));
     }

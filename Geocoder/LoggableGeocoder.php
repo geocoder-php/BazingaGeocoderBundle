@@ -7,21 +7,19 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\Geocoder;
 
-use Geocoder\Geocoder;
 use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
+use Geocoder\ProviderAggregator;
 
-class LoggableGeocoder extends Geocoder
+class LoggableGeocoder extends ProviderAggregator
 {
-     /**
+    /**
      * @var GeocoderLogger
      */
     protected $logger;
 
     /**
-     *
      * @param GeocoderLogger $logger
      */
     public function setLogger(GeocoderLogger $logger = null)
@@ -39,11 +37,11 @@ class LoggableGeocoder extends Geocoder
         }
 
         $startTime = microtime(true);
-        $results   = parent::geocode($value);
-        $duration  = (microtime(true) - $startTime) * 1000;
+        $results = parent::geocode($value);
+        $duration = (microtime(true) - $startTime) * 1000;
 
         $this->logger->logRequest(
-            sprintf("[Geocoding] %s", $value),
+            sprintf('[Geocoding] %s', $value),
             $duration,
             $this->getProviderClass(),
             $results
@@ -53,7 +51,7 @@ class LoggableGeocoder extends Geocoder
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function reverse($latitude, $longitude)
     {
@@ -62,10 +60,10 @@ class LoggableGeocoder extends Geocoder
         }
 
         $startTime = microtime(true);
-        $results   = parent::reverse($latitude, $longitude);
-        $duration  = (microtime(true) - $startTime) * 1000;
+        $results = parent::reverse($latitude, $longitude);
+        $duration = (microtime(true) - $startTime) * 1000;
 
-        $value = sprintf("[Reverse geocoding] latitude: %s, longitude: %s", $latitude, $longitude);
+        $value = sprintf('[Reverse geocoding] latitude: %s, longitude: %s', $latitude, $longitude);
 
         $this->logger->logRequest($value, $duration, $this->getProviderClass(), $results);
 

@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\DataCollector;
 
 use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
@@ -26,7 +25,6 @@ class GeocoderDataCollector extends DataCollector
     protected $logger;
 
     /**
-     *
      * @param GeocoderLogger $logger
      */
     public function __construct(GeocoderLogger $logger)
@@ -57,7 +55,7 @@ class GeocoderDataCollector extends DataCollector
     /**
      * Returns the number of collected requests.
      *
-     * @return integer
+     * @return int
      */
     public function getRequestsCount()
     {

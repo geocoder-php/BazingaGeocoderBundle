@@ -3,8 +3,7 @@ bazinga_geocoder:
     fake_ip:
         ip: 33.33.33.11
         priority: 128
-    adapter:
-        class: Geocoder\HttpAdapter\CurlHttpAdapter
+    adapter: bazinga_geocoder.geocoder.default_adapter
     providers:
         bing_maps:
             api_key: 123
@@ -32,12 +31,6 @@ bazinga_geocoder:
         free_geo_ip: ~
         mapquest:
             api_key: 123
-        oiorest: ~
-        geocoder_ca: ~
-        geocoder_us: ~
-        ign_openls:
-            api_key: 123
-        data_science_toolkit: ~
         yandex:
             locale: en-US
             toponym: locality
@@ -48,5 +41,8 @@ bazinga_geocoder:
             api_key: 123
         maxmind_binary:
             binary_file: %fixtures_dir%/maxmind.dat
+        opencage:
+            locale: en_US
+            api_key: 123
         chain:
             providers: [free_geo_ip, host_ip]

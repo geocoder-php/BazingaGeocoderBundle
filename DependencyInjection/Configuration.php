@@ -7,7 +7,6 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
@@ -47,11 +46,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('priority')->defaultValue(0)->end()
                 ->end()
             ->end()
-            ->arrayNode('adapter')
-                ->children()
-                    ->scalarNode('class')->defaultNull()->end()
-                ->end()
-            ->end()
+            ->scalarNode('adapter')->defaultValue('bazinga_geocoder.geocoder.default_adapter')->end()
             ->arrayNode('providers')
                 ->children()
                 ->arrayNode('bing_maps')
@@ -123,9 +118,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->arrayNode('oiorest')->end()
-                ->arrayNode('geocoder_ca')->end()
-                ->arrayNode('geocoder_us')->end()
                 ->arrayNode('ign_openls')
                     ->children()
                         ->scalarNode('api_key')
@@ -133,7 +125,6 @@ class Configuration implements ConfigurationInterface
                         ->end()
                     ->end()
                 ->end()
-                ->arrayNode('data_science_toolkit')->end()
                 ->arrayNode('yandex')
                     ->children()
                         ->scalarNode('locale')->defaultNull()->end()
@@ -161,6 +152,13 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('open_flag')
                             ->defaultValue(null)
                         ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('opencage')
+                    ->children()
+                        ->scalarNode('locale')->defaultNull()->end()
+                        ->booleanNode('use_ssl')->defaultFalse()->end()
+                        ->scalarNode('api_key')->isRequired()->cannotBeEmpty()->end()
                     ->end()
                 ->end()
                 ->arrayNode('chain')

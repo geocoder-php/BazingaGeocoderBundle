@@ -7,12 +7,10 @@
  *
  * @license    MIT License
  */
-
 namespace Bazinga\Bundle\GeocoderBundle;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
-
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddProvidersPass;
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddDumperPass;
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\LoggablePass;

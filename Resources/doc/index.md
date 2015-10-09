@@ -218,6 +218,22 @@ bazinga_geocoder:
 > **Tip:** If you want to configure the cache adapter,
 > we recommend the [doctrine/doctrine-cache-bundle](https://github.com/doctrine/DoctrineCacheBundle).
 
+### Custom HTTP Adapter
+
+Geocoder Bundle integrates with [egeloen/http-adapter] (https://github.com/egeloen/ivory-http-adapter). By default the bundle use a simple cURL Adapter. 
+You can use any [PSR-7] (http://www.php-fig.org/psr/psr-7/) compliant adapter.
+
+An example, if you want to use Guzzle.
+
+```yaml
+# app/config/config*.yml
+services:
+    guzzle_http_adapter:
+        class: "Ivory\HttpAdapter\Guzzle6HttpAdapter"
+
+bazinga_geocoder:
+    adapter: guzzle_http_adapter
+```
 
 ### Symfony2 Profiler Integration
 
@@ -244,8 +260,7 @@ bazinga_geocoder:
         enabled:              true
         ip:                   null
         priority:             0
-    adapter:
-        class:                null
+    adapter:  					~ # An adapter service id
     default_provider:         ~ # Name of provider, e.g. chain
     providers:
         bing_maps:
@@ -276,11 +291,6 @@ bazinga_geocoder:
         free_geo_ip:          []
         mapquest:
             api_key:              ~ # Required
-        oiorest:              []
-        geocoder_ca:          []
-        geocoder_us:          []
-        ign_openls:
-            api_key:              ~ # Required
         data_science_toolkit:  []
         yandex:
             locale:               null
@@ -293,6 +303,10 @@ bazinga_geocoder:
         maxmind_binary:
             binary_file:          ~ # Required
             open_flag:            null
+        opencage:
+            locale:               null
+            use_ssl:              false
+            api_key:              null
         chain:
             providers:            []
         tom_tom:

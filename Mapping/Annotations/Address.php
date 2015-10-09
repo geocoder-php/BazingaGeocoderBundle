@@ -9,5 +9,4 @@ namespace Bazinga\Bundle\GeocoderBundle\Mapping\Annotations;
  */
 class Address
 {
-
 }

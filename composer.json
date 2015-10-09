@@ -12,10 +12,11 @@
   ],
   "require": {
     "symfony/framework-bundle": "~2.1",
-    "willdurand/geocoder": "~2.5",
+    "willdurand/geocoder": "~3.0",
     "symfony/console": "~2.1"
   },
   "require-dev": {
+    "php": ">=5.4",
     "symfony/yaml": "~2.1",
     "maxromanovsky/php-maxmind-geoip": "~1.12",
     "doctrine/cache": "~1.3",
