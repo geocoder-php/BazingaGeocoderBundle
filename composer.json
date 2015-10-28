@@ -1,18 +1,18 @@
 {
   "name": "willdurand/geocoder-bundle",
-  "description": "Integration of Geocoder into Symfony2",
+  "description": "Integration of Geocoder into Symfony",
   "keywords": ["geocoding", "geocoder"],
   "type": "symfony-bundle",
   "license": "MIT",
   "authors": [
     {
       "name": "William Durand",
-      "email": "william.durand1@gmail.com"
+      "email": "will+git@drnd.me"
     }
   ],
   "require": {
     "symfony/framework-bundle": "~2.1",
-    "willdurand/geocoder": "~3.0",
+    "willdurand/geocoder": "~3.1",
     "symfony/console": "~2.1"
   },
   "require-dev": {
@@ -28,7 +28,7 @@
   "target-dir": "Bazinga/Bundle/GeocoderBundle",
   "extra": {
     "branch-alias": {
-      "dev-master": "3.1-dev"
+      "dev-master": "4.0-dev"
     }
   }
 }
