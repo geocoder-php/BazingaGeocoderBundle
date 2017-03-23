@@ -11,13 +11,17 @@ namespace Bazinga\Bundle\GeocoderBundle\Provider;
 
 use Doctrine\Common\Cache\Cache as DoctrineCache;
 use Geocoder\Provider\AbstractProvider;
+use Geocoder\Provider\LocaleAwareProvider;
+use Geocoder\Provider\LocaleTrait;
 use Geocoder\Provider\Provider;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class Cache extends AbstractProvider implements Provider
+class Cache extends AbstractProvider implements LocaleAwareProvider
 {
+    use LocaleTrait;
+
     /**
      * @var Cache
      */
