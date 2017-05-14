@@ -115,7 +115,7 @@ an easy way to fake this behavior by using a `fake_ip` configuration.
 ``` yaml
 # app/config/config_dev.yml
 bazinga_geocoder:
-    fake_ip:    123.345.643.133
+    fake_ip:    123.123.123.123
 ```
 
 If set, the parameter will replace the `REMOTE_ADDR` value by the given one.
@@ -129,7 +129,7 @@ listeners, You can set up different fake ip listener priority.
 # app/config/config_dev.yml
 bazinga_geocoder:
     fake_ip:
-        ip: 123.345.643.133
+        ip: 123.123.123.123
         priority: 128
 ```
 
