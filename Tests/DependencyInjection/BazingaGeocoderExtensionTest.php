@@ -57,6 +57,7 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
             'cache' => 'Bazinga\\Bundle\\GeocoderBundle\\Provider\\Cache',
             'ip_info_db' => 'Geocoder\\Provider\\IpInfoDb',
             'google_maps' => 'Geocoder\\Provider\\GoogleMaps',
+            'arcgis_online' => 'Geocoder\\Provider\\ArcGISOnline',
             'google_maps_business' => 'Geocoder\\Provider\\GoogleMapsBusiness',
             'openstreetmap' => 'Geocoder\\Provider\\OpenStreetMap',
             'host_ip' => 'Geocoder\\Provider\\HostIp',
