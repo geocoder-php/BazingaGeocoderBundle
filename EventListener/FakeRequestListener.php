@@ -29,10 +29,6 @@ class FakeRequestListener
 
     public function onKernelRequest(GetResponseEvent $event)
     {
-        if (HttpKernelInterface::MASTER_REQUEST !== $event->getRequestType()) {
-            return;
-        }
-
         if (null !== $this->fakeIp && !empty($this->fakeIp)) {
             $event->getRequest()->server->set('REMOTE_ADDR', $this->fakeIp);
         }
