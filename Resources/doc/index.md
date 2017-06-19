@@ -94,8 +94,9 @@ information in your development environment, for instance:
             ->geocode($request->server->get('REMOTE_ADDR'));
 
         // Find the 5 nearest objects (15km) from the current user.
+        $address = $result->first();
         $objects = ObjectQuery::create()
-            ->filterByDistanceFrom($result->getLatitude(), $result->getLongitude(), 15)
+            ->filterByDistanceFrom($address->getLatitude(), $address->getLongitude(), 15)
             ->limit(5)
             ->find();
 
