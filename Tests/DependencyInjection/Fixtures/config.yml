@@ -40,7 +40,7 @@ bazinga_geocoder:
         maxmind:
             api_key: 123
         maxmind_binary:
-            binary_file: %fixtures_dir%/maxmind.dat
+            binary_file: "%fixtures_dir%/maxmind.dat"
         opencage:
             locale: en_US
             api_key: 123

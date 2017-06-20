@@ -16,13 +16,13 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
         $coordinates = array('lat' => 48.857049,'lng' => 2.35223);
         $cacheKey = 'geocoder_'.sha1($address);
 
-        $delegate = $this->getMock('Geocoder\\Provider\\Provider');
+        $delegate = $this->getMockBuilder('Geocoder\\Provider\\Provider')->getMock();
         $delegate->expects($this->once())
             ->method('geocode')
             ->with($address)
             ->will($this->returnValue($coordinates));
 
-        $cache = $this->getMock('Doctrine\\Common\\Cache\\Cache');
+        $cache = $this->getMockBuilder('Doctrine\\Common\\Cache\\Cache')->getMock();
         $cache->expects($this->once())
             ->method('fetch')
             ->with($cacheKey)
@@ -42,7 +42,7 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
         $coordinates = array('lat' => 48.857049,'lng' => 2.35223);
         $cacheKey = 'geocoder_'.sha1($address);
 
-        $delegate = $this->getMock('Geocoder\\Provider\\Provider');
+        $delegate = $this->getMockBuilder('Geocoder\\Provider\\Provider')->getMock();
         $delegate->expects($this->once())
             ->method('geocode')
             ->with($address)
@@ -60,7 +60,7 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
     {
         $coordinates = array('lat' => 48.857049, 'lon' => 2.35223);
 
-        $delegate = $this->getMock('Geocoder\\Provider\\Provider');
+        $delegate = $this->getMockBuilder('Geocoder\\Provider\\Provider')->getMock();
         $delegate->expects($this->once())
             ->method('reverse')
             ->with($coordinates['lat'], $coordinates['lon'])
@@ -76,8 +76,8 @@ class CacheProviderTest extends \PHPUnit_Framework_TestCase
 
     public function testGetName()
     {
-        $delegate = $this->getMock('Geocoder\\Provider\\Provider');
-        $cache = $this->getMock('Doctrine\\Common\\Cache\\Cache');
+        $delegate = $this->getMockBuilder('Geocoder\\Provider\\Provider')->getMock();
+        $cache = $this->getMockBuilder('Doctrine\\Common\\Cache\\Cache')->getMock();
 
         $provider = new Cache($cache, $delegate);
 

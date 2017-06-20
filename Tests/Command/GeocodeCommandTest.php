@@ -32,13 +32,13 @@ class GeocodeCommandTest extends \PHPUnit_Framework_TestCase
         $country = new Country('France', 'FR');
         $address = new Address($coordinates, $bounds, '10', 'rue Gambetta', '75020', 'Paris', null, null, $country);
 
-        $geocoder = $this->getMock('Geocoder\\ProviderAggregator');
+        $geocoder = $this->getMockBuilder('Geocoder\\ProviderAggregator')->getMock();
         $geocoder->expects($this->once())
             ->method('geocode')
             ->with(self::$address)
             ->will($this->returnValue(new AddressCollection(array($address))));
 
-        $container = $this->getMock('Symfony\\Component\\DependencyInjection\\Container');
+        $container = $this->getMockBuilder('Symfony\\Component\\DependencyInjection\\Container')->getMock();
         $container->expects($this->once())
             ->method('get')
             ->with('bazinga_geocoder.geocoder')
@@ -48,9 +48,13 @@ class GeocodeCommandTest extends \PHPUnit_Framework_TestCase
             ->disableOriginalConstructor()
             ->getMock();
 
-        $kernel->expects($this->once())
+        $kernel->expects($this->any())
             ->method('getContainer')
             ->will($this->returnValue($container));
+
+        $kernel->expects($this->any())
+            ->method('getBundles')
+            ->will($this->returnValue([]));
 
         $app = new Application($kernel);
         $app->add(new GeocodeCommand());

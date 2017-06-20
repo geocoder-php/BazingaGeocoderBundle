@@ -27,7 +27,7 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $logger = $this->getMock('Psr\\Log\\LoggerInterface');
+        $logger = $this->getMockBuilder('Psr\\Log\\LoggerInterface')->getMock();
         $logger
             ->expects($this->any())
             ->method('info')
