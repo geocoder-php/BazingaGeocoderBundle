@@ -10,6 +10,7 @@
 namespace Bazinga\Bundle\GeocoderBundle\Geocoder;
 
 use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
+use Geocoder\Provider\LocaleAwareProvider;
 use Geocoder\ProviderAggregator;
 
 class LoggableGeocoder extends ProviderAggregator
@@ -75,5 +76,19 @@ class LoggableGeocoder extends ProviderAggregator
         $provider = explode('\\', get_class($this->getProvider()));
 
         return end($provider);
+    }
+
+    /**
+     * @param string $locale
+     *
+     * @return $this
+     */
+    public function setLocale($locale)
+    {
+        if ($this->getProvider() instanceof LocaleAwareProvider) {
+            $this->getProvider()->setLocale($locale);
+        }
+
+        return $this;
     }
 }

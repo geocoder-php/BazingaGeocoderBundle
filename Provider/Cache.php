@@ -11,13 +11,17 @@ namespace Bazinga\Bundle\GeocoderBundle\Provider;
 
 use Doctrine\Common\Cache\Cache as DoctrineCache;
 use Geocoder\Provider\AbstractProvider;
+use Geocoder\Provider\LocaleAwareProvider;
+use Geocoder\Provider\LocaleTrait;
 use Geocoder\Provider\Provider;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class Cache extends AbstractProvider implements Provider
+class Cache extends AbstractProvider implements LocaleAwareProvider
 {
+    use LocaleTrait;
+
     /**
      * @var Cache
      */
@@ -32,11 +36,6 @@ class Cache extends AbstractProvider implements Provider
      * @var int
      */
     private $lifetime;
-
-    /**
-     * @var string|null
-     */
-    private $locale;
 
     /**
      * @var int
@@ -67,6 +66,10 @@ class Cache extends AbstractProvider implements Provider
     public function geocode($address)
     {
         $key = 'geocoder_'.sha1($this->locale.$address);
+
+        if (null !== $this->getLocale() && $this->provider instanceof LocaleAwareProvider) {
+            $this->provider->setLocale($this->getLocale());
+        }
 
         if (false !== $data = $this->cache->fetch($key)) {
             return unserialize($data);
