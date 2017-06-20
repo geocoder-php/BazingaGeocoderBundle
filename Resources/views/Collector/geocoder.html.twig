@@ -1,44 +1,84 @@
-{% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
+{% extends app.request.isXmlHttpRequest ? '@WebProfiler/Profiler/ajax_layout.html.twig' : '@WebProfiler/Profiler/layout.html.twig' %}
 
 {% block toolbar %}
-    {% set icon %}
-        <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAtMjU2IDE3OTIgMTc5MiIKICAgaWQ9InN2ZzMwMjUiCiAgIHZlcnNpb249IjEuMSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMC40OC4zLjEgcjk4ODYiCiAgIHdpZHRoPSIxMDAlIgogICBoZWlnaHQ9IjEwMCUiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1hcF9tYXJrZXJfZm9udF9hd2Vzb21lLnN2ZyI+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMzAzNSI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGRlZnMKICAgICBpZD0iZGVmczMwMzMiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxIgogICAgIG9iamVjdHRvbGVyYW5jZT0iMTAiCiAgICAgZ3JpZHRvbGVyYW5jZT0iMTAiCiAgICAgZ3VpZGV0b2xlcmFuY2U9IjEwIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSI2NDAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNDgwIgogICAgIGlkPSJuYW1lZHZpZXczMDMxIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp6b29tPSIwLjEzMTY5NjQzIgogICAgIGlua3NjYXBlOmN4PSI4OTYiCiAgICAgaW5rc2NhcGU6Y3k9Ijg5NiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMjUiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMCIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmczMDI1IiAvPgogIDxnCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMzY0LjQ3NDU4LDEyNzAuMjM3MykiCiAgICAgaWQ9ImczMDI3Ij4KICAgIDxwYXRoCiAgICAgICBkPSJtIDc2OCw4OTYgcSAwLDEwNiAtNzUsMTgxIC03NSw3NSAtMTgxLDc1IC0xMDYsMCAtMTgxLC03NSAtNzUsLTc1IC03NSwtMTgxIDAsLTEwNiA3NSwtMTgxIDc1LC03NSAxODEsLTc1IDEwNiwwIDE4MSw3NSA3NSw3NSA3NSwxODEgeiBtIDI1NiwwIHEgMCwtMTA5IC0zMywtMTc5IEwgNjI3LC01NyBxIC0xNiwtMzMgLTQ3LjUsLTUyIC0zMS41LC0xOSAtNjcuNSwtMTkgLTM2LDAgLTY3LjUsMTkgUSA0MTMsLTkwIDM5OCwtNTcgTCAzMyw3MTcgUSAwLDc4NyAwLDg5NiBxIDAsMjEyIDE1MCwzNjIgMTUwLDE1MCAzNjIsMTUwIDIxMiwwIDM2MiwtMTUwIDE1MCwtMTUwIDE1MCwtMzYyIHoiCiAgICAgICBpZD0icGF0aDMwMjkiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6Y3VycmVudENvbG9yIiAvPgogIDwvZz4KPC9zdmc+Cg==" alt="Geocoder" style="height:28px; width:28px" />
-        <span class="sf-toolbar-status">{{ collector.requestscount }}</span>
-    {% endset %}
-    {% set text %}
-        <div class="sf-toolbar-info-piece">
-            <b>Requests</b>
-            <span>{{ collector.requestsCount }}</span>
-        </div>
-        <div class="sf-toolbar-info-piece">
-            <b>Total time</b>
-            <span>{{ '%0.2f'|format(collector.time) }} ms</span>
-        </div>
-    {% endset %}
-    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+    {% set profiler_markup_version = profiler_markup_version|default(1) %}
+
+    {% if profiler_markup_version == 1 %}
+        {% set icon %}
+            <img width="28" height="28" alt="Geocoder" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAtMjU2IDE3OTIgMTc5MiIKICAgaWQ9InN2ZzMwMjUiCiAgIHZlcnNpb249IjEuMSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMC40OC4zLjEgcjk4ODYiCiAgIHdpZHRoPSIxMDAlIgogICBoZWlnaHQ9IjEwMCUiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1hcF9tYXJrZXJfZm9udF9hd2Vzb21lLnN2ZyI+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMzAzNSI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGRlZnMKICAgICBpZD0iZGVmczMwMzMiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxIgogICAgIG9iamVjdHRvbGVyYW5jZT0iMTAiCiAgICAgZ3JpZHRvbGVyYW5jZT0iMTAiCiAgICAgZ3VpZGV0b2xlcmFuY2U9IjEwIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSI2NDAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNDgwIgogICAgIGlkPSJuYW1lZHZpZXczMDMxIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp6b29tPSIwLjEzMTY5NjQzIgogICAgIGlua3NjYXBlOmN4PSI4OTYiCiAgICAgaW5rc2NhcGU6Y3k9Ijg5NiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMjUiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMCIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmczMDI1IiAvPgogIDxnCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMzY0LjQ3NDU4LDEyNzAuMjM3MykiCiAgICAgaWQ9ImczMDI3Ij4KICAgIDxwYXRoCiAgICAgICBkPSJtIDc2OCw4OTYgcSAwLDEwNiAtNzUsMTgxIC03NSw3NSAtMTgxLDc1IC0xMDYsMCAtMTgxLC03NSAtNzUsLTc1IC03NSwtMTgxIDAsLTEwNiA3NSwtMTgxIDc1LC03NSAxODEsLTc1IDEwNiwwIDE4MSw3NSA3NSw3NSA3NSwxODEgeiBtIDI1NiwwIHEgMCwtMTA5IC0zMywtMTc5IEwgNjI3LC01NyBxIC0xNiwtMzMgLTQ3LjUsLTUyIC0zMS41LC0xOSAtNjcuNSwtMTkgLTM2LDAgLTY3LjUsMTkgUSA0MTMsLTkwIDM5OCwtNTcgTCAzMyw3MTcgUSAwLDc4NyAwLDg5NiBxIDAsMjEyIDE1MCwzNjIgMTUwLDE1MCAzNjIsMTUwIDIxMiwwIDM2MiwtMTUwIDE1MCwtMTUwIDE1MCwtMzYyIHoiCiAgICAgICBpZD0icGF0aDMwMjkiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6Y3VycmVudENvbG9yIiAvPgogIDwvZz4KPC9zdmc+Cg==" />
+            <span class="sf-toolbar-status">{{ collector.requestsCount }}</span>
+        {% endset %}
+
+        {% set text %}
+            <div class="sf-toolbar-info-piece">
+                <b>Requests</b>
+                <span class="sf-toolbar-status">{{ collector.requestsCount }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Total time</b>
+                <span>{{ '%0.2f'|format(collector.time) }} ms</span>
+            </div>
+        {% endset %}
+
+        {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+    {% elseif collector.requestsCount %}
+        {% set icon %}
+            {{ include('@BazingaGeocoder/Collector/icon.svg') }}
+            <span class="sf-toolbar-value">{{ collector.requestsCount }}</span>
+        {% endset %}
+
+        {% set text %}
+            <div class="sf-toolbar-info-piece">
+                <b>Requests</b>
+                <span>{{ collector.requestsCount }}</span>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <b>Total time</b>
+                <span>{{ '%0.2f'|format(collector.time) }} ms</span>
+            </div>
+        {% endset %}
+
+        {{ include('@WebProfiler/Profiler/toolbar_item.html.twig', { 'link': profiler_url }) }}
+    {% endif %}
 {% endblock %}
 
 {% block menu %}
-<span class="label">
-    <span class="icon"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAtMjU2IDE3OTIgMTc5MiIKICAgaWQ9InN2ZzMwMjUiCiAgIHZlcnNpb249IjEuMSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMC40OC4zLjEgcjk4ODYiCiAgIHdpZHRoPSIxMDAlIgogICBoZWlnaHQ9IjEwMCUiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1hcF9tYXJrZXJfZm9udF9hd2Vzb21lLnN2ZyI+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMzAzNSI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGRlZnMKICAgICBpZD0iZGVmczMwMzMiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxIgogICAgIG9iamVjdHRvbGVyYW5jZT0iMTAiCiAgICAgZ3JpZHRvbGVyYW5jZT0iMTAiCiAgICAgZ3VpZGV0b2xlcmFuY2U9IjEwIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSI2NDAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNDgwIgogICAgIGlkPSJuYW1lZHZpZXczMDMxIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp6b29tPSIwLjEzMTY5NjQzIgogICAgIGlua3NjYXBlOmN4PSI4OTYiCiAgICAgaW5rc2NhcGU6Y3k9Ijg5NiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMjUiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMCIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmczMDI1IiAvPgogIDxnCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMzY0LjQ3NDU4LDEyNzAuMjM3MykiCiAgICAgaWQ9ImczMDI3Ij4KICAgIDxwYXRoCiAgICAgICBkPSJtIDc2OCw4OTYgcSAwLDEwNiAtNzUsMTgxIC03NSw3NSAtMTgxLDc1IC0xMDYsMCAtMTgxLC03NSAtNzUsLTc1IC03NSwtMTgxIDAsLTEwNiA3NSwtMTgxIDc1LC03NSAxODEsLTc1IDEwNiwwIDE4MSw3NSA3NSw3NSA3NSwxODEgeiBtIDI1NiwwIHEgMCwtMTA5IC0zMywtMTc5IEwgNjI3LC01NyBxIC0xNiwtMzMgLTQ3LjUsLTUyIC0zMS41LC0xOSAtNjcuNSwtMTkgLTM2LDAgLTY3LjUsMTkgUSA0MTMsLTkwIDM5OCwtNTcgTCAzMyw3MTcgUSAwLDc4NyAwLDg5NiBxIDAsMjEyIDE1MCwzNjIgMTUwLDE1MCAzNjIsMTUwIDIxMiwwIDM2MiwtMTUwIDE1MCwtMTUwIDE1MCwtMzYyIHoiCiAgICAgICBpZD0icGF0aDMwMjkiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6Y3VycmVudENvbG9yIiAvPgogIDwvZz4KPC9zdmc+Cg==" alt="Geocoder" width="26" height="26"/></span>
-    <strong>Geocoder</strong>
-    <span class="count">
-        <span>{{ collector.requestsCount }}</span>
-        <span>{{ '%0.0f'|format(collector.time) }} ms</span>
-    </span>
-</span>
+    {% set profiler_markup_version = profiler_markup_version|default(1) %}
+
+    {% if profiler_markup_version == 1 %}
+        <span class="label">
+            <span class="icon"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAtMjU2IDE3OTIgMTc5MiIKICAgaWQ9InN2ZzMwMjUiCiAgIHZlcnNpb249IjEuMSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMC40OC4zLjEgcjk4ODYiCiAgIHdpZHRoPSIxMDAlIgogICBoZWlnaHQ9IjEwMCUiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1hcF9tYXJrZXJfZm9udF9hd2Vzb21lLnN2ZyI+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMzAzNSI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGRlZnMKICAgICBpZD0iZGVmczMwMzMiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxIgogICAgIG9iamVjdHRvbGVyYW5jZT0iMTAiCiAgICAgZ3JpZHRvbGVyYW5jZT0iMTAiCiAgICAgZ3VpZGV0b2xlcmFuY2U9IjEwIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSI2NDAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNDgwIgogICAgIGlkPSJuYW1lZHZpZXczMDMxIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp6b29tPSIwLjEzMTY5NjQzIgogICAgIGlua3NjYXBlOmN4PSI4OTYiCiAgICAgaW5rc2NhcGU6Y3k9Ijg5NiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMjUiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMCIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmczMDI1IiAvPgogIDxnCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMzY0LjQ3NDU4LDEyNzAuMjM3MykiCiAgICAgaWQ9ImczMDI3Ij4KICAgIDxwYXRoCiAgICAgICBkPSJtIDc2OCw4OTYgcSAwLDEwNiAtNzUsMTgxIC03NSw3NSAtMTgxLDc1IC0xMDYsMCAtMTgxLC03NSAtNzUsLTc1IC03NSwtMTgxIDAsLTEwNiA3NSwtMTgxIDc1LC03NSAxODEsLTc1IDEwNiwwIDE4MSw3NSA3NSw3NSA3NSwxODEgeiBtIDI1NiwwIHEgMCwtMTA5IC0zMywtMTc5IEwgNjI3LC01NyBxIC0xNiwtMzMgLTQ3LjUsLTUyIC0zMS41LC0xOSAtNjcuNSwtMTkgLTM2LDAgLTY3LjUsMTkgUSA0MTMsLTkwIDM5OCwtNTcgTCAzMyw3MTcgUSAwLDc4NyAwLDg5NiBxIDAsMjEyIDE1MCwzNjIgMTUwLDE1MCAzNjIsMTUwIDIxMiwwIDM2MiwtMTUwIDE1MCwtMTUwIDE1MCwtMzYyIHoiCiAgICAgICBpZD0icGF0aDMwMjkiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6Y3VycmVudENvbG9yIiAvPgogIDwvZz4KPC9zdmc+Cg==" alt="Geocoder" width="26" height="26"/></span>
+            <strong>Geocoder</strong>
+            <span class="count">
+                <span>{{ collector.requestsCount }}</span>
+                <span>{{ '%0.0f'|format(collector.time) }} ms</span>
+            </span>
+        </span>
+    {% else %}
+        <span class="label {{ collector.requestsCount ? '' : 'disabled' }}">
+            <span class="icon">{{ include('@BazingaGeocoder/Collector/icon.svg') }}</span>
+            <strong>Geocoder</strong>
+            {% if collector.requestsCount > 0 %}
+                <span class="count">
+                    <span>{{ collector.requestsCount }}</span>
+                </span>
+            {% endif %}
+        </span>
+    {% endif %}
 {% endblock %}
 
 {% block panel %}
+    {% set profiler_markup_version = profiler_markup_version|default(1) %}
     <h2>Geocoder Requests</h2>
 
     {% if not collector.requestsCount %}
-        <p><em>No requests.</em></p>
-    {% else %}
+        <div class="empty">
+            <p>No requests.</p>
+        </div>
+    {% elseif profiler_markup_version == 1 %}
         <ul class="alt">
             {% for i, request in collector.requests %}
                 <li class="{{ cycle(['odd', 'even'], loop.index) }}">
-
                     <div>
                         <a href="#" onclick="return geo_explain(this);" style="text-decoration: none;" title="Explains" data-target-id="explain-{{ i }}">
                             <img alt="+" src="{{ asset('bundles/framework/images/blue_picto_more.gif') }}" style="display: inline;"/>
@@ -46,24 +86,41 @@
                         </a>
                         <code>{{ request.value }} ({{request.providerClass}})</code>
                     </div>
-
                     <small>
                         <strong>Time</strong>: {{ '%0.2f'|format(request.duration) }} ms
                     </small>
-
                     <div id="explain-{{ i }}" style="display:none; padding-top: 1em;">
                         <small>
                             <strong>Result:</strong>
                         </small>
                         <pre style="white-space: pre-wrap; white-space: -moz-pre-wrap !important; white-space: -pre-wrap; white-space: -o-pre-wrap; word-wrap: break-word;">{{ request.result }}</pre>
                     </div>
-
                 </li>
             {% endfor %}
         </ul>
+    {% else %}
+        <table class="alt">
+            <thead>
+                <tr>
+                    <th class="nowrap" onclick="javascript:sortTable(this, 0, 'results')" data-sort-direction="-1" style="cursor: pointer;">#<span class="text-muted">&#9650;</span></th>
+                    <th class="nowrap" onclick="javascript:sortTable(this, 1, 'results')" style="cursor: pointer;">Time<span></span></th>
+                    <th style="width: 100%;">Result</th>
+                </tr>
+            </thead>
+            <tbody id="results">
+                {% for i, request in collector.requests %}
+                    <tr id="result-{{ i }}">
+                        <td>{{ loop.index }}</td>
+                        <td class="nowrap">{{ '%0.2f'|format(request.duration) }}&nbsp;ms</td>
+                        <td>{{ request.result }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% endif %}
 
     <script type="text/javascript">//<![CDATA[
+    {% if profiler_markup_version == 1 %}
     function geo_explain(link) {
         "use strict";
 
@@ -73,6 +130,42 @@
         Sfjs.toggle(target, imgs[0], imgs[1]);
 
         return false;
+    }
+    {% endif %}
+
+    function sortTable(header, column, targetId) {
+        "use strict";
+
+        var direction = parseInt(header.getAttribute('data-sort-direction')) || 1,
+            items = [],
+            target = document.getElementById(targetId),
+            rows = target.children,
+            headers = header.parentElement.children,
+            i;
+
+        for (i = 0; i < rows.length; ++i) {
+            items.push(rows[i]);
+        }
+
+        for (i = 0; i < headers.length; ++i) {
+            headers[i].removeAttribute('data-sort-direction');
+            if (headers[i].children.length > 0) {
+                headers[i].children[0].innerHTML = '';
+            }
+        }
+
+        header.setAttribute('data-sort-direction', (-1*direction).toString());
+        header.children[0].innerHTML = direction > 0 ? '<span class="text-muted">&#9650;</span>' : '<span class="text-muted">&#9660;</span>';
+
+        items.sort(function(a, b) {
+            return direction * (parseFloat(a.children[column].innerHTML) - parseFloat(b.children[column].innerHTML));
+        });
+
+        for (i = 0; i < items.length; ++i) {
+            Sfjs.removeClass(items[i], i % 2 ? 'even' : 'odd');
+            Sfjs.addClass(items[i], i % 2 ? 'odd' : 'even');
+            target.appendChild(items[i]);
+        }
     }
     //]]></script>
 {% endblock %}
