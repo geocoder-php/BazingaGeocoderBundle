@@ -89,6 +89,15 @@ class BazingaGeocoderExtension extends Extension
             ));
         }
 
+        if (isset($config['providers']['arcgis_online'])) {
+            $params = $config['providers']['arcgis_online'];
+
+            $this->addProvider('arcgis_online', array(
+                $params['source_country'],
+                $params['use_ssl'],
+            ));
+        }
+
         if (isset($config['providers']['google_maps_business'])) {
             $googleMapsBusinessParams = $config['providers']['google_maps_business'];
 
