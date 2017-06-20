@@ -17,7 +17,7 @@ matrix:
         - env: SYMFONY_VERSION=dev-master
     include:
       - php: hhvm
-        dist: trust
+        dist: trusty
         env: SYMFONY_VERSION=2.7.*
 
 before_script:
