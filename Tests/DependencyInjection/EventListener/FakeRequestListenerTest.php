@@ -16,7 +16,7 @@ class FakeRequestListenerTest extends \PHPUnit_Framework_TestCase
     {
         $listener = new FakeRequestListener('33.33.33.1');
 
-        $kernel = $this->getMock('Symfony\\Component\\HttpKernel\\HttpKernelInterface');
+        $kernel = $this->getMockBuilder('Symfony\\Component\\HttpKernel\\HttpKernelInterface')->getMock();
         $request = new Request();
         $event = new GetResponseEvent($kernel, $request, HttpKernelInterface::MASTER_REQUEST);
 
