@@ -4,6 +4,10 @@ services:
         public: true
         tags: ['bazinga_geocoder.dumper']
 
+    Bazinga\Bundle\GeocoderBundle\ProviderFactory\:
+        resource: '../../ProviderFactory'
+        public: false
+
     Geocoder\ProviderAggregator:
         class: Geocoder\ProviderAggregator
 
