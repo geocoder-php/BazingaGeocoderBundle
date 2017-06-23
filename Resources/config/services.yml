@@ -1,0 +1,14 @@
+services:
+    Geocoder\Dumper\:
+        resource: '%kernel.root_dir%/vendor/willdurand/geocoer/Dumper'
+        public: true
+        tags: ['bazinga_geocoder.dumper']
+
+    Geocoder\ProviderAggregator:
+        class: Geocoder\ProviderAggregator
+
+    bazinga_geocoder.geocoder:
+        alias: "Geocoder\ProviderAggregator"
+
+    geocoder:
+        alias: "Geocoder\ProviderAggregator"
