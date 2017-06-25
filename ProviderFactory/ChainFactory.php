@@ -11,7 +11,6 @@
 
 namespace Bazinga\Bundle\GeocoderBundle\ProviderFactory;
 
-use Bazinga\Bundle\GeocoderBundle\ProviderFactory\AbstractFactory;
 use Geocoder\Provider\Chain\Chain;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

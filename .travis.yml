@@ -19,4 +19,4 @@ before_script:
     - composer update --prefer-source
 
 script:
-  - phpunit --coverage-text
+  - ./vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml

@@ -15,7 +15,7 @@ class ConfigurationTest extends \PHPUnit_Framework_TestCase
     {
         $config = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
 
-        $configuration = new Configuration();
+        $configuration = new Configuration(true);
         $treeBuilder = $configuration->getConfigTreeBuilder();
         $processor = new Processor();
 

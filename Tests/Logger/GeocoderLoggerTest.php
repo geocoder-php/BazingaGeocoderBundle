@@ -36,16 +36,39 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
 
         $this->geocoderLogger = new GeocoderLogger($logger);
 
-        $coordinates = new Coordinates(1, 2);
-        $bounds = new Bounds(1, 2, 3, 4);
-        $country = new Country('France', 'FR');
-        $this->result = new Address($coordinates, $bounds, '10', 'rue Gambetta', '75020', 'Paris', null, null, $country);
+        $this->result = Address::createFromArray([
+            'latitude' => 1,
+            'longitude' => 2,
+            'bounds' => [
+                'south' => 1,
+                'west' => 2,
+                'north' => 3,
+                'east' => 4,
+            ],
+            'streetNumber' => '10',
+            'streetName' => 'rue Gambetta',
+            'locality' => 'Paris',
+            'postalCode' => '75020',
+            'country' => 'France',
+            'countryCode' => 'FR',
+        ]);
 
-        $coordinates = new Coordinates(3, 4);
-        $bounds = new Bounds(5, 6, 7, 8);
-        $country = new Country('France', 'FR');
-        $otherResult = new Address($coordinates, $bounds, '3', 'avenue Secrétan', '75019', 'Paris', null, null, $country);
-
+        $otherResult = Address::createFromArray([
+            'latitude' => 3,
+            'longitude' => 4,
+            'bounds' => [
+                'south' => 5,
+                'west' => 6,
+                'north' => 7,
+                'east' => 8,
+            ],
+            'streetNumber' => '3',
+            'streetName' => 'avenue Secrétan',
+            'locality' => 'Paris',
+            'postalCode' => '75019',
+            'country' => 'France',
+            'countryCode' => 'FR',
+        ]);
         $this->results = new AddressCollection(array($this->result, $otherResult));
     }
 
@@ -72,7 +95,16 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($request['value'], 'copenhagen');
         $this->assertSame($request['duration'], 0.123);
         $this->assertSame($request['providerClass'], 'FooProvider');
-        $this->assertSame($request['result'], '[{"latitude":1,"longitude":2,"bounds":{"south":1,"west":2,"north":3,"east":4},"streetNumber":"10","streetName":"rue Gambetta","postalCode":"75020","locality":"Paris","subLocality":null,"adminLevels":[],"country":"France","countryCode":"FR","timezone":null},{"latitude":3,"longitude":4,"bounds":{"south":5,"west":6,"north":7,"east":8},"streetNumber":"3","streetName":"avenue Secr\u00e9tan","postalCode":"75019","locality":"Paris","subLocality":null,"adminLevels":[],"country":"France","countryCode":"FR","timezone":null}]');
+
+        $this->assertContains('"latitude":1', $request['result']);
+        $this->assertContains('"longitude":2', $request['result']);
+        $this->assertContains('"streetNumber":"10"', $request['result']);
+        $this->assertContains('"streetName":"rue Gambetta"', $request['result']);
+        $this->assertContains('"postalCode":"75020"', $request['result']);
+        $this->assertContains('"locality":"Paris"', $request['result']);
+        $this->assertContains('"locality":"Paris"', $request['result']);
+        $this->assertContains('"country":"France"', $request['result']);
+        $this->assertContains('"countryCode":"FR"', $request['result']);
         $this->assertCount(2, json_decode($request['result']));
     }
 
@@ -104,6 +136,15 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($request['value'], 'copenhagen');
         $this->assertSame($request['duration'], 0.123);
         $this->assertSame($request['providerClass'], 'FooProvider');
-        $this->assertSame($request['result'], '[{"latitude":1,"longitude":2,"bounds":{"south":1,"west":2,"north":3,"east":4},"streetNumber":"10","streetName":"rue Gambetta","postalCode":"75020","locality":"Paris","subLocality":null,"adminLevels":[],"country":"France","countryCode":"FR","timezone":null},{"latitude":3,"longitude":4,"bounds":{"south":5,"west":6,"north":7,"east":8},"streetNumber":"3","streetName":"avenue Secr\u00e9tan","postalCode":"75019","locality":"Paris","subLocality":null,"adminLevels":[],"country":"France","countryCode":"FR","timezone":null}]');
+
+        $this->assertContains('"latitude":1', $request['result']);
+        $this->assertContains('"longitude":2', $request['result']);
+        $this->assertContains('"streetNumber":"10"', $request['result']);
+        $this->assertContains('"streetName":"rue Gambetta"', $request['result']);
+        $this->assertContains('"postalCode":"75020"', $request['result']);
+        $this->assertContains('"locality":"Paris"', $request['result']);
+        $this->assertContains('"locality":"Paris"', $request['result']);
+        $this->assertContains('"country":"France"', $request['result']);
+        $this->assertContains('"countryCode":"FR"', $request['result']);
     }
 }

@@ -28,9 +28,16 @@ class GeocodeCommandTest extends \PHPUnit_Framework_TestCase
     public function testExecute()
     {
         $coordinates = new Coordinates(1, 2);
-        $bounds = new Bounds(1, 2, 3, 4);
         $country = new Country('France', 'FR');
-        $address = new Address($coordinates, $bounds, '10', 'rue Gambetta', '75020', 'Paris', null, null, $country);
+        $address = Address::createFromArray([
+            'coordinates' => $coordinates,
+            'streetNumber'=>'10',
+            'streetName'=> 'rue Gambetta',
+            'zipCode' => '75020',
+            'locality'=> 'Paris',
+            'countryName' => $country->getName(),
+            'countryCode' => $country->getCode(),
+        ]);
 
         $geocoder = $this->getMockBuilder('Geocoder\\ProviderAggregator')->getMock();
         $geocoder->expects($this->once())
