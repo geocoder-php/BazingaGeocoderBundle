@@ -68,6 +68,6 @@ class ProfilingProvider implements Provider
 
     public function getName(): string
     {
-        $this->realProvider->getName();
+        return $this->realProvider->getName();
     }
 }

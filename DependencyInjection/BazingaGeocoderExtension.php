@@ -25,12 +25,8 @@ use Symfony\Component\Config\Definition\Processor;
  */
 class BazingaGeocoderExtension extends Extension
 {
-    protected $container;
-
     public function load(array $configs, ContainerBuilder $container)
     {
-        $this->container = $container;
-
         $processor = new Processor();
         $configuration = $this->getConfiguration($configs, $container);
         $config = $processor->processConfiguration($configuration, $configs);
@@ -41,12 +37,7 @@ class BazingaGeocoderExtension extends Extension
         if ($config['profiling']) {
             $loader->load('profiling.yml');
         }
-
         $this->loadProviders($container, $config);
-
-        if ($config['default_provider']) {
-            $container->setParameter('bazinga_geocoder.default_provider', $config['default_provider']);
-        }
 
         if (!empty($config['fake_ip']) && true === $config['fake_ip']['enabled']) {
             $definition = $container->getDefinition('bazinga_geocoder.event_listener.fake_request');
@@ -64,21 +55,22 @@ class BazingaGeocoderExtension extends Extension
     private function loadProviders(ContainerBuilder $container, array $config)
     {
         foreach ($config['providers'] as $providerName => $providerConfig) {
-            $factoryClass = $container->getDefinition($providerConfig['factory'])->getClass();
-            if (!is_a($factoryClass, ProviderFactoryInterface::class)) {
-                throw new \LogicException(sprintf('Provider factory "%s" must implement ProviderFactoryInterface', $providerConfig['factory']));
+            $factoryService = $container->getDefinition($providerConfig['factory']);
+            $factoryClass = $factoryService->getClass() ?: $providerConfig['factory'];
+            if (!(is_a($factoryClass, ProviderFactoryInterface::class))) {
+                //throw new \LogicException(sprintf('Provider factory "%s" must implement ProviderFactoryInterface', $providerConfig['factory']));
             }
             $factoryClass::validate($providerConfig['options'], $providerName);
 
             // See if any option has a service reference
-            $arguments['options'] = $this->findReferences($providerConfig['options']);
+            $providerConfig['options'] = $this->findReferences($providerConfig['options']);
 
             $def = $container->register('bazinga_geocoder.provider.'.$providerName, Provider::class);
-            $def->setFactory([new Reference($arguments['factory']), 'createProvider'])
-                ->addArgument($arguments['options']);
+            $def->setFactory([new Reference($providerConfig['factory']), 'createProvider'])
+                ->addArgument($providerConfig['options']);
 
             $def->addTag('bazinga_geocoder.provider');
-            foreach ($arguments['aliases'] as $alias) {
+            foreach ($providerConfig['aliases'] as $alias) {
                 $container->setAlias($alias, 'bazinga_geocoder.provider.'.$providerName);
             }
         }
