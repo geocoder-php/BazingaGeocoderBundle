@@ -1,5 +1,11 @@
 language: php
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 php:
     - 7.0
     - 7.1
@@ -19,4 +25,4 @@ before_script:
     - composer update --prefer-source
 
 script:
-  - ./vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml
+  - phpunit --coverage-text --coverage-clover=build/coverage.xml
