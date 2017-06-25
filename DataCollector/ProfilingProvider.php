@@ -36,29 +36,39 @@ class ProfilingProvider implements Provider
     public function geocodeQuery(GeocodeQuery $query): Collection
     {
         $startTime = microtime(true);
-        $results = $this->realProvider->geocodeQuery($query);
-        $duration = (microtime(true) - $startTime) * 1000;
+        try {
+            $results = $this->realProvider->geocodeQuery($query);
+        } finally {
+            $duration = (microtime(true) - $startTime) * 1000;
 
-        $this->logger->logRequest(
-            sprintf('[Geocoding] %s', json_encode($query)),
-            $duration,
-            $this->getName(),
-            $results
-        );
+            $this->logger->logRequest(
+                sprintf('[Geocoding] %s', json_encode($query)),
+                $duration,
+                $this->getName(),
+                $results
+            );
+        }
+
+        return $results;
     }
 
     public function reverseQuery(ReverseQuery $query): Collection
     {
         $startTime = microtime(true);
-        $results = $this->realProvider->reverseQuery($query);
-        $duration = (microtime(true) - $startTime) * 1000;
+        try {
+            $results = $this->realProvider->reverseQuery($query);
+        } finally {
+            $duration = (microtime(true) - $startTime) * 1000;
 
-        $this->logger->logRequest(
-            sprintf('[Geocoding] %s', json_encode($query)),
-            $duration,
-            $this->getName(),
-            $results
-        );
+            $this->logger->logRequest(
+                sprintf('[Geocoding] %s', json_encode($query)),
+                $duration,
+                $this->getName(),
+                $results
+            );
+        }
+
+        return $results;
     }
 
     public function __call($method, $args)
