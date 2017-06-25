@@ -22,7 +22,7 @@ class GeocoderDataCollector extends DataCollector
     /**
      * @var GeocoderLogger
      */
-    protected $logger;
+    private $logger;
 
     /**
      * @param GeocoderLogger $logger

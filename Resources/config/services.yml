@@ -16,3 +16,7 @@ services:
 
     geocoder:
         alias: "Geocoder\ProviderAggregator"
+
+    Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger:
+      class: Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger
+      arguments: ['@?logger']
