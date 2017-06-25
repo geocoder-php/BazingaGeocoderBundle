@@ -19,6 +19,23 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 class Configuration implements ConfigurationInterface
 {
     /**
+     * Whether to use the debug mode.
+     *
+     * @see https://github.com/doctrine/DoctrineBundle/blob/v1.5.2/DependencyInjection/Configuration.php#L31-L41
+     *
+     * @var bool
+     */
+    private $debug;
+
+    /**
+     * @param bool $debug
+     */
+    public function __construct($debug)
+    {
+        $this->debug = (bool) $debug;
+    }
+
+    /**
      * Generates the configuration tree builder.
      *
      * @return TreeBuilder The tree builder
@@ -31,6 +48,19 @@ class Configuration implements ConfigurationInterface
         $rootNode
             ->children()
             ->append($this->getProvidersNode())
+            ->arrayNode('profiling')
+                ->addDefaultsIfNotSet()
+                ->treatFalseLike(['enabled' => false])
+                ->treatTrueLike(['enabled' => true])
+                ->treatNullLike(['enabled' => $this->debug])
+                ->info('Extend the debug profiler with information about requests.')
+                ->children()
+                    ->booleanNode('enabled')
+                        ->info('Turn the toolbar on or off. Defaults to kernel debug mode.')
+                        ->defaultValue($this->debug)
+                    ->end()
+                ->end()
+            ->end()
             ->scalarNode('default_provider')->defaultNull()->end()
             ->arrayNode('fake_ip')
                 ->beforeNormalization()

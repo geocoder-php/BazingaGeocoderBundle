@@ -8,7 +8,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\BazingaGeocoderExtension;
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddDumperPass;
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddProvidersPass;
-use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\LoggablePass;
+use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\ProfilerPass;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
@@ -29,7 +29,7 @@ class BazingaGeocoderExtensionTest extends \PHPUnit_Framework_TestCase
 
         $container->addCompilerPass(new AddDumperPass());
         $container->addCompilerPass(new AddProvidersPass());
-        $container->addCompilerPass(new LoggablePass());
+        $container->addCompilerPass(new ProfilerPass());
 
         $extension->load($configs, $container);
         $container->compile();

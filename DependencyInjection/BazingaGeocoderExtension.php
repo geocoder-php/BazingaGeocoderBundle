@@ -32,7 +32,7 @@ class BazingaGeocoderExtension extends Extension
         $this->container = $container;
 
         $processor = new Processor();
-        $configuration = new Configuration();
+        $configuration = $this->getConfiguration($configs, $container);
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
@@ -79,6 +79,14 @@ class BazingaGeocoderExtension extends Extension
                 $container->setAlias($alias, 'bazinga_geocoder.provider.'.$providerName);
             }
         }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getConfiguration(array $config, ContainerBuilder $container)
+    {
+        return new Configuration($container->getParameter('kernel.debug'));
     }
 
     /**

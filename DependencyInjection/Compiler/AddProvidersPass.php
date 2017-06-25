@@ -31,7 +31,7 @@ class AddProvidersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('bazinga_geocoder.geocoder')) {
+        if (!$container->hasDefinition('Geocoder\ProviderAggregator')) {
             return;
         }
 
@@ -40,7 +40,7 @@ class AddProvidersPass implements CompilerPassInterface
             $providers[] = new Reference($providerId);
         }
 
-        $geocoderDefinition = $container->getDefinition('bazinga_geocoder.geocoder');
+        $geocoderDefinition = $container->getDefinition('Geocoder\ProviderAggregator');
         $geocoderDefinition->addMethodCall('registerProviders', array($providers));
 
         if ($container->hasParameter('bazinga_geocoder.default_provider')) {
