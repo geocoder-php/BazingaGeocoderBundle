@@ -65,15 +65,50 @@ class BazingaGeocoderExtension extends Extension
             // See if any option has a service reference
             $providerConfig['options'] = $this->findReferences($providerConfig['options']);
 
-            $def = $container->register('bazinga_geocoder.provider.'.$providerName, Provider::class);
+            $serviceId = 'bazinga_geocoder.provider.'.$providerName;
+            $def = $container->register($serviceId, Provider::class);
             $def->setFactory([new Reference($providerConfig['factory']), 'createProvider'])
                 ->addArgument($providerConfig['options']);
 
             $def->addTag('bazinga_geocoder.provider');
             foreach ($providerConfig['aliases'] as $alias) {
-                $container->setAlias($alias, 'bazinga_geocoder.provider.'.$providerName);
+                $container->setAlias($alias, $serviceId);
             }
+
+            $this->configureCache($container, $serviceId, $providerConfig);
         }
+    }
+
+    /**
+     * Add cache to a provider if needed.
+     *
+     * @param ContainerBuilder $
+     * @param string $serviceId
+     * @param array $providerConfig
+     */
+    private function configureCache(ContainerBuilder $container, string $serviceId, array $providerConfig)
+    {
+        if (
+            (null !== $providerConfig['cache'] || null !== $providerConfig['cache_lifetime']) &&
+            !class_exists(ProviderCache::class)
+        ) {
+            throw new \LogicException('You must install "geocoder-php/chain-provider" to use cache.');
+        }
+
+        if (null !== $cacheServiceId = $providerConfig['cache']) {
+            if (!$container->has('app.cache\'')) {
+                throw new \LogicException('You need to specify a service for cache.');
+            }
+            $cacheServiceId = 'app.cache';
+        }
+
+        $container->register($serviceId.'.cache', ProviderCache::class)
+            ->setDecoratedService($serviceId)
+            ->setArguments([
+                new Reference($serviceId.'.cache.inner'),
+                new Reference($cacheServiceId),
+                $providerConfig['cache_lifetime']
+            ]);
     }
 
     /**

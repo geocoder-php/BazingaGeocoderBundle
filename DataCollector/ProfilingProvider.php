@@ -42,7 +42,7 @@ class ProfilingProvider implements Provider
             $duration = (microtime(true) - $startTime) * 1000;
 
             $this->logger->logRequest(
-                sprintf('[Geocoding] %s', json_encode($query)),
+                sprintf('[Geocoding] %s', $query),
                 $duration,
                 $this->getName(),
                 $results
@@ -61,7 +61,7 @@ class ProfilingProvider implements Provider
             $duration = (microtime(true) - $startTime) * 1000;
 
             $this->logger->logRequest(
-                sprintf('[Geocoding] %s', json_encode($query)),
+                sprintf('[Geocoding] %s', $query),
                 $duration,
                 $this->getName(),
                 $results
