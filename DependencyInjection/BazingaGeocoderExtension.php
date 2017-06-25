@@ -59,8 +59,6 @@ class BazingaGeocoderExtension extends Extension
         } else {
             $container->removeDefinition('bazinga_geocoder.event_listener.fake_request');
         }
-
-        $container->setAlias('bazinga_geocoder.geocoder.adapter', $config['adapter']);
     }
 
     private function loadProviders(ContainerBuilder $container, array $config)

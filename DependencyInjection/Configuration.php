@@ -78,7 +78,6 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('priority')->defaultValue(0)->end()
                 ->end()
             ->end()
-            ->scalarNode('adapter')->defaultValue('bazinga_geocoder.geocoder.default_adapter')->end()
         ;
 
         return $treeBuilder;

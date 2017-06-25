@@ -1,6 +1,6 @@
 services:
     Geocoder\Dumper\:
-        resource: '%kernel.root_dir%/vendor/willdurand/geocoer/Dumper'
+        resource: '%kernel.root_dir%/../vendor/willdurand/geocoder/Dumper'
         public: true
         tags: ['bazinga_geocoder.dumper']
 
@@ -12,10 +12,10 @@ services:
         class: Geocoder\ProviderAggregator
 
     bazinga_geocoder.geocoder:
-        alias: "Geocoder\ProviderAggregator"
+        alias: "Geocoder\\ProviderAggregator"
 
     geocoder:
-        alias: "Geocoder\ProviderAggregator"
+        alias: "Geocoder\\ProviderAggregator"
 
     Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger:
       class: Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger

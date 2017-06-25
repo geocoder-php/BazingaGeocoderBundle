@@ -9,7 +9,7 @@
  * with this source code in the file LICENSE.
  */
 
-namespace Cache\AdapterBundle\Factory;
+namespace Bazinga\Bundle\GeocoderBundle\ProviderFactory;
 
 use Bazinga\Bundle\GeocoderBundle\ProviderFactory\AbstractFactory;
 use Geocoder\Provider\Chain\Chain;
