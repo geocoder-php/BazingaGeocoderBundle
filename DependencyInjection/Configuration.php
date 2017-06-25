@@ -89,7 +89,7 @@ class Configuration implements ConfigurationInterface
     private function getProvidersNode()
     {
         $treeBuilder = new TreeBuilder();
-        $node        = $treeBuilder->root('providers');
+        $node = $treeBuilder->root('providers');
 
         $node
             ->requiresAtLeastOneElement()
