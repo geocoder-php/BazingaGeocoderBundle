@@ -10,8 +10,9 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Tests\OrmTestCase;
-use Ivory\HttpAdapter\CurlHttpAdapter;
-use Geocoder\Provider\GoogleMaps;
+use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Http\Client\Curl\Client;
+
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
@@ -22,6 +23,11 @@ class GeocoderListenerTest extends OrmTestCase
      * @var EntityManager
      */
     private $em;
+
+    /**
+     * @var GeocoderListener
+     */
+    private $listener;
 
     protected function setUp()
     {
@@ -40,7 +46,7 @@ class GeocoderListenerTest extends OrmTestCase
 
         $driver = new AnnotationDriver($reader);
 
-        $geocoder = new GoogleMaps(new CurlHttpAdapter());
+        $geocoder = new GoogleMaps(new Client());
 
         $this->listener = new GeocoderListener($geocoder, $driver);
 

@@ -9,6 +9,7 @@
  */
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection;
 
+use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -17,6 +18,23 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
+    /**
+     * Whether to use the debug mode.
+     *
+     * @see https://github.com/doctrine/DoctrineBundle/blob/v1.5.2/DependencyInjection/Configuration.php#L31-L41
+     *
+     * @var bool
+     */
+    private $debug;
+
+    /**
+     * @param bool $debug
+     */
+    public function __construct($debug)
+    {
+        $this->debug = (bool) $debug;
+    }
+
     /**
      * Generates the configuration tree builder.
      *
@@ -29,6 +47,20 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+            ->append($this->getProvidersNode())
+            ->arrayNode('profiling')
+                ->addDefaultsIfNotSet()
+                ->treatFalseLike(['enabled' => false])
+                ->treatTrueLike(['enabled' => true])
+                ->treatNullLike(['enabled' => $this->debug])
+                ->info('Extend the debug profiler with information about requests.')
+                ->children()
+                    ->booleanNode('enabled')
+                        ->info('Turn the toolbar on or off. Defaults to kernel debug mode.')
+                        ->defaultValue($this->debug)
+                    ->end()
+                ->end()
+            ->end()
             ->scalarNode('default_provider')->defaultNull()->end()
             ->arrayNode('fake_ip')
                 ->beforeNormalization()
@@ -46,147 +78,35 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('priority')->defaultValue(0)->end()
                 ->end()
             ->end()
-            ->scalarNode('adapter')->defaultValue('bazinga_geocoder.geocoder.default_adapter')->end()
-            ->arrayNode('providers')
-                ->children()
-                ->arrayNode('bing_maps')
-                    ->children()
-                        ->scalarNode('api_key')
-                            ->isRequired()->cannotBeEmpty()
-                        ->end()
-                        ->scalarNode('locale')->defaultNull()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('cache')
-                    ->children()
-                        ->scalarNode('adapter')
-                            ->isRequired()
-                            ->cannotBeEmpty()
-                        ->end()
-                        ->scalarNode('provider')
-                            ->isRequired()
-                            ->cannotBeEmpty()
-                        ->end()
-                        ->scalarNode('locale')
-                            ->defaultNull()
-                        ->end()
-                        ->scalarNode('lifetime')
-                            ->defaultValue(86400)
-                            ->validate()
-                                ->ifTrue(function ($v) { return !is_integer($v); })
-                                ->thenInvalid('Only integer are allowed!')
-                            ->end()
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('ip_info_db')
-                    ->children()
-                        ->scalarNode('api_key')
-                            ->isRequired()->cannotBeEmpty()
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('google_maps')
-                    ->children()
-                        ->scalarNode('locale')->defaultNull()->end()
-                        ->scalarNode('region')->defaultNull()->end()
-                        ->booleanNode('use_ssl')->defaultFalse()->end()
-                        ->scalarNode('api_key')->defaultNull()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('arcgis_online')
-                    ->children()
-                        ->scalarNode('source_country')->defaultNull()->end()
-                        ->booleanNode('use_ssl')->defaultFalse()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('google_maps_business')
-                    ->children()
-                        ->scalarNode('client_id')->isRequired()->cannotBeEmpty()->end()
-                        ->scalarNode('api_key')->defaultNull()->end()
-                        ->scalarNode('locale')->defaultNull()->end()
-                        ->scalarNode('region')->defaultNull()->end()
-                        ->booleanNode('use_ssl')->defaultFalse()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('openstreetmap')
-                    ->children()
-                        ->scalarNode('locale')->defaultNull()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('host_ip')->end()
-                ->arrayNode('geoip')->end()
-                ->arrayNode('free_geo_ip')->end()
-                ->arrayNode('mapquest')
-                    ->children()
-                        ->scalarNode('api_key')
-                            ->isRequired()->cannotBeEmpty()
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('ign_openls')
-                    ->children()
-                        ->scalarNode('api_key')
-                            ->isRequired()->cannotBeEmpty()
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('yandex')
-                    ->children()
-                        ->scalarNode('locale')->defaultNull()->end()
-                        ->scalarNode('toponym')->defaultNull()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('geo_ips')
-                    ->children()
-                        ->scalarNode('api_key')->defaultNull()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('geo_plugin')->end()
-                ->arrayNode('maxmind')
-                    ->children()
-                        ->scalarNode('api_key')
-                            ->isRequired()->cannotBeEmpty()
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('maxmind_binary')
-                    ->children()
-                        ->scalarNode('binary_file')
-                            ->isRequired()->cannotBeEmpty()
-                        ->end()
-                        ->scalarNode('open_flag')
-                            ->defaultValue(null)
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('opencage')
-                    ->children()
-                        ->scalarNode('locale')->defaultNull()->end()
-                        ->booleanNode('use_ssl')->defaultFalse()->end()
-                        ->scalarNode('api_key')->isRequired()->cannotBeEmpty()->end()
-                    ->end()
-                ->end()
-                ->arrayNode('chain')
-                    ->fixXmlConfig('provider')
-                    ->children()
-                        ->arrayNode('providers')
-                            ->performNoDeepMerging()
-                            ->prototype('scalar')->end()
-                        ->end()
-                    ->end()
-                ->end()
-                ->arrayNode('tom_tom')
-                    ->children()
-                        ->scalarNode('api_key')
-                            ->isRequired()->cannotBeEmpty()
-                        ->end()
-                        ->scalarNode('locale')->defaultNull()->end()
-                    ->end()
-                ->end()
-            ->end()
         ;
 
         return $treeBuilder;
     }
+
+    /**
+     * @return ArrayNodeDefinition
+     */
+    private function getProvidersNode()
+    {
+        $treeBuilder = new TreeBuilder();
+        $node = $treeBuilder->root('providers');
+
+        $node
+            ->requiresAtLeastOneElement()
+            ->useAttributeAsKey('name')
+            ->prototype('array')
+                ->children()
+                    ->scalarNode('factory')->isRequired()->cannotBeEmpty()->end()
+                    ->variableNode('options')->defaultValue([])->end()
+                    ->scalarNode('cache')->defaultNull()->end()
+                    ->scalarNode('cache_lifetime')->defaultNull()->end()
+                    ->arrayNode('aliases')
+                        ->prototype('scalar')->end()
+                    ->end()
+                ->end()
+            ->end();
+
+        return $node;
+    }
+
 }

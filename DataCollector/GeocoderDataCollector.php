@@ -22,7 +22,7 @@ class GeocoderDataCollector extends DataCollector
     /**
      * @var GeocoderLogger
      */
-    protected $logger;
+    private $logger;
 
     /**
      * @param GeocoderLogger $logger
@@ -38,7 +38,7 @@ class GeocoderDataCollector extends DataCollector
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         $this->data = array(
-            'requests' => null !== $this->logger ? $this->logger->getRequests() : array(),
+            'requests' => $this->logger->getRequests(),
         );
     }
 

@@ -1,23 +1,22 @@
 language: php
 
+sudo: false
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 php:
-    - 5.4
-    - 5.5
-    - 5.6
+    - 7.0
+    - 7.1
 
 env:
-    - SYMFONY_VERSION=2.3.*
-    - SYMFONY_VERSION=2.5.*
-    - SYMFONY_VERSION=2.7.*
-    - SYMFONY_VERSION=2.8.*
+    - SYMFONY_VERSION=3.3.*
     - SYMFONY_VERSION=dev-master
 
 matrix:
     allow_failures:
         - env: SYMFONY_VERSION=dev-master
-        - php: hhvm
-          dist: trusty
-          env: SYMFONY_VERSION=2.7.*
 
 before_script:
     - composer require symfony/framework-bundle:${SYMFONY_VERSION} --no-update
@@ -25,4 +24,5 @@ before_script:
     # won't be found.
     - composer update --prefer-source
 
-script: phpunit --coverage-text
+script:
+  - phpunit --coverage-text --coverage-clover=build/coverage.xml

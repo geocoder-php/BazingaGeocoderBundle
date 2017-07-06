@@ -11,27 +11,35 @@
     }
   ],
   "require": {
-    "symfony/framework-bundle": "~2.1|~3.0",
-    "willdurand/geocoder": "~3.1",
-    "symfony/console": "~2.1|~3.0"
+    "php": "^7.0",
+    "symfony/framework-bundle": "^3.3",
+    "willdurand/geocoder": "^4.0",
+    "symfony/console": "^3.3"
   },
   "require-dev": {
-    "php": ">=5.4",
-    "symfony/yaml": "~2.1|~3.0",
+    "phpunit/phpunit": "^5.7",
+    "symfony/yaml": "^3.2",
     "geoip/geoip": "~1.17",
     "doctrine/cache": "~1.3",
-    "doctrine/orm": "~2.3"
+    "doctrine/orm": "~2.3",
+    "php-http/message": "^1.5",
+    "geocoder-php/google-maps-provider": "^4.0",
+    "php-http/curl-client": "^1.7",
+    "nyholm/psr7": "^0.2.2"
   },
   "conflict":  {
     "willdurand/geocoder": "3.2"
   },
   "autoload": {
-    "psr-0": { "Bazinga\\Bundle\\GeocoderBundle": "" }
+    "psr-4": {
+      "Bazinga\\Bundle\\GeocoderBundle\\": ""
+    }
   },
-  "target-dir": "Bazinga/Bundle/GeocoderBundle",
+  "minimum-stability": "beta",
+  "prefer-stable": true,
   "extra": {
     "branch-alias": {
-      "dev-master": "4.1-dev"
+      "dev-master": "5.0-dev"
     }
   }
 }

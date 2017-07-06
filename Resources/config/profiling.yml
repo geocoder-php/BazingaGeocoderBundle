@@ -1,0 +1,7 @@
+services:
+  Bazinga\Bundle\GeocoderBundle\DataCollector\GeocoderDataCollector:
+    class: Bazinga\Bundle\GeocoderBundle\DataCollector\GeocoderDataCollector
+    arguments: ['@Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger']
+    public: false
+    tags:
+      - { name: data_collector, template: "BazingaGeocoderBundle:Collector:geocoder", id: "geocoder"  }

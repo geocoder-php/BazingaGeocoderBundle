@@ -9,9 +9,9 @@
  */
 namespace Bazinga\Bundle\GeocoderBundle\Logger;
 
+use Geocoder\Collection;
+use Geocoder\Location;
 use Psr\Log\LoggerInterface;
-use Geocoder\Model\AddressCollection;
-use Geocoder\Model\Address;
 
 /**
  * @author Michal Dabrowski <dabrowski@brillante.pl>
@@ -21,12 +21,12 @@ class GeocoderLogger
     /**
      * @var LoggerInterface
      */
-    protected $logger;
+    private $logger;
 
     /**
      * @var array
      */
-    protected $requests = array();
+    private $requests = array();
 
     /**
      * @param LoggerInterface $logger
@@ -40,17 +40,16 @@ class GeocoderLogger
      * @param string            $value         value to geocode
      * @param float             $duration      geocoding duration
      * @param string            $providerClass Geocoder provider class name
-     * @param AddressCollection $results
+     * @param Collection $results
      */
-    public function logRequest($value, $duration, $providerClass, AddressCollection $results)
+    public function logRequest(string $value, float $duration, string $providerClass, Collection $results)
     {
         if (null !== $this->logger) {
             $this->logger->info(sprintf('%s %0.2f ms (%s)', $value, $duration, $providerClass));
         }
 
         $data = array();
-
-        /** @var Address $result */
+        /** @var Location $result */
         foreach ($results as $result) {
             $data[] = $result->toArray();
         }

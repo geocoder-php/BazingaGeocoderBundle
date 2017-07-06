@@ -7,17 +7,25 @@ use Doctrine\ORM\Events;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Bazinga\Bundle\GeocoderBundle\Mapping\Driver\DriverInterface;
 use Geocoder\Geocoder;
+use Geocoder\Provider\Provider;
+use Geocoder\Query\GeocodeQuery;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
 class GeocoderListener implements EventSubscriber
 {
+    /**
+     * @var DriverInterface
+     */
     private $driver;
 
+    /**
+     * @var Provider
+     */
     private $geocoder;
 
-    public function __construct(Geocoder $geocoder, DriverInterface $driver)
+    public function __construct(Provider $geocoder, DriverInterface $driver)
     {
         $this->driver = $driver;
         $this->geocoder = $geocoder;
@@ -69,12 +77,12 @@ class GeocoderListener implements EventSubscriber
     {
         $metadata = $this->driver->loadMetadataFromObject($entity);
         $address = $metadata->addressProperty->getValue($entity);
-        $results = $this->geocoder->geocode($address);
+        $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($address));
 
         if (!empty($results)) {
             $result = $results->first();
-            $metadata->latitudeProperty->setValue($entity, $results->first()->getLatitude());
-            $metadata->longitudeProperty->setValue($entity, $results->first()->getLongitude());
+            $metadata->latitudeProperty->setValue($entity, $result->getCoordinates()->getLatitude());
+            $metadata->longitudeProperty->setValue($entity, $result->getCoordinates()->getLongitude());
         }
     }
 }
