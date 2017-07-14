@@ -1,17 +1,18 @@
 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
 {% block toolbar %}
+    {% set queryLabel = collector.queries|length == 1 ? 'query' : 'queries' %}
     {% if collector.queries|length > 0 %}
         {% set icon %}
             {{ include('@BazingaGeocoder/Collector/icon.svg') }}
             <span class="sf-toolbar-value">{{ collector.queries|length }}</span>
-            <span class="sf-toolbar-label">queries in</span>
+            <span class="sf-toolbar-label">{{ queryLabel }} in</span>
             <span class="sf-toolbar-value">{{ collector.totalDuration|number_format }}</span>
             <span class="sf-toolbar-label">ms</span>
         {% endset %}
         {% set text %}
             <div class="sf-toolbar-info-piece">
-                <b>{{ collector.queries|length }} queries</b>
+                <b>{{ collector.queries|length }} {{ queryLabel }}</b>
             </div>
             <div class="sf-toolbar-info-piece">
                 <table class="sf-toolbar-ajax-requests">
