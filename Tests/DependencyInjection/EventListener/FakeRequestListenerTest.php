@@ -3,8 +3,8 @@
 namespace Bazinga\Bundle\GeocoderBundle\Tests\EventListener;
 
 use Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 /**

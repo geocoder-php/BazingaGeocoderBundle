@@ -7,12 +7,13 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\DataCollector;
 
 use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
-use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
  * @author Michal Dabrowski <dabrowski@brillante.pl>
@@ -37,9 +38,9 @@ class GeocoderDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->data = array(
+        $this->data = [
             'requests' => $this->logger->getRequests(),
-        );
+        ];
     }
 
     /**

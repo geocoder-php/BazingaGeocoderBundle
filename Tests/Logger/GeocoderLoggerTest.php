@@ -7,13 +7,13 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\Tests\Logger;
 
 use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
 use Geocoder\Model\Address;
 use Geocoder\Model\AddressCollection;
 use Geocoder\Model\Bounds;
-use Geocoder\Model\Coordinates;
 use Geocoder\Model\Country;
 
 /**
@@ -31,45 +31,44 @@ class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
         $logger
             ->expects($this->any())
             ->method('info')
-            ->will($this->returnValue(null))
-        ;
+            ->will($this->returnValue(null));
 
         $this->geocoderLogger = new GeocoderLogger($logger);
 
         $this->result = Address::createFromArray([
-            'latitude' => 1,
+            'latitude'  => 1,
             'longitude' => 2,
-            'bounds' => [
+            'bounds'    => [
                 'south' => 1,
-                'west' => 2,
+                'west'  => 2,
                 'north' => 3,
-                'east' => 4,
+                'east'  => 4,
             ],
             'streetNumber' => '10',
-            'streetName' => 'rue Gambetta',
-            'locality' => 'Paris',
-            'postalCode' => '75020',
-            'country' => 'France',
-            'countryCode' => 'FR',
+            'streetName'   => 'rue Gambetta',
+            'locality'     => 'Paris',
+            'postalCode'   => '75020',
+            'country'      => 'France',
+            'countryCode'  => 'FR',
         ]);
 
         $otherResult = Address::createFromArray([
-            'latitude' => 3,
+            'latitude'  => 3,
             'longitude' => 4,
-            'bounds' => [
+            'bounds'    => [
                 'south' => 5,
-                'west' => 6,
+                'west'  => 6,
                 'north' => 7,
-                'east' => 8,
+                'east'  => 8,
             ],
             'streetNumber' => '3',
-            'streetName' => 'avenue Secrétan',
-            'locality' => 'Paris',
-            'postalCode' => '75019',
-            'country' => 'France',
-            'countryCode' => 'FR',
+            'streetName'   => 'avenue Secrétan',
+            'locality'     => 'Paris',
+            'postalCode'   => '75019',
+            'country'      => 'France',
+            'countryCode'  => 'FR',
         ]);
-        $this->results = new AddressCollection(array($this->result, $otherResult));
+        $this->results = new AddressCollection([$this->result, $otherResult]);
     }
 
     public function testLogNoResults()

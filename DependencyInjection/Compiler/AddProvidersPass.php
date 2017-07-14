@@ -7,6 +7,7 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -35,12 +36,12 @@ class AddProvidersPass implements CompilerPassInterface
             return;
         }
 
-        $providers = array();
+        $providers = [];
         foreach ($container->findTaggedServiceIds('bazinga_geocoder.provider') as $providerId => $attributes) {
             $providers[] = new Reference($providerId);
         }
 
         $geocoderDefinition = $container->getDefinition('Geocoder\\ProviderAggregator');
-        $geocoderDefinition->addMethodCall('registerProviders', array($providers));
+        $geocoderDefinition->addMethodCall('registerProviders', [$providers]);
     }
 }

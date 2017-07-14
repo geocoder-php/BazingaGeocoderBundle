@@ -2,11 +2,10 @@
 
 namespace Bazinga\Bundle\GeocoderBundle\Doctrine\ORM;
 
-use Doctrine\Common\EventSubscriber;
-use Doctrine\ORM\Events;
-use Doctrine\ORM\Event\OnFlushEventArgs;
 use Bazinga\Bundle\GeocoderBundle\Mapping\Driver\DriverInterface;
-use Geocoder\Geocoder;
+use Doctrine\Common\EventSubscriber;
+use Doctrine\ORM\Event\OnFlushEventArgs;
+use Doctrine\ORM\Events;
 use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
 
@@ -36,9 +35,9 @@ class GeocoderListener implements EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array(
+        return [
             Events::onFlush,
-        );
+        ];
     }
 
     public function onFlush(OnFlushEventArgs $args)

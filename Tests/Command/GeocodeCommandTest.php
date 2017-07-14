@@ -7,12 +7,12 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\Tests\Command;
 
 use Bazinga\Bundle\GeocoderBundle\Command\GeocodeCommand;
 use Geocoder\Model\Address;
 use Geocoder\Model\AddressCollection;
-use Geocoder\Model\Bounds;
 use Geocoder\Model\Coordinates;
 use Geocoder\Model\Country;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
@@ -31,10 +31,10 @@ class GeocodeCommandTest extends \PHPUnit_Framework_TestCase
         $country = new Country('France', 'FR');
         $address = Address::createFromArray([
             'coordinates' => $coordinates,
-            'streetNumber'=>'10',
-            'streetName'=> 'rue Gambetta',
-            'zipCode' => '75020',
-            'locality'=> 'Paris',
+            'streetNumber'=> '10',
+            'streetName'  => 'rue Gambetta',
+            'zipCode'     => '75020',
+            'locality'    => 'Paris',
             'countryName' => $country->getName(),
             'countryCode' => $country->getCode(),
         ]);
@@ -43,7 +43,7 @@ class GeocodeCommandTest extends \PHPUnit_Framework_TestCase
         $geocoder->expects($this->once())
             ->method('geocode')
             ->with(self::$address)
-            ->will($this->returnValue(new AddressCollection(array($address))));
+            ->will($this->returnValue(new AddressCollection([$address])));
 
         $container = $this->getMockBuilder('Symfony\\Component\\DependencyInjection\\Container')->getMock();
         $container->expects($this->once())
@@ -69,9 +69,9 @@ class GeocodeCommandTest extends \PHPUnit_Framework_TestCase
         $command = $app->find('geocoder:geocode');
 
         $tester = new CommandTester($command);
-        $tester->execute(array(
+        $tester->execute([
             'command' => 'geocoder:geocode',
             'address' => self::$address,
-        ));
+        ]);
     }
 }

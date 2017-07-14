@@ -13,7 +13,6 @@ use Doctrine\Tests\OrmTestCase;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Http\Client\Curl\Client;
 
-
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
@@ -33,10 +32,10 @@ class GeocoderListenerTest extends OrmTestCase
     {
         AnnotationRegistry::registerLoader('class_exists');
 
-        $conn = DriverManager::getConnection(array(
+        $conn = DriverManager::getConnection([
             'driver' => 'pdo_sqlite',
             'memory' => true,
-        ));
+        ]);
 
         $this->em = $this->_getTestEntityManager($conn);
 
@@ -53,9 +52,9 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em->getEventManager()->addEventSubscriber($this->listener);
 
         $sm = new SchemaTool($this->em);
-        $sm->createSchema(array(
+        $sm->createSchema([
             $this->em->getClassMetadata('Bazinga\Bundle\GeocoderBundle\Tests\Doctrine\ORM\Dummy'),
-        ));
+        ]);
     }
 
     public function testPersist()

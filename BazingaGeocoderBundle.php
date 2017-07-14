@@ -7,12 +7,13 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle;
 
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\AddProvidersPass;
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler\ProfilerPass;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 /**
  * @author William Durand <william.durand1@gmail.com>

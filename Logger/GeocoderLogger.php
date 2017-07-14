@@ -7,6 +7,7 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\Logger;
 
 use Geocoder\Collection;
@@ -26,7 +27,7 @@ class GeocoderLogger
     /**
      * @var array
      */
-    private $requests = array();
+    private $requests = [];
 
     /**
      * @param LoggerInterface $logger
@@ -37,9 +38,9 @@ class GeocoderLogger
     }
 
     /**
-     * @param string            $value         value to geocode
-     * @param float             $duration      geocoding duration
-     * @param string            $providerClass Geocoder provider class name
+     * @param string     $value         value to geocode
+     * @param float      $duration      geocoding duration
+     * @param string     $providerClass Geocoder provider class name
      * @param Collection $results
      */
     public function logRequest(string $value, float $duration, string $providerClass, Collection $results)
@@ -48,18 +49,18 @@ class GeocoderLogger
             $this->logger->info(sprintf('%s %0.2f ms (%s)', $value, $duration, $providerClass));
         }
 
-        $data = array();
+        $data = [];
         /** @var Location $result */
         foreach ($results as $result) {
             $data[] = $result->toArray();
         }
 
-        $this->requests[] = array(
-            'value' => $value,
-            'duration' => $duration,
+        $this->requests[] = [
+            'value'         => $value,
+            'duration'      => $duration,
             'providerClass' => $providerClass,
-            'result' => json_encode($data),
-        );
+            'result'        => json_encode($data),
+        ];
     }
 
     /**
