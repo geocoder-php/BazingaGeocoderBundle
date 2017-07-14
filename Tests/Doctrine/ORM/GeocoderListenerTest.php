@@ -9,6 +9,7 @@ use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\Tests\DoctrineTestCase;
 use Doctrine\Tests\OrmTestCase;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Http\Client\Curl\Client;
@@ -28,6 +29,19 @@ class GeocoderListenerTest extends OrmTestCase
      * @var GeocoderListener
      */
     private $listener;
+
+    public static function setUpBeforeClass()
+    {
+        if (!class_exists(DoctrineTestCase::class)) {
+            /*
+             * We check for DoctrineTestCase because it is in the same package as OrmTestCase and we want to be able to
+             * fake OrmTestCase
+             */
+            static::markTestSkipped('Doctrine\Tests\OrmTestCase was not found.');
+        }
+        parent::setUpBeforeClass();
+    }
+
 
     protected function setUp()
     {

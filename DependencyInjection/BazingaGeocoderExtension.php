@@ -10,6 +10,7 @@
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection;
 
 use Bazinga\Bundle\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
+use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\Provider;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -88,15 +89,16 @@ class BazingaGeocoderExtension extends Extension
      */
     private function configureCache(ContainerBuilder $container, string $serviceId, array $providerConfig)
     {
-        if (
-            (null !== $providerConfig['cache'] || null !== $providerConfig['cache_lifetime']) &&
-            !class_exists(ProviderCache::class)
-        ) {
-            throw new \LogicException('You must install "geocoder-php/chain-provider" to use cache.');
+        if (null === $providerConfig['cache'] && null === $providerConfig['cache_lifetime']) {
+            return;
+        }
+
+        if (!class_exists(ProviderCache::class)) {
+            throw new \LogicException('You must install "geocoder-php/cache-provider" to use cache.');
         }
 
         if (null !== $cacheServiceId = $providerConfig['cache']) {
-            if (!$container->has('app.cache\'')) {
+            if (!$container->has('app.cache')) {
                 throw new \LogicException('You need to specify a service for cache.');
             }
             $cacheServiceId = 'app.cache';

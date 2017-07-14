@@ -1,0 +1,5 @@
+
+bazinga_geocoder:
+  providers:
+    acme:
+      factory: Bazinga\Bundle\GeocoderBundle\ProviderFactory\GoogleMapsFactory
