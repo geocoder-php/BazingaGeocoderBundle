@@ -12,14 +12,14 @@
   ],
   "require": {
     "php": "^7.0",
-    "symfony/framework-bundle": "^3.3",
-    "symfony/options-resolver": "^3.3",
     "willdurand/geocoder": "^4.0",
-    "symfony/console": "^3.3"
+    "symfony/framework-bundle": "^3.3 || ^4.0",
+    "symfony/options-resolver": "^3.3 || ^4.0",
+    "symfony/console": "^3.3 || ^4.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^5.7",
-    "symfony/yaml": "^3.2",
+    "symfony/yaml": "^3.3 || ^4.0",
     "geoip/geoip": "~1.17",
     "doctrine/cache": "~1.3",
     "doctrine/orm": "~2.3",
