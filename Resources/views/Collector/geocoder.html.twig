@@ -25,7 +25,7 @@
                     <tbody class="sf-toolbar-ajax-request-list">
                     {% for query in collector.queries %}
                         <tr>
-                            <td>{{ query.providerName }}</td>
+                            <td>{{ query.providerName|humanize }}</td>
                             <td>{{ query.queryString }}</td>
                             <td>{{ query.duration == 0 ? 'n/a' : query.duration|number_format ~ ' ms'}}</td>
                         </tr>
