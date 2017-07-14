@@ -15,7 +15,6 @@ class CacheHelper implements CacheInterface
 {
     public function get($key, $default = null)
     {
-        return null;
     }
 
     public function set($key, $value, $ttl = null)
@@ -52,5 +51,4 @@ class CacheHelper implements CacheInterface
     {
         return false;
     }
-
 }

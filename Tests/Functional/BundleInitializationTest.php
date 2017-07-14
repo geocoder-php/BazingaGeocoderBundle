@@ -1,6 +1,7 @@
 <?php
 
 declare(strict_types=1);
+
 namespace Bazinga\Bundle\GeocoderBundle\Tests\Functional;
 
 use Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle;
@@ -9,7 +10,6 @@ use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\Provider;
 use Geocoder\ProviderAggregator;
 use Nyholm\BundleTest\BaseBundleTestCase;
-
 
 class BundleInitializationTest extends BaseBundleTestCase
 {

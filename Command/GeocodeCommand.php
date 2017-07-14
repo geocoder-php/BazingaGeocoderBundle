@@ -7,12 +7,13 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 /**
@@ -30,7 +31,7 @@ class GeocodeCommand extends ContainerAwareCommand
             ->setDescription('Geocode an address or a ip address')
             ->addArgument('address', InputArgument::REQUIRED, 'The address')
             ->addOption('provider', null, InputOption::VALUE_OPTIONAL)
-            ->setHelp(<<<HELP
+            ->setHelp(<<<'HELP'
 The <info>geocoder:geocoder</info> command will fetch the latitude
 and longitude from the given address.
 

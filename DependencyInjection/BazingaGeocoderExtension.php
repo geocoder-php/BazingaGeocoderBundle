@@ -7,19 +7,18 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection;
 
 use Bazinga\Bundle\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
 use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\Provider;
-use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
-use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Definition;
-use Symfony\Component\DependencyInjection\Reference;
-use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Config\Definition\Processor;
+use Symfony\Component\Config\FileLocator;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
+use Symfony\Component\DependencyInjection\Reference;
+use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 
 /**
  * William Durand <william.durand1@gmail.com>.
@@ -46,7 +45,7 @@ class BazingaGeocoderExtension extends Extension
 
             $tag = current($definition->getTag('kernel.event_listener'));
             $tag['priority'] = $config['fake_ip']['priority'];
-            $tags = array('kernel.event_listener' => array($tag));
+            $tags = ['kernel.event_listener' => [$tag]];
             $definition->setTags($tags);
         } else {
             $container->removeDefinition('bazinga_geocoder.event_listener.fake_request');
@@ -85,7 +84,7 @@ class BazingaGeocoderExtension extends Extension
      *
      * @param ContainerBuilder $
      * @param string $serviceId
-     * @param array $providerConfig
+     * @param array  $providerConfig
      */
     private function configureCache(ContainerBuilder $container, string $serviceId, array $providerConfig)
     {
@@ -109,7 +108,7 @@ class BazingaGeocoderExtension extends Extension
             ->setArguments([
                 new Reference($serviceId.'.cache.inner'),
                 new Reference($cacheServiceId),
-                $providerConfig['cache_lifetime']
+                $providerConfig['cache_lifetime'],
             ]);
     }
 

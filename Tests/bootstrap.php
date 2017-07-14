@@ -19,4 +19,3 @@ if (!is_bool($loader)) {
     // Fake class
     class_alias('\PHPUnit\Framework\TestCase', 'Doctrine\Tests\OrmTestCase');
 }
-
