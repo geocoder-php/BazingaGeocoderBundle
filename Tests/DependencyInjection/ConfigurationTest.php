@@ -3,13 +3,14 @@
 namespace Bazinga\Bundle\GeocoderBundle\Tests\DependencyInjection;
 
 use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Configuration;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class ConfigurationTest extends \PHPUnit_Framework_TestCase
+class ConfigurationTest extends TestCase
 {
     public function testGetConfigTreeBuilder()
     {

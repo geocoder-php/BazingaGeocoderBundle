@@ -3,6 +3,7 @@
 namespace Bazinga\Bundle\GeocoderBundle\Tests\EventListener;
 
 use Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener;
+use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
@@ -10,7 +11,7 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class FakeRequestListenerTest extends \PHPUnit_Framework_TestCase
+class FakeRequestListenerTest extends TestCase
 {
     public function testOnKernelRequest()
     {

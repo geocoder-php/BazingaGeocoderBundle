@@ -12,4 +12,11 @@ require_once __DIR__.'/../vendor/geoip/geoip/src/geoipcity.inc';
 
 Http\Discovery\ClassDiscovery::prependStrategy(\Nyholm\Psr7\Httplug\DiscoveryStrategy::class);
 
-$loader->add('Doctrine\Tests', __DIR__.'/../vendor/doctrine/orm/tests');
+if (!is_bool($loader)) {
+    $loader->add('Doctrine\Tests', __DIR__.'/../vendor/doctrine/orm/tests');
+} else {
+    echo "Warning: Doctrine\Tests could not be added to the autoloader. \n";
+    // Fake class
+    class_alias('\PHPUnit\Framework\TestCase', 'Doctrine\Tests\OrmTestCase');
+}
+

@@ -1,6 +1,6 @@
 services:
     Geocoder\Dumper\:
-        resource: '%kernel.root_dir%/../vendor/willdurand/geocoder/Dumper'
+        resource: '%kernel.project_dir%/vendor/willdurand/geocoder/Dumper'
         public: true
         tags: ['bazinga_geocoder.dumper']
 
@@ -11,18 +11,15 @@ services:
     Geocoder\ProviderAggregator:
         class: Geocoder\ProviderAggregator
 
-    bazinga_geocoder.geocoder:
-        alias: "Geocoder\\ProviderAggregator"
-
-    geocoder:
-        alias: "Geocoder\\ProviderAggregator"
-
-    Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger:
-      class: Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger
-      arguments: ['@?logger']
-
     Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener:
       class: Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener
       arguments: ['127.0.0.1']
       tags:
         - { name: kernel.event_listener, event: "kernel.request",  method: "onKernelRequest" }
+
+    # Keep these aliases for BC purpose
+    bazinga_geocoder.geocoder:
+        alias: "Geocoder\\ProviderAggregator"
+
+    geocoder:
+        alias: "Geocoder\\ProviderAggregator"

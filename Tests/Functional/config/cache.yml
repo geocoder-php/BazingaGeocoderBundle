@@ -1,0 +1,13 @@
+
+bazinga_geocoder:
+  profiling:
+    enabled: false
+  providers:
+    acme:
+      factory: Bazinga\Bundle\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      cache_lifetime: 10
+      cache: acme.cache
+
+services:
+  acme.cache:
+    class: Bazinga\Bundle\GeocoderBundle\Tests\Functional\Helper\CacheHelper

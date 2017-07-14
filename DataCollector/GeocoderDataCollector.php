@@ -7,9 +7,9 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\DataCollector;
 
-use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,16 +20,15 @@ use Symfony\Component\HttpFoundation\Response;
 class GeocoderDataCollector extends DataCollector
 {
     /**
-     * @var GeocoderLogger
+     * @var ProfilingProvider[]
      */
-    private $logger;
+    private $instances = [];
 
-    /**
-     * @param GeocoderLogger $logger
-     */
-    public function __construct(GeocoderLogger $logger)
+
+    public function __construct()
     {
-        $this->logger = $logger;
+        $this->data['queries'] = [];
+        $this->data['providers'] = [];
     }
 
     /**
@@ -37,9 +36,13 @@ class GeocoderDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
-        $this->data = array(
-            'requests' => $this->logger->getRequests(),
-        );
+        foreach ($this->instances as $instance) {
+            foreach ($instance->getQueries() as $query) {
+                $query['query'] = $this->cloneVar($query['query']);
+                $query['result'] = $this->cloneVar($query['result']);
+                $this->data['queries'][] = $query;
+            }
+        }
     }
 
     /**
@@ -47,19 +50,9 @@ class GeocoderDataCollector extends DataCollector
      *
      * @return array
      */
-    public function getRequests()
+    public function getQueries(): array
     {
-        return $this->data['requests'];
-    }
-
-    /**
-     * Returns the number of collected requests.
-     *
-     * @return int
-     */
-    public function getRequestsCount()
-    {
-        return count($this->data['requests']);
+        return $this->data['queries'];
     }
 
     /**
@@ -67,14 +60,43 @@ class GeocoderDataCollector extends DataCollector
      *
      * @return float
      */
-    public function getTime()
+    public function getTotalDuration()
     {
         $time = 0;
-        foreach ($this->data['requests'] as $command) {
+        foreach ($this->data['queries'] as $command) {
             $time += $command['duration'];
         }
 
         return $time;
+    }
+
+    /**
+     * @return array
+     */
+    public function getProviders(): array
+    {
+        return $this->data['providers'];
+    }
+
+    /**
+     * @param string $provider
+     *
+     * @return array
+     */
+    public function getProviderQueries($provider):array
+    {
+        return array_filter($this->data['queries'], function ($data) use ($provider) {
+            return $data['providerName'] === $provider;
+        });
+    }
+
+    /**
+     * @param ProfilingProvider $instance
+     */
+    public function addInstance(ProfilingProvider $instance)
+    {
+        $this->instances[] = $instance;
+        $this->data['providers'][] = $instance->getName();
     }
 
     /**
