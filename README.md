@@ -1,20 +1,16 @@
 BazingaGeocoderBundle
 =====================
 
-[![Build
-Status](https://secure.travis-ci.org/geocoder-php/BazingaGeocoderBundle.png)](http://travis-ci.org/geocoder-php/BazingaGeocoderBundle)
-[![Total
-Downloads](https://poser.pugx.org/willdurand/geocoder-bundle/downloads.png)](https://packagist.org/packages/willdurand/geocoder-bundle)
-[![Latest Stable
-Version](https://poser.pugx.org/willdurand/geocoder-bundle/v/stable.png)](https://packagist.org/packages/willdurand/geocoder-bundle)
+[![Build Status](https://travis-ci.org/geocoder-php/BazingaGeocoderBundle.svg?branch=master)](http://travis-ci.org/geocoder-php/BazingaGeocoderBundle)
+[![Latest Stable Version](https://poser.pugx.org/willdurand/geocoder-bundle/v/stable)](https://packagist.org/packages/willdurand/geocoder-bundle)
+[![Total Downloads](https://poser.pugx.org/willdurand/geocoder-bundle/downloads)](https://packagist.org/packages/willdurand/geocoder-bundle)
+[![Monthly Downloads](https://poser.pugx.org/willdurand/geocoder-bundle/d/monthly.png)](https://packagist.org/packages/willdurand/geocoder-bundle)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/geocoder-php/BazingaGeocoderBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/geocoder-php/BazingaGeocoderBundle)
+[![Quality Score](https://img.shields.io/scrutinizer/g/geocoder-php/BazingaGeocoderBundle.svg?style=flat-square)](https://scrutinizer-ci.com/g/geocoder-php/BazingaGeocoderBundle)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) library
-into Symfony2.
-
-**Important:** this bundle is developed in sync with [Geocoder's
-repository](http://github.com/geocoder-php/Geocoder). If you are using Geocoder
-`1.x`, you need to use the `~1.5` releases of the bundle (or lower).
-
+into Symfony.
 
 Documentation
 -------------
@@ -39,6 +35,7 @@ Credits
 -------
 
 * William Durand
+* Tobias Nyholm
 * [All contributors](https://github.com/geocoder-php/BazingaGeocoderBundle/contributors)
 
 
