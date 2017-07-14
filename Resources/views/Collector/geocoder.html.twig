@@ -1,78 +1,109 @@
 {% extends 'WebProfilerBundle:Profiler:layout.html.twig' %}
 
 {% block toolbar %}
-    {% set icon %}
-        {{ include('@BazingaGeocoder/Collector/icon.svg') }}
-        <span class="sf-toolbar-info-piece-additional-detail">
-            <span class="sf-toolbar-value">{{ collector.queryCount }}</span>
-        </span>
-    {% endset %}
-    {% set text %}
-        <div class="sf-toolbar-info-piece">
-            <b>Requests</b>
-            <span class="sf-toolbar-status">{{ collector.queryCount }}</span>
-        </div>
-        <div class="sf-toolbar-info-piece">
-            <b>Total time</b>
-            <span>{{ '%0.2f'|format(collector.time) }} ms</span>
-        </div>
-    {% endset %}
-    {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+    {% if collector.queries|length > 0 %}
+        {% set icon %}
+            {{ include('@BazingaGeocoder/Collector/icon.svg') }}
+            <span class="sf-toolbar-value">{{ collector.queries|length }}</span>
+            <span class="sf-toolbar-label">in</span>
+            <span class="sf-toolbar-value">{{ collector.totalDuration|number_format }}</span>
+            <span class="sf-toolbar-label">ms</span>
+        {% endset %}
+        {% set text %}
+            <div class="sf-toolbar-info-piece">
+                <b>{{ collector.queries|length }} queries</b>
+            </div>
+            <div class="sf-toolbar-info-piece">
+                <table class="sf-toolbar-ajax-requests">
+                    <thead>
+                    <tr>
+                        <th>Provider</th>
+                        <th>Query</th>
+                        <th>Time</th>
+                    </tr>
+                    </thead>
+                    <tbody class="sf-toolbar-ajax-request-list">
+                    {% for query in collector.queries %}
+                        <tr>
+                            <td>{{ query.providerName }}</td>
+                            <td>{{ query.queryString }}</td>
+                            <td>{{ query.duration == 0 ? 'n/a' : query.duration|number_format ~ ' ms'}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% endset %}
+
+        {% include 'WebProfilerBundle:Profiler:toolbar_item.html.twig' with { 'link': profiler_url } %}
+{% endif %}
 {% endblock %}
 
 {% block menu %}
-    <span class="label">
-    <span class="icon"><img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcKICAgeG1sbnM6ZGM9Imh0dHA6Ly9wdXJsLm9yZy9kYy9lbGVtZW50cy8xLjEvIgogICB4bWxuczpjYz0iaHR0cDovL2NyZWF0aXZlY29tbW9ucy5vcmcvbnMjIgogICB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiCiAgIHhtbG5zOnN2Zz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKICAgeG1sbnM6c29kaXBvZGk9Imh0dHA6Ly9zb2RpcG9kaS5zb3VyY2Vmb3JnZS5uZXQvRFREL3NvZGlwb2RpLTAuZHRkIgogICB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIKICAgdmlld0JveD0iMCAtMjU2IDE3OTIgMTc5MiIKICAgaWQ9InN2ZzMwMjUiCiAgIHZlcnNpb249IjEuMSIKICAgaW5rc2NhcGU6dmVyc2lvbj0iMC40OC4zLjEgcjk4ODYiCiAgIHdpZHRoPSIxMDAlIgogICBoZWlnaHQ9IjEwMCUiCiAgIHNvZGlwb2RpOmRvY25hbWU9Im1hcF9tYXJrZXJfZm9udF9hd2Vzb21lLnN2ZyI+CiAgPG1ldGFkYXRhCiAgICAgaWQ9Im1ldGFkYXRhMzAzNSI+CiAgICA8cmRmOlJERj4KICAgICAgPGNjOldvcmsKICAgICAgICAgcmRmOmFib3V0PSIiPgogICAgICAgIDxkYzpmb3JtYXQ+aW1hZ2Uvc3ZnK3htbDwvZGM6Zm9ybWF0PgogICAgICAgIDxkYzp0eXBlCiAgICAgICAgICAgcmRmOnJlc291cmNlPSJodHRwOi8vcHVybC5vcmcvZGMvZGNtaXR5cGUvU3RpbGxJbWFnZSIgLz4KICAgICAgPC9jYzpXb3JrPgogICAgPC9yZGY6UkRGPgogIDwvbWV0YWRhdGE+CiAgPGRlZnMKICAgICBpZD0iZGVmczMwMzMiIC8+CiAgPHNvZGlwb2RpOm5hbWVkdmlldwogICAgIHBhZ2Vjb2xvcj0iI2ZmZmZmZiIKICAgICBib3JkZXJjb2xvcj0iIzY2NjY2NiIKICAgICBib3JkZXJvcGFjaXR5PSIxIgogICAgIG9iamVjdHRvbGVyYW5jZT0iMTAiCiAgICAgZ3JpZHRvbGVyYW5jZT0iMTAiCiAgICAgZ3VpZGV0b2xlcmFuY2U9IjEwIgogICAgIGlua3NjYXBlOnBhZ2VvcGFjaXR5PSIwIgogICAgIGlua3NjYXBlOnBhZ2VzaGFkb3c9IjIiCiAgICAgaW5rc2NhcGU6d2luZG93LXdpZHRoPSI2NDAiCiAgICAgaW5rc2NhcGU6d2luZG93LWhlaWdodD0iNDgwIgogICAgIGlkPSJuYW1lZHZpZXczMDMxIgogICAgIHNob3dncmlkPSJmYWxzZSIKICAgICBpbmtzY2FwZTp6b29tPSIwLjEzMTY5NjQzIgogICAgIGlua3NjYXBlOmN4PSI4OTYiCiAgICAgaW5rc2NhcGU6Y3k9Ijg5NiIKICAgICBpbmtzY2FwZTp3aW5kb3cteD0iMCIKICAgICBpbmtzY2FwZTp3aW5kb3cteT0iMjUiCiAgICAgaW5rc2NhcGU6d2luZG93LW1heGltaXplZD0iMCIKICAgICBpbmtzY2FwZTpjdXJyZW50LWxheWVyPSJzdmczMDI1IiAvPgogIDxnCiAgICAgdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMzY0LjQ3NDU4LDEyNzAuMjM3MykiCiAgICAgaWQ9ImczMDI3Ij4KICAgIDxwYXRoCiAgICAgICBkPSJtIDc2OCw4OTYgcSAwLDEwNiAtNzUsMTgxIC03NSw3NSAtMTgxLDc1IC0xMDYsMCAtMTgxLC03NSAtNzUsLTc1IC03NSwtMTgxIDAsLTEwNiA3NSwtMTgxIDc1LC03NSAxODEsLTc1IDEwNiwwIDE4MSw3NSA3NSw3NSA3NSwxODEgeiBtIDI1NiwwIHEgMCwtMTA5IC0zMywtMTc5IEwgNjI3LC01NyBxIC0xNiwtMzMgLTQ3LjUsLTUyIC0zMS41LC0xOSAtNjcuNSwtMTkgLTM2LDAgLTY3LjUsMTkgUSA0MTMsLTkwIDM5OCwtNTcgTCAzMyw3MTcgUSAwLDc4NyAwLDg5NiBxIDAsMjEyIDE1MCwzNjIgMTUwLDE1MCAzNjIsMTUwIDIxMiwwIDM2MiwtMTUwIDE1MCwtMTUwIDE1MCwtMzYyIHoiCiAgICAgICBpZD0icGF0aDMwMjkiCiAgICAgICBpbmtzY2FwZTpjb25uZWN0b3ItY3VydmF0dXJlPSIwIgogICAgICAgc3R5bGU9ImZpbGw6Y3VycmVudENvbG9yIiAvPgogIDwvZz4KPC9zdmc+Cg==" alt="Geocoder" width="26" height="26"/></span>
-    <strong>Geocoder</strong>
-    <span class="count">
-        <span>{{ collector.queryCount }}</span>
-        <span>{{ '%0.0f'|format(collector.time) }} ms</span>
+    {# This left-hand menu appears when using the full-screen profiler. #}
+    <span class="label {{ collector.queries|length == 0 ? 'disabled' }}">
+        <span class="icon">
+            {{ include('@BazingaGeocoder/Collector/icon.svg') }}
+        </span>
+        <strong>Geocoder</strong>
     </span>
-</span>
 {% endblock %}
 
 {% block panel %}
-    <h2>Geocoder Queries</h2>
+    <h2>Geocoder</h2>
 
-    <ul class="alt">
-        {% for i, query in collector.queries %}
-            <li class="{{ cycle(['odd', 'even'], loop.index) }}">
+    <div class="sf-tabs">
+        {% for provider in collector.providers %}
+        <div class="tab">
+            <h3 class="tab-title">{{ provider|humanize }} <span class="badge">{{ collector.providerQueries(provider)|length }}</span></h3>
 
-                <div>
-                    <a href="#" onclick="return geo_explain(this);" style="text-decoration: none;" title="Explains" data-target-id="explain-{{ i }}">
-                        <img alt="+" src="data:image/gif;base64,R0lGODlhEgASAMQTANft99/v+Ga44bHb8ITG52S44dXs9+z1+uPx+YvK6WC24G+944/M6W28443L6dnu+Ge54v/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABMALAAAAAASABIAQAVS4DQBTiOd6LkwgJgeUSzHSDoNaZ4PU6FLgYBA5/vFID/DbylRGiNIZu74I0h1hNsVxbNuUV4d9SsZM2EzWe1qThVzwWFOAFCQFa1RQq6DJB4iIQA7" style="display: inline; background-color: #5eb5e0"/>
-                        <img alt="-" src="data:image/gif;base64,R0lGODlhEgASAMQSANft94TG57Hb8GS44ez1+mC24IvK6ePx+Wa44dXs92+942e54o3L6W2844/M6dnu+P/+/l614P///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAABIALAAAAAASABIAQAVCoCQBTBOd6Kk4gJhGBCTPxysJb44K0qD/ER/wlxjmisZkMqBEBW5NHrMZmVKvv9hMVsO+hE0EoNAstEYGxG9heIhCADs=" style="display: none; background-color: #5eb5e0"/>
-                    </a>
-                    {{ profiler_dump(query.query) }}
-                </div>
+            <div class="tab-content">
+                <p class="help">
+                    These queries are executed by a provider named "{{ provider }}".
+                </p>
 
-                <small>
-                    <strong>Time</strong>: {{ '%0.2f'|format(query.duration) }} ms
-                </small>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th class="full-width">Query</th>
+                        <th>Duration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for query in collector.providerQueries(provider) %}
+                    <tr>
+                        <td class="font-normal text-small" nowrap="">
+                            <span class="colored text-bold"># {{ loop.index }}</span>
+                        </td>
+                        <td class="font-normal">
+                            <span class="dump-inline">
+                                {{ query.queryString }}
+                            </span>
+                            <span class="metadata">
+                                <a class="btn btn-link text-small sf-toggle" data-toggle-selector="#geocoder-{{ provider }}-{{ loop.index }}-details" data-toggle-alt-content="Hide context">Show context</a>
 
-                <div id="explain-{{ i }}" style="display:none; padding-top: 1em;">
-                    <small>
-                        <strong>Result:</strong>
-                    </small>
-                    {{ profiler_dump(query.result) }}
-                </div>
+                                 <div id="geocoder-{{ provider }}-{{ loop.index }}-details" class="context sf-toggle-content sf-toggle-hidden">
+                                     {{ profiler_dump(query.query, maxDepth=1) }}
+                                     <hr />
+                                     {{ profiler_dump(query.result, maxDepth=2) }}
+                                </div>
+                            </span>
+                        </td>
+                        <td class="font-normal text-small" nowrap="">
+                            {{ query.duration|number_format }} ms
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
 
-            </li>
+            </div>
+        </div>
         {% else %}
-            <li><p><em>No queries.</em></p></li>
+        <div class="empty">
+            <p>No queries were executed.</p>
+        </div>
         {% endfor %}
-    </ul>
-
-    <script type="text/javascript">//<![CDATA[
-        function geo_explain(link) {
-            "use strict";
-
-            var imgs   = link.children,
-                target = link.getAttribute('data-target-id');
-
-            Sfjs.toggle(target, imgs[0], imgs[1]);
-
-            return false;
-        }
-        //]]></script>
+    </div>
 {% endblock %}

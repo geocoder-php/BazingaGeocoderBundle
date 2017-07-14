@@ -24,6 +24,13 @@ class GeocoderDataCollector extends DataCollector
      */
     private $instances = [];
 
+
+    public function __construct()
+    {
+        $this->data['queries'] = [];
+        $this->data['providers'] = [];
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -43,19 +50,9 @@ class GeocoderDataCollector extends DataCollector
      *
      * @return array
      */
-    public function getQueries()
+    public function getQueries(): array
     {
         return $this->data['queries'];
-    }
-
-    /**
-     * Returns the number of collected requests.
-     *
-     * @return int
-     */
-    public function getQueryCount()
-    {
-        return count($this->data['queries']);
     }
 
     /**
@@ -63,7 +60,7 @@ class GeocoderDataCollector extends DataCollector
      *
      * @return float
      */
-    public function getTime()
+    public function getTotalDuration()
     {
         $time = 0;
         foreach ($this->data['queries'] as $command) {
@@ -74,11 +71,32 @@ class GeocoderDataCollector extends DataCollector
     }
 
     /**
+     * @return array
+     */
+    public function getProviders(): array
+    {
+        return $this->data['providers'];
+    }
+
+    /**
+     * @param string $provider
+     *
+     * @return array
+     */
+    public function getProviderQueries($provider):array
+    {
+        return array_filter($this->data['queries'], function ($data) use ($provider) {
+            return $data['providerName'] === $provider;
+        });
+    }
+
+    /**
      * @param ProfilingProvider $instance
      */
     public function addInstance(ProfilingProvider $instance)
     {
         $this->instances[] = $instance;
+        $this->data['providers'][] = $instance->getName();
     }
 
     /**
