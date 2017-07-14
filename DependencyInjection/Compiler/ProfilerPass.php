@@ -7,6 +7,7 @@
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler;
 
 use Bazinga\Bundle\GeocoderBundle\DataCollector\GeocoderDataCollector;
@@ -16,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
 
 /**
- * Add Profiling on all providers with that 'bazinga_geocoder.provider'
+ * Add Profiling on all providers with that 'bazinga_geocoder.provider'.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */

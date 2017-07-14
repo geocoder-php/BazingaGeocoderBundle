@@ -4,7 +4,6 @@ namespace Bazinga\Bundle\GeocoderBundle\DataCollector;
 
 use Geocoder\Collection;
 use Geocoder\Exception\LogicException;
-use Geocoder\Location;
 use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\ReverseQuery;
@@ -25,7 +24,7 @@ class ProfilingProvider implements Provider
     private $queries = [];
 
     /**
-     * @param Provider       $realProvider
+     * @param Provider $realProvider
      */
     public function __construct(Provider $realProvider)
     {
@@ -61,27 +60,27 @@ class ProfilingProvider implements Provider
     }
 
     /**
-     * @param GeocodeQuery|ReverseQuery     $query
-     * @param float      $duration      geocoding duration
-     * @param Collection $result
+     * @param GeocodeQuery|ReverseQuery $query
+     * @param float                     $duration geocoding duration
+     * @param Collection                $result
      */
     private function logQuery($query, float $duration, Collection $result = null)
     {
         if ($query instanceof GeocodeQuery) {
             $queryString = $query->getText();
         } elseif ($query instanceof ReverseQuery) {
-            $queryString = sprintf('(%s, %s)', $query->getCoordinates()->getLongitude(),  $query->getCoordinates()->getLongitude());
+            $queryString = sprintf('(%s, %s)', $query->getCoordinates()->getLongitude(), $query->getCoordinates()->getLongitude());
         } else {
             throw new LogicException('First parameter to ProfilingProvider::logQuery must be a query');
         }
 
-        $this->queries[] = array(
-            'query' => $query,
-            'queryString' => $queryString,
-            'duration' => $duration,
+        $this->queries[] = [
+            'query'        => $query,
+            'queryString'  => $queryString,
+            'duration'     => $duration,
             'providerName' => $this->getName(),
-            'result' => $result,
-        );
+            'result'       => $result,
+        ];
     }
 
     /**
