@@ -1,12 +1,13 @@
 <?php
 
-/**
+/*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
@@ -65,11 +66,13 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('fake_ip')
                 ->beforeNormalization()
                 ->ifString()
-                    ->then(function ($value) { return array('ip' => $value); })
+                    ->then(function ($value) {
+                        return ['ip' => $value];
+                    })
                 ->end()
-                ->treatFalseLike(array('enabled' => false))
-                ->treatTrueLike(array('enabled' => true))
-                ->treatNullLike(array('enabled' => true))
+                ->treatFalseLike(['enabled' => false])
+                ->treatTrueLike(['enabled' => true])
+                ->treatNullLike(['enabled' => true])
                 ->children()
                     ->booleanNode('enabled')
                         ->defaultTrue()
@@ -77,8 +80,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('ip')->defaultNull()->end()
                     ->scalarNode('priority')->defaultValue(0)->end()
                 ->end()
-            ->end()
-        ;
+            ->end();
 
         return $treeBuilder;
     }
@@ -108,5 +110,4 @@ class Configuration implements ConfigurationInterface
 
         return $node;
     }
-
 }

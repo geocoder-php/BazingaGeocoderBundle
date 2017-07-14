@@ -1,11 +1,19 @@
 <?php
 
+/*
+ * This file is part of the BazingaGeocoderBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @license    MIT License
+ */
+
 namespace Bazinga\Bundle\GeocoderBundle\Mapping\Driver;
 
-use Doctrine\Common\Annotations\Reader;
-use Bazinga\Bundle\GeocoderBundle\Mapping\Exception;
 use Bazinga\Bundle\GeocoderBundle\Mapping\Annotations;
 use Bazinga\Bundle\GeocoderBundle\Mapping\ClassMetadata;
+use Bazinga\Bundle\GeocoderBundle\Mapping\Exception;
+use Doctrine\Common\Annotations\Reader;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
@@ -23,7 +31,7 @@ class AnnotationDriver implements DriverInterface
     {
         $reflection = new \ReflectionObject($object);
 
-        return !!$this->reader->getClassAnnotation($reflection, 'Bazinga\\Bundle\\GeocoderBundle\\Mapping\\Annotations\\Geocodeable');
+        return (bool) $this->reader->getClassAnnotation($reflection, 'Bazinga\\Bundle\\GeocoderBundle\\Mapping\\Annotations\\Geocodeable');
     }
 
     public function loadMetadataFromObject($object)

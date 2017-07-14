@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the BazingaGeocoderBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @license    MIT License
+ */
+
 namespace Bazinga\Bundle\GeocoderBundle\Tests\Doctrine\ORM;
 
 use Bazinga\Bundle\GeocoderBundle\Doctrine\ORM\GeocoderListener;
@@ -13,7 +21,6 @@ use Doctrine\Tests\DoctrineTestCase;
 use Doctrine\Tests\OrmTestCase;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Http\Client\Curl\Client;
-
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
@@ -42,15 +49,14 @@ class GeocoderListenerTest extends OrmTestCase
         parent::setUpBeforeClass();
     }
 
-
     protected function setUp()
     {
         AnnotationRegistry::registerLoader('class_exists');
 
-        $conn = DriverManager::getConnection(array(
+        $conn = DriverManager::getConnection([
             'driver' => 'pdo_sqlite',
             'memory' => true,
-        ));
+        ]);
 
         $this->em = $this->_getTestEntityManager($conn);
 
@@ -67,9 +73,9 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em->getEventManager()->addEventSubscriber($this->listener);
 
         $sm = new SchemaTool($this->em);
-        $sm->createSchema(array(
+        $sm->createSchema([
             $this->em->getClassMetadata('Bazinga\Bundle\GeocoderBundle\Tests\Doctrine\ORM\Dummy'),
-        ));
+        ]);
     }
 
     public function testPersist()

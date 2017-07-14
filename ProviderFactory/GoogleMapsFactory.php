@@ -1,5 +1,13 @@
 <?php
 
+/*
+ * This file is part of the BazingaGeocoderBundle package.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @license    MIT License
+ */
+
 namespace Bazinga\Bundle\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
@@ -24,8 +32,8 @@ final class GoogleMapsFactory extends AbstractFactory
     {
         $resolver->setDefaults([
             'httplug_client' => null,
-            'region' => null,
-            'api_key' => null,
+            'region'         => null,
+            'api_key'        => null,
         ]);
 
         $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
