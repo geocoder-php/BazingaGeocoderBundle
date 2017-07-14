@@ -1,5 +1,7 @@
 
 bazinga_geocoder:
+  profiling:
+    enabled: false
   providers:
     acme:
       factory: Bazinga\Bundle\GeocoderBundle\ProviderFactory\GoogleMapsFactory

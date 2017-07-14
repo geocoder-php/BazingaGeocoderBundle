@@ -35,7 +35,7 @@ class BazingaGeocoderExtension extends Extension
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
 
-        if ($config['profiling']) {
+        if (true === $config['profiling']['enabled']) {
             $loader->load('profiling.yml');
         }
         $this->loadProviders($container, $config);
@@ -97,7 +97,7 @@ class BazingaGeocoderExtension extends Extension
             throw new \LogicException('You must install "geocoder-php/cache-provider" to use cache.');
         }
 
-        if (null !== $cacheServiceId = $providerConfig['cache']) {
+        if (null === $cacheServiceId = $providerConfig['cache']) {
             if (!$container->has('app.cache')) {
                 throw new \LogicException('You need to specify a service for cache.');
             }
