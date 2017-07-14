@@ -11,8 +11,6 @@ php:
     - 7.1
 
 env:
-  global:
-    - TEST_COMMAND="composer test"
   matrix:
     - SYMFONY_VERSION=3.3.*
     - SYMFONY_VERSION=dev-master
