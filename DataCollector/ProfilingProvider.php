@@ -2,8 +2,8 @@
 
 namespace Bazinga\Bundle\GeocoderBundle\DataCollector;
 
-use Bazinga\Bundle\GeocoderBundle\Logger\GeocoderLogger;
 use Geocoder\Collection;
+use Geocoder\Location;
 use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\ReverseQuery;
@@ -19,56 +19,67 @@ class ProfilingProvider implements Provider
     private $realProvider;
 
     /**
-     * @var GeocoderLogger
+     * @var array
      */
-    private $logger;
+    private $queries = [];
 
     /**
      * @param Provider       $realProvider
-     * @param GeocoderLogger $logger
      */
-    public function __construct(Provider $realProvider, GeocoderLogger $logger)
+    public function __construct(Provider $realProvider)
     {
         $this->realProvider = $realProvider;
-        $this->logger = $logger;
     }
 
     public function geocodeQuery(GeocodeQuery $query): Collection
     {
         $startTime = microtime(true);
         try {
-            $results = $this->realProvider->geocodeQuery($query);
+            $result = $this->realProvider->geocodeQuery($query);
         } finally {
             $duration = (microtime(true) - $startTime) * 1000;
 
-            $this->logger->logRequest(
-                sprintf('[Geocoding] %s', $query),
-                $duration,
-                $this->getName(),
-                $results
-            );
+            $this->logQuery($query, $duration, $result);
         }
 
-        return $results;
+        return $result;
     }
 
     public function reverseQuery(ReverseQuery $query): Collection
     {
         $startTime = microtime(true);
         try {
-            $results = $this->realProvider->reverseQuery($query);
+            $result = $this->realProvider->reverseQuery($query);
         } finally {
             $duration = (microtime(true) - $startTime) * 1000;
 
-            $this->logger->logRequest(
-                sprintf('[Geocoding] %s', $query),
-                $duration,
-                $this->getName(),
-                $results
-            );
+            $this->logQuery($query, $duration, $result);
         }
 
-        return $results;
+        return $result;
+    }
+
+    /**
+     * @param string     $value         value to geocode
+     * @param float      $duration      geocoding duration
+     * @param Collection $result
+     */
+    private function logQuery($query, float $duration, Collection $result = null)
+    {
+        $this->queries[] = array(
+            'query' => $query,
+            'duration' => $duration,
+            'providerName' => $this->getName(),
+            'result' => $result,
+        );
+    }
+
+    /**
+     * @return array
+     */
+    public function getQueries(): array
+    {
+        return $this->queries;
     }
 
     public function __call($method, $args)
