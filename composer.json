@@ -18,7 +18,7 @@
     "symfony/console": "^3.3 || ^4.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^6.2",
+    "phpunit/phpunit": "^5.7",
     "symfony/yaml": "^3.3 || ^4.0",
     "geoip/geoip": "~1.17",
     "doctrine/cache": "~1.3",
