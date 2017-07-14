@@ -1,12 +1,13 @@
 <?php
 
-/**
+/*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
  * @license    MIT License
  */
+
 namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -35,12 +36,12 @@ class AddProvidersPass implements CompilerPassInterface
             return;
         }
 
-        $providers = array();
+        $providers = [];
         foreach ($container->findTaggedServiceIds('bazinga_geocoder.provider') as $providerId => $attributes) {
             $providers[] = new Reference($providerId);
         }
 
         $geocoderDefinition = $container->getDefinition('Geocoder\\ProviderAggregator');
-        $geocoderDefinition->addMethodCall('registerProviders', array($providers));
+        $geocoderDefinition->addMethodCall('registerProviders', [$providers]);
     }
 }
