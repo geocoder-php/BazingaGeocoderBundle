@@ -15,11 +15,12 @@ use Geocoder\Model\AddressCollection;
 use Geocoder\Model\Bounds;
 use Geocoder\Model\Coordinates;
 use Geocoder\Model\Country;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Antoine Corcy <contact@sbin.dk>
  */
-class GeocoderLoggerTest extends \PHPUnit_Framework_TestCase
+class GeocoderLoggerTest extends TestCase
 {
     protected $geocoderLogger;
     protected $result;

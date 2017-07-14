@@ -15,13 +15,14 @@ use Geocoder\Model\AddressCollection;
 use Geocoder\Model\Bounds;
 use Geocoder\Model\Coordinates;
 use Geocoder\Model\Country;
+use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class GeocodeCommandTest extends \PHPUnit_Framework_TestCase
+class GeocodeCommandTest extends TestCase
 {
     private static $address = '10 rue Gambetta, Paris, France';
 

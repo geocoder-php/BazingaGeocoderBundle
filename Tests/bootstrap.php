@@ -17,6 +17,6 @@ if (!is_bool($loader)) {
 } else {
     echo "Warning: Doctrine\Tests could not be added to the autoloader. \n";
     // Fake class
-    class_alias('\PHPUnit_Framework_TestCase', 'Doctrine\Tests\OrmTestCase');
+    class_alias('\PHPUnit\Framework\TestCase', 'Doctrine\Tests\OrmTestCase');
 }
 

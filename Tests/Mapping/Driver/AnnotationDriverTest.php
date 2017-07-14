@@ -6,11 +6,12 @@ use Bazinga\Bundle\GeocoderBundle\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
+use PHPUnit\Framework\TestCase;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class AnnotationDriverTest extends \PHPUnit_Framework_TestCase
+class AnnotationDriverTest extends TestCase
 {
     /**
      * @var AnnotationDriver
