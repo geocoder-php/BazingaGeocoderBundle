@@ -32,8 +32,8 @@ final class GoogleMapsFactory extends AbstractFactory
     {
         $resolver->setDefaults([
             'httplug_client' => null,
-            'region'         => null,
-            'api_key'        => null,
+            'region' => null,
+            'api_key' => null,
         ]);
 
         $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);

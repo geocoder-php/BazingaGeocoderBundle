@@ -83,11 +83,11 @@ class ProfilingProvider implements Provider
         }
 
         $this->queries[] = [
-            'query'        => $query,
-            'queryString'  => $queryString,
-            'duration'     => $duration,
+            'query' => $query,
+            'queryString' => $queryString,
+            'duration' => $duration,
             'providerName' => $this->getName(),
-            'result'       => $result,
+            'result' => $result,
         ];
     }
 

@@ -52,7 +52,7 @@ class AnnotationDriverTest extends TestCase
     }
 
     /**
-     * @expectedException Bazinga\Bundle\GeocoderBundle\Mapping\Exception\MappingException
+     * @expectedException \Bazinga\Bundle\GeocoderBundle\Mapping\Exception\MappingException
      */
     public function testLoadMetadataFromWrongObject()
     {
