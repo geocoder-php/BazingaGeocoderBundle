@@ -15,11 +15,11 @@ check number of queries executed by each provider, total execution time
 and geocoding results.
 
 ![Example
-Toolbar](https://raw.github.com/geocoder-php/BazingaGeocoderBundle/master/Resources/doc/toolbar.png)
+Toolbar](Resources/doc/toolbar.png)
 
 
 ![Example
-Profiler page](https://raw.github.com/geocoder-php/BazingaGeocoderBundle/master/Resources/doc/profiler-page.png)
+Profiler page](Resources/doc/profiler-page.png)
 
 
 
