@@ -69,7 +69,7 @@ class Configuration implements ConfigurationInterface
                         return ['ip' => $value];
                     })
                 ->end()
-                ->canBeDisabled()
+                ->canBeEnabled()
                 ->children()
                     ->scalarNode('ip')->defaultNull()->end()
                 ->end()
