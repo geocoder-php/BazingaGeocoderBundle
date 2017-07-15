@@ -57,7 +57,7 @@ bazinga_geocoder:
 This will create a service named `bazinga_geocoder.provider.acme` which is a 
 `GoogleMapsProvider`.
 
-You can also configure **all** provider factories to adjust the behavior of the 
+You can also configure **all ``ProviderFactories``** to adjust the behavior of the 
 provider.
 
 ```yaml
@@ -74,8 +74,8 @@ bazinga_geocoder:
 This will create a service named `my_geocoder` that caches the responses for one 
 hour.
 
-**Some** provider factories takes an array with options. This is usually options 
-to the constructor of the provider. In the example of Google Maps:
+**Most ``ProviderFactories``** do also take an array with options. This is usually 
+parameters to the constructor of the provider. In the example of Google Maps:
 
 ```yaml
 bazinga_geocoder:
@@ -117,35 +117,31 @@ You can fake the `REMOTE_ADDR` HTTP parameter through this bundle in order to ge
 information in your development environment, for instance:
 
 ```php
-<?php
+/**
+ * @Template()
+ */
+public function indexAction(Request $request)
+{
+    // Retrieve information from the current user (by its IP address)
+    $result = $this->container
+        ->get('bazinga_geocoder.provider.acme')
+        ->geocodeQuery(GeocodeQuery::create($request->server->get('REMOTE_ADDR')));
 
-// ...
+    // Find the 5 nearest objects (15km) from the current user.
+    $coords = $result->first()->getCoordinates();;
+    $objects = ObjectQuery::create()
+        ->filterByDistanceFrom($coords->getLatitude(), $coords->getLongitude(), 15)
+        ->limit(5)
+        ->find();
 
-    /**
-     * @Template()
-     */
-    public function indexAction(Request $request)
-    {
-        // Retrieve information from the current user (by its IP address)
-        $result = $this->container
-            ->get('bazinga_geocoder.provider.acme')
-            ->geocodeQuery(GeocodeQuery::create($request->server->get('REMOTE_ADDR')));
-
-        // Find the 5 nearest objects (15km) from the current user.
-        $coords = $result->first()->getCoordinates();;
-        $objects = ObjectQuery::create()
-            ->filterByDistanceFrom($coords->getLatitude(), $coords->getLongitude(), 15)
-            ->limit(5)
-            ->find();
-
-        return array(
-            'geocoded'        => $result,
-            'nearest_objects' => $objects
-        );
-    }
+    return array(
+        'geocoded'        => $result,
+        'nearest_objects' => $objects
+    );
+}
 ```
 
-In the example, we'll retrieve information from the user's IP address, and 5
+In the example above, we'll retrieve information from the user's IP address, and 5
 objects nears him.
 But it won't work on your local environment, that's why this bundle provides
 an easy way to fake this behavior by using a `fake_ip` configuration.
@@ -214,7 +210,7 @@ To register a new dumper, you must tag it with `bazinga_geocoder.dumper`.
 </service>
 ```
 
-### Cache Cesults
+### Cache Results
 
 Sometimes you have to cache the results from a provider. For this case the bundle provides
 simple configuration. You only need to provide a service name for you SimpleCache (PSR-16)
@@ -232,7 +228,7 @@ bazinga_geocoder:
 
 ### Custom HTTP Client
 
-Geocoder Bundle integrates with [HTTPlug](http://httplug.io/). It will give you all
+The HTTP geocoder providers integrates with [HTTPlug](http://httplug.io/). It will give you all
 the power of the HTTP client. You have to select which one you want to use and how 
 you want to configure it. 
 
@@ -247,9 +243,6 @@ composer require php-http/guzzle6-adapter php-http/message
 
 Reference Configuration
 -----------------------
-
-You MUST define the providers you want to use in your configuration.  Some of
-them need information (API key for instance).
 
 You'll find the reference configuration below:
 
