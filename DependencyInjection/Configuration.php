@@ -62,7 +62,6 @@ class Configuration implements ConfigurationInterface
                     ->end()
                 ->end()
             ->end()
-            ->scalarNode('default_provider')->defaultNull()->end()
             ->arrayNode('fake_ip')
                 ->beforeNormalization()
                 ->ifString()
@@ -70,15 +69,9 @@ class Configuration implements ConfigurationInterface
                         return ['ip' => $value];
                     })
                 ->end()
-                ->treatFalseLike(['enabled' => false])
-                ->treatTrueLike(['enabled' => true])
-                ->treatNullLike(['enabled' => true])
+                ->canBeDisabled()
                 ->children()
-                    ->booleanNode('enabled')
-                        ->defaultTrue()
-                    ->end()
                     ->scalarNode('ip')->defaultNull()->end()
-                    ->scalarNode('priority')->defaultValue(0)->end()
                 ->end()
             ->end();
 
