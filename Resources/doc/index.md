@@ -245,16 +245,6 @@ An example, if you want to use Guzzle6.
 composer require php-http/guzzle6-adapter php-http/message
 ```
 
-### Symfony2 Profiler Integration
-
-Geocoder bundle additionally integrates with Symfony2 profiler. You can
-check number of queries executed by each provider, total execution time
-and geocoding results.
-
-![Example
-Toolbar](https://raw.github.com/geocoder-php/BazingaGeocoderBundle/master/Resources/doc/toolbar.png)
-
-
 Reference Configuration
 -----------------------
 
