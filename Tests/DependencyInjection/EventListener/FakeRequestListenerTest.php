@@ -8,9 +8,9 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Tests\EventListener;
+namespace Bazinga\GeocoderBundle\Tests\EventListener;
 
-use Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener;
+use Bazinga\GeocoderBundle\EventListener\FakeRequestListener;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;

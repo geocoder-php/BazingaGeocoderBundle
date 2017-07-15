@@ -8,10 +8,10 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Tests\Doctrine\ORM;
+namespace Bazinga\GeocoderBundle\Tests\Doctrine\ORM;
 
-use Bazinga\Bundle\GeocoderBundle\Doctrine\ORM\GeocoderListener;
-use Bazinga\Bundle\GeocoderBundle\Mapping\Driver\AnnotationDriver;
+use Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener;
+use Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Doctrine\DBAL\DriverManager;
@@ -61,7 +61,7 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em = $this->_getTestEntityManager($conn);
 
         $reader = new SimpleAnnotationReader();
-        $reader->addNamespace('Bazinga\Bundle\GeocoderBundle\Mapping\Annotations');
+        $reader->addNamespace('Bazinga\GeocoderBundle\Mapping\Annotations');
         $reader->addNamespace('Doctrine\ORM\Mapping');
 
         $driver = new AnnotationDriver($reader);
@@ -74,7 +74,7 @@ class GeocoderListenerTest extends OrmTestCase
 
         $sm = new SchemaTool($this->em);
         $sm->createSchema([
-            $this->em->getClassMetadata('Bazinga\Bundle\GeocoderBundle\Tests\Doctrine\ORM\Dummy'),
+            $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\Dummy'),
         ]);
     }
 

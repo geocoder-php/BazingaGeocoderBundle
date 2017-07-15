@@ -8,7 +8,7 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\EventListener;
+namespace Bazinga\GeocoderBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;

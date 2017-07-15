@@ -39,7 +39,7 @@ public function registerBundles()
 {
     return array(
         // ...
-        new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
+        new Bazinga\GeocoderBundle\BazingaGeocoderBundle(),
     );
 }
 ```

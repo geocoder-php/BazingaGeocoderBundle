@@ -8,10 +8,10 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection\Compiler;
+namespace Bazinga\GeocoderBundle\DependencyInjection\Compiler;
 
-use Bazinga\Bundle\GeocoderBundle\DataCollector\GeocoderDataCollector;
-use Bazinga\Bundle\GeocoderBundle\DataCollector\ProfilingProvider;
+use Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector;
+use Bazinga\GeocoderBundle\DataCollector\ProfilingProvider;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

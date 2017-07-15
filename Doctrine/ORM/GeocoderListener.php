@@ -8,9 +8,9 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Doctrine\ORM;
+namespace Bazinga\GeocoderBundle\Doctrine\ORM;
 
-use Bazinga\Bundle\GeocoderBundle\Mapping\Driver\DriverInterface;
+use Bazinga\GeocoderBundle\Mapping\Driver\DriverInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;

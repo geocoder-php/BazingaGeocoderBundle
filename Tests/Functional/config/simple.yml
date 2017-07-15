@@ -4,4 +4,4 @@ bazinga_geocoder:
     enabled: false
   providers:
     acme:
-      factory: Bazinga\Bundle\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory

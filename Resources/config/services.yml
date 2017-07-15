@@ -4,15 +4,15 @@ services:
         public: true
         tags: ['bazinga_geocoder.dumper']
 
-    Bazinga\Bundle\GeocoderBundle\ProviderFactory\:
+    Bazinga\GeocoderBundle\ProviderFactory\:
         resource: '../../ProviderFactory'
         public: false
 
     Geocoder\ProviderAggregator:
         class: Geocoder\ProviderAggregator
 
-    Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener:
-      class: Bazinga\Bundle\GeocoderBundle\EventListener\FakeRequestListener
+    Bazinga\GeocoderBundle\EventListener\FakeRequestListener:
+      class: Bazinga\GeocoderBundle\EventListener\FakeRequestListener
       arguments: ['127.0.0.1']
       tags:
         - { name: kernel.event_listener, event: "kernel.request",  method: "onKernelRequest" }

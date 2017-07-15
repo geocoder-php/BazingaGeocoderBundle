@@ -10,7 +10,7 @@ declare(strict_types=1);
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Tests\Functional\Helper;
+namespace Bazinga\GeocoderBundle\Tests\Functional\Helper;
 
 use Psr\SimpleCache\CacheInterface;
 

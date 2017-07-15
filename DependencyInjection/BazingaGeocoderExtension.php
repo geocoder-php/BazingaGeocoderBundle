@@ -8,9 +8,9 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\DependencyInjection;
+namespace Bazinga\GeocoderBundle\DependencyInjection;
 
-use Bazinga\Bundle\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
+use Bazinga\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
 use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\Provider;
 use Symfony\Component\Config\Definition\Processor;

@@ -8,11 +8,11 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Mapping\Driver;
+namespace Bazinga\GeocoderBundle\Mapping\Driver;
 
-use Bazinga\Bundle\GeocoderBundle\Mapping\Annotations;
-use Bazinga\Bundle\GeocoderBundle\Mapping\ClassMetadata;
-use Bazinga\Bundle\GeocoderBundle\Mapping\Exception;
+use Bazinga\GeocoderBundle\Mapping\Annotations;
+use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
+use Bazinga\GeocoderBundle\Mapping\Exception;
 use Doctrine\Common\Annotations\Reader;
 
 /**

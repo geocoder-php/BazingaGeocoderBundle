@@ -8,7 +8,7 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\ProviderFactory;
+namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Provider;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;

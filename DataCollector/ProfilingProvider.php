@@ -8,7 +8,7 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\DataCollector;
+namespace Bazinga\GeocoderBundle\DataCollector;
 
 use Geocoder\Collection;
 use Geocoder\Exception\LogicException;

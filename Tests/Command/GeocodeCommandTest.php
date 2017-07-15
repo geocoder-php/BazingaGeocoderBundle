@@ -8,9 +8,9 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Tests\Command;
+namespace Bazinga\GeocoderBundle\Tests\Command;
 
-use Bazinga\Bundle\GeocoderBundle\Command\GeocodeCommand;
+use Bazinga\GeocoderBundle\Command\GeocodeCommand;
 use Geocoder\Model\Address;
 use Geocoder\Model\AddressCollection;
 use Geocoder\Model\Coordinates;
