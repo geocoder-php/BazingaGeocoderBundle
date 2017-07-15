@@ -32,10 +32,10 @@ class GeocodeCommandTest extends TestCase
         $country = new Country('France', 'FR');
         $address = Address::createFromArray([
             'coordinates' => $coordinates,
-            'streetNumber'=> '10',
-            'streetName'  => 'rue Gambetta',
-            'zipCode'     => '75020',
-            'locality'    => 'Paris',
+            'streetNumber' => '10',
+            'streetName' => 'rue Gambetta',
+            'zipCode' => '75020',
+            'locality' => 'Paris',
             'countryName' => $country->getName(),
             'countryCode' => $country->getCode(),
         ]);

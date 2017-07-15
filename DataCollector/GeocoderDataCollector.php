@@ -82,7 +82,7 @@ class GeocoderDataCollector extends DataCollector
      *
      * @return array
      */
-    public function getProviderQueries($provider):array
+    public function getProviderQueries($provider): array
     {
         return array_filter($this->data['queries'], function ($data) use ($provider) {
             return $data['providerName'] === $provider;
