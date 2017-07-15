@@ -35,7 +35,7 @@ public function registerBundles()
 {
     return array(
         // ...
-        new Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle(),
+        new Bazinga\GeocoderBundle\BazingaGeocoderBundle(),
     );
 }
 ```
@@ -51,7 +51,7 @@ using Google Maps.
 bazinga_geocoder:
   providers:
     acme:
-      factory: Bazinga\Bundle\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
 ```
 
 This will create a service named `bazinga_geocoder.provider.acme` which is a 
@@ -64,7 +64,7 @@ provider.
 bazinga_geocoder:
   providers:
     acme:
-      factory: Bazinga\Bundle\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
       cache: 'any.psr16.service'
       cache_lifetime: 3600
       aliases: 
@@ -224,7 +224,7 @@ service and you are good to go.
 bazinga_geocoder:
   providers:
     acme:
-      factory: Bazinga\Bundle\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
       cache: 'any.psr16.service'
       cache_lifetime: 3600
 
