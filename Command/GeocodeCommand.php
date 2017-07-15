@@ -10,6 +10,7 @@
 
 namespace Bazinga\Bundle\GeocoderBundle\Command;
 
+use Geocoder\Query\GeocodeQuery;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -47,14 +48,14 @@ HELP
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var $geocoder \Geocoder\Geocoder */
-        $geocoder = $this->getContainer()->get('bazinga_geocoder.geocoder');
+        /** @var $geocoder \Geocoder\ProviderAggregator */
+        $geocoder = $this->getContainer()->get('Geocoder\ProviderAggregator');
 
         if ($input->getOption('provider')) {
             $geocoder->using($input->getOption('provider'));
         }
 
-        $results = $geocoder->geocode($input->getArgument('address'));
+        $results = $geocoder->geocodeQuery(GeocodeQuery::create($input->getArgument('address')));
         $data = $results->first()->toArray();
 
         $max = 0;
