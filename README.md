@@ -10,7 +10,18 @@ BazingaGeocoderBundle
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
 
 Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) library
-into Symfony.
+into Symfony. It integrates seamlessly with the Symfony profiler. You can
+check number of queries executed by each provider, total execution time
+and geocoding results.
+
+![Example
+Toolbar](https://raw.github.com/geocoder-php/BazingaGeocoderBundle/master/Resources/doc/toolbar.png)
+
+
+![Example
+Profiler page](https://raw.github.com/geocoder-php/BazingaGeocoderBundle/master/Resources/doc/profiler-page.png)
+
+
 
 Documentation
 -------------
