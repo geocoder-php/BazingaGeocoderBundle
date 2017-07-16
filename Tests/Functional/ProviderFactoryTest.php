@@ -10,10 +10,14 @@ declare(strict_types=1);
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Tests\Functional;
+namespace Bazinga\GeocoderBundle\Tests\Functional;
 
-use Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle;
+use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
+use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
+use Geocoder\Provider\BingMaps\BingMaps;
 use Geocoder\Provider\Cache\ProviderCache;
+use Geocoder\Provider\Chain\Chain;
+use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\Provider;
 use Geocoder\ProviderAggregator;
@@ -29,7 +33,11 @@ class ProviderFactoryTest extends BaseBundleTestCase
     public function getProviders()
     {
         return [
-            [GoogleMaps::class, ['acme']]
+            [ArcGISOnline::class, ['empty', 'acme']],
+            [BingMaps::class, ['acme']],
+            [Chain::class, ['acme']],
+            [FreeGeoIp::class, ['empty', 'acme']],
+            [GoogleMaps::class, ['empty', 'acme']],
         ];
     }
 

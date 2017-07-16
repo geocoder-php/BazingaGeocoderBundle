@@ -8,7 +8,7 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\ProviderFactory;
+namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\BingMaps\BingMaps;
 use Geocoder\Provider\GeoIPs\GeoIPs;

@@ -2,8 +2,10 @@ bazinga_geocoder:
   profiling:
     enabled: false
   providers:
+    empty:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\ArcGISOnlineFactory
+
     acme:
       factory: Bazinga\GeocoderBundle\ProviderFactory\ArcGISOnlineFactory
       options:
-        region: 'foo'
         source_country: 'bar'
