@@ -6,4 +6,4 @@ bazinga_geocoder:
       factory: Bazinga\GeocoderBundle\ProviderFactory\MapQuestFactory
       options:
         api_key: 'bar'
-        licensed: true'
+        licensed: true

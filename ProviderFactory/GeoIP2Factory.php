@@ -36,6 +36,8 @@ final class GeoIP2Factory extends AbstractFactory
             $provider = new Client($config['user_id'], $config['license_key'], $config['locales'], $config['webservice_options']);
         } elseif ($provider === 'database') {
             $provider = new Reader($config['database_filename'], $config['locales']);
+        } else {
+            $provider = $config['provider_service'];
         }
 
         $adapter = new GeoIP2Adapter($provider, $config['model']);
@@ -51,10 +53,12 @@ final class GeoIP2Factory extends AbstractFactory
             'license_key' => null,
             'webservice_options' => [],
             'locales' => ['en'],
+            'provider_service' => null,
         ]);
 
         $resolver->setRequired('provider');
-        $resolver->setAllowedTypes('provider', ['string', ProviderInterface::class]);
+        $resolver->setAllowedTypes('provider', ['string']);
+        $resolver->setAllowedTypes('provider_service', [ProviderInterface::class, 'null']);
         $resolver->setAllowedTypes('model', ['string']);
         $resolver->setAllowedTypes('user_id', ['string', 'null']);
         $resolver->setAllowedTypes('license_key', ['string', 'null']);
@@ -62,7 +66,7 @@ final class GeoIP2Factory extends AbstractFactory
         $resolver->setAllowedTypes('webservice_options', ['array']);
         $resolver->setAllowedTypes('database_filename', ['string', 'null']);
 
-
         $resolver->setAllowedValues('model', [GeoIP2Adapter::GEOIP2_MODEL_CITY, GeoIP2Adapter::GEOIP2_MODEL_COUNTRY]);
+        $resolver->setAllowedValues('provider', ['webservice', 'database', 'service']);
     }
 }

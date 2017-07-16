@@ -6,4 +6,4 @@ bazinga_geocoder:
       factory: Bazinga\GeocoderBundle\ProviderFactory\MaxMindFactory
       options:
         api_key: 'bar'
-        service: 'f'
+        endpoint: 'f'

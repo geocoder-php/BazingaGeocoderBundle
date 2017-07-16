@@ -42,7 +42,7 @@ final class MaxMindBinaryFactory extends AbstractFactory
 
         $resolver->setRequired('dat_file');
         $resolver->setAllowedTypes('dat_file', ['string']);
-        $resolver->setAllowedTypes('open_flag', ['string']);
+        $resolver->setAllowedTypes('open_flag', ['string', 'null']);
 
     }
 }

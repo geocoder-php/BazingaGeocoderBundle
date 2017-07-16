@@ -30,7 +30,12 @@ use Geocoder\Provider\MapQuest\MapQuest;
 use Geocoder\Provider\Mapzen\Mapzen;
 use Geocoder\Provider\MaxMind\MaxMind;
 use Geocoder\Provider\MaxMindBinary\MaxMindBinary;
+use Geocoder\Provider\Nominatim\Nominatim;
+use Geocoder\Provider\OpenCage\OpenCage;
+use Geocoder\Provider\PickPoint\PickPoint;
 use Geocoder\Provider\Provider;
+use Geocoder\Provider\TomTom\TomTom;
+use Geocoder\Provider\Yandex\Yandex;
 use Geocoder\ProviderAggregator;
 use Nyholm\BundleTest\BaseBundleTestCase;
 
@@ -60,13 +65,18 @@ class ProviderFactoryTest extends BaseBundleTestCase
             [Mapzen::class, ['acme']],
             [MaxMind::class, ['acme']],
             [MaxMindBinary::class, ['acme']],
+            [Nominatim::class, ['empty', 'acme']],
+            [OpenCage::class, ['acme']],
+            [PickPoint::class, ['acme']],
+            [TomTom::class, ['acme']],
+            [Yandex::class, ['empty', 'acme']],
         ];
     }
 
     /**
      * @dataProvider getProviders
      */
-    public function testBundleWithOneProviderConfiguration($class, $serviceNames)
+    public function testProviderConfiguration($class, $serviceNames)
     {
         // Create a new Kernel
         $kernel = $this->createKernel();

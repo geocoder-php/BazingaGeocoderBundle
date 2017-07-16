@@ -5,4 +5,4 @@ bazinga_geocoder:
     acme:
       factory: Bazinga\GeocoderBundle\ProviderFactory\MaxMindBinaryFactory
       options:
-        dat_file: 'bar'
+        dat_file: '%kernel.project_dir%/Tests/DependencyInjection/Fixtures/maxmind.dat'
