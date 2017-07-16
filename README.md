@@ -24,14 +24,14 @@ For documentation, see:
     Resources/doc/
 
 [Read the
-documentation](https://github.com/geocoder-php/BazingaGeocoderBundle/blob/master/Resources/doc/index.md)
+documentation](Resources/doc/index.md)
 
 
 Contributing
 ------------
 
 See
-[CONTRIBUTING](https://github.com/geocoder-php/BazingaGeocoderBundle/blob/master/CONTRIBUTING.md)
+[CONTRIBUTING](CONTRIBUTING.md)
 file.
 
 
