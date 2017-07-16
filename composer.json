@@ -28,7 +28,7 @@
     "geocoder-php/cache-provider": "^4.0",
     "php-http/curl-client": "^1.7",
     "nyholm/psr7": "^0.2.2",
-    "nyholm/symfony-bundle-test": "^1.1"
+    "nyholm/symfony-bundle-test": "^1.2"
   },
   "conflict":  {
     "willdurand/geocoder": "3.2"
@@ -40,7 +40,6 @@
   },
   "scripts": {
     "test": "vendor/bin/phpunit --testsuite main",
-    "test-doctrine": "vendor/bin/phpunit --testsuite doctrine",
     "test-ci": "vendor/bin/phpunit --testsuite main --coverage-text --coverage-clover=build/coverage.xml"
   },
   "minimum-stability": "dev",
