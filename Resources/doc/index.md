@@ -94,9 +94,27 @@ Here is a list of all provider factories and their options.
 
 | Service | Options |
 | ------- | ------- |
+| `Bazinga\GeocoderBundle\ProviderFactory\ArcGISOnlineFactory` | httplug_client, source_country
+| `Bazinga\GeocoderBundle\ProviderFactory\BingMapsFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\ChainFactory` | services
-| `Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory` | httplug_client, region, api_key
-
+| `Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory` | httplug_client, base_url
+| `Bazinga\GeocoderBundle\ProviderFactory\GeoIP2Factory` | provider, database_filename, user_id, license_key, webservice_options, locales, provider_service
+| `Bazinga\GeocoderBundle\ProviderFactory\GeoipFactory` | 
+| `Bazinga\GeocoderBundle\ProviderFactory\GeoIPsFactory` | httplug_client, api_key
+| `Bazinga\GeocoderBundle\ProviderFactory\GeonamesFactory` | httplug_client, username
+| `Bazinga\GeocoderBundle\ProviderFactory\GeoPluginFactory` | httplug_client
+| `Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory` | httplug_client, api_key, region
+| `Bazinga\GeocoderBundle\ProviderFactory\HostIpFactory` | httplug_client
+| `Bazinga\GeocoderBundle\ProviderFactory\IpInfoDbFactory` | httplug_client, api_key, precision
+| `Bazinga\GeocoderBundle\ProviderFactory\MapQuestFactory` | httplug_client, api_key, licensed
+| `Bazinga\GeocoderBundle\ProviderFactory\MapzenFactory` | httplug_client, api_key
+| `Bazinga\GeocoderBundle\ProviderFactory\MaxMindBinaryFactory` | dat_file, open_flag
+| `Bazinga\GeocoderBundle\ProviderFactory\MaxMindFactory` | httplug_client, api_key, endpoint
+| `Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory` | httplug_client, root_url
+| `Bazinga\GeocoderBundle\ProviderFactory\OpenCageFactory` | httplug_client, api_key
+| `Bazinga\GeocoderBundle\ProviderFactory\PickPointFactory` | httplug_client, api_key
+| `Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory` | httplug_client, api_key
+| `Bazinga\GeocoderBundle\ProviderFactory\YandexFactory` | httplug_client, toponym
 
 ### Services
 
