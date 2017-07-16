@@ -39,14 +39,9 @@ class BazingaGeocoderExtension extends Extension
         }
         $this->loadProviders($container, $config);
 
-        if (!empty($config['fake_ip']) && true === $config['fake_ip']['enabled']) {
+        if ($config['fake_ip']['enabled']) {
             $definition = $container->getDefinition('bazinga_geocoder.event_listener.fake_request');
             $definition->replaceArgument(0, $config['fake_ip']['ip']);
-
-            $tag = current($definition->getTag('kernel.event_listener'));
-            $tag['priority'] = $config['fake_ip']['priority'];
-            $tags = ['kernel.event_listener' => [$tag]];
-            $definition->setTags($tags);
         } else {
             $container->removeDefinition('bazinga_geocoder.event_listener.fake_request');
         }
