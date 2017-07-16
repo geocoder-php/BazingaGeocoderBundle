@@ -2,15 +2,17 @@ BazingaGeocoderBundle
 =====================
 
 Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder)
-library into Symfony2.
+library into Symfony.
 
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Killer Feature](#killer-feature)
-  * [Registering Your Own Providers](#registering-your-own-providers)
-  * [Dumpers](#dumpers)
-  * [Cache Provider](#cache-provider)
-  * [Symfony2 Profiler Integration](#symfony2-profiler-integration)
+  * [Provider factories](#provider-factories)
+  * [Services](#services)
+  * [Fake local ip](#fake-local-ip)
+  * [Registering Your Own Provider](#registering-your-own-provider)
+  * [Dumpers](#dumper)
+  * [Cache](#cache-results)
+  * [Custom HTTP clients](#custom-http-clients)
 * [Reference Configuration](#reference-configuration)
 * [Testing](#testing)
 
@@ -18,17 +20,11 @@ library into Symfony2.
 Installation
 ------------
 
-Require
-[`willdurand/geocoder-bundle`](https://packagist.org/packages/willdurand/geocoder-bundle)
-to your `composer.json` file:
+To install this bundle you need to know how to [install the geocoder and providers](https://github.com/geocoder-php/Geocoder#installation)
+and then you may just install the bundle like normal: 
 
-
-```json
-{
-    "require": {
-        "willdurand/geocoder-bundle": "^5.0"
-    }
-}
+```bash
+composer require willdurand/geocoder-bundle:^5.0
 ```
 
 Register the bundle in `app/AppKernel.php`:
@@ -44,90 +40,120 @@ public function registerBundles()
 }
 ```
 
-Enable the bundle's configuration in `app/config/config.yml`:
-
-``` yaml
-# app/config/config.yml
-bazinga_geocoder: ~
-```
-
 Usage
 -----
 
-This bundle registers a `bazinga_geocoder.geocoder` service which is an instance
-of `Geocoder`. You'll be able to do whatever you want with it but be sure to
-configure at least **one provider** first.
+The bundle helps you register your providers and to enable profiling support. To 
+configure a provider you must use a `ProviderFactory`. See the following example
+using Google Maps. 
 
-**NOTE:** When using `Request::getClientIp()` with Symfony 2.1+, ensure you have
-a trusted proxy set in your `config.yml`:
-
-``` yaml
-# app/config/config.yml
-framework:
-    trusted_proxies: ['127.0.0.1']
-    # ...
+```yaml
+bazinga_geocoder:
+  providers:
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
 ```
 
-### Killer Feature
+This will create a service named `bazinga_geocoder.provider.acme` which is a 
+`GoogleMapsProvider`.
+
+You can also configure **all ``ProviderFactories``** to adjust the behavior of the 
+provider.
+
+```yaml
+bazinga_geocoder:
+  providers:
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      cache: 'any.psr16.service'
+      cache_lifetime: 3600
+      aliases: 
+        - my_geocoer
+```
+
+This will create a service named `my_geocoder` that caches the responses for one 
+hour.
+
+**Most ``ProviderFactories``** do also take an array with options. This is usually 
+parameters to the constructor of the provider. In the example of Google Maps:
+
+```yaml
+bazinga_geocoder:
+  providers:
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      options: 
+        httplug_client: 'httplug.client' # When using HTTPlugBundle
+        region: 'Sweden'
+        api_key: 'xxyy'
+```
+
+### Provider Factories
+
+Here is a list of all provider factories and their options. 
+
+| Service | Options |
+| ------- | ------- |
+| `Bazinga\GeocoderBundle\ProviderFactory\ChainFactory` | services
+| `Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory` | httplug_client, region, api_key
+
+
+### Services
+
+Except for the provider factories, here is a list of services this bundle exposes are: 
+
+* `Geocoder\ProviderAggregator`
+* `Geocoder\Dumper\GeoArray`
+* `Geocoder\Dumper\GeoJson`
+* `Geocoder\Dumper\Gpx`
+* `Geocoder\Dumper\Kml`
+* `Geocoder\Dumper\Wkb`
+* `Geocoder\Dumper\Wkt`
+
+
+### Fake local ip
 
 You can fake the `REMOTE_ADDR` HTTP parameter through this bundle in order to get
 information in your development environment, for instance:
 
-``` php
-<?php
+```php
+/**
+ * @Template()
+ */
+public function indexAction(Request $request)
+{
+    // Retrieve information from the current user (by its IP address)
+    $result = $this->container
+        ->get('bazinga_geocoder.provider.acme')
+        ->geocodeQuery(GeocodeQuery::create($request->server->get('REMOTE_ADDR')));
 
-// ...
+    // Find the 5 nearest objects (15km) from the current user.
+    $coords = $result->first()->getCoordinates();;
+    $objects = ObjectQuery::create()
+        ->filterByDistanceFrom($coords->getLatitude(), $coords->getLongitude(), 15)
+        ->limit(5)
+        ->find();
 
-    /**
-     * @Template()
-     */
-    public function indexAction(Request $request)
-    {
-        // Retrieve information from the current user (by its IP address)
-        $result = $this->container
-            ->get('bazinga_geocoder.geocoder')
-            ->using('google_maps')
-            ->geocode($request->server->get('REMOTE_ADDR'));
-
-        // Find the 5 nearest objects (15km) from the current user.
-        $address = $result->first();
-        $objects = ObjectQuery::create()
-            ->filterByDistanceFrom($address->getLatitude(), $address->getLongitude(), 15)
-            ->limit(5)
-            ->find();
-
-        return array(
-            'geocoded'        => $result,
-            'nearest_objects' => $objects
-        );
-    }
+    return array(
+        'geocoded'        => $result,
+        'nearest_objects' => $objects
+    );
+}
 ```
 
-In the example, we'll retrieve information from the user's IP address, and 5
+In the example above, we'll retrieve information from the user's IP address, and 5
 objects nears him.
 But it won't work on your local environment, that's why this bundle provides
 an easy way to fake this behavior by using a `fake_ip` configuration.
 
-``` yaml
+```yaml
 # app/config/config_dev.yml
 bazinga_geocoder:
     fake_ip:    123.123.123.123
 ```
 
-If set, the parameter will replace the `REMOTE_ADDR` value by the given one.
+If set, the parameter will replace all instances of "127.0.0.1" in your queries and replace them with the given one.
 
-
-Additionally if it interferes with your current
-listeners, You can set up different fake ip listener priority.
-
-
-``` yaml
-# app/config/config_dev.yml
-bazinga_geocoder:
-    fake_ip:
-        ip: 123.123.123.123
-        priority: 128
-```
 
 ### Registering Your Own Providers
 
@@ -141,11 +167,7 @@ and tag it as `bazinga_geocoder.provider`:
 ```
 
 The bundle will automatically register your provider into the
-`bazinga_geocoder.geocoder` service.
-
-**Note:** the `bazinga_geocoder.geocoder.adapter` service represents the configured
-Geocoder's adapter. If your provider needs an HTTP adapter, you should inject this
-service into the service you have just created.
+`Geocoder\ProviderAggregator` service and you provider will show up in the profiler. 
 
 ### Dumpers
 
@@ -166,12 +188,11 @@ Here is an example:
 public function geocodeAction(Request $request)
 {
     $result = $this->container
-        ->get('bazinga_geocoder.geocoder')
-        ->geocode($request->server->get('REMOTE_ADDR'));
+        ->get('bazinga_geocoder.provider.acme')
+        ->geocodeQuery(GeocodeQuery::create($request->server->get('REMOTE_ADDR')));
 
     $body = $this->container
-        ->get('bazinga_geocoder.dumper_manager')
-        ->get('geojson')
+        ->get('Geocoder\Dumper\GeoJson')
         ->dump($result);
 
     $response = new Response();
@@ -182,9 +203,6 @@ public function geocodeAction(Request $request)
 ```
 
 To register a new dumper, you must tag it with `bazinga_geocoder.dumper`.
-The bundles will automatically register it.
-
-A little example:
 
 ```xml
 <service id="some.dumper" class="%some.dumper.class">
@@ -192,136 +210,78 @@ A little example:
 </service>
 ```
 
-### Cache Provider
+### Cache Results
 
 Sometimes you have to cache the results from a provider. For this case the bundle provides
-a cache provider. The cache provider wraps another provider and delegate all calls
-to this provider and cache the return value.
+simple configuration. You only need to provide a service name for you SimpleCache (PSR-16)
+service and you are good to go. 
 
 ```yaml
-# app/config/config*.yml
-services:
-    acme_cache_adapter:
-        class: "Doctrine\\Common\\Cache\\ApcCache"
-
 bazinga_geocoder:
-    providers:
-        cache:
-            adapter:  acme_cache_adapter
-            provider: google_maps
-        google_maps: ~
+  providers:
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      cache: 'any.psr16.service'
+      cache_lifetime: 3600
+
 ```
 
-> **Tip:** If you want to configure the cache adapter,
-> we recommend the [doctrine/doctrine-cache-bundle](https://github.com/doctrine/DoctrineCacheBundle).
+### Custom HTTP Client
 
-### Custom HTTP Adapter
+The HTTP geocoder providers integrates with [HTTPlug](http://httplug.io/). It will give you all
+the power of the HTTP client. You have to select which one you want to use and how 
+you want to configure it. 
 
-Geocoder Bundle integrates with [egeloen/http-adapter] (https://github.com/egeloen/ivory-http-adapter). By default the bundle use a simple cURL Adapter. 
-You can use any [PSR-7] (http://www.php-fig.org/psr/psr-7/) compliant adapter.
+Read their [usage page](http://docs.php-http.org/en/latest/httplug/users.html), you 
+may also be interested in checking out the [HTTPlugBundle](https://github.com/php-http/HttplugBundle).
 
-An example, if you want to use Guzzle.
+An example, if you want to use Guzzle6.
 
-```yaml
-# app/config/config*.yml
-services:
-    guzzle_http_adapter:
-        class: "Ivory\HttpAdapter\Guzzle6HttpAdapter"
-
-bazinga_geocoder:
-    adapter: guzzle_http_adapter
+```bash
+composer require php-http/guzzle6-adapter php-http/message
 ```
-
-### Symfony2 Profiler Integration
-
-Geocoder bundle additionally integrates with Symfony2 profiler. You can
-check number of queries executed by each provider, total execution time
-and geocoding results.
-
-![Example
-Toolbar](https://raw.github.com/geocoder-php/BazingaGeocoderBundle/master/Resources/doc/toolbar.png)
-
 
 Reference Configuration
 -----------------------
 
-You MUST define the providers you want to use in your configuration.  Some of
-them need information (API key for instance).
-
 You'll find the reference configuration below:
 
 ``` yaml
-# app/config/config*.yml
+# app/config/config.yml
 bazinga_geocoder:
+    profiling: 
+        enabled: ~                # Default is same as kernel.debug
     fake_ip:
         enabled:              true
         ip:                   null
-        priority:             0
-    adapter:  					~ # An adapter service id
-    default_provider:         ~ # Name of provider, e.g. chain
     providers:
-        bing_maps:
-            api_key:              ~ # Required
-            locale:               null
-        cache:
-            adapter:              ~ # Required
-            provider:             ~ # Required
-            locale:               null
-            lifetime:             86400
-        ip_info_db:
-            api_key:              ~ # Required
-        google_maps:
-            locale:               null
-            region:               null
-            use_ssl:              false
-            api_key:              null
-        google_maps_business:
-            client_id:            ~ # Required
-            api_key:              null
-            locale:               null
-            region:               null
-            use_ssl:              false
-        openstreetmap:
-            locale:               null
-        host_ip:              []
-        geoip:                []
-        free_geo_ip:          []
-        mapquest:
-            api_key:              ~ # Required
-        data_science_toolkit:  []
-        yandex:
-            locale:               null
-            toponym:              null
-        geo_ips:
-            api_key:              null
-        geo_plugin:           []
-        maxmind:
-            api_key:              ~ # Required
-        maxmind_binary:
-            binary_file:          ~ # Required
-            open_flag:            null
-        opencage:
-            locale:               null
-            use_ssl:              false
-            api_key:              null
-        chain:
-            providers:            []
-        tom_tom:
-            api_key:              ~ # Required
-            locale:               null
+        # ... 
+        acme:
+            factory:  ~           # Required
+            cache: ~
+            cache_lifetime: ~
+            aliases: 
+                - acme
+                - acme_geocoder
+            options:
+                foo: bar
+                biz: baz
 ```
-
 
 Testing
 -------
 
 Setup the test suite using [Composer](http://getcomposer.org/):
 
-    $ composer install --dev --prefer-source
+```bash
+composer install --dev --prefer-source
+```
 
 **Important:** this command must be run with `--prefer-source`, otherwise the
 `Doctrine\Tests\OrmTestCase` class won't be found.
 
 Run it using PHPUnit:
 
-    $ phpunit
+```bash
+composer test
+```

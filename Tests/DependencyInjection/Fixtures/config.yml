@@ -1,71 +1,9 @@
 bazinga_geocoder:
     fake_ip:
         ip: 33.33.33.11
-        priority: 128
     providers:
         bing_maps:
           factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
           options:
             api_key: 123
             locale: en_US
-        ip_info_db:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            api_key: 123
-        arcgis_online:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-        google_maps:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            locale: en_US
-            region: en_US
-            api_key: 123
-        google_maps_business:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            client_id: 123
-            api_key: 123
-            locale: en_US
-            region: en_US
-        openstreetmap:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            locale: en_US
-        host_ip:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-        # geoip: ~
-        free_geo_ip:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-        mapquest:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            api_key: 123
-        yandex:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            locale: en-US
-            toponym: locality
-        geo_ips:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            api_key: 123
-        geo_plugin:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-        maxmind:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            api_key: 123
-        maxmind_binary:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            binary_file: "%fixtures_dir%/maxmind.dat"
-        opencage:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-          options:
-            locale: en_US
-            api_key: 123
-        chain:
-          factory: Bazinga\GeocoderBundle\ProviderFactory\ChainFactory
-          options:
-            providers: [free_geo_ip, host_ip]

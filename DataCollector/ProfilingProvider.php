@@ -77,7 +77,7 @@ class ProfilingProvider implements Provider
         if ($query instanceof GeocodeQuery) {
             $queryString = $query->getText();
         } elseif ($query instanceof ReverseQuery) {
-            $queryString = sprintf('(%s, %s)', $query->getCoordinates()->getLongitude(), $query->getCoordinates()->getLongitude());
+            $queryString = sprintf('(%s, %s)', $query->getCoordinates()->getLongitude(), $query->getCoordinates()->getLatitude());
         } else {
             throw new LogicException('First parameter to ProfilingProvider::logQuery must be a query');
         }
