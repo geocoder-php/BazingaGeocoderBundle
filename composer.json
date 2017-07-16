@@ -32,7 +32,14 @@
     "geocoder-php/arcgis-online-provider": "^4.0",
     "geocoder-php/bing-maps-provider": "^4.0",
     "geocoder-php/chain-provider": "^4.0@beta",
-    "geocoder-php/free-geoip-provider": "^4.0@dev"
+    "geocoder-php/free-geoip-provider": "^4.0@dev",
+    "geocoder-php/geo-plugin-provider": "^4.0@beta",
+    "geocoder-php/geonames-provider": "^4.0@dev",
+    "geocoder-php/geoips-provider": "^4.0@dev",
+    "geocoder-php/geoip2-provider": "^4.0@dev",
+    "geocoder-php/ip-info-db-provider": "^4.0@dev",
+    "geocoder-php/host-ip-provider": "^4.0@dev",
+    "geocoder-php/maxmind-binary-provider": "^4.0@beta"
   },
   "conflict":  {
     "willdurand/geocoder": "3.2"

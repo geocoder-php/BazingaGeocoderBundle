@@ -56,11 +56,11 @@ final class GeoIP2Factory extends AbstractFactory
         $resolver->setRequired('provider');
         $resolver->setAllowedTypes('provider', ['string', ProviderInterface::class]);
         $resolver->setAllowedTypes('model', ['string']);
-        $resolver->setAllowedTypes('user_id', ['string']);
-        $resolver->setAllowedTypes('license_key', ['string']);
+        $resolver->setAllowedTypes('user_id', ['string', 'null']);
+        $resolver->setAllowedTypes('license_key', ['string', 'null']);
         $resolver->setAllowedTypes('locales', ['array']);
         $resolver->setAllowedTypes('webservice_options', ['array']);
-        $resolver->setAllowedTypes('database_filename', ['string']);
+        $resolver->setAllowedTypes('database_filename', ['string', 'null']);
 
 
         $resolver->setAllowedValues('model', [GeoIP2Adapter::GEOIP2_MODEL_CITY, GeoIP2Adapter::GEOIP2_MODEL_COUNTRY]);

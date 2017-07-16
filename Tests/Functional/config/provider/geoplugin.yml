@@ -1,0 +1,7 @@
+bazinga_geocoder:
+  profiling:
+    enabled: false
+  providers:
+    empty:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GeoPluginFactory
+

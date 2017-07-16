@@ -18,7 +18,18 @@ use Geocoder\Provider\BingMaps\BingMaps;
 use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
+use Geocoder\Provider\Geoip\Geoip;
+use Geocoder\Provider\GeoIP2\GeoIP2;
+use Geocoder\Provider\GeoIPs\GeoIPs;
+use Geocoder\Provider\Geonames\Geonames;
+use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\Provider\HostIp\HostIp;
+use Geocoder\Provider\IpInfoDb\IpInfoDb;
+use Geocoder\Provider\MapQuest\MapQuest;
+use Geocoder\Provider\Mapzen\Mapzen;
+use Geocoder\Provider\MaxMind\MaxMind;
+use Geocoder\Provider\MaxMindBinary\MaxMindBinary;
 use Geocoder\Provider\Provider;
 use Geocoder\ProviderAggregator;
 use Nyholm\BundleTest\BaseBundleTestCase;
@@ -37,7 +48,18 @@ class ProviderFactoryTest extends BaseBundleTestCase
             [BingMaps::class, ['acme']],
             [Chain::class, ['acme']],
             [FreeGeoIp::class, ['empty', 'acme']],
-            [GoogleMaps::class, ['empty', 'acme']],
+            //[Geoip::class, ['empty']],
+            [GeoIP2::class, ['acme']],
+            [GeoIPs::class, ['acme']],
+            [Geonames::class, ['acme']],
+            [GeoPlugin::class, ['empty']],
+            [GoogleMaps::class, ['empty']],
+            [HostIp::class, ['empty']],
+            [IpInfoDb::class, ['empty', 'acme']],
+            [MapQuest::class, ['acme']],
+            [Mapzen::class, ['acme']],
+            [MaxMind::class, ['acme']],
+            [MaxMindBinary::class, ['acme']],
         ];
     }
 
