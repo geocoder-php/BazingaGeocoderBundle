@@ -10,17 +10,11 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
-use Geocoder\Provider\Geoip\Geoip;
 use Geocoder\Provider\GeoIP2\GeoIP2;
 use Geocoder\Provider\GeoIP2\GeoIP2Adapter;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use GeoIp2\Database\Reader;
 use GeoIp2\ProviderInterface;
 use GeoIp2\WebService\Client;
-use Http\Client\HttpClient;
-use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class GeoIP2Factory extends AbstractFactory
@@ -41,6 +35,7 @@ final class GeoIP2Factory extends AbstractFactory
         }
 
         $adapter = new GeoIP2Adapter($provider, $config['model']);
+
         return new GeoIP2($adapter);
     }
 

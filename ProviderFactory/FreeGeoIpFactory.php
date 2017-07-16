@@ -10,9 +10,7 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\BingMaps\BingMaps;
 use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -34,7 +32,7 @@ final class FreeGeoIpFactory extends AbstractFactory
     {
         $resolver->setDefaults([
             'httplug_client' => null,
-            'base_url' => 'https://freegeoip.net/json/%s'
+            'base_url' => 'https://freegeoip.net/json/%s',
         ]);
 
         $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);

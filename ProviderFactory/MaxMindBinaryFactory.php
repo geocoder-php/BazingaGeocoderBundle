@@ -10,17 +10,8 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\GeoIPs\GeoIPs;
-use Geocoder\Provider\Geonames\Geonames;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
-use Geocoder\Provider\HostIp\HostIp;
-use Geocoder\Provider\IpInfoDb\IpInfoDb;
-use Geocoder\Provider\Mapzen\Mapzen;
 use Geocoder\Provider\MaxMind\MaxMind;
 use Geocoder\Provider\MaxMindBinary\MaxMindBinary;
-use Http\Client\HttpClient;
-use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MaxMindBinaryFactory extends AbstractFactory
@@ -43,6 +34,5 @@ final class MaxMindBinaryFactory extends AbstractFactory
         $resolver->setRequired('dat_file');
         $resolver->setAllowedTypes('dat_file', ['string']);
         $resolver->setAllowedTypes('open_flag', ['string', 'null']);
-
     }
 }

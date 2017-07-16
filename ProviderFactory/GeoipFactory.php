@@ -10,12 +10,7 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
 use Geocoder\Provider\Geoip\Geoip;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
-use Http\Client\HttpClient;
-use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class GeoipFactory extends AbstractFactory

@@ -11,8 +11,6 @@
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
-use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;

@@ -10,14 +10,6 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\GeoIPs\GeoIPs;
-use Geocoder\Provider\Geonames\Geonames;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
-use Geocoder\Provider\HostIp\HostIp;
-use Geocoder\Provider\IpInfoDb\IpInfoDb;
-use Geocoder\Provider\Mapzen\Mapzen;
-use Geocoder\Provider\OpenCage\OpenCage;
 use Geocoder\Provider\PickPoint\PickPoint;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
@@ -45,6 +37,5 @@ final class PickPointFactory extends AbstractFactory
         $resolver->setRequired('api_key');
         $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
         $resolver->setAllowedTypes('api_key', ['string']);
-
     }
 }

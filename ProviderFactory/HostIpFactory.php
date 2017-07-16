@@ -10,10 +10,6 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\GeoIPs\GeoIPs;
-use Geocoder\Provider\Geonames\Geonames;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\HostIp\HostIp;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;

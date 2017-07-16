@@ -15,7 +15,6 @@ namespace Bazinga\GeocoderBundle\Tests\Functional;
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
 use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
 use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
 use Geocoder\Provider\Geoip\Geoip;
@@ -36,7 +35,6 @@ use Geocoder\Provider\PickPoint\PickPoint;
 use Geocoder\Provider\Provider;
 use Geocoder\Provider\TomTom\TomTom;
 use Geocoder\Provider\Yandex\Yandex;
-use Geocoder\ProviderAggregator;
 use Nyholm\BundleTest\BaseBundleTestCase;
 
 class ProviderFactoryTest extends BaseBundleTestCase
@@ -82,7 +80,7 @@ class ProviderFactoryTest extends BaseBundleTestCase
         $kernel = $this->createKernel();
 
         // Add some configuration
-        $kernel->addConfigFile(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\')+1)).'.yml');
+        $kernel->addConfigFile(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\') + 1)).'.yml');
 
         // Boot the kernel as normal ...
         $this->bootKernel();

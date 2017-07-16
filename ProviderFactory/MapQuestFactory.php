@@ -10,12 +10,6 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\GeoIPs\GeoIPs;
-use Geocoder\Provider\Geonames\Geonames;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
-use Geocoder\Provider\HostIp\HostIp;
-use Geocoder\Provider\IpInfoDb\IpInfoDb;
 use Geocoder\Provider\MapQuest\MapQuest;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
@@ -31,7 +25,7 @@ final class MapQuestFactory extends AbstractFactory
     {
         $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
 
-        return new MapQuest($httplug, $config['api_key'] ,$config['licensed']);
+        return new MapQuest($httplug, $config['api_key'], $config['licensed']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
@@ -45,6 +39,5 @@ final class MapQuestFactory extends AbstractFactory
         $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
         $resolver->setAllowedTypes('api_key', ['string']);
         $resolver->setAllowedTypes('licensed', ['boolean']);
-
     }
 }

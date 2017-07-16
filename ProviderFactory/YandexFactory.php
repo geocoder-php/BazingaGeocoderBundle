@@ -10,21 +10,10 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\BingMaps\BingMaps;
-use Geocoder\Provider\GeoIPs\GeoIPs;
-use Geocoder\Provider\Geonames\Geonames;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
-use Geocoder\Provider\HostIp\HostIp;
-use Geocoder\Provider\IpInfoDb\IpInfoDb;
-use Geocoder\Provider\Mapzen\Mapzen;
-use Geocoder\Provider\OpenCage\OpenCage;
-use Geocoder\Provider\PickPoint\PickPoint;
-use Geocoder\Provider\TomTom\TomTom;
 use Geocoder\Provider\Yandex\Yandex;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Routing\Loader\YamlFileLoader;
 
 final class YandexFactory extends AbstractFactory
 {
