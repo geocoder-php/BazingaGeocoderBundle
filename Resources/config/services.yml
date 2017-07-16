@@ -11,11 +11,9 @@ services:
     Geocoder\ProviderAggregator:
         class: Geocoder\ProviderAggregator
 
-    Bazinga\GeocoderBundle\EventListener\FakeRequestListener:
-      class: Bazinga\GeocoderBundle\EventListener\FakeRequestListener
-      arguments: ['127.0.0.1']
-      tags:
-        - { name: kernel.event_listener, event: "kernel.request",  method: "onKernelRequest" }
+    Bazinga\GeocoderBundle\Plugin\FakeIpPlugin:
+      class: Bazinga\GeocoderBundle\Plugin\FakeIpPlugin
+      arguments: ['127.0.0.1', ~]
 
     # Keep these aliases for BC purpose
     bazinga_geocoder.geocoder:
