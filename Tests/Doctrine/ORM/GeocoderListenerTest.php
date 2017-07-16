@@ -44,7 +44,7 @@ class GeocoderListenerTest extends OrmTestCase
              * We check for DoctrineTestCase because it is in the same package as OrmTestCase and we want to be able to
              * fake OrmTestCase
              */
-            static::markTestSkipped('Doctrine\Tests\OrmTestCase was not found.');
+            static::fail('Doctrine\Tests\OrmTestCase was not found.');
         }
         parent::setUpBeforeClass();
     }

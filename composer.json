@@ -18,7 +18,7 @@
     "symfony/console": "^3.3 || ^4.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "^5.7",
+    "phpunit/phpunit": "^5.7 || ^6.2",
     "symfony/yaml": "^3.3 || ^4.0",
     "geoip/geoip": "~1.17",
     "doctrine/cache": "~1.3",
@@ -39,8 +39,9 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/phpunit",
-    "test-ci": "vendor/bin/phpunit --coverage-text --coverage-clover=build/coverage.xml"
+    "test": "vendor/bin/phpunit --testsuite main",
+    "test-doctrine": "vendor/bin/phpunit --testsuite doctrine",
+    "test-ci": "vendor/bin/phpunit --testsuite main --coverage-text --coverage-clover=build/coverage.xml"
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
