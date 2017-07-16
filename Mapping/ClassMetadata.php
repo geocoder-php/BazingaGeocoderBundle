@@ -8,7 +8,7 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Mapping;
+namespace Bazinga\GeocoderBundle\Mapping;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>

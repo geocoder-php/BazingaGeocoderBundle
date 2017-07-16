@@ -10,9 +10,9 @@ declare(strict_types=1);
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Tests\Functional;
+namespace Bazinga\GeocoderBundle\Tests\Functional;
 
-use Bazinga\Bundle\GeocoderBundle\BazingaGeocoderBundle;
+use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
 use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\Provider;

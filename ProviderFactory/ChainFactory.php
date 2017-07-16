@@ -8,7 +8,7 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\ProviderFactory;
+namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Chain\Chain;
 use Symfony\Component\OptionsResolver\OptionsResolver;

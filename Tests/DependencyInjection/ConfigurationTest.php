@@ -8,9 +8,9 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Tests\DependencyInjection;
+namespace Bazinga\GeocoderBundle\Tests\DependencyInjection;
 
-use Bazinga\Bundle\GeocoderBundle\DependencyInjection\Configuration;
+use Bazinga\GeocoderBundle\DependencyInjection\Configuration;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Yaml\Yaml;

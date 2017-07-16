@@ -8,7 +8,7 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Mapping\Exception;
+namespace Bazinga\GeocoderBundle\Mapping\Exception;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>

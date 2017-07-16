@@ -8,7 +8,7 @@
  * @license    MIT License
  */
 
-namespace Bazinga\Bundle\GeocoderBundle\Mapping\Driver;
+namespace Bazinga\GeocoderBundle\Mapping\Driver;
 
 interface DriverInterface
 {
