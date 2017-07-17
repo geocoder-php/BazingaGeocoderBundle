@@ -268,6 +268,20 @@ bazinga_geocoder:
                 biz: baz
 ```
 
+Backwards compatibility
+-----------------------
+
+The BazingaGeocoderBundle is just a Symfony integration for Geocoder-PHP and it
+does not have any classes which falls under the BC promise. The backwards compatibility 
+of the bundle is only the configuration and its values (and of course the behavior
+of those values).
+
+The public service names (excluding the ones related to profiling/DataCollector)
+falls under the backwards compatibility promise. 
+
+Bottom line is, that you can trust that your configuration will not break and that 
+the services you use will still be working. 
+
 Testing
 -------
 
