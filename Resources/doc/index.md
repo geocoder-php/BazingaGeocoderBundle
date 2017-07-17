@@ -6,8 +6,6 @@ library into Symfony.
 
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Provider factories](#provider-factories)
-  * [Services](#services)
   * [Fake local ip](#fake-local-ip)
   * [Registering Your Own Provider](#registering-your-own-provider)
   * [Dumpers](#dumper)
@@ -89,29 +87,6 @@ bazinga_geocoder:
         region: 'Sweden'
         api_key: 'xxyy'
 ```
-
-### Provider Factories
-
-Here is a list of all provider factories and their options. 
-
-| Service | Options |
-| ------- | ------- |
-| `Bazinga\GeocoderBundle\ProviderFactory\ChainFactory` | services
-| `Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory` | httplug_client, region, api_key
-
-
-### Services
-
-Except for the provider factories, here is a list of services this bundle exposes are: 
-
-* `Geocoder\ProviderAggregator`
-* `Geocoder\Dumper\GeoArray`
-* `Geocoder\Dumper\GeoJson`
-* `Geocoder\Dumper\Gpx`
-* `Geocoder\Dumper\Kml`
-* `Geocoder\Dumper\Wkb`
-* `Geocoder\Dumper\Wkt`
-
 
 ### Fake local ip
 
