@@ -13,6 +13,8 @@ library into Symfony.
   * [Dumpers](#dumper)
   * [Cache](#cache-results)
   * [Custom HTTP clients](#custom-http-clients)
+* [Doctrine support](Resources/doc/doctrine.md)
+* [Public services](Resources/doc/services.md)
 * [Reference Configuration](#reference-configuration)
 * [Testing](#testing)
 
