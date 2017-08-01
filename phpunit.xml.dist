@@ -12,8 +12,12 @@
          bootstrap="Tests/bootstrap.php"
         >
     <testsuites>
-        <testsuite name="Geocoder for the Symfony Framework">
+        <testsuite name="main">
             <directory>./Tests</directory>
+            <exclude>./Tests/Doctrine</exclude>
+        </testsuite>
+        <testsuite name="doctrine">
+            <directory>./Tests/Doctrine</directory>
         </testsuite>
     </testsuites>
 

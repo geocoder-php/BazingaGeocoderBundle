@@ -264,15 +264,24 @@ Testing
 
 Setup the test suite using [Composer](http://getcomposer.org/):
 
+
 ```bash
-composer install --dev --prefer-source
+composer update
+composer test
+```
+
+### Doctrine test
+
+There is also a test that tests the doctrine integration. It runs automatically on
+Traivs but if you want to run it locally you must do the following.
+
+```bash
+composer require phpunit/phpunit:^5.7 --no-update
+composer update --prefer-source
+wget https://phar.phpunit.de/phpunit-5.7.phar
+php phpunit-5.7.phar --testsuit doctrine 
 ```
 
 **Important:** this command must be run with `--prefer-source`, otherwise the
 `Doctrine\Tests\OrmTestCase` class won't be found.
 
-Run it using PHPUnit:
-
-```bash
-composer test
-```
