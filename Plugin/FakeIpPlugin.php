@@ -23,7 +23,6 @@ use Geocoder\Query\Query;
  */
 class FakeIpPlugin implements Plugin
 {
-
     /**
      * @var string
      */
@@ -35,7 +34,6 @@ class FakeIpPlugin implements Plugin
     private $replacement;
 
     /**
-     *
      * @param string $needle
      * @param string $replacement
      */
