@@ -13,7 +13,7 @@
   "require": {
     "php": "^7.0",
     "willdurand/geocoder": "^4.0",
-    "willdurand/plugin": "^1.0",
+    "geocoder-php/plugin": "^1.0",
     "symfony/framework-bundle": "^3.3 || ^4.0",
     "symfony/options-resolver": "^3.3 || ^4.0",
     "symfony/console": "^3.3 || ^4.0"
