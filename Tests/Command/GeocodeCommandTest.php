@@ -15,6 +15,8 @@ use Geocoder\Model\Address;
 use Geocoder\Model\AddressCollection;
 use Geocoder\Model\Coordinates;
 use Geocoder\Model\Country;
+use Geocoder\ProviderAggregator;
+use Geocoder\Query\GeocodeQuery;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -40,16 +42,17 @@ class GeocodeCommandTest extends TestCase
             'countryCode' => $country->getCode(),
         ]);
 
-        $geocoder = $this->getMockBuilder('Geocoder\\ProviderAggregator')->getMock();
+        $geocoder = $this->getMockBuilder(ProviderAggregator::class)->getMock();
+        $query = GeocodeQuery::create(self::$address);
         $geocoder->expects($this->once())
-            ->method('geocode')
-            ->with(self::$address)
+            ->method('geocodeQuery')
+            ->with($query)
             ->will($this->returnValue(new AddressCollection([$address])));
 
         $container = $this->getMockBuilder('Symfony\\Component\\DependencyInjection\\Container')->getMock();
         $container->expects($this->once())
             ->method('get')
-            ->with('bazinga_geocoder.geocoder')
+            ->with(ProviderAggregator::class)
             ->will($this->returnValue($geocoder));
 
         $kernel = $this->getMockBuilder('Symfony\\Component\\HttpKernel\\Kernel')

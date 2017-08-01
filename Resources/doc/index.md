@@ -6,13 +6,13 @@ library into Symfony.
 
 * [Installation](#installation)
 * [Usage](#usage)
-  * [Provider factories](#provider-factories)
-  * [Services](#services)
   * [Fake local ip](#fake-local-ip)
   * [Registering Your Own Provider](#registering-your-own-provider)
   * [Dumpers](#dumper)
   * [Cache](#cache-results)
   * [Custom HTTP clients](#custom-http-clients)
+* [Doctrine support](Resources/doc/doctrine.md)
+* [Public services](Resources/doc/services.md)
 * [Reference Configuration](#reference-configuration)
 * [Testing](#testing)
 
@@ -87,29 +87,6 @@ bazinga_geocoder:
         region: 'Sweden'
         api_key: 'xxyy'
 ```
-
-### Provider Factories
-
-Here is a list of all provider factories and their options. 
-
-| Service | Options |
-| ------- | ------- |
-| `Bazinga\GeocoderBundle\ProviderFactory\ChainFactory` | services
-| `Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory` | httplug_client, region, api_key
-
-
-### Services
-
-Except for the provider factories, here is a list of services this bundle exposes are: 
-
-* `Geocoder\ProviderAggregator`
-* `Geocoder\Dumper\GeoArray`
-* `Geocoder\Dumper\GeoJson`
-* `Geocoder\Dumper\Gpx`
-* `Geocoder\Dumper\Kml`
-* `Geocoder\Dumper\Wkb`
-* `Geocoder\Dumper\Wkt`
-
 
 ### Fake local ip
 
@@ -267,6 +244,20 @@ bazinga_geocoder:
                 foo: bar
                 biz: baz
 ```
+
+Backwards compatibility
+-----------------------
+
+The BazingaGeocoderBundle is just a Symfony integration for Geocoder-PHP and it
+does not have any classes which falls under the BC promise. The backwards compatibility 
+of the bundle is only the configuration and its values (and of course the behavior
+of those values).
+
+The public service names (excluding the ones related to profiling/DataCollector)
+falls under the backwards compatibility promise. 
+
+Bottom line is, that you can trust that your configuration will not break and that 
+the services you use will still be working. 
 
 Testing
 -------

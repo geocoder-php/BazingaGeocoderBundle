@@ -1,0 +1,12 @@
+bazinga_geocoder:
+  profiling:
+    enabled: false
+  providers:
+    empty:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
+
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
+      options:
+        root_url: 'https://nominatim.openstreetmap.org'
+

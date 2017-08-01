@@ -1,0 +1,9 @@
+bazinga_geocoder:
+  profiling:
+    enabled: false
+  providers:
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\MaxMindFactory
+      options:
+        api_key: 'bar'
+        endpoint: 'f'
