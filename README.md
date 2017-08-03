@@ -64,4 +64,4 @@ By participating in this project you agree to abide by its terms.
 License
 -------
 
-This bundle is released under the MIT license. See the complete license [here](LICENSE)
+This bundle is released under the MIT license. See the complete license [here](LICENSE).
