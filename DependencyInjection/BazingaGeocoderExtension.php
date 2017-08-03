@@ -10,6 +10,7 @@
 
 namespace Bazinga\GeocoderBundle\DependencyInjection;
 
+use Bazinga\GeocoderBundle\EventListener\FakeRequestListener;
 use Bazinga\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
 use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\Provider;
@@ -40,10 +41,10 @@ class BazingaGeocoderExtension extends Extension
         $this->loadProviders($container, $config);
 
         if ($config['fake_ip']['enabled']) {
-            $definition = $container->getDefinition('bazinga_geocoder.event_listener.fake_request');
+            $definition = $container->getDefinition(FakeRequestListener::class);
             $definition->replaceArgument(0, $config['fake_ip']['ip']);
         } else {
-            $container->removeDefinition('bazinga_geocoder.event_listener.fake_request');
+            $container->removeDefinition(FakeRequestListener::class);
         }
     }
 
