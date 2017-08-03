@@ -10,6 +10,7 @@ Version 5 does only support Symfony 3.3+ and PHP7. We dropped some complexity an
 
 - Support for Geocoder 4.0
 - Provider factories
+- Support for plugins
 
 ### Changed
 

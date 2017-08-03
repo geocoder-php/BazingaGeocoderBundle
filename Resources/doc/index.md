@@ -90,7 +90,7 @@ bazinga_geocoder:
 
 ### Fake local ip
 
-You can fake the `REMOTE_ADDR` HTTP parameter through this bundle in order to get
+You can fake your local IP through this bundle in order to get location
 information in your development environment, for instance:
 
 ```php
@@ -144,7 +144,10 @@ and tag it as `bazinga_geocoder.provider`:
 ```
 
 The bundle will automatically register your provider into the
-`Geocoder\ProviderAggregator` service and you provider will show up in the profiler. 
+`Geocoder\ProviderAggregator` service. 
+
+If you want your provider to show up the web profiler you have to create a custom factory
+for your provider. 
 
 ### Dumpers
 
@@ -235,8 +238,11 @@ bazinga_geocoder:
         # ... 
         acme:
             factory:  ~           # Required
-            cache: ~
-            cache_lifetime: ~
+            cache: 'app.cache'
+            cache_lifetime: 3600
+            limit: 5
+            locale: 'sv'
+            logger: 'logger'
             aliases: 
                 - acme
                 - acme_geocoder
