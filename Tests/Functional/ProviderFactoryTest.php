@@ -36,6 +36,7 @@ use Geocoder\Provider\Provider;
 use Geocoder\Provider\TomTom\TomTom;
 use Geocoder\Provider\Yandex\Yandex;
 use Nyholm\BundleTest\BaseBundleTestCase;
+use Nyholm\NSA;
 
 class ProviderFactoryTest extends BaseBundleTestCase
 {
@@ -89,7 +90,8 @@ class ProviderFactoryTest extends BaseBundleTestCase
         foreach ($serviceNames as $name) {
             $this->assertTrue($container->has('bazinga_geocoder.provider.'.$name));
             $service = $container->get('bazinga_geocoder.provider.'.$name);
-            $this->assertInstanceOf($class, $service);
+            $this->assertInstanceOf($class, NSA::getProperty($service, 'provider'));
+
         }
     }
 }

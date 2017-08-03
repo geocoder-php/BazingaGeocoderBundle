@@ -13,11 +13,14 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
+use Geocoder\Plugin\Plugin\CachePlugin;
+use Geocoder\Plugin\PluginProvider;
 use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\Provider;
 use Geocoder\ProviderAggregator;
 use Nyholm\BundleTest\BaseBundleTestCase;
+use Nyholm\NSA;
 
 class BundleInitializationTest extends BaseBundleTestCase
 {
@@ -54,7 +57,8 @@ class BundleInitializationTest extends BaseBundleTestCase
 
         $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
-        $this->assertInstanceOf(GoogleMaps::class, $service);
+        $this->assertInstanceOf(PluginProvider::class, $service);
+        $this->assertInstanceOf(GoogleMaps::class, NSA::getProperty($service, 'provider'));
     }
 
     public function testBundleWithCachedProvider()
@@ -66,6 +70,9 @@ class BundleInitializationTest extends BaseBundleTestCase
 
         $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
-        $this->assertInstanceOf(ProviderCache::class, $service);
+        $this->assertInstanceOf(PluginProvider::class, $service);
+        $plugins = NSA::getProperty($service, 'plugins');
+        $this->assertNotEmpty($plugins);
+        $this->assertInstanceOf(CachePlugin::class, $plugins[0]);
     }
 }
