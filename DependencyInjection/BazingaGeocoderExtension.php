@@ -10,7 +10,9 @@
 
 namespace Bazinga\GeocoderBundle\DependencyInjection;
 
+use Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector;
 use Bazinga\GeocoderBundle\Plugin\FakeIpPlugin;
+use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
 use Bazinga\GeocoderBundle\ProviderFactory\PluginProviderFactory;
 use Bazinga\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
 use Geocoder\Plugin\Plugin\CachePlugin;
@@ -19,7 +21,6 @@ use Geocoder\Plugin\Plugin\LocalePlugin;
 use Geocoder\Plugin\Plugin\LoggerPlugin;
 use Geocoder\Plugin\PluginProvider;
 use Geocoder\Provider\Cache\ProviderCache;
-use Geocoder\Provider\Provider;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -110,43 +111,45 @@ class BazingaGeocoderExtension extends Extension
             $plugins[] = $providerServiceId.'.cache';
             $container->register($providerServiceId.'.cache', CachePlugin::class)
                 ->setPublic(false)
-                ->setArguments([
-                    new Reference($cacheServiceId),
-                    (int) $config['cache_lifetime'],
-                ]);
-
+                ->setArguments([new Reference($cacheServiceId), (int) $config['cache_lifetime']]);
         }
 
         if (isset($config['limit'])) {
             $plugins[] = $providerServiceId.'.limit';
             $container->register($providerServiceId.'.limit', LimitPlugin::class)
                 ->setPublic(false)
-                ->setArguments([
-                    (int) $config['limit'],
-                ]);
-
+                ->setArguments([(int) $config['limit']]);
         }
 
         if (isset($config['locale'])) {
             $plugins[] = $providerServiceId.'.locale';
             $container->register($providerServiceId.'.locale', LocalePlugin::class)
                 ->setPublic(false)
-                ->setArguments([
-                    $config['locale'],
-                ]);
-
+                ->setArguments([$config['locale']]);
         }
 
         if (isset($config['logger'])) {
             $plugins[] = $providerServiceId.'.logger';
             $container->register($providerServiceId.'.logger', LoggerPlugin::class)
                 ->setPublic(false)
-                ->setArguments([
-                    $config['locale'],
-                ]);
+                ->setArguments([new Reference($config['logger'])]);
         }
 
-        return $plugins;
+        if ($container->has(FakeIpPlugin::class)) {
+            $plugins[] = FakeIpPlugin::class;
+        }
+
+        if ($container->has(GeocoderDataCollector::class)) {
+            $plugins[] = $providerServiceId.'.profiler';
+            $container->register($providerServiceId.'.profiler', ProfilingPlugin::class)
+                ->setPublic(false)
+                ->setArguments([substr($providerServiceId, strlen('bazinga_geocoder.provider.'))])
+                ->addTag('bazinga_geocoder.profiling_plugin');
+        }
+
+        return array_map(function(string $id) {
+            return new Reference($id);
+        }, $plugins);
     }
 
     /**

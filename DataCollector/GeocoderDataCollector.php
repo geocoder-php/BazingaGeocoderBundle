@@ -10,6 +10,7 @@
 
 namespace Bazinga\GeocoderBundle\DataCollector;
 
+use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -20,7 +21,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 class GeocoderDataCollector extends DataCollector
 {
     /**
-     * @var ProfilingProvider[]
+     * @var ProfilingPlugin[]
      */
     private $instances = [];
 
@@ -90,9 +91,9 @@ class GeocoderDataCollector extends DataCollector
     }
 
     /**
-     * @param ProfilingProvider $instance
+     * @param ProfilingPlugin $instance
      */
-    public function addInstance(ProfilingProvider $instance)
+    public function addInstance(ProfilingPlugin $instance)
     {
         $this->instances[] = $instance;
         $this->data['providers'][] = $instance->getName();

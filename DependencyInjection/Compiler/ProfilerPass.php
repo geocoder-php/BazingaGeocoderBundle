@@ -34,12 +34,7 @@ class ProfilerPass implements CompilerPassInterface
 
         $dataCollector = $container->getDefinition(GeocoderDataCollector::class);
 
-        foreach ($container->findTaggedServiceIds('bazinga_geocoder.provider') as $providerId => $attributes) {
-            $container->register($providerId.'.debug', ProfilingProvider::class)
-                ->setDecoratedService($providerId)
-                ->setArguments([
-                    new Reference($providerId.'.debug.inner'),
-                ]);
+        foreach ($container->findTaggedServiceIds('bazinga_geocoder.profiling_plugin') as $providerId => $attributes) {
             $dataCollector->addMethodCall('addInstance', [new Reference($providerId)]);
         }
     }

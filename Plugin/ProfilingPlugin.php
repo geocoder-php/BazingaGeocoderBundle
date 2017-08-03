@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -8,78 +10,69 @@
  * @license    MIT License
  */
 
-namespace Bazinga\GeocoderBundle\DataCollector;
+namespace Bazinga\GeocoderBundle\Plugin;
 
 use Geocoder\Collection;
 use Geocoder\Exception\LogicException;
-use Geocoder\Provider\Provider;
+use Geocoder\Plugin\Plugin;
 use Geocoder\Query\GeocodeQuery;
+use Geocoder\Query\Query;
 use Geocoder\Query\ReverseQuery;
+use Geocoder\Exception\Exception;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ProfilingProvider implements Provider
+class ProfilingPlugin implements Plugin
 {
-    /**
-     * @var Provider
-     */
-    private $realProvider;
-
     /**
      * @var array
      */
     private $queries = [];
 
     /**
-     * @param Provider $realProvider
+     * @var string service id of the provider;
      */
-    public function __construct(Provider $realProvider)
+    private $name;
+
+    /**
+     *
+     * @param string $name
+     */
+    public function __construct(string $name)
     {
-        $this->realProvider = $realProvider;
+        $this->name = $name;
     }
 
-    public function geocodeQuery(GeocodeQuery $query): Collection
+    public function handleQuery(Query $query, callable $next, callable $first)
     {
         $startTime = microtime(true);
-        try {
-            $result = $this->realProvider->geocodeQuery($query);
-        } finally {
+        return $next($query)->then(function (Collection $result) use ($query, $startTime) {
             $duration = (microtime(true) - $startTime) * 1000;
-
             $this->logQuery($query, $duration, $result);
-        }
 
-        return $result;
-    }
-
-    public function reverseQuery(ReverseQuery $query): Collection
-    {
-        $startTime = microtime(true);
-        try {
-            $result = $this->realProvider->reverseQuery($query);
-        } finally {
+            return $result;
+        }, function (Exception $exception) use ($query, $startTime) {
             $duration = (microtime(true) - $startTime) * 1000;
+            $this->logQuery($query, $duration);
 
-            $this->logQuery($query, $duration, $result);
-        }
-
-        return $result;
+            throw $exception;
+        });
     }
 
     /**
-     * @param GeocodeQuery|ReverseQuery $query
-     * @param float                     $duration geocoding duration
-     * @param Collection                $result
+     * @param Query      $query
+     * @param float      $duration geocoding duration
+     * @param Collection $result
      */
-    private function logQuery($query, float $duration, Collection $result = null)
+    private function logQuery(Query $query, float $duration, Collection $result = null)
     {
         if ($query instanceof GeocodeQuery) {
             $queryString = $query->getText();
         } elseif ($query instanceof ReverseQuery) {
             $queryString = sprintf('(%s, %s)', $query->getCoordinates()->getLongitude(), $query->getCoordinates()->getLatitude());
         } else {
-            throw new LogicException('First parameter to ProfilingProvider::logQuery must be a query');
+            throw new LogicException('First parameter to ProfilingProvider::logQuery must be a Query');
         }
 
         $this->queries[] = [
@@ -99,13 +92,11 @@ class ProfilingProvider implements Provider
         return $this->queries;
     }
 
-    public function __call($method, $args)
-    {
-        return call_user_func_array([$this->realProvider, $method], $args);
-    }
-
+    /**
+     * @return string
+     */
     public function getName(): string
     {
-        return $this->realProvider->getName();
+        return $this->name;
     }
 }
