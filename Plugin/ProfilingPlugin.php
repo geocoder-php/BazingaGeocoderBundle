@@ -36,7 +36,6 @@ class ProfilingPlugin implements Plugin
     private $name;
 
     /**
-     *
      * @param string $name
      */
     public function __construct(string $name)
@@ -47,6 +46,7 @@ class ProfilingPlugin implements Plugin
     public function handleQuery(Query $query, callable $next, callable $first)
     {
         $startTime = microtime(true);
+
         return $next($query)->then(function (Collection $result) use ($query, $startTime) {
             $duration = (microtime(true) - $startTime) * 1000;
             $this->logQuery($query, $duration, $result);

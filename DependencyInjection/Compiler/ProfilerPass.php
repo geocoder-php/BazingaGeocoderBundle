@@ -11,7 +11,6 @@
 namespace Bazinga\GeocoderBundle\DependencyInjection\Compiler;
 
 use Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector;
-use Bazinga\GeocoderBundle\DataCollector\ProfilingProvider;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;

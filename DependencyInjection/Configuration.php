@@ -108,7 +108,6 @@ class Configuration implements ConfigurationInterface
         return $node;
     }
 
-
     /**
      * Create plugin node of a client.
      *
@@ -160,5 +159,4 @@ class Configuration implements ConfigurationInterface
 
         return $node;
     }
-
 }

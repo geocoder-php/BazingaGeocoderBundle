@@ -86,11 +86,11 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
-     * Configure plugins for a client
+     * Configure plugins for a client.
      *
      * @param ContainerBuilder $container
-     * @param array $config
-     * @param string $providerServiceId
+     * @param array            $config
+     * @param string           $providerServiceId
      *
      * @return array
      */
@@ -147,7 +147,7 @@ class BazingaGeocoderExtension extends Extension
                 ->addTag('bazinga_geocoder.profiling_plugin');
         }
 
-        return array_map(function(string $id) {
+        return array_map(function (string $id) {
             return new Reference($id);
         }, $plugins);
     }
