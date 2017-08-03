@@ -95,12 +95,70 @@ class Configuration implements ConfigurationInterface
                     ->variableNode('options')->defaultValue([])->end()
                     ->scalarNode('cache')->defaultNull()->end()
                     ->scalarNode('cache_lifetime')->defaultNull()->end()
+                    ->scalarNode('limit')->defaultNull()->end()
+                    ->scalarNode('locale')->defaultNull()->end()
+                    ->scalarNode('logger')->defaultNull()->end()
                     ->arrayNode('aliases')
                         ->prototype('scalar')->end()
                     ->end()
+                    ->append($this->createClientPluginNode())
                 ->end()
             ->end();
 
         return $node;
     }
+
+
+    /**
+     * Create plugin node of a client.
+     *
+     * @return ArrayNodeDefinition The plugin node
+     */
+    private function createClientPluginNode()
+    {
+        $builder = new TreeBuilder();
+        $node = $builder->root('plugins');
+
+        /** @var ArrayNodeDefinition $pluginList */
+        $pluginList = $node
+            ->info('A list of plugin service ids. The order is important.')
+            ->prototype('array')
+        ;
+        $pluginList
+            // support having just a service id in the list
+            ->beforeNormalization()
+                ->always(function ($plugin) {
+                    if (is_string($plugin)) {
+                        return [
+                            'reference' => [
+                                'enabled' => true,
+                                'id' => $plugin,
+                            ],
+                        ];
+                    }
+
+                    return $plugin;
+                })
+            ->end()
+        ;
+
+        $pluginList
+            ->children()
+                ->arrayNode('reference')
+                    ->canBeEnabled()
+                    ->info('Reference to a plugin service')
+                    ->children()
+                        ->scalarNode('id')
+                            ->info('Service id of a plugin')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end()
+        ->end();
+
+        return $node;
+    }
+
 }
