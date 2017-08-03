@@ -13,6 +13,7 @@
   "require": {
     "php": "^7.0",
     "willdurand/geocoder": "^4.0",
+    "geocoder-php/plugin": "^1.0",
     "symfony/framework-bundle": "^3.3 || ^4.0",
     "symfony/options-resolver": "^3.3 || ^4.0",
     "symfony/console": "^3.3 || ^4.0"
@@ -26,6 +27,7 @@
     "php-http/message": "^1.5",
     "php-http/curl-client": "^1.7",
     "nyholm/psr7": "^0.2.2",
+    "nyholm/nsa": "^1.1",
     "nyholm/symfony-bundle-test": "^1.2",
     "geocoder-php/google-maps-provider": "^4.0",
     "geocoder-php/cache-provider": "^4.0",

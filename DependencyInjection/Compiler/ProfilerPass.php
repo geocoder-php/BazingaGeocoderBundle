@@ -11,7 +11,6 @@
 namespace Bazinga\GeocoderBundle\DependencyInjection\Compiler;
 
 use Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector;
-use Bazinga\GeocoderBundle\DataCollector\ProfilingProvider;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -34,12 +33,7 @@ class ProfilerPass implements CompilerPassInterface
 
         $dataCollector = $container->getDefinition(GeocoderDataCollector::class);
 
-        foreach ($container->findTaggedServiceIds('bazinga_geocoder.provider') as $providerId => $attributes) {
-            $container->register($providerId.'.debug', ProfilingProvider::class)
-                ->setDecoratedService($providerId)
-                ->setArguments([
-                    new Reference($providerId.'.debug.inner'),
-                ]);
+        foreach ($container->findTaggedServiceIds('bazinga_geocoder.profiling_plugin') as $providerId => $attributes) {
             $dataCollector->addMethodCall('addInstance', [new Reference($providerId)]);
         }
     }

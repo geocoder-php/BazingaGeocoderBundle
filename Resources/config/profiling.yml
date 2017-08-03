@@ -3,4 +3,4 @@ services:
     class: Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector
     public: false
     tags:
-      - { name: data_collector, template: "BazingaGeocoderBundle:Collector:geocoder", id: "geocoder"  }
+      - { name: data_collector, template: "@BazingaGeocoder/Collector/geocoder.html.twig", id: "geocoder"  }

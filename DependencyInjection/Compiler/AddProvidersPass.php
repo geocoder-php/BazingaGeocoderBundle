@@ -10,6 +10,7 @@
 
 namespace Bazinga\GeocoderBundle\DependencyInjection\Compiler;
 
+use Geocoder\ProviderAggregator;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -32,7 +33,7 @@ class AddProvidersPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->hasDefinition('Geocoder\\ProviderAggregator')) {
+        if (!$container->hasDefinition(ProviderAggregator::class)) {
             return;
         }
 
@@ -41,7 +42,7 @@ class AddProvidersPass implements CompilerPassInterface
             $providers[] = new Reference($providerId);
         }
 
-        $geocoderDefinition = $container->getDefinition('Geocoder\\ProviderAggregator');
+        $geocoderDefinition = $container->getDefinition(ProviderAggregator::class);
         $geocoderDefinition->addMethodCall('registerProviders', [$providers]);
     }
 }
