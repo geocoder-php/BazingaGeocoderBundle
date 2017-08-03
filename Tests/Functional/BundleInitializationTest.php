@@ -15,7 +15,6 @@ namespace Bazinga\GeocoderBundle\Tests\Functional;
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
 use Geocoder\Plugin\Plugin\CachePlugin;
 use Geocoder\Plugin\PluginProvider;
-use Geocoder\Provider\Cache\ProviderCache;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\Provider;
 use Geocoder\ProviderAggregator;

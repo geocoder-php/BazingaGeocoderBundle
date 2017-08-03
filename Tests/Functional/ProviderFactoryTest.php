@@ -91,7 +91,6 @@ class ProviderFactoryTest extends BaseBundleTestCase
             $this->assertTrue($container->has('bazinga_geocoder.provider.'.$name));
             $service = $container->get('bazinga_geocoder.provider.'.$name);
             $this->assertInstanceOf($class, NSA::getProperty($service, 'provider'));
-
         }
     }
 }
