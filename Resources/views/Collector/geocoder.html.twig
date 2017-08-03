@@ -51,6 +51,11 @@
 {% endblock %}
 
 {% block panel %}
+    <style>
+        .sf-toggle-content.sf-toggle-visible {
+            display: table-row;
+        }
+    </style>
     <h2>Geocoder</h2>
 
     <div class="sf-tabs">
@@ -66,9 +71,10 @@
             <table>
                 <thead>
                     <tr>
-                        <th></th>
-                        <th class="full-width">Query</th>
-                        <th>Duration</th>
+                        <th style="min-width: 2rem;"></th>
+                        <th style="width: 40%">Query</th>
+                        <th style="width: 60%">Result</th>
+                        <th style="min-width: 4rem;">Duration</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -81,19 +87,32 @@
                             <span class="dump-inline">
                                 {{ query.queryString }}
                             </span>
+                        </td>
+                        <td class="font-normal">
+                            <span class="dump-inline">
+                                {% if query.result.message is defined %}
+                                    Exception
+                                {% else %}
+                                    {{ dump(query.resultCount) }} Result(s)
+                                {% endif %}
+                            </span>
                             <span class="metadata">
-                                <a class="btn btn-link text-small sf-toggle" data-toggle-selector="#geocoder-{{ provider }}-{{ loop.index }}-details" data-toggle-alt-content="Hide context">Show context</a>
-
-                                 <div id="geocoder-{{ provider }}-{{ loop.index }}-details" class="context sf-toggle-content sf-toggle-hidden">
-                                     {{ profiler_dump(query.query, maxDepth=1) }}
-                                     <hr />
-                                     {{ profiler_dump(query.result, maxDepth=2) }}
-                                </div>
+                                <a class="btn btn-link text-small sf-toggle" data-toggle-selector="#geocoder-{{ provider }}-{{ loop.index }}-details" data-toggle-alt-content="Hide">Show</a>
                             </span>
                         </td>
                         <td class="font-normal text-small" nowrap="">
                             {{ query.duration|number_format }} ms
                         </td>
+                    </tr>
+                    <tr id="geocoder-{{ provider }}-{{ loop.index }}-details" class="context sf-toggle-content sf-toggle-hidden">
+                        <td></td>
+                        <td>{{ profiler_dump(query.query, maxDepth=1) }}</td>
+                        {% if query.result.message is defined %}
+                        <td>{{ profiler_dump(query.result, maxDepth=1) }}</td>
+                        {% else %}
+                        <td>{{ profiler_dump(query.result, maxDepth=3) }}</td>
+                        {% endif %}
+                        <td></td>
                     </tr>
                 {% endfor %}
                 </tbody>

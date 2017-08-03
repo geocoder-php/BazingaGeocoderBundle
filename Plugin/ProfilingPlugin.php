@@ -54,18 +54,18 @@ class ProfilingPlugin implements Plugin
             return $result;
         }, function (Exception $exception) use ($query, $startTime) {
             $duration = (microtime(true) - $startTime) * 1000;
-            $this->logQuery($query, $duration);
+            $this->logQuery($query, $duration, $exception);
 
             throw $exception;
         });
     }
 
     /**
-     * @param Query      $query
-     * @param float      $duration geocoding duration
-     * @param Collection $result
+     * @param Query                $query
+     * @param float                $duration geocoding duration
+     * @param Collection|Exception $result
      */
-    private function logQuery(Query $query, float $duration, Collection $result = null)
+    private function logQuery(Query $query, float $duration, $result = null)
     {
         if ($query instanceof GeocodeQuery) {
             $queryString = $query->getText();
@@ -81,6 +81,7 @@ class ProfilingPlugin implements Plugin
             'duration' => $duration,
             'providerName' => $this->getName(),
             'result' => $result,
+            'resultCount' => $result instanceof Collection ? $result->count() : 0,
         ];
     }
 

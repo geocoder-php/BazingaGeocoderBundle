@@ -36,6 +36,10 @@ class GeocoderDataCollector extends DataCollector
      */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
+        if (!empty($this->data['queries'])) {
+            // To avoid collection more that once.
+            return;
+        }
         foreach ($this->instances as $instance) {
             foreach ($instance->getQueries() as $query) {
                 $query['query'] = $this->cloneVar($query['query']);
