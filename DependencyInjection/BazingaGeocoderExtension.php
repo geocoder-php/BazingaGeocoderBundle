@@ -63,7 +63,7 @@ class BazingaGeocoderExtension extends Extension
         foreach ($config['providers'] as $providerName => $providerConfig) {
             $factoryService = $container->getDefinition($providerConfig['factory']);
             $factoryClass = $factoryService->getClass() ?: $providerConfig['factory'];
-            if (!class_implements($factoryClass, ProviderFactoryInterface::class)) {
+            if (!$this->implementsPoviderFactory($factoryClass)) {
                 throw new \LogicException(sprintf('Provider factory "%s" must implement ProviderFactoryInterface', $providerConfig['factory']));
             }
             $factoryClass::validate($providerConfig['options'], $providerName);
@@ -205,11 +205,25 @@ class BazingaGeocoderExtension extends Extension
         foreach ($options as $key => $value) {
             if (is_array($value)) {
                 $options[$key] = $this->findReferences($value);
-            } elseif (substr($key, -8) === '_service' || strpos($value, '@') === 0 || $key === 'service') {
+            } elseif (substr((string) $key, -8) === '_service' || strpos((string) $value, '@') === 0 || $key === 'service') {
                 $options[$key] = new Reference(ltrim($value, '@'));
             }
         }
 
         return $options;
+    }
+
+    /**
+     * @param mixed $factoryClass
+     *
+     * @return bool
+     */
+    private function implementsPoviderFactory($factoryClass): bool
+    {
+        if (false === $interfaces = class_implements($factoryClass)) {
+            return false;
+        }
+
+        return in_array(ProviderFactoryInterface::class, $interfaces);
     }
 }
