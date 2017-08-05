@@ -5,12 +5,12 @@ Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) libra
 
 Our documentation has the following sections:
 
-* [Index](Resources/doc/index.md) (This page)
-* [Public services](Resources/doc/services.md)
-* [Registering Your Own Provider](Resources/doc/custom-provider.md)
-* [All about Cache](Resources/doc/cache.md)
-* [Plugins](Resources/doc/plguins.md)
-* [Doctrine support](Resources/doc/doctrine.md)
+* [Index](index.md) (This page)
+* [Public services](services.md)
+* [Registering Your Own Provider](custom-provider.md)
+* [All about Cache](cache.md)
+* [Plugins](plguins.md)
+* [Doctrine support](doctrine.md)
 
 Table of contents
 -----------------
@@ -156,7 +156,7 @@ bazinga_geocoder:
       cache_lifetime: 3600
 ```
 
-Read more about cache [here](Resources/doc/cache.md).
+Read more about cache [here](cache.md).
 
 ### Dumpers
 
