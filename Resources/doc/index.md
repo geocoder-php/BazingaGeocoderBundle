@@ -154,8 +154,9 @@ bazinga_geocoder:
       factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
       cache: 'any.psr16.service'
       cache_lifetime: 3600
-
 ```
+
+Read more about cache [here](Resources/doc/cache.md).
 
 ### Dumpers
 
