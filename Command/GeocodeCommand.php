@@ -38,7 +38,7 @@ and longitude from the given address.
 
 You can force a provider with the "provider" option.
 
-<info>php app/console geocoder:geocoder "Eiffel Tower" --provider=yahoo</info>
+<info>php bin/console geocoder:geocoder "Eiffel Tower" --provider=yahoo</info>
 HELP
             );
     }
