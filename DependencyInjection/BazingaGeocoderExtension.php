@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -198,7 +200,7 @@ class BazingaGeocoderExtension extends Extension
      *
      * @return array
      */
-    private function findReferences(array $options)
+    private function findReferences(array $options): array
     {
         foreach ($options as $key => $value) {
             if (is_array($value)) {

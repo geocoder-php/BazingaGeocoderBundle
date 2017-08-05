@@ -30,7 +30,7 @@ final class PluginProviderFactory
      *
      * @return PluginProvider
      */
-    public static function createPluginProvider(array $plugins, $factory, array $config, array $pluginProviderOptions = [])
+    public static function createPluginProvider(array $plugins, $factory, array $config, array $pluginProviderOptions = []): PluginProvider
     {
         if ($factory instanceof ProviderFactoryInterface) {
             $client = $factory->createProvider($config);

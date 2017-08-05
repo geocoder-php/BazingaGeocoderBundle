@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -80,7 +82,7 @@ HELP
         }
     }
 
-    private function humanize($text)
+    private function humanize(string $text): string
     {
         $text = preg_replace('/([A-Z][a-z]+)|([A-Z][A-Z]+)|([^A-Za-z ]+)/', ' \1', $text);
 

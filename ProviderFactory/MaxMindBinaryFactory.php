@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -12,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\MaxMind\MaxMind;
 use Geocoder\Provider\MaxMindBinary\MaxMindBinary;
+use Geocoder\Provider\Provider;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MaxMindBinaryFactory extends AbstractFactory
@@ -20,7 +23,7 @@ final class MaxMindBinaryFactory extends AbstractFactory
         ['requiredClass' => MaxMindBinary::class, 'packageName' => 'geocoder-php/maxmind-binary-provider'],
     ];
 
-    protected function getProvider(array $config)
+    protected function getProvider(array $config): Provider
     {
         return new MaxMindBinary($config['dat_file'], $config['open_flag']);
     }

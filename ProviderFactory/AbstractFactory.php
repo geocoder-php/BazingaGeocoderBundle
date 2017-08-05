@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -29,12 +31,12 @@ abstract class AbstractFactory implements ProviderFactoryInterface
      *
      * @return Provider
      */
-    abstract protected function getProvider(array $config);
+    abstract protected function getProvider(array $config): Provider;
 
     /**
      * {@inheritdoc}
      */
-    public function createProvider(array $options = [])
+    public function createProvider(array $options = []): Provider
     {
         $this->verifyDependencies();
 

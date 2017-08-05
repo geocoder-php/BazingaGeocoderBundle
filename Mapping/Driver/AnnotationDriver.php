@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -27,7 +29,7 @@ class AnnotationDriver implements DriverInterface
         $this->reader = $reader;
     }
 
-    public function isGeocodeable($object)
+    public function isGeocodeable($object): bool
     {
         $reflection = new \ReflectionObject($object);
 
