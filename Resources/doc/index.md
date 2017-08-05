@@ -1,19 +1,28 @@
 BazingaGeocoderBundle
 =====================
 
-Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder)
-library into Symfony.
+Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) library into Symfony.
+
+Our documentation has the following sections:
+
+* [Index](Resources/doc/index.md) (This page)
+* [Public services](Resources/doc/services.md)
+* [Registering Your Own Provider](Resources/doc/custom-provider.md)
+* [All about Cache](Resources/doc/cache.md)
+* [Plugins](Resources/doc/plguins.md)
+* [Doctrine support](Resources/doc/doctrine.md)
+
+Table of contents
+-----------------
 
 * [Installation](#installation)
 * [Usage](#usage)
   * [Fake local ip](#fake-local-ip)
-  * [Registering Your Own Provider](#registering-your-own-provider)
-  * [Dumpers](#dumper)
   * [Cache](#cache-results)
+  * [Dumpers](#dumper)
   * [Custom HTTP clients](#custom-http-clients)
-* [Doctrine support](Resources/doc/doctrine.md)
-* [Public services](Resources/doc/services.md)
 * [Reference Configuration](#reference-configuration)
+* [Backwards compatibility](#backwards-compatibility)
 * [Testing](#testing)
 
 
@@ -132,22 +141,21 @@ bazinga_geocoder:
 If set, the parameter will replace all instances of "127.0.0.1" in your queries and replace them with the given one.
 
 
-### Registering Your Own Providers
+### Cache Results
 
-If you want to use your own provider in your application, create a service,
-and tag it as `bazinga_geocoder.provider`:
+Sometimes you have to cache the results from a provider. For this case the bundle provides
+simple configuration. You only need to provide a service name for you SimpleCache (PSR-16)
+service and you are good to go. 
 
-```xml
-<service id="acme_demo.geocoder.my_provider" class="Acme\Demo\Geocoder\Provider\MyProvider">
-    <tag name="bazinga_geocoder.provider" />
-</service>
+```yaml
+bazinga_geocoder:
+  providers:
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      cache: 'any.psr16.service'
+      cache_lifetime: 3600
+
 ```
-
-The bundle will automatically register your provider into the
-`Geocoder\ProviderAggregator` service. 
-
-If you want your provider to show up the web profiler you have to create a custom factory
-for your provider. 
 
 ### Dumpers
 
@@ -188,22 +196,6 @@ To register a new dumper, you must tag it with `bazinga_geocoder.dumper`.
 <service id="some.dumper" class="%some.dumper.class">
     <tag name="bazinga_geocoder.dumper" alias="custom" />
 </service>
-```
-
-### Cache Results
-
-Sometimes you have to cache the results from a provider. For this case the bundle provides
-simple configuration. You only need to provide a service name for you SimpleCache (PSR-16)
-service and you are good to go. 
-
-```yaml
-bazinga_geocoder:
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-      cache: 'any.psr16.service'
-      cache_lifetime: 3600
-
 ```
 
 ### Custom HTTP Client
