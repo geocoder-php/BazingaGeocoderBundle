@@ -236,6 +236,8 @@ bazinga_geocoder:
             limit: 5
             locale: 'sv'
             logger: 'logger'
+            plugins: 
+                - my_custom_plugin
             aliases: 
                 - acme
                 - acme_geocoder
