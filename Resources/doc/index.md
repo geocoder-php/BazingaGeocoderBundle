@@ -9,7 +9,7 @@ Our documentation has the following sections:
 * [Public services](services.md)
 * [Registering Your Own Provider](custom-provider.md)
 * [All about Cache](cache.md)
-* [Plugins](plguins.md)
+* [Plugins](plugins.md)
 * [Doctrine support](doctrine.md)
 
 Table of contents
