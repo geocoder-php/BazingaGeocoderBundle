@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -64,7 +66,7 @@ class GeocoderDataCollector extends DataCollector
      *
      * @return float
      */
-    public function getTotalDuration()
+    public function getTotalDuration(): float
     {
         $time = 0;
         foreach ($this->data['queries'] as $command) {
@@ -87,7 +89,7 @@ class GeocoderDataCollector extends DataCollector
      *
      * @return array
      */
-    public function getProviderQueries($provider): array
+    public function getProviderQueries(string $provider): array
     {
         return array_filter($this->data['queries'], function ($data) use ($provider) {
             return $data['providerName'] === $provider;
@@ -106,7 +108,7 @@ class GeocoderDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getName(): string
     {
         return 'geocoder';
     }

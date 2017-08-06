@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -12,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\GeoIP2\GeoIP2;
 use Geocoder\Provider\GeoIP2\GeoIP2Adapter;
+use Geocoder\Provider\Provider;
 use GeoIp2\Database\Reader;
 use GeoIp2\ProviderInterface;
 use GeoIp2\WebService\Client;
@@ -23,7 +26,7 @@ final class GeoIP2Factory extends AbstractFactory
         ['requiredClass' => GeoIP2::class, 'packageName' => 'geocoder-php/geoip2-provider'],
     ];
 
-    protected function getProvider(array $config)
+    protected function getProvider(array $config): Provider
     {
         $provider = $config['provider'];
         if ($provider === 'webservice') {

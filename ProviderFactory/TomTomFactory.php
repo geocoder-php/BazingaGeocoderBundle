@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE
@@ -10,6 +12,7 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
+use Geocoder\Provider\Provider;
 use Geocoder\Provider\TomTom\TomTom;
 use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
@@ -21,7 +24,7 @@ final class TomTomFactory extends AbstractFactory
         ['requiredClass' => TomTom::class, 'packageName' => 'geocoder-php/tomtom-provider'],
     ];
 
-    protected function getProvider(array $config)
+    protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
 
