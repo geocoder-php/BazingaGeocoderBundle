@@ -22,7 +22,6 @@ use Geocoder\Plugin\Plugin\LimitPlugin;
 use Geocoder\Plugin\Plugin\LocalePlugin;
 use Geocoder\Plugin\Plugin\LoggerPlugin;
 use Geocoder\Plugin\PluginProvider;
-use Geocoder\Provider\Cache\ProviderCache;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -152,39 +151,6 @@ class BazingaGeocoderExtension extends Extension
         return array_map(function (string $id) {
             return new Reference($id);
         }, $plugins);
-    }
-
-    /**
-     * Add cache to a provider if needed.
-     *
-     * @param ContainerBuilder $
-     * @param string $serviceId
-     * @param array  $providerConfig
-     */
-    private function configureCache(ContainerBuilder $container, string $serviceId, array $providerConfig)
-    {
-        if (null === $providerConfig['cache'] && null === $providerConfig['cache_lifetime']) {
-            return;
-        }
-
-        if (!class_exists(ProviderCache::class)) {
-            throw new \LogicException('You must install "geocoder-php/cache-provider" to use cache.');
-        }
-
-        if (null === $cacheServiceId = $providerConfig['cache']) {
-            if (!$container->has('app.cache')) {
-                throw new \LogicException('You need to specify a service for cache.');
-            }
-            $cacheServiceId = 'app.cache';
-        }
-
-        $container->register($serviceId.'.cache', ProviderCache::class)
-            ->setDecoratedService($serviceId)
-            ->setArguments([
-                new Reference($serviceId.'.cache.inner'),
-                new Reference($cacheServiceId),
-                $providerConfig['cache_lifetime'],
-            ]);
     }
 
     /**
