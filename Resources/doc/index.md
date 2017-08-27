@@ -6,7 +6,7 @@ Integration of the [**Geocoder**](http://github.com/geocoder-php/Geocoder) libra
 Our documentation has the following sections:
 
 * [Index](index.md) (This page)
-* [Public services](services.md)
+* [Public services](services.md) (Providers)
 * [Registering Your Own Provider](custom-provider.md)
 * [All about Cache](cache.md)
 * [Plugins](plugins.md)
@@ -17,6 +17,7 @@ Table of contents
 
 * [Installation](#installation)
 * [Usage](#usage)
+  * [Chain providers](#chain-providers)
   * [Fake local ip](#fake-local-ip)
   * [Cache](#cache-results)
   * [Dumpers](#dumper)
@@ -96,6 +97,36 @@ bazinga_geocoder:
         region: 'Sweden'
         api_key: 'xxyy'
 ```
+
+### Chain providers
+
+Someone was thinking ahead here. Wouldn't it be nice if you could pass your request through different `ProviderFactories`? You can!! With the `ChainFactory`, see the configuration below.
+
+```yaml
+bazinga_geocoder:
+  providers:
+    acme:
+      aliases:
+        - my_geocoder
+      cache: 'any.psr16.service'
+      cache_lifetime: 3600
+      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+      options:
+        api_key: 'xxxx'
+    acme_ii:
+      aliases:
+        - my_geocoder_ii
+      factory: Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory
+      options:
+        api_key: 'xxyy'
+        httplug_client: 'httplug.client' # When using HTTPlugBundle
+        region: 'Sweden'
+    chain:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\ChainFactory
+      services: ['@bazinga_geocoder.providers.acme', '@bazinga_geocoder.providers.acme_ii']
+```
+
+The `services` key could also be as follows `services: ['@my_geocoder', '@my_geocoder_ii']`. Notice these are the values from the `aliases` key.
 
 ### Fake local ip
 
@@ -244,6 +275,13 @@ bazinga_geocoder:
             options:
                 foo: bar
                 biz: baz
+        # ...
+        free_chain:
+            aliases:
+                - free_geo_chain
+            factory: Bazinga\GeocoderBundle\ProviderFactory\ChainFactory
+            options:
+                services: ['@acme', '@acme_ii']
 ```
 
 Backwards compatibility
