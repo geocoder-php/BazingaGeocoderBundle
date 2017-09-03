@@ -25,13 +25,13 @@ matrix:
     - php: 7.0
       env: TEST_COMMAND="composer test-ci" COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_VERSION=3.3.* COVERAGE=true
     - php: 7.0
+      # We need `--prefer-source`, otherwise the `Doctrine\Tests\OrmTestCase` class won't be found.
       env: TEST_COMMAND="phpunit --testsuite doctrine" COMPOSER_FLAGS="--prefer-source" SYMFONY_VERSION="3.3.* phpunit/phpunit:^5.7"
     - php: 7.1
       env: SYMFONY_VERSION=4.0.*
 
 before_script:
     - composer require symfony/symfony:${SYMFONY_VERSION} --no-update
-    # This command must be run with `--prefer-source`, otherwise the `Doctrine\Tests\OrmTestCase` class won't be found.
     - composer update $COMPOSER_FLAGS
 
 script:
