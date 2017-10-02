@@ -123,7 +123,8 @@ bazinga_geocoder:
         region: 'Sweden'
     chain:
       factory: Bazinga\GeocoderBundle\ProviderFactory\ChainFactory
-      services: ['@bazinga_geocoder.providers.acme', '@bazinga_geocoder.providers.acme_ii']
+      options:
+        services: ['@bazinga_geocoder.provider.acme', '@bazinga_geocoder.provider.acme_ii']
 ```
 
 The `services` key could also be as follows `services: ['@my_geocoder', '@my_geocoder_ii']`. Notice these are the values from the `aliases` key.
