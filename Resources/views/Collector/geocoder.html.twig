@@ -26,7 +26,7 @@
                     <tbody class="sf-toolbar-ajax-request-list">
                     {% for query in collector.queries %}
                         <tr>
-                            <td>{{ query.providerName|humanize }}</td>
+                            <td>{{ query.providerName }}</td>
                             <td>{{ query.queryString }}</td>
                             <td>{{ query.duration == 0 ? 'n/a' : query.duration|number_format ~ ' ms'}}</td>
                         </tr>
@@ -61,7 +61,7 @@
     <div class="sf-tabs">
         {% for provider in collector.providers %}
         <div class="tab">
-            <h3 class="tab-title">{{ provider|humanize }} <span class="badge">{{ collector.providerQueries(provider)|length }}</span></h3>
+            <h3 class="tab-title">{{ provider }} <span class="badge">{{ collector.providerQueries(provider)|length }}</span></h3>
 
             <div class="tab-content">
                 <p class="help">
