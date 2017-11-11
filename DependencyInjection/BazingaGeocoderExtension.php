@@ -171,7 +171,7 @@ class BazingaGeocoderExtension extends Extension
         foreach ($options as $key => $value) {
             if (is_array($value)) {
                 $options[$key] = $this->findReferences($value);
-            } elseif (substr((string) $key, -8) === '_service' || strpos((string) $value, '@') === 0 || $key === 'service') {
+            } elseif ('_service' === substr((string) $key, -8) || 0 === strpos((string) $value, '@') || 'service' === $key) {
                 $options[$key] = new Reference(ltrim($value, '@'));
             }
         }

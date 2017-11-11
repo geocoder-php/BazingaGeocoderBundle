@@ -29,9 +29,9 @@ final class GeoIP2Factory extends AbstractFactory
     protected function getProvider(array $config): Provider
     {
         $provider = $config['provider'];
-        if ($provider === 'webservice') {
+        if ('webservice' === $provider) {
             $provider = new Client($config['user_id'], $config['license_key'], $config['locales'], $config['webservice_options']);
-        } elseif ($provider === 'database') {
+        } elseif ('database' === $provider) {
             $provider = new Reader($config['database_filename'], $config['locales']);
         } else {
             $provider = $config['provider_service'];
