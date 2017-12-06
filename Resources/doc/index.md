@@ -78,7 +78,7 @@ bazinga_geocoder:
       cache: 'any.psr16.service'
       cache_lifetime: 3600
       aliases: 
-        - my_geocoer
+        - my_geocoder
 ```
 
 This will create a service named `my_geocoder` that caches the responses for one 
