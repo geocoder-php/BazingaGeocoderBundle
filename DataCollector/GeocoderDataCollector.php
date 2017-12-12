@@ -36,6 +36,16 @@ class GeocoderDataCollector extends DataCollector
     /**
      * {@inheritdoc}
      */
+    public function reset()
+    {
+        $this->instances = [];
+        $this->data['queries'] = [];
+        $this->data['providers'] = [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function collect(Request $request, Response $response, \Exception $exception = null)
     {
         if (!empty($this->data['queries'])) {
