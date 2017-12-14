@@ -39,6 +39,7 @@
     "geocoder-php/geonames-provider": "^4.0",
     "geocoder-php/geoips-provider": "^4.0",
     "geocoder-php/geoip2-provider": "^4.0",
+    "geocoder-php/ip-info-provider": "^0.1",
     "geocoder-php/ip-info-db-provider": "^4.0",
     "geocoder-php/host-ip-provider": "^4.0",
     "geocoder-php/maxmind-binary-provider": "^4.0",
