@@ -2,6 +2,13 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.1.0
+
+### Added
+
+- `Collector::clear` to be compatible with Symfony 4. 
+- Added support for IpInfo. 
+
 ## Version 5.0.0
 
 Version 5 does only support Symfony 3.3+ and PHP7. We dropped some complexity and added plenty of type hints.  
