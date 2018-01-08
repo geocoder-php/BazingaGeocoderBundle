@@ -8,10 +8,10 @@ wanted.
 
 ``` php
 
-use Bazinga\GeocoderBundle\Mapping\Annotation as Geocoder;
+use Bazinga\GeocoderBundle\Mapping\Annotations as Geocoder;
 
 /**
- * @Geocoder\Geocodable
+ * @Geocoder\Geocodeable
  */
 class User
 {
