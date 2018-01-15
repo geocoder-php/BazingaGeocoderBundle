@@ -20,6 +20,7 @@
                     <tr>
                         <th>Provider</th>
                         <th>Query</th>
+                        <th>Locale</th>
                         <th>Time</th>
                     </tr>
                     </thead>
@@ -28,6 +29,7 @@
                         <tr>
                             <td>{{ query.providerName }}</td>
                             <td>{{ query.queryString }}</td>
+                            <td>{{ query.query.locale is not null ? query.query.locale : 'null' }}</td>
                             <td>{{ query.duration == 0 ? 'n/a' : query.duration|number_format ~ ' ms'}}</td>
                         </tr>
                     {% endfor %}
@@ -73,6 +75,7 @@
                     <tr>
                         <th style="min-width: 2rem;"></th>
                         <th style="width: 40%">Query</th>
+                        <th style="min-width: 3rem;">Locale</th>
                         <th style="width: 60%">Result</th>
                         <th style="min-width: 4rem;">Duration</th>
                     </tr>
@@ -86,6 +89,11 @@
                         <td class="font-normal">
                             <span class="dump-inline">
                                 {{ query.queryString }}
+                            </span>
+                        </td>
+                        <td class="font-normal">
+                            <span class="dump-inline">
+                                {{ query.query.locale is not null ? query.query.locale : 'null' }}
                             </span>
                         </td>
                         <td class="font-normal">
