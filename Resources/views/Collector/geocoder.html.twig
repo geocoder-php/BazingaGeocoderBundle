@@ -20,7 +20,6 @@
                     <tr>
                         <th>Provider</th>
                         <th>Query</th>
-                        <th>Locale</th>
                         <th>Time</th>
                     </tr>
                     </thead>
@@ -29,7 +28,6 @@
                         <tr>
                             <td>{{ query.providerName }}</td>
                             <td>{{ query.queryString }}</td>
-                            <td>{{ query.query.locale is not null ? query.query.locale : 'null' }}</td>
                             <td>{{ query.duration == 0 ? 'n/a' : query.duration|number_format ~ ' ms'}}</td>
                         </tr>
                     {% endfor %}
