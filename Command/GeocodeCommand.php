@@ -24,6 +24,8 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GeocodeCommand extends ContainerAwareCommand
 {
+    protected static $defaultName = 'geocoder:geocode';
+
     /**
      * {@inheritdoc}
      */

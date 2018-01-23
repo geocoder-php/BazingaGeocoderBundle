@@ -12,8 +12,11 @@ services:
         class: Geocoder\ProviderAggregator
 
     Bazinga\GeocoderBundle\Plugin\FakeIpPlugin:
-      class: Bazinga\GeocoderBundle\Plugin\FakeIpPlugin
-      arguments: ['127.0.0.1', ~]
+        class: Bazinga\GeocoderBundle\Plugin\FakeIpPlugin
+        arguments: ['127.0.0.1', ~]
+
+    Bazinga\GeocoderBundle\Command\GeocodeCommand:
+        tags: [{ name: 'console.command' }]
 
     # Keep these aliases for BC purpose
     bazinga_geocoder.geocoder:
