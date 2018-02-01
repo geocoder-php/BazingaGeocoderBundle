@@ -17,7 +17,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 /**
- * Make sure that the factory actually exists
+ * Make sure that the factory actually exists.
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
