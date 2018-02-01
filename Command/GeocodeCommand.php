@@ -33,16 +33,14 @@ class GeocodeCommand extends ContainerAwareCommand
     private $geocoder;
 
     /**
-     *
      * @param ProviderAggregator $geocoder
      */
     public function __construct(ProviderAggregator $geocoder)
     {
         $this->geocoder = $geocoder;
-        
+
         parent::__construct();
     }
-
 
     /**
      * {@inheritdoc}
