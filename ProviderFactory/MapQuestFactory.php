@@ -39,7 +39,7 @@ final class MapQuestFactory extends AbstractFactory
         ]);
 
         $resolver->setRequired('api_key');
-        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('api_key', ['string']);
         $resolver->setAllowedTypes('licensed', ['boolean']);
     }

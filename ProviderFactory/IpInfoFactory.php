@@ -37,6 +37,6 @@ final class IpInfoFactory extends AbstractFactory
             'httplug_client' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
     }
 }

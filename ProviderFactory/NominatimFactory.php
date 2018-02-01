@@ -38,7 +38,7 @@ final class NominatimFactory extends AbstractFactory
             'root_url' => 'https://nominatim.openstreetmap.org',
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('root_url', ['string']);
     }
 }

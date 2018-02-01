@@ -65,10 +65,9 @@ class BazingaGeocoderExtension extends Extension
             if (!$this->implementsPoviderFactory($factoryClass)) {
                 throw new \LogicException(sprintf('Provider factory "%s" must implement ProviderFactoryInterface', $providerConfig['factory']));
             }
-            $factoryClass::validate($providerConfig['options'], $providerName);
-
             // See if any option has a service reference
             $providerConfig['options'] = $this->findReferences($providerConfig['options']);
+            $factoryClass::validate($providerConfig['options'], $providerName);
 
             $serviceId = 'bazinga_geocoder.provider.'.$providerName;
             $plugins = $this->configureProviderPlugins($container, $providerConfig, $serviceId);

@@ -38,7 +38,7 @@ final class YandexFactory extends AbstractFactory
             'toponym' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('toponym', ['string', 'null']);
     }
 }

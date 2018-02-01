@@ -38,7 +38,7 @@ final class GeonamesFactory extends AbstractFactory
         ]);
 
         $resolver->setRequired('username');
-        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('username', ['string']);
     }
 }

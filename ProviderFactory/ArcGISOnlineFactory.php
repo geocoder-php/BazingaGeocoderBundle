@@ -38,7 +38,7 @@ final class ArcGISOnlineFactory extends AbstractFactory
             'source_country' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('source_country', ['string', 'null']);
     }
 }

@@ -39,7 +39,7 @@ final class MaxMindFactory extends AbstractFactory
         ]);
 
         $resolver->setRequired('api_key');
-        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('api_key', ['string']);
         $resolver->setAllowedValues('endpoint', [MaxMind::CITY_EXTENDED_SERVICE, MaxMind::OMNI_SERVICE]);
     }

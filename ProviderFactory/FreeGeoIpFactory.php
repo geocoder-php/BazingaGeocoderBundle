@@ -38,7 +38,7 @@ final class FreeGeoIpFactory extends AbstractFactory
             'base_url' => 'https://freegeoip.net/json/%s',
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('base_url', ['string']);
     }
 }
