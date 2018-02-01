@@ -51,26 +51,16 @@ class GeocodeCommandTest extends TestCase
             ->with($query)
             ->will($this->returnValue(new AddressCollection([$address])));
 
-        $container = $this->getMockBuilder('Symfony\\Component\\DependencyInjection\\Container')->getMock();
-        $container->expects($this->once())
-            ->method('get')
-            ->with(ProviderAggregator::class)
-            ->will($this->returnValue($geocoder));
-
         $kernel = $this->getMockBuilder('Symfony\\Component\\HttpKernel\\Kernel')
             ->disableOriginalConstructor()
             ->getMock();
-
-        $kernel->expects($this->any())
-            ->method('getContainer')
-            ->will($this->returnValue($container));
 
         $kernel->expects($this->any())
             ->method('getBundles')
             ->will($this->returnValue([]));
 
         $app = new Application($kernel);
-        $app->add(new GeocodeCommand());
+        $app->add(new GeocodeCommand($geocoder));
 
         $command = $app->find('geocoder:geocode');
 
