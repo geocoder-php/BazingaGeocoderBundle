@@ -16,6 +16,7 @@ services:
         arguments: ['127.0.0.1', ~]
 
     Bazinga\GeocoderBundle\Command\GeocodeCommand:
+        arguments: ['@Geocoder\ProviderAggregator']
         tags: [{ name: 'console.command' }]
 
     # Keep these aliases for BC purpose

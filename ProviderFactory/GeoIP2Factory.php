@@ -16,7 +16,6 @@ use Geocoder\Provider\GeoIP2\GeoIP2;
 use Geocoder\Provider\GeoIP2\GeoIP2Adapter;
 use Geocoder\Provider\Provider;
 use GeoIp2\Database\Reader;
-use GeoIp2\ProviderInterface;
 use GeoIp2\WebService\Client;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
