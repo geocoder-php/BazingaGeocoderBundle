@@ -23,7 +23,7 @@ matrix:
         - php: 7.0
         - php: 7.1
         - php: 7.2
-          env: COVERAGE=true PHPUNIT_FLAGS="--coverage-text --coverage-clover=build/coverage.xml"
+          env: COVERAGE=true PHPUNIT_FLAGS="-v --testsuite main --coverage-text --coverage-clover=build/coverage.xml"
 
         - php: 7.1
           # We need `--prefer-source`, otherwise the `Doctrine\Tests\OrmTestCase` class won't be found.
