@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Command;
 
+use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
@@ -25,6 +26,23 @@ use Symfony\Component\Console\Output\OutputInterface;
 class GeocodeCommand extends ContainerAwareCommand
 {
     protected static $defaultName = 'geocoder:geocode';
+
+    /**
+     * @var ProviderAggregator
+     */
+    private $geocoder;
+
+    /**
+     *
+     * @param ProviderAggregator $geocoder
+     */
+    public function __construct(ProviderAggregator $geocoder)
+    {
+        $this->geocoder = $geocoder;
+        
+        parent::__construct();
+    }
+
 
     /**
      * {@inheritdoc}
@@ -52,14 +70,11 @@ HELP
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /** @var $geocoder \Geocoder\ProviderAggregator */
-        $geocoder = $this->getContainer()->get('Geocoder\ProviderAggregator');
-
         if ($input->getOption('provider')) {
-            $geocoder->using($input->getOption('provider'));
+            $this->geocoder->using($input->getOption('provider'));
         }
 
-        $results = $geocoder->geocodeQuery(GeocodeQuery::create($input->getArgument('address')));
+        $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($input->getArgument('address')));
         $data = $results->first()->toArray();
 
         $max = 0;
