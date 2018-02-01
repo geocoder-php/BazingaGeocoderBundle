@@ -93,7 +93,7 @@ bazinga_geocoder:
     acme:
       factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
       options: 
-        httplug_client: 'httplug.client' # When using HTTPlugBundle
+        httplug_client: '@httplug.client' # When using HTTPlugBundle
         region: 'Sweden'
         api_key: 'xxyy'
 ```
@@ -119,7 +119,7 @@ bazinga_geocoder:
       factory: Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory
       options:
         api_key: 'xxyy'
-        httplug_client: 'httplug.client' # When using HTTPlugBundle
+        httplug_client: '@httplug.client' # When using HTTPlugBundle
         region: 'Sweden'
     chain:
       factory: Bazinga\GeocoderBundle\ProviderFactory\ChainFactory
