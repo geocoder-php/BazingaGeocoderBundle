@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle;
 
 use Bazinga\GeocoderBundle\DependencyInjection\Compiler\AddProvidersPass;
+use Bazinga\GeocoderBundle\DependencyInjection\Compiler\FactoryValidatorPass;
 use Bazinga\GeocoderBundle\DependencyInjection\Compiler\ProfilerPass;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -31,5 +32,6 @@ class BazingaGeocoderBundle extends Bundle
 
         $container->addCompilerPass(new ProfilerPass());
         $container->addCompilerPass(new AddProvidersPass());
+        $container->addCompilerPass(new FactoryValidatorPass());
     }
 }

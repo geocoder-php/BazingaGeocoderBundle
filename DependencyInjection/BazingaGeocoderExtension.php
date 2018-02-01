@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\DependencyInjection;
 
 use Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector;
+use Bazinga\GeocoderBundle\DependencyInjection\Compiler\FactoryValidatorPass;
 use Bazinga\GeocoderBundle\Plugin\FakeIpPlugin;
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
 use Bazinga\GeocoderBundle\ProviderFactory\PluginProviderFactory;
@@ -25,6 +26,7 @@ use Geocoder\Plugin\PluginProvider;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
@@ -60,14 +62,20 @@ class BazingaGeocoderExtension extends Extension
     private function loadProviders(ContainerBuilder $container, array $config)
     {
         foreach ($config['providers'] as $providerName => $providerConfig) {
-            $factoryService = $container->getDefinition($providerConfig['factory']);
-            $factoryClass = $factoryService->getClass() ?: $providerConfig['factory'];
-            if (!$this->implementsPoviderFactory($factoryClass)) {
-                throw new \LogicException(sprintf('Provider factory "%s" must implement ProviderFactoryInterface', $providerConfig['factory']));
+            try {
+                $factoryService = $container->getDefinition($providerConfig['factory']);
+                $factoryClass = $factoryService->getClass() ?: $providerConfig['factory'];
+                if (!$this->implementsPoviderFactory($factoryClass)) {
+                    throw new \LogicException(sprintf('Provider factory "%s" must implement ProviderFactoryInterface', $providerConfig['factory']));
+                }
+                // See if any option has a service reference
+                $providerConfig['options'] = $this->findReferences($providerConfig['options']);
+                $factoryClass::validate($providerConfig['options'], $providerName);
+            } catch (ServiceNotFoundException $e) {
+                // Assert: We are using a custom factory. If invalid config, it will be caught in FactoryValidatorPass
+                $providerConfig['options'] = $this->findReferences($providerConfig['options']);
+                FactoryValidatorPass::addFactoryServiceId($providerConfig['factory']);
             }
-            // See if any option has a service reference
-            $providerConfig['options'] = $this->findReferences($providerConfig['options']);
-            $factoryClass::validate($providerConfig['options'], $providerName);
 
             $serviceId = 'bazinga_geocoder.provider.'.$providerName;
             $plugins = $this->configureProviderPlugins($container, $providerConfig, $serviceId);
