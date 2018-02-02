@@ -16,13 +16,20 @@ use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
 use Geocoder\Plugin\Plugin\CachePlugin;
 use Geocoder\Plugin\PluginProvider;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
-use Geocoder\Provider\Provider;
 use Geocoder\ProviderAggregator;
 use Nyholm\BundleTest\BaseBundleTestCase;
+use Nyholm\BundleTest\CompilerPass\PublicServicePass;
 use Nyholm\NSA;
 
 class BundleInitializationTest extends BaseBundleTestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->addCompilerPass(new PublicServicePass('|[Bb]azinga:*|'));
+        $this->addCompilerPass(new PublicServicePass('|[gG]eocoder:*|'));
+    }
+
     protected function getBundleClass()
     {
         return BazingaGeocoderBundle::class;

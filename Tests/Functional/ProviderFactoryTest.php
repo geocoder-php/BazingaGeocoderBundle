@@ -33,14 +33,20 @@ use Geocoder\Provider\MaxMindBinary\MaxMindBinary;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Geocoder\Provider\OpenCage\OpenCage;
 use Geocoder\Provider\PickPoint\PickPoint;
-use Geocoder\Provider\Provider;
 use Geocoder\Provider\TomTom\TomTom;
 use Geocoder\Provider\Yandex\Yandex;
 use Nyholm\BundleTest\BaseBundleTestCase;
+use Nyholm\BundleTest\CompilerPass\PublicServicePass;
 use Nyholm\NSA;
 
 class ProviderFactoryTest extends BaseBundleTestCase
 {
+    protected function setUp()
+    {
+        parent::setUp();
+        $this->addCompilerPass(new PublicServicePass('|bazinga.*|'));
+    }
+
     protected function getBundleClass()
     {
         return BazingaGeocoderBundle::class;
