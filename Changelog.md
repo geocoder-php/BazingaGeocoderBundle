@@ -2,6 +2,21 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.1.2
+
+### Fixed
+
+- Make sure commands not using the container. 
+- Fixed issue with using custom factories. We do not validate custom factories better. 
+- We are more relaxed in our requirements for HTTPClients. You may now use the option `http_client`. 
+
+## Version 5.1.1
+
+### Fixed
+
+- Adding commands as services
+- Fixed twig paths for webprofiler
+
 ## Version 5.1.0
 
 ### Added
