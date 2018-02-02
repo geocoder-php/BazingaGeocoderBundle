@@ -27,7 +27,7 @@ matrix:
 
         - php: 7.1
           # We need `--prefer-source`, otherwise the `Doctrine\Tests\OrmTestCase` class won't be found.
-          env: PHPUNIT_FLAGS="-v --testsuite doctrine" COMPOSER_FLAGS="--prefer-source" DEPENDENCIES="dunglas/symfony-lock:^3""
+          env: PHPUNIT_FLAGS="-v --testsuite doctrine" COMPOSER_FLAGS="--prefer-source" DEPENDENCIES="dunglas/symfony-lock:^3"
         - php: 7.2
           env: DEPENDENCIES="dunglas/symfony-lock:^3"
         - php: 7.2
