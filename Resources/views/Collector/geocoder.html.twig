@@ -113,6 +113,7 @@
                     <tr id="geocoder-{{ provider }}-{{ loop.index }}-details" class="context sf-toggle-content sf-toggle-hidden">
                         <td></td>
                         <td>{{ profiler_dump(query.query, maxDepth=1) }}</td>
+                        <td></td>
                         {% if query.result.message is defined %}
                         <td>{{ profiler_dump(query.result, maxDepth=1) }}</td>
                         {% else %}
