@@ -51,23 +51,17 @@ You may use any adapter from [PHP-cache.com](http://www.php-cache.com/en/latest/
 
 ## Using Symfony cache
 
-Symfony 3.3 does not support SimpleCache, but fear not. You can use a bridge between PSR-6 and PSR-16. Install the 
-[bridge](https://github.com/php-cache/simple-cache-bridge) by:
-
-```bash
-composer require cache/simple-cache-bridge
-```
-
-Then register a service: 
+Symfony>=3.3 supports SimpleCache thanks to `Symfony\Component\Cache\Simple\Psr6Cache` adapter.
+Thus a service can be registered like so:
 
 ```yaml
 # services.yml
 app.simple_cache:
-    class: Cache\Bridge\SimpleCache\SimpleCacheBridge
+    class: Symfony\Component\Cache\Simple\Psr6Cache
     arguments: ['@app.cache.acme']
 ```
 
-Then configure the framework and the bundle. 
+Then configure the framework and the bundle:
 
 ```yaml
 # config.yml
@@ -87,3 +81,11 @@ bazinga_geocoder:
       cache_lifetime: 3600
 ```
 
+For older Symfony version, you can use a bridge between PSR-6 and PSR-16. Install the 
+[bridge](https://github.com/php-cache/simple-cache-bridge) by:
+
+```bash
+composer require cache/simple-cache-bridge
+```
+
+Then, in the service declaration you can use `Cache\Bridge\SimpleCache\SimpleCacheBridge` instead of `Symfony\Component\Cache\Simple\Psr6Cache`.
