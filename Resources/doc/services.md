@@ -10,6 +10,7 @@ Here is a list of all provider factories and their options.
 
 | Service | Options |
 | ------- | ------- |
+| `Bazinga\GeocoderBundle\ProviderFactory\AddokFactory` | httplug_client, root_url
 | `Bazinga\GeocoderBundle\ProviderFactory\ArcGISOnlineFactory` | httplug_client, source_country
 | `Bazinga\GeocoderBundle\ProviderFactory\BingMapsFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\ChainFactory` | services
