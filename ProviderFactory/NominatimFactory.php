@@ -27,7 +27,7 @@ final class NominatimFactory extends AbstractFactory
     {
         $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
 
-        return new Nominatim($httplug, $config['root_url']);
+        return new Nominatim($httplug, $config['root_url'], $config['user_agent']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
@@ -35,9 +35,12 @@ final class NominatimFactory extends AbstractFactory
         $resolver->setDefaults([
             'httplug_client' => null,
             'root_url' => 'https://nominatim.openstreetmap.org',
+            'user_agent' => 'BazingaGeocoderBundle',
         ]);
 
         $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('root_url', ['string']);
+        $resolver->setAllowedTypes('user_agent', ['string']);
+        $resolver->setRequired('user_agent');
     }
 }
