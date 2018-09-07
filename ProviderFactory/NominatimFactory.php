@@ -41,5 +41,6 @@ final class NominatimFactory extends AbstractFactory
         $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('root_url', ['string']);
         $resolver->setAllowedTypes('user_agent', ['string']);
+        $resolver->setRequired('user_agent');
     }
 }
