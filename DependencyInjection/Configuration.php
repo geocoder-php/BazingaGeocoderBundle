@@ -92,6 +92,7 @@ class Configuration implements ConfigurationInterface
             ->requiresAtLeastOneElement()
             ->useAttributeAsKey('name')
             ->prototype('array')
+            ->fixXmlConfig('plugin')
                 ->children()
                     ->scalarNode('factory')->isRequired()->cannotBeEmpty()->end()
                     ->variableNode('options')->defaultValue([])->end()

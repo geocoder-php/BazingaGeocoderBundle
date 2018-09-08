@@ -83,7 +83,7 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(CachePlugin::class, $plugins[0]);
     }
 
-    public function testBundleWithPlugin()
+    public function testBundleWithPluginYml()
     {
         $kernel = $this->createKernel();
         $kernel->addConfigFile(__DIR__.'/config/service_plugin.yml');
@@ -98,10 +98,10 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
     }
 
-    public function testBundleWithPluginReference()
+    public function testBundleWithPluginXml()
     {
         $kernel = $this->createKernel();
-        $kernel->addConfigFile(__DIR__.'/config/reference_plugin.yml');
+        $kernel->addConfigFile(__DIR__.'/config/service_plugin.xml');
         $this->bootKernel();
         $container = $this->getContainer();
 
