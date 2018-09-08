@@ -83,7 +83,7 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(CachePlugin::class, $plugins[0]);
     }
 
-    public function testBundleWithPluginYml()
+    public function testBundleWithPluginsYml()
     {
         $kernel = $this->createKernel();
         $kernel->addConfigFile(__DIR__.'/config/service_plugin.yml');
@@ -94,7 +94,7 @@ class BundleInitializationTest extends BaseBundleTestCase
         $service = $container->get('bazinga_geocoder.provider.acme');
         $this->assertInstanceOf(PluginProvider::class, $service);
         $plugins = NSA::getProperty($service, 'plugins');
-        $this->assertNotEmpty($plugins);
+        $this->assertCount(3, $plugins);
         $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
     }
 
