@@ -1,0 +1,15 @@
+
+bazinga_geocoder:
+  profiling:
+    enabled: false
+  providers:
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
+      plugins:
+        - acme.logger
+
+services:
+  acme.logger:
+    class: Geocoder\Plugin\Plugin\LoggerPlugin
+    arguments:
+      - '@logger'
