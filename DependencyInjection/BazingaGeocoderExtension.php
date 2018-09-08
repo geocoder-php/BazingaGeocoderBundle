@@ -106,7 +106,9 @@ class BazingaGeocoderExtension extends Extension
     {
         $plugins = [];
         foreach ($config['plugins'] as $plugin) {
-            $plugins[] = $plugin['id'];
+            if ($plugin['reference']['enabled']) {
+                $plugins[] = $plugin['reference']['id'];
+            }
         }
 
         if (isset($config['cache']) || isset($config['cache_lifetime'])) {
