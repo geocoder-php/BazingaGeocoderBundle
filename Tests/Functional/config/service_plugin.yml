@@ -9,6 +9,9 @@ bazinga_geocoder:
         - acme.logger
 
 services:
+  logger:
+    class: Psr\Log\NullLogger
+
   acme.logger:
     class: Geocoder\Plugin\Plugin\LoggerPlugin
     arguments:
