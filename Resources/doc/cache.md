@@ -14,7 +14,12 @@ bazinga_geocoder:
       factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
       cache: 'any.psr16.service'
       cache_lifetime: 3600
+      cache_precision: ~
 ```
+
+If you do a lot of reverse queries it can be useful to cache them with less precision. So if you are interested in only the city,
+you don't want to query for every exact coordinate. Instead, you want to remove some precision of the coordinates. For example: 
+reversing `52.3705273, 4.891031` will be cached as `52.3705, 4.8910`. 
 
 You may use any [PSR16](http://www.php-fig.org/psr/psr-16/) cache [implementation](https://packagist.org/providers/psr/simple-cache-implementation).
 The `CachePlugin` helps you to cache all responses. 
@@ -79,6 +84,7 @@ bazinga_geocoder:
       factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
       cache: 'app.simple_cache'
       cache_lifetime: 3600
+      cache_precision: 4
 ```
 
 For older Symfony version, you can use a bridge between PSR-6 and PSR-16. Install the 
