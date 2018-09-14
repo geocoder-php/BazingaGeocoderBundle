@@ -111,7 +111,7 @@ class BazingaGeocoderExtension extends Extension
             }
         }
 
-        if (isset($config['cache']) || isset($config['cache_lifetime'])) {
+        if (isset($config['cache']) || isset($config['cache_lifetime']) || isset($config['cache_precision'])) {
             if (null === $cacheServiceId = $config['cache']) {
                 if (!$container->has('app.cache')) {
                     throw new \LogicException('You need to specify a service for cache.');
@@ -121,7 +121,7 @@ class BazingaGeocoderExtension extends Extension
             $plugins[] = $providerServiceId.'.cache';
             $container->register($providerServiceId.'.cache', CachePlugin::class)
                 ->setPublic(false)
-                ->setArguments([new Reference($cacheServiceId), (int) $config['cache_lifetime']]);
+                ->setArguments([new Reference($cacheServiceId), (int) $config['cache_lifetime'], $config['cache_precision']]);
         }
 
         if (isset($config['limit'])) {
