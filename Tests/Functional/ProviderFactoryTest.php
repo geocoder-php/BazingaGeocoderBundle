@@ -26,6 +26,7 @@ use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\HostIp\HostIp;
 use Geocoder\Provider\IpInfo\IpInfo;
 use Geocoder\Provider\IpInfoDb\IpInfoDb;
+use Geocoder\Provider\Ipstack\Ipstack;
 use Geocoder\Provider\MapQuest\MapQuest;
 use Geocoder\Provider\Mapzen\Mapzen;
 use Geocoder\Provider\MaxMind\MaxMind;
@@ -68,6 +69,7 @@ class ProviderFactoryTest extends BaseBundleTestCase
             [HostIp::class, ['empty']],
             [IpInfo::class, ['acme']],
             [IpInfoDb::class, ['empty', 'acme']],
+            [Ipstack::class, ['empty', 'acme']],
             [MapQuest::class, ['acme']],
             [Mapzen::class, ['acme']],
             [MaxMind::class, ['acme']],
