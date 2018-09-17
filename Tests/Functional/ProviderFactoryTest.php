@@ -69,7 +69,7 @@ class ProviderFactoryTest extends BaseBundleTestCase
             [HostIp::class, ['empty']],
             [IpInfo::class, ['acme']],
             [IpInfoDb::class, ['empty', 'acme']],
-            [Ipstack::class, ['empty', 'acme']],
+            [Ipstack::class, ['acme']],
             [MapQuest::class, ['acme']],
             [Mapzen::class, ['acme']],
             [MaxMind::class, ['acme']],
