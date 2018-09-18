@@ -2,6 +2,13 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.3.0
+
+### Added 
+
+- Support for Ipstack provider
+- Support for adding precision argument for the Cache plugin. 
+
 ## Version 5.2.0
 
 ### Added 
