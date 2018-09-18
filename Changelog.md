@@ -7,7 +7,7 @@ The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" 
 ### Added 
 
 - Support for Ipstack provider
-- Support for adding precision argument for the Cache provider. 
+- Support for adding precision argument for the Cache plugin. 
 
 ## Version 5.2.0
 
