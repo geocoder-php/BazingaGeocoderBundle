@@ -6,6 +6,7 @@ bazinga_geocoder:
     acme:
       factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
       cache_lifetime: 10
+      cache_precision: 4
       cache: acme.cache
 
 services:

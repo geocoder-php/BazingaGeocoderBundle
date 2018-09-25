@@ -265,6 +265,7 @@ bazinga_geocoder:
             factory:  ~           # Required
             cache: 'app.cache'
             cache_lifetime: 3600
+            cache_precision: 4    # Precision of the coordinates to cache.
             limit: 5
             locale: 'sv'
             logger: 'logger'

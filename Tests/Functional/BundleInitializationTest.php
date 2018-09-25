@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
 use Geocoder\Plugin\Plugin\CachePlugin;
+use Geocoder\Plugin\Plugin\LoggerPlugin;
 use Geocoder\Plugin\PluginProvider;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\ProviderAggregator;
@@ -80,5 +81,35 @@ class BundleInitializationTest extends BaseBundleTestCase
         $plugins = NSA::getProperty($service, 'plugins');
         $this->assertNotEmpty($plugins);
         $this->assertInstanceOf(CachePlugin::class, $plugins[0]);
+    }
+
+    public function testBundleWithPluginsYml()
+    {
+        $kernel = $this->createKernel();
+        $kernel->addConfigFile(__DIR__.'/config/service_plugin.yml');
+        $this->bootKernel();
+        $container = $this->getContainer();
+
+        $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
+        $service = $container->get('bazinga_geocoder.provider.acme');
+        $this->assertInstanceOf(PluginProvider::class, $service);
+        $plugins = NSA::getProperty($service, 'plugins');
+        $this->assertCount(3, $plugins);
+        $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
+    }
+
+    public function testBundleWithPluginXml()
+    {
+        $kernel = $this->createKernel();
+        $kernel->addConfigFile(__DIR__.'/config/service_plugin.xml');
+        $this->bootKernel();
+        $container = $this->getContainer();
+
+        $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
+        $service = $container->get('bazinga_geocoder.provider.acme');
+        $this->assertInstanceOf(PluginProvider::class, $service);
+        $plugins = NSA::getProperty($service, 'plugins');
+        $this->assertNotEmpty($plugins);
+        $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
     }
 }

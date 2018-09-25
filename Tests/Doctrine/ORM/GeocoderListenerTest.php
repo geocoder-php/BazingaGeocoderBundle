@@ -21,7 +21,7 @@ use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Tests\DoctrineTestCase;
 use Doctrine\Tests\OrmTestCase;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
 
 /**
@@ -67,9 +67,7 @@ class GeocoderListenerTest extends OrmTestCase
         $reader->addNamespace('Doctrine\ORM\Mapping');
 
         $driver = new AnnotationDriver($reader);
-
-        $geocoder = new GoogleMaps(new Client());
-
+        $geocoder = Nominatim::withOpenStreetMapServer(new Client(), 'BazingaGeocoderBundle/Test');
         $this->listener = new GeocoderListener($geocoder, $driver);
 
         $this->em->getEventManager()->addEventSubscriber($this->listener);

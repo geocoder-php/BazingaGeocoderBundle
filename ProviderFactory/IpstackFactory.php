@@ -12,35 +12,32 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\Nominatim\Nominatim;
 use Geocoder\Provider\Provider;
+use Geocoder\Provider\Ipstack\Ipstack;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class NominatimFactory extends AbstractFactory
+final class IpstackFactory extends AbstractFactory
 {
     protected static $dependencies = [
-        ['requiredClass' => Nominatim::class, 'packageName' => 'geocoder-php/nominatim-provider'],
+        ['requiredClass' => Ipstack::class, 'packageName' => 'geocoder-php/ipstack-provider'],
     ];
 
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
 
-        return new Nominatim($httplug, $config['root_url'], $config['user_agent']);
+        return new Ipstack($httplug, $config['api_key']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'httplug_client' => null,
-            'root_url' => 'https://nominatim.openstreetmap.org',
-            'user_agent' => 'BazingaGeocoderBundle',
         ]);
 
+        $resolver->setRequired('api_key');
         $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
-        $resolver->setAllowedTypes('root_url', ['string']);
-        $resolver->setAllowedTypes('user_agent', ['string']);
-        $resolver->setRequired('user_agent');
+        $resolver->setAllowedTypes('api_key', ['string']);
     }
 }
