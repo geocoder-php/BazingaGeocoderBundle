@@ -16,7 +16,8 @@
     "geocoder-php/plugin": "^1.0",
     "symfony/framework-bundle": "^3.3 || ^4.0",
     "symfony/options-resolver": "^3.3 || ^4.0",
-    "symfony/console": "^3.3 || ^4.0"
+    "symfony/console": "^3.3 || ^4.0",
+    "geocoder-php/algolia-places-provider": "^0.1.0"
   },
   "require-dev": {
     "symfony/phpunit-bridge": "^3.4 || ^4.0",
