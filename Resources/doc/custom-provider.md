@@ -1,6 +1,6 @@
 # Registering Your Own Providers
 
-*[<< Back to documentation index](Resources/doc/index.md)*
+*[<< Back to documentation index](/Resources/doc/index.md)*
 
 If you want to use your own provider in your application, create a service, and tag it as `bazinga_geocoder.provider`:
 
@@ -12,7 +12,7 @@ If you want to use your own provider in your application, create a service, and 
 ```
 
 The bundle will automatically register your provider into the`Geocoder\ProviderAggregator` service. However, it will not
-show up the the web profiler because it is not registered with the [PluginProvider](Resources/doc/plguins.md).
+show up the the web profiler because it is not registered with the [PluginProvider](/Resources/doc/plugins.md).
 
 If you want your provider to show up the web profiler you have to create a custom factory for your provider.
 

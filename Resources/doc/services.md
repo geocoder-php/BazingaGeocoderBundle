@@ -1,8 +1,8 @@
 # Public services
 
-*[<< Back to documentation index](Resources/doc/index.md)*
+*[<< Back to documentation index](/Resources/doc/index.md)*
 
-This is a list of our public services. They are all part of [BC promise](Resources/doc/index.md#backwards-compatibility).
+This is a list of our public services. They are all part of [BC promise](/Resources/doc/index.md#backwards-compatibility).
 
 ### Provider Factories
 
