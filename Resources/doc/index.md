@@ -251,7 +251,7 @@ Reference Configuration
 
 You'll find the reference configuration below:
 
-``` yaml
+```yaml
 # app/config/config.yml
 bazinga_geocoder:
     profiling:
