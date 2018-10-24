@@ -2,7 +2,7 @@
 
 *[<< Back to documentation index](Resources/doc/index.md)*
 
-Wouldn't it be great if you could automatically save the coordinates of a users 
+Wouldn't it be great if you could automatically save the coordinates of a users
 address every time it is updated? Wait not more here is the feature you been always
 wanted.
 

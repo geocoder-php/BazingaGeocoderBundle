@@ -26,17 +26,17 @@ use Acme\Demo\Service\Foo;
 final class MyFactory extends AbstractFactory
 {
     private $fooService;
-    
+
     public function __construct(Foo $service) {
         $this->someService = $service;
     }
- 
+
     protected function getProvider(array $config)
     {
         return new MyProvider($this->fooService);
     }
 }
-``` 
+```
 
 ```yaml
 bazinga_geocoder:
