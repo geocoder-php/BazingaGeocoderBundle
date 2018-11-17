@@ -1,12 +1,12 @@
 # Public services
 
-*[<< Back to documentation index](Resources/doc/index.md)*
+*[<< Back to documentation index](/Resources/doc/index.md)*
 
-This is a list of our public services. They are all part of [BC promise](Resources/doc/index.md#backwards-compatibility).
+This is a list of our public services. They are all part of [BC promise](/Resources/doc/index.md#backwards-compatibility).
 
 ### Provider Factories
 
-Here is a list of all provider factories and their options. 
+Here is a list of all provider factories and their options.
 
 | Service | Options |
 | ------- | ------- |
@@ -15,7 +15,7 @@ Here is a list of all provider factories and their options.
 | `Bazinga\GeocoderBundle\ProviderFactory\ChainFactory` | services
 | `Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory` | httplug_client, base_url
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoIP2Factory` | provider, database_filename, user_id, license_key, webservice_options, locales, provider_service
-| `Bazinga\GeocoderBundle\ProviderFactory\GeoipFactory` | 
+| `Bazinga\GeocoderBundle\ProviderFactory\GeoipFactory` |
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoIPsFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\GeonamesFactory` | httplug_client, username
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoPluginFactory` | httplug_client
@@ -36,7 +36,7 @@ Here is a list of all provider factories and their options.
 
 ### Services
 
-Except for the provider factories, here is a list of services this bundle exposes are: 
+Except for the provider factories, here is a list of services this bundle exposes are:
 
 * `Geocoder\ProviderAggregator`
 * `Geocoder\Dumper\GeoArray`
