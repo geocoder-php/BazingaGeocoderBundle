@@ -14,7 +14,7 @@ namespace Bazinga\GeocoderBundle\Command;
 
 use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
-use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class GeocodeCommand extends ContainerAwareCommand
+class GeocodeCommand extends Command
 {
     protected static $defaultName = 'geocoder:geocode';
 
