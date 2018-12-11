@@ -45,10 +45,9 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('bazinga_geocoder');
+        $treeBuilder = new TreeBuilder('bazinga_geocoder');
 
-        $rootNode
+        $treeBuilder->getRootNode()
             ->children()
             ->append($this->getProvidersNode())
             ->arrayNode('profiling')
@@ -85,10 +84,9 @@ class Configuration implements ConfigurationInterface
      */
     private function getProvidersNode()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('providers');
+        $treeBuilder = new TreeBuilder('providers');
 
-        $node
+        return $treeBuilder->getRootNode()
             ->requiresAtLeastOneElement()
             ->useAttributeAsKey('name')
             ->prototype('array')
@@ -111,8 +109,6 @@ class Configuration implements ConfigurationInterface
                     ->append($this->createClientPluginNode())
                 ->end()
             ->end();
-
-        return $node;
     }
 
     /**
@@ -122,8 +118,8 @@ class Configuration implements ConfigurationInterface
      */
     private function createClientPluginNode()
     {
-        $builder = new TreeBuilder();
-        $node = $builder->root('plugins');
+        $builder = new TreeBuilder('plugins');
+        $node = $builder->getRootNode();
 
         /** @var ArrayNodeDefinition $pluginList */
         $pluginList = $node
