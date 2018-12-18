@@ -37,6 +37,15 @@ class Configuration implements ConfigurationInterface
     {
         $this->debug = (bool) $debug;
     }
+    
+    protected function getRootNode(TreeBuilder $treeBuilder, string $name)
+    {
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+             return $treeBuilder->getRootNode();
+         } else {
+             return $treeBuilder->root($name);
+         }
+    }
 
     /**
      * Generates the configuration tree builder.
@@ -47,7 +56,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('bazinga_geocoder');
 
-        $treeBuilder->getRootNode()
+        $this->getRootNode($treeBuilder, 'bazinga_geocoder')
             ->children()
             ->append($this->getProvidersNode())
             ->arrayNode('profiling')
@@ -86,7 +95,7 @@ class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder('providers');
 
-        return $treeBuilder->getRootNode()
+        return $this->getRootNode($treeBuilder, 'providers')
             ->requiresAtLeastOneElement()
             ->useAttributeAsKey('name')
             ->prototype('array')
@@ -119,7 +128,7 @@ class Configuration implements ConfigurationInterface
     private function createClientPluginNode()
     {
         $builder = new TreeBuilder('plugins');
-        $node = $builder->getRootNode();
+        $node = $this->getRootNode($builder, 'plugins');
 
         /** @var ArrayNodeDefinition $pluginList */
         $pluginList = $node
