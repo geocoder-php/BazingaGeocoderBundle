@@ -37,11 +37,11 @@ class Configuration implements ConfigurationInterface
     {
         $this->debug = (bool) $debug;
     }
-    
+
     /**
      * Proxy to get root node for Symfony < 4.2.
-     * @param TreeBuilder   $treeBuilder
-     * @param string        $name
+     * @param TreeBuilder $treeBuilder
+     * @param string      $name
      * @return NodeDefinition
      */
     protected function getRootNode(TreeBuilder $treeBuilder, string $name)
