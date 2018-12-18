@@ -40,8 +40,10 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Proxy to get root node for Symfony < 4.2.
+     *
      * @param TreeBuilder $treeBuilder
      * @param string      $name
+     *
      * @return NodeDefinition
      */
     protected function getRootNode(TreeBuilder $treeBuilder, string $name)
