@@ -39,16 +39,32 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
+     * Proxy to get root node for Symfony < 4.2.
+     *
+     * @param TreeBuilder $treeBuilder
+     * @param string      $name
+     *
+     * @return NodeDefinition
+     */
+    protected function getRootNode(TreeBuilder $treeBuilder, string $name)
+    {
+        if (\method_exists($treeBuilder, 'getRootNode')) {
+            return $treeBuilder->getRootNode();
+        } else {
+            return $treeBuilder->root($name);
+        }
+    }
+
+    /**
      * Generates the configuration tree builder.
      *
      * @return TreeBuilder The tree builder
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('bazinga_geocoder');
+        $treeBuilder = new TreeBuilder('bazinga_geocoder');
 
-        $rootNode
+        $this->getRootNode($treeBuilder, 'bazinga_geocoder')
             ->children()
             ->append($this->getProvidersNode())
             ->arrayNode('profiling')
@@ -85,10 +101,9 @@ class Configuration implements ConfigurationInterface
      */
     private function getProvidersNode()
     {
-        $treeBuilder = new TreeBuilder();
-        $node = $treeBuilder->root('providers');
+        $treeBuilder = new TreeBuilder('providers');
 
-        $node
+        return $this->getRootNode($treeBuilder, 'providers')
             ->requiresAtLeastOneElement()
             ->useAttributeAsKey('name')
             ->prototype('array')
@@ -111,8 +126,6 @@ class Configuration implements ConfigurationInterface
                     ->append($this->createClientPluginNode())
                 ->end()
             ->end();
-
-        return $node;
     }
 
     /**
@@ -122,8 +135,8 @@ class Configuration implements ConfigurationInterface
      */
     private function createClientPluginNode()
     {
-        $builder = new TreeBuilder();
-        $node = $builder->root('plugins');
+        $builder = new TreeBuilder('plugins');
+        $node = $this->getRootNode($builder, 'plugins');
 
         /** @var ArrayNodeDefinition $pluginList */
         $pluginList = $node
