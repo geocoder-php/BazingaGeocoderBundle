@@ -12,6 +12,7 @@ Here is a list of all provider factories and their options.
 | ------- | ------- |
 | `Bazinga\GeocoderBundle\ProviderFactory\ArcGISOnlineFactory` | httplug_client, source_country
 | `Bazinga\GeocoderBundle\ProviderFactory\BingMapsFactory` | httplug_client, api_key
+| `Bazinga\GeocoderBundle\ProviderFactory\BPostactory` | httplug_client
 | `Bazinga\GeocoderBundle\ProviderFactory\ChainFactory` | services
 | `Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory` | httplug_client, base_url
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoIP2Factory` | provider, database_filename, user_id, license_key, webservice_options, locales, provider_service
