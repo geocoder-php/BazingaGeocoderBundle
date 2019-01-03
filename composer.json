@@ -51,7 +51,8 @@
     "geocoder-php/nominatim-provider": "^5.0",
     "geocoder-php/maxmind-provider": "^4.0",
     "geocoder-php/mapzen-provider": "^4.0",
-    "geocoder-php/mapquest-provider": "^4.0"
+    "geocoder-php/mapquest-provider": "^4.0",
+    "symfony/validator": "^3.3 || ^4.0"
   },
   "conflict":  {
     "willdurand/geocoder": "3.2",
