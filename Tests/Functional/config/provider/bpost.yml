@@ -2,5 +2,5 @@ bazinga_geocoder:
   profiling:
     enabled: false
   providers:
-    empty:
+    acme:
       factory: Bazinga\GeocoderBundle\ProviderFactory\BPostFactory
