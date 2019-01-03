@@ -26,7 +26,7 @@ final class BPostFactory extends AbstractFactory
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
-        
+
         return new bpost($httplug);
     }
 
