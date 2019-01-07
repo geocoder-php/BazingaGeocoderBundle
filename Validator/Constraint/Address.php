@@ -28,7 +28,7 @@ class Address extends Constraint
         self::INVALID_ADDRESS_ERROR => 'INVALID_ADDRESS_ERROR',
     ];
 
-    public $service = 'Bazinga\GeocoderBundle\Validator\Constraints\AddressValidator';
+    public $service = AddressValidator::class;
 
     public $message = 'Address {{ address }} is not valid.';
 
