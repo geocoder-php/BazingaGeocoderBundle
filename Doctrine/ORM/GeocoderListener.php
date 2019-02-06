@@ -86,12 +86,19 @@ class GeocoderListener implements EventSubscriber
     {
         $metadata = $this->driver->loadMetadataFromObject($entity);
         $address = $metadata->addressProperty->getValue($entity);
-        $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($address));
+        if (!empty($address)) {
+            try {
+                 $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($address));
 
-        if (!empty($results)) {
-            $result = $results->first();
-            $metadata->latitudeProperty->setValue($entity, $result->getCoordinates()->getLatitude());
-            $metadata->longitudeProperty->setValue($entity, $result->getCoordinates()->getLongitude());
+                if (!empty($results)) {
+                    $result = $results->first();
+                    $metadata->latitudeProperty->setValue($entity, $result->getCoordinates()->getLatitude());
+                    $metadata->longitudeProperty->setValue($entity, $result->getCoordinates()->getLongitude());
+                }
+            } catch(\Geocoder\Exception\Exception $e) {
+                // todo log?   
+            }
         }
+       
     }
 }
