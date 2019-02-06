@@ -95,7 +95,7 @@ class GeocoderListener implements EventSubscriber
                     $metadata->latitudeProperty->setValue($entity, $result->getCoordinates()->getLatitude());
                     $metadata->longitudeProperty->setValue($entity, $result->getCoordinates()->getLongitude());
                 }
-            } catch(\Geocoder\Exception\Exception $e) {
+            } catch(\Exception $e) {
                 // todo log?   
             }
         }
