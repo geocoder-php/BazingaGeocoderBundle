@@ -31,14 +31,27 @@ class AnnotationDriver implements DriverInterface
 
     public function isGeocodeable($object): bool
     {
-        $reflection = new \ReflectionObject($object);
+        $reflection = new \ReflectionClass($object);
+
+        // check if object is a doctrine proxy object
+        if ($object instanceof \Doctrine\Common\Persistence\Proxy) {
+            // This gets the real object, the one that the Proxy extends
+            $reflection = $reflection->getParentClass();
+        }
 
         return (bool) $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class);
     }
 
     public function loadMetadataFromObject($object)
     {
-        $reflection = new \ReflectionObject($object);
+         $reflection = new \ReflectionClass($object);
+
+        // check if object is a doctrine proxy object
+        if ($object instanceof \Doctrine\Common\Persistence\Proxy) {
+            // This gets the real object, the one that the Proxy extends
+            $reflection = $reflection->getParentClass();
+        }
+        
         if (!$annotation = $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class)) {
             throw new Exception\MappingException(sprintf(
                 'The class %s is not geocodeable', get_class($object)
