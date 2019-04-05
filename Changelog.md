@@ -13,6 +13,7 @@ The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" 
 - SF 4.2 Compliance
 - Fix another SF 4.2 deprecation
 - Doc fixes
+- Custom vendor location symfony 4
 
 ## Version 5.3.0
 

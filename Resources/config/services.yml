@@ -1,6 +1,25 @@
 services:
-    Geocoder\Dumper\:
-        resource: '%kernel.project_dir%/vendor/willdurand/geocoder/Dumper'
+    Geocoder\Dumper\GeoArray:
+        public: true
+        tags: ['bazinga_geocoder.dumper']
+
+    Geocoder\Dumper\GeoJson:
+        public: true
+        tags: ['bazinga_geocoder.dumper']
+
+    Geocoder\Dumper\Gpx:
+        public: true
+        tags: ['bazinga_geocoder.dumper']
+
+    Geocoder\Dumper\Kml:
+        public: true
+        tags: ['bazinga_geocoder.dumper']
+
+    Geocoder\Dumper\Wkb:
+        public: true
+        tags: ['bazinga_geocoder.dumper']
+
+    Geocoder\Dumper\Wkt:
         public: true
         tags: ['bazinga_geocoder.dumper']
 
