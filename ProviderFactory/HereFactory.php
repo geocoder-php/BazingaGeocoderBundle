@@ -27,7 +27,7 @@ final class HereFactory extends AbstractFactory
     {
         $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
 
-        return new Here($httplug, $config['app_id'], $config['app_code']);
+        return new Here($httplug, $config['app_id'], $config['app_code'], $config['use_cit']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
@@ -36,10 +36,12 @@ final class HereFactory extends AbstractFactory
             'httplug_client' => null,
             'app_id' => null,
             'app_code' => null,
+            'use_cit' => false,
         ]);
 
         $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('app_id', ['string', 'null']);
         $resolver->setAllowedTypes('app_code', ['string', 'null']);
+        $resolver->setAllowedTypes('use_cit', ['bool', 'false']);
     }
 }
