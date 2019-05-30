@@ -13,6 +13,9 @@ tool](http://cs.sensiolabs.org/).
 
 You MUST run the test suite.
 
+    vendor/bin/simple-phpunit -v --testsuite main
+    vendor/bin/simple-phpunit -v --testsuite doctrine
+
 You MUST write (or update) unit tests.
 
 You SHOULD write documentation.

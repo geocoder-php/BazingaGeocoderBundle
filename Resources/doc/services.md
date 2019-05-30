@@ -20,6 +20,7 @@ Here is a list of all provider factories and their options.
 | `Bazinga\GeocoderBundle\ProviderFactory\GeonamesFactory` | httplug_client, username
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoPluginFactory` | httplug_client
 | `Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory` | httplug_client, api_key, region
+| `Bazinga\GeocoderBundle\ProviderFactory\HereFactory` | httplug_client, api_id, api_code
 | `Bazinga\GeocoderBundle\ProviderFactory\HostIpFactory` | httplug_client
 | `Bazinga\GeocoderBundle\ProviderFactory\IpInfoFactory` | httplug_client
 | `Bazinga\GeocoderBundle\ProviderFactory\IpInfoDbFactory` | httplug_client, api_key, precision

@@ -1,0 +1,12 @@
+bazinga_geocoder:
+  profiling:
+    enabled: false
+  providers:
+    empty:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\HereFactory
+
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\HereFactory
+      options:
+        api_id:   'foo'
+        api_code: 'bar'
