@@ -23,6 +23,7 @@ use Geocoder\Provider\GeoIPs\GeoIPs;
 use Geocoder\Provider\Geonames\Geonames;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\Provider\Here\Here;
 use Geocoder\Provider\HostIp\HostIp;
 use Geocoder\Provider\IpInfo\IpInfo;
 use Geocoder\Provider\IpInfoDb\IpInfoDb;
@@ -66,6 +67,7 @@ class ProviderFactoryTest extends BaseBundleTestCase
             [Geonames::class, ['acme']],
             [GeoPlugin::class, ['empty']],
             [GoogleMaps::class, ['empty']],
+            [Here::class, ['acme']],
             [HostIp::class, ['empty']],
             [IpInfo::class, ['acme']],
             [IpInfoDb::class, ['empty', 'acme']],
