@@ -23,6 +23,7 @@ use Geocoder\Plugin\Plugin\LimitPlugin;
 use Geocoder\Plugin\Plugin\LocalePlugin;
 use Geocoder\Plugin\Plugin\LoggerPlugin;
 use Geocoder\Plugin\PluginProvider;
+use Geocoder\Provider\Provider;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -30,6 +31,7 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * William Durand <william.durand1@gmail.com>.
@@ -89,6 +91,10 @@ class BazingaGeocoderExtension extends Extension
             $def->addTag('bazinga_geocoder.provider');
             foreach ($providerConfig['aliases'] as $alias) {
                 $container->setAlias($alias, $serviceId);
+            }
+
+            if (Kernel::VERSION_ID > 40200) {
+                $container->registerAliasForArgument($serviceId, Provider::class, "{$providerName}Geocoder");
             }
         }
     }

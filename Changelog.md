@@ -2,6 +2,19 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.4.0
+
+### Added
+
+- Add address validator constraint
+
+### Fixed
+
+- SF 4.2 Compliance
+- Fix another SF 4.2 deprecation
+- Doc fixes
+- Custom vendor location symfony 4
+
 ## Version 5.3.0
 
 ### Added 
