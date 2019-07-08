@@ -14,10 +14,6 @@ into Symfony. It integrates seamlessly with the Symfony profiler. You can
 check number of queries executed by each provider, total execution time
 and geocoding results.
 
-> **Note**: You are browsing the docs for the 5.x release. Our older 4.x docs are 
-[found here](https://github.com/geocoder-php/BazingaGeocoderBundle/tree/4.x). Version
-4.x will be activly supported until 2018-02-25. 
-
 ![Example
 Toolbar](Resources/doc/toolbar.png)
 
