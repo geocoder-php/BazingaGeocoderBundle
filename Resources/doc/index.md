@@ -146,7 +146,7 @@ public function indexAction(Request $request)
         ->geocodeQuery(GeocodeQuery::create($request->server->get('REMOTE_ADDR')));
 
     // Find the 5 nearest objects (15km) from the current user.
-    $coords = $result->first()->getCoordinates();;
+    $coords = $result->first()->getCoordinates();
     $objects = ObjectQuery::create()
         ->filterByDistanceFrom($coords->getLatitude(), $coords->getLongitude(), 15)
         ->limit(5)
