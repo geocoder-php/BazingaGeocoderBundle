@@ -13,6 +13,12 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
+use Geocoder\Dumper\GeoArray;
+use Geocoder\Dumper\GeoJson;
+use Geocoder\Dumper\Gpx;
+use Geocoder\Dumper\Kml;
+use Geocoder\Dumper\Wkb;
+use Geocoder\Dumper\Wkt;
 use Geocoder\Plugin\Plugin\CachePlugin;
 use Geocoder\Plugin\Plugin\LoggerPlugin;
 use Geocoder\Plugin\PluginProvider;
@@ -111,5 +117,18 @@ class BundleInitializationTest extends BaseBundleTestCase
         $plugins = NSA::getProperty($service, 'plugins');
         $this->assertNotEmpty($plugins);
         $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
+    }
+
+    public function testBundleHasRegisteredDumpers()
+    {
+        $this->bootKernel();
+        $container = $this->getContainer();
+
+        $this->assertTrue($container->has(GeoArray::class));
+        $this->assertTrue($container->has(GeoJson::class));
+        $this->assertTrue($container->has(Gpx::class));
+        $this->assertTrue($container->has(Kml::class));
+        $this->assertTrue($container->has(Wkb::class));
+        $this->assertTrue($container->has(Wkt::class));
     }
 }
