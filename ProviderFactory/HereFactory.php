@@ -39,5 +39,6 @@ final class HereFactory extends AbstractFactory
 
         $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('use_cit', ['bool', 'false']);
+        $resolver->setRequired(['app_id', 'app_code']);
     }
 }
