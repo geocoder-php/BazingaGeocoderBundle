@@ -19,7 +19,7 @@
     "symfony/console": "^3.3 || ^4.0"
   },
   "require-dev": {
-    "symfony/phpunit-bridge": "^3.4 || ^4.0",
+    "symfony/phpunit-bridge": "^4.3",
     "symfony/yaml": "^3.3 || ^4.0",
     "geoip/geoip": "~1.17",
     "doctrine/cache": "~1.3",
