@@ -34,7 +34,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\HttpKernel\Kernel;
 
 /**
- * William Durand <william.durand1@gmail.com>.
+ * @author William Durand <william.durand1@gmail.com>.
  */
 class BazingaGeocoderExtension extends Extension
 {
