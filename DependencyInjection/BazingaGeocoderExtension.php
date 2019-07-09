@@ -67,7 +67,7 @@ class BazingaGeocoderExtension extends Extension
             try {
                 $factoryService = $container->getDefinition($providerConfig['factory']);
                 $factoryClass = $factoryService->getClass() ?: $providerConfig['factory'];
-                if (!$this->implementsPoviderFactory($factoryClass)) {
+                if (!$this->implementsProviderFactory($factoryClass)) {
                     throw new \LogicException(sprintf('Provider factory "%s" must implement ProviderFactoryInterface', $providerConfig['factory']));
                 }
                 // See if any option has a service reference
@@ -199,12 +199,12 @@ class BazingaGeocoderExtension extends Extension
      *
      * @return bool
      */
-    private function implementsPoviderFactory($factoryClass): bool
+    private function implementsProviderFactory($factoryClass): bool
     {
         if (false === $interfaces = class_implements($factoryClass)) {
             return false;
         }
 
-        return in_array(ProviderFactoryInterface::class, $interfaces);
+        return in_array(ProviderFactoryInterface::class, $interfaces, true);
     }
 }
