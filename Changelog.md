@@ -2,6 +2,23 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.5.0
+
+### Added
+
+- Add autowiring bindings by Provider interface + providerName
+- Exposes Here provider to the bundle
+
+### Fixed
+
+- Add missing tag for AddressValidator constraint
+
+### Changed
+
+- Update readme
+- Fix method name
+- Drop unmaintained Symfony versions support
+
 ## Version 5.4.0
 
 ### Added
