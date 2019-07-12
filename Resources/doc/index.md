@@ -129,6 +129,41 @@ bazinga_geocoder:
 
 The `services` key could also be as follows `services: ['@my_geocoder', '@my_geocoder_ii']`. Notice these are the values from the `aliases` key.
 
+### Autowiring Providers
+
+If you're using Symfony 4.3 and autowiring you can use bindings provided
+the bundle.
+
+```yaml
+bazinga_geocoder:
+    providers:
+        googleMaps:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+```
+
+```php
+<?php
+
+namespace App\Service;
+
+use Geocoder\Provider\Provider;
+
+class MyService
+{
+    private $googleMapsGeocoder;
+
+    public function __construct(Provider $googleMapsGeocoder)
+    {
+        $this->googleMapsGeocoder = $googleMapsGeocoder;
+    }
+}
+```
+
+Each configured provider has a binding in the following format:
+`providerName + Geocoder`.
+
+In the example we configured provider name as `googleMaps` so the argument is `$googleMapsGeocoder`.
+
 ### Fake local ip
 
 You can fake your local IP through this bundle in order to get location
