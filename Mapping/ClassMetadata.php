@@ -31,4 +31,9 @@ class ClassMetadata
      * @var \ReflectionProperty
      */
     public $longitudeProperty;
+
+    /**
+     * @var \ReflectionMethod
+     */
+    public $addressGetter;
 }
