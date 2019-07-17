@@ -33,10 +33,6 @@ class FakeIpPlugin implements Plugin
      */
     private $replacement;
 
-    /**
-     * @param string $needle
-     * @param string $replacement
-     */
     public function __construct(string $needle, string $replacement)
     {
         $this->needle = $needle;

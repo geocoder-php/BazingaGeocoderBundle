@@ -30,8 +30,6 @@ class AddProvidersPass implements CompilerPassInterface
     /**
      * Get all providers based on their tag (`bazinga_geocoder.provider`) and
      * register them.
-     *
-     * @param ContainerBuilder $container
      */
     public function process(ContainerBuilder $container)
     {

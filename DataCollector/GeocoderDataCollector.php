@@ -63,8 +63,6 @@ class GeocoderDataCollector extends DataCollector
 
     /**
      * Returns an array of collected requests.
-     *
-     * @return array
      */
     public function getQueries(): array
     {
@@ -73,8 +71,6 @@ class GeocoderDataCollector extends DataCollector
 
     /**
      * Returns the execution time of all collected requests in seconds.
-     *
-     * @return float
      */
     public function getTotalDuration(): float
     {
@@ -86,19 +82,11 @@ class GeocoderDataCollector extends DataCollector
         return $time;
     }
 
-    /**
-     * @return array
-     */
     public function getProviders(): array
     {
         return $this->data['providers'];
     }
 
-    /**
-     * @param string $provider
-     *
-     * @return array
-     */
     public function getProviderQueries(string $provider): array
     {
         return array_filter($this->data['queries'], function ($data) use ($provider) {
@@ -106,9 +94,6 @@ class GeocoderDataCollector extends DataCollector
         });
     }
 
-    /**
-     * @param ProfilingPlugin $instance
-     */
     public function addInstance(ProfilingPlugin $instance)
     {
         $this->instances[] = $instance;

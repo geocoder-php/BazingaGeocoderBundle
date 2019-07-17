@@ -32,9 +32,6 @@ class GeocodeCommand extends Command
      */
     private $geocoder;
 
-    /**
-     * @param ProviderAggregator $geocoder
-     */
     public function __construct(ProviderAggregator $geocoder)
     {
         $this->geocoder = $geocoder;

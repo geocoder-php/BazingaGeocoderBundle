@@ -26,11 +26,6 @@ abstract class AbstractFactory implements ProviderFactoryInterface
 {
     protected static $dependencies = [];
 
-    /**
-     * @param array $config
-     *
-     * @return Provider
-     */
     abstract protected function getProvider(array $config): Provider;
 
     /**
@@ -94,8 +89,6 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * By default we do not have any options to configure. A factory should override this function and confgure
      * the options resolver.
-     *
-     * @param OptionsResolver $resolver
      */
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
