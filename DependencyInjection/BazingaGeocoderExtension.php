@@ -101,12 +101,6 @@ class BazingaGeocoderExtension extends Extension
 
     /**
      * Configure plugins for a client.
-     *
-     * @param ContainerBuilder $container
-     * @param array            $config
-     * @param string           $providerServiceId
-     *
-     * @return array
      */
     public function configureProviderPlugins(ContainerBuilder $container, array $config, string $providerServiceId): array
     {
@@ -176,11 +170,6 @@ class BazingaGeocoderExtension extends Extension
         return new Configuration($container->getParameter('kernel.debug'));
     }
 
-    /**
-     * @param array $options
-     *
-     * @return array
-     */
     private function findReferences(array $options): array
     {
         foreach ($options as $key => $value) {
@@ -196,8 +185,6 @@ class BazingaGeocoderExtension extends Extension
 
     /**
      * @param mixed $factoryClass
-     *
-     * @return bool
      */
     private function implementsProviderFactory($factoryClass): bool
     {

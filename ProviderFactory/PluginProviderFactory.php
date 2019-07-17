@@ -27,8 +27,6 @@ final class PluginProviderFactory
      * @param ProviderFactoryInterface|callable $factory
      * @param array                             $config                config to the client factory
      * @param array                             $pluginProviderOptions config forwarded to the PluginProvider
-     *
-     * @return PluginProvider
      */
     public static function createPluginProvider(array $plugins, $factory, array $config, array $pluginProviderOptions = []): PluginProvider
     {

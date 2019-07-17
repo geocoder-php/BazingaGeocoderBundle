@@ -35,9 +35,6 @@ class ProfilingPlugin implements Plugin
      */
     private $name;
 
-    /**
-     * @param string $name
-     */
     public function __construct(string $name)
     {
         $this->name = $name;
@@ -61,8 +58,6 @@ class ProfilingPlugin implements Plugin
     }
 
     /**
-     * @param Query                $query
-     * @param float                $duration geocoding duration
      * @param Collection|Exception $result
      */
     private function logQuery(Query $query, float $duration, $result = null)
@@ -85,17 +80,11 @@ class ProfilingPlugin implements Plugin
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getQueries(): array
     {
         return $this->queries;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
