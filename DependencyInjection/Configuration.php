@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\Config\Definition\Builder\NodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
@@ -42,7 +41,7 @@ class Configuration implements ConfigurationInterface
     /**
      * Proxy to get root node for Symfony < 4.2.
      *
-     * @return NodeDefinition
+     * @return ArrayNodeDefinition
      */
     protected function getRootNode(TreeBuilder $treeBuilder, string $name)
     {
@@ -104,7 +103,7 @@ class Configuration implements ConfigurationInterface
         return $this->getRootNode($treeBuilder, 'providers')
             ->requiresAtLeastOneElement()
             ->useAttributeAsKey('name')
-            ->prototype('array')
+            ->arrayPrototype()
             ->fixXmlConfig('plugin')
                 ->children()
                     ->scalarNode('factory')->isRequired()->cannotBeEmpty()->end()
@@ -119,7 +118,7 @@ class Configuration implements ConfigurationInterface
                     ->scalarNode('locale')->defaultNull()->end()
                     ->scalarNode('logger')->defaultNull()->end()
                     ->arrayNode('aliases')
-                        ->prototype('scalar')->end()
+                        ->scalarPrototype()->end()
                     ->end()
                     ->append($this->createClientPluginNode())
                 ->end()
@@ -139,7 +138,7 @@ class Configuration implements ConfigurationInterface
         /** @var ArrayNodeDefinition $pluginList */
         $pluginList = $node
             ->info('A list of plugin service ids. The order is important.')
-            ->prototype('array')
+            ->arrayPrototype()
         ;
         $pluginList
             // support having just a service id in the list

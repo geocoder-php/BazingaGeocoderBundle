@@ -1,0 +1,14 @@
+parameters:
+	paths:
+		- %currentWorkingDirectory%
+	excludes_analyse:
+		- ./vendor/
+		- ./Tests/
+	level: 2
+	ignoreErrors:
+		-
+			path: %currentWorkingDirectory%/DependencyInjection/Configuration.php
+			message: '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::(end|variableNode)#'
+		-
+			path: %currentWorkingDirectory%/ProviderFactory/GeoipFactory.php
+			message: '#Geocoder\\Provider\\Geoip\\Geoip not found#'
