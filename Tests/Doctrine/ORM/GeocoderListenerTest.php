@@ -74,13 +74,15 @@ class GeocoderListenerTest extends OrmTestCase
 
         $sm = new SchemaTool($this->em);
         $sm->createSchema([
-            $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\Dummy'),
+            $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\DummyWithProperty'),
+            $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\DummyWithGetter'),
+            $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\DummyWithInvalidGetter'),
         ]);
     }
 
-    public function testPersist()
+    public function testPersistForProperty()
     {
-        $dummy = new Dummy();
+        $dummy = new DummyWithProperty();
         $dummy->address = 'Berlin, Germany';
 
         $this->em->persist($dummy);
@@ -98,13 +100,46 @@ class GeocoderListenerTest extends OrmTestCase
         $this->assertNotEquals($clone->latitude, $dummy->latitude);
         $this->assertNotEquals($clone->longitude, $dummy->longitude);
     }
+
+    public function testPersistForGetter()
+    {
+        $dummy = new DummyWithGetter();
+        $dummy->setAddress('Berlin, Germany');
+
+        $this->em->persist($dummy);
+        $this->em->flush();
+
+        $this->assertNotNull($dummy->getLatitude());
+        $this->assertNotNull($dummy->getLongitude());
+
+        $clone = clone $dummy;
+        $dummy->setAddress('Paris, France');
+
+        $this->em->persist($dummy);
+        $this->em->flush();
+
+        $this->assertNotEquals($clone->getLatitude(), $dummy->getLatitude());
+        $this->assertNotEquals($clone->getLongitude(), $dummy->getLongitude());
+    }
+
+    public function testPersistForInvalidGetter()
+    {
+        $dummy = new DummyWithInvalidGetter();
+        $dummy->setAddress('Berlin, Germany');
+
+        $this->em->persist($dummy);
+
+        $this->expectException(\Exception::class);
+
+        $this->em->flush();
+    }
 }
 
 /**
  * @Geocodeable
  * @Entity
  */
-class Dummy
+class DummyWithProperty
 {
     /**
      * @Id @GeneratedValue
@@ -129,4 +164,130 @@ class Dummy
      * @Column
      */
     public $address;
+}
+
+/**
+ * @Geocodeable
+ * @Entity
+ */
+class DummyWithGetter
+{
+    /**
+     * @Id @GeneratedValue
+     * @Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @Latitude
+     * @Column
+     */
+    private $latitude;
+
+    /**
+     * @Longitude
+     * @Column
+     */
+    private $longitude;
+
+    /**
+     * @Column
+     */
+    private $_address;
+
+    public function setAddress($address)
+    {
+        $this->_address = $address;
+    }
+
+    /**
+     * @Address
+     */
+    public function getAddress()
+    {
+        return $this->_address;
+    }
+
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
+}
+
+/**
+ * @Geocodeable
+ * @Entity
+ */
+class DummyWithInvalidGetter
+{
+    /**
+     * @Id @GeneratedValue
+     * @Column(type="integer")
+     */
+    private $id;
+
+    /**
+     * @Latitude
+     * @Column
+     */
+    private $latitude;
+
+    /**
+     * @Longitude
+     * @Column
+     */
+    private $longitude;
+
+    /**
+     * @Column
+     */
+    private $_address;
+
+    public function setAddress($address)
+    {
+        $this->_address = $address;
+    }
+
+    /**
+     * @Address
+     */
+    public function getAddress($requiredParameter)
+    {
+        return $this->_address;
+    }
+
+    public function getLatitude()
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude($latitude)
+    {
+        $this->latitude = $latitude;
+    }
+
+    public function getLongitude()
+    {
+        return $this->longitude;
+    }
+
+    public function setLongitude($longitude)
+    {
+        $this->longitude = $longitude;
+    }
 }

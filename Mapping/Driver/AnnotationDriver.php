@@ -62,6 +62,16 @@ class AnnotationDriver implements DriverInterface
             }
         }
 
+        foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+            if ($this->reader->getMethodAnnotation($method, Annotations\Address::class)) {
+                if (0 !== $method->getNumberOfRequiredParameters()) {
+                    throw new \Exception('You can not use a method requiring parameters with @Address annotation!');
+                }
+
+                $metadata->addressGetter = $method;
+            }
+        }
+
         return $metadata;
     }
 }

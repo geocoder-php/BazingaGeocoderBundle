@@ -34,6 +34,37 @@ class User
 }
 ```
 
+Instead of annotating a property, you can also annotate a getter:
+
+```php
+
+use Bazinga\GeocoderBundle\Mapping\Annotations as Geocoder;
+
+/**
+ * @Geocoder\Geocodeable
+ */
+class User
+{
+    /**
+     * @Geocoder\Latitude
+     */
+    private $latitude;
+
+    /**
+     * @Geocoder\Longitude
+     */
+    private $longitude;
+    
+    /**
+     * @Geocoder\Address
+     */
+    public function getAddress(): string
+    {
+        // Your code...
+    }
+}
+```
+
 Secondly, register the Doctrine event listener and its dependencies in your `services.yaml` file.  
 You have to indicate which provider to use to reverse geocode the address. Here we use `acme` provider we declared in bazinga_geocoder configuration earlier.
 
