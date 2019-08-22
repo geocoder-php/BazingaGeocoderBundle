@@ -69,7 +69,7 @@
     "test": "vendor/bin/simple-phpunit --testsuite main"
   },
   "config": {
-   "sort-packages": true
+    "sort-packages": true
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
