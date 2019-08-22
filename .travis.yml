@@ -24,7 +24,8 @@ matrix:
         - php: 7.0
         - php: 7.1
         - php: 7.2
-          env: COVERAGE=true PHPUNIT_FLAGS="-v --testsuite main --coverage-text --coverage-clover=build/coverage.xml" DEPENDENCIES="phpstan/phpstan"
+        - php: 7.3
+          env: COVERAGE=true PHPUNIT_FLAGS="-v --testsuite main --coverage-text --coverage-clover=build/coverage.xml"
 
         - php: 7.1
           # We need `--prefer-source`, otherwise the `Doctrine\Tests\OrmTestCase` class won't be found.
@@ -54,10 +55,6 @@ install:
 script:
     - composer validate --strict --no-check-lock
     - ./vendor/bin/simple-phpunit $PHPUNIT_FLAGS
-    - |
-        if [[ $COVERAGE == true ]]; then
-          vendor/bin/phpstan analyze -c phpstan.neon.dist --no-interaction --no-progress
-        fi
 
 after_success:
     - if [[ $COVERAGE = true ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
