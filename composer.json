@@ -11,7 +11,7 @@
     }
   ],
   "require": {
-    "php": "^7.0",
+    "php": "^7.1",
     "geocoder-php/plugin": "^1.0",
     "symfony/console": "^3.4 || ^4.2",
     "symfony/framework-bundle": "^3.4 || ^4.2",
