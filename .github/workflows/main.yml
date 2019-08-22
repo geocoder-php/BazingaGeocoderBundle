@@ -19,24 +19,4 @@ jobs:
             - name: PHP-CS-Fixer
               uses: docker://oskarstark/php-cs-fixer-ga
               with:
-                args: --diff --dry-run
-
-    php-cs-fixer_udiff:
-        name: PHP-CS-Fixer-udiff
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@master
-            - name: PHP-CS-Fixer
-              uses: docker://oskarstark/php-cs-fixer-ga
-              with:
                 args: --dry-run --diff-format udiff
-
-    php-cs-fixer_udiff_diff:
-        name: PHP-CS-Fixer-udiff-diff
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@master
-            - name: PHP-CS-Fixer
-              uses: docker://oskarstark/php-cs-fixer-ga
-              with:
-                args: --diff --dry-run --diff-format udiff
