@@ -16,7 +16,8 @@
     "symfony/console": "^3.4 || ^4.2",
     "symfony/framework-bundle": "^3.4 || ^4.2",
     "symfony/options-resolver": "^3.4 || ^4.2",
-    "willdurand/geocoder": "^4.0"
+    "willdurand/geocoder": "^4.0",
+    "php-http/discovery": "^1.7"
   },
   "require-dev": {
     "doctrine/cache": "~1.3",
