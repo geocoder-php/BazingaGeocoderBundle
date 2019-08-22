@@ -15,6 +15,7 @@ namespace Bazinga\GeocoderBundle\Tests\Functional;
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
 use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
 use Geocoder\Provider\BingMaps\BingMaps;
+use Geocoder\Provider\bpost\bpost;
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
 use Geocoder\Provider\Geoip\Geoip;
@@ -59,6 +60,7 @@ class ProviderFactoryTest extends BaseBundleTestCase
         return [
             [ArcGISOnline::class, ['empty', 'acme']],
             [BingMaps::class, ['acme']],
+            [bpost::class, ['acme']],
             [Chain::class, ['acme']],
             [FreeGeoIp::class, ['empty', 'acme']],
             //[Geoip::class, ['empty']],
