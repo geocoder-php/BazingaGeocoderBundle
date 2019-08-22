@@ -9,7 +9,7 @@ jobs:
             - name: PHPStan
               uses: docker://oskarstark/phpstan-ga
               with:
-                  args: analyze
+                  args: analyze --no-progress
 
     php-cs-fixer:
         name: PHP-CS-Fixer
