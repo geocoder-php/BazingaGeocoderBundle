@@ -2,6 +2,26 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.6.0
+
+### Added
+
+- Added missing step in Doctrine documentation
+- Address annotation can be used over a getter
+- Add docs about autowiring
+- Integrate phpstan at level 2
+- Adding github actions
+
+### Changed
+
+- Deprecate MapzenFactory
+- Deprecate GeoIPsFactory
+- Rename Changelog.md to CHANGELOG.md
+
+### Removed
+
+- Remove useless phpdocs
+
 ## Version 5.5.0
 
 ### Added
