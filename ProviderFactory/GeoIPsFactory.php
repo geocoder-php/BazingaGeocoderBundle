@@ -17,6 +17,11 @@ use Geocoder\Provider\Provider;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+@trigger_error('Bazinga\GeocoderBundle\ProviderFactory\GeoIPsFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/965', E_USER_DEPRECATED);
+
+/**
+ * @deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/965
+ */
 final class GeoIPsFactory extends AbstractFactory
 {
     protected static $dependencies = [
