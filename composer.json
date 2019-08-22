@@ -13,11 +13,11 @@
   "require": {
     "php": "^7.1",
     "geocoder-php/plugin": "^1.0",
+    "php-http/discovery": "^1.7",
     "symfony/console": "^3.4 || ^4.2",
     "symfony/framework-bundle": "^3.4 || ^4.2",
     "symfony/options-resolver": "^3.4 || ^4.2",
-    "willdurand/geocoder": "^4.0",
-    "php-http/discovery": "^1.7"
+    "willdurand/geocoder": "^4.0"
   },
   "require-dev": {
     "doctrine/cache": "~1.3",
@@ -67,6 +67,9 @@
   },
   "scripts": {
     "test": "vendor/bin/simple-phpunit --testsuite main"
+  },
+  "config": {
+   "sort-packages": true
   },
   "minimum-stability": "dev",
   "prefer-stable": true,
