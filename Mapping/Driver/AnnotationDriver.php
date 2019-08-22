@@ -31,7 +31,7 @@ class AnnotationDriver implements DriverInterface
 
     public function isGeocodeable($object): bool
     {
-        $reflection = new ReflectionObject($object);
+        $reflection = new \ReflectionObject($object);
 
         return (bool) $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class);
     }
