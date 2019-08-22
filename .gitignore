@@ -1,5 +1,5 @@
-build/
 composer.lock
 composer.phar
 phpunit.xml
 vendor/
+.php_cs.cache
