@@ -75,6 +75,7 @@ class GeocoderListenerTest extends OrmTestCase
         $sm = new SchemaTool($this->em);
         $sm->createSchema([
             $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\DummyWithProperty'),
+            $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\DummyWithEmptyProperty'),
             $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\DummyWithGetter'),
             $this->em->getClassMetadata('Bazinga\GeocoderBundle\Tests\Doctrine\ORM\DummyWithInvalidGetter'),
         ]);
@@ -132,6 +133,18 @@ class GeocoderListenerTest extends OrmTestCase
         $this->expectException(\Exception::class);
 
         $this->em->flush();
+    }
+
+    public function testPersistForEmptyProperty()
+    {
+        $dummy = new DummyWithEmptyProperty();
+        $dummy->address = '';
+
+        $this->em->persist($dummy);
+        $this->em->flush();
+
+        $this->assertNull($dummy->latitude);
+        $this->assertNull($dummy->longitude);
     }
 }
 
@@ -290,4 +303,35 @@ class DummyWithInvalidGetter
     {
         $this->longitude = $longitude;
     }
+}
+
+/**
+ * @Geocodeable
+ * @Entity
+ */
+class DummyWithEmptyProperty
+{
+    /**
+     * @Id @GeneratedValue
+     * @Column(type="integer")
+     */
+    public $id;
+
+    /**
+     * @Latitude
+     * @Column(nullable=true)
+     */
+    public $latitude;
+
+    /**
+     * @Longitude
+     * @Column(nullable=true)
+     */
+    public $longitude;
+
+    /**
+     * @Address
+     * @Column
+     */
+    public $address;
 }

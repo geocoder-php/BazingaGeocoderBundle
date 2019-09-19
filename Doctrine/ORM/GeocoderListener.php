@@ -94,6 +94,10 @@ class GeocoderListener implements EventSubscriber
             $address = $metadata->addressProperty->getValue($entity);
         }
 
+        if (empty($address)) {
+            return;
+        }
+
         $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($address));
 
         if (!empty($results)) {
