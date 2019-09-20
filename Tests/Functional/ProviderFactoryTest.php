@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
+use Geocoder\Provider\AlgoliaPlaces\AlgoliaPlaces;
 use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
 use Geocoder\Provider\BingMaps\BingMaps;
 use Geocoder\Provider\Chain\Chain;
@@ -57,6 +58,7 @@ class ProviderFactoryTest extends BaseBundleTestCase
     public function getProviders()
     {
         return [
+            [AlgoliaPlaces::class, ['empty', 'acme']],
             [ArcGISOnline::class, ['empty', 'acme']],
             [BingMaps::class, ['acme']],
             [Chain::class, ['acme']],
