@@ -89,6 +89,31 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(CachePlugin::class, $plugins[0]);
     }
 
+    public function testCacheLifetimeCanBeNull()
+    {
+        $kernel = $this->createKernel();
+        $kernel->addConfigFile(__DIR__.'/config/cache_without_lifetime.yml');
+
+        $this->bootKernel();
+
+        $container = $this->getContainer();
+
+        self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
+
+        /** @var PluginProvider $service */
+        $service = $container->get('bazinga_geocoder.provider.acme');
+        self::assertInstanceOf(PluginProvider::class, $service);
+
+        $plugins = NSA::getProperty($service, 'plugins');
+        self::assertCount(1, $plugins);
+
+        $cachePlugin = array_shift($plugins);
+        self::assertInstanceOf(CachePlugin::class, $cachePlugin);
+
+        $cacheLifeTime = NSA::getProperty($cachePlugin, 'lifetime');
+        self::assertNull($cacheLifeTime);
+    }
+
     public function testBundleWithPluginsYml()
     {
         $kernel = $this->createKernel();
