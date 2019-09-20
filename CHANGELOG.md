@@ -2,6 +2,19 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.7.0
+
+### Added
+
+- Add Algolia provider factory
+
+### Changed
+
+- Skip empty address values in listener
+- Allow cache lifetime as null
+- Update dev dependencies
+- Make sure we run action on PRs
+
 ## Version 5.6.0
 
 ### Added
