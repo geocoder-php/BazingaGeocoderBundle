@@ -14,13 +14,17 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\Provider;
+use Psr\Log\LoggerAwareInterface;
+use Psr\Log\LoggerAwareTrait;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-final class ChainFactory extends AbstractFactory
+final class ChainFactory extends AbstractFactory implements LoggerAwareInterface
 {
+    use LoggerAwareTrait;
+
     protected static $dependencies = [
         ['requiredClass' => Chain::class, 'packageName' => 'geocoder-php/chain-provider'],
     ];
@@ -30,7 +34,12 @@ final class ChainFactory extends AbstractFactory
      */
     protected function getProvider(array $config): Provider
     {
-        return new Chain($config['services']);
+        $provider = new Chain($config['services']);
+        if (null !== $this->logger) {
+            $provider->setLogger($this->logger);
+        }
+
+        return $provider;
     }
 
     /**
