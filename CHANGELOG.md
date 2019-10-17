@@ -2,6 +2,16 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.8.0
+
+### Added
+
+- Add logger support to ChainFactory
+
+### Changed
+
+- Update FreeGeoIpFactory with freegeoip.app
+
 ## Version 5.7.0
 
 ### Added
