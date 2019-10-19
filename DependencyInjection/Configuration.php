@@ -87,6 +87,7 @@ class Configuration implements ConfigurationInterface
                 ->canBeEnabled()
                 ->children()
                     ->scalarNode('ip')->defaultNull()->end()
+                    ->booleanNode('user_faker')->defaultFalse()->end()
                 ->end()
             ->end();
 

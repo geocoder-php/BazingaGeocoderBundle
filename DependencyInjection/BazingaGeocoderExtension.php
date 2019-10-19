@@ -53,7 +53,7 @@ class BazingaGeocoderExtension extends Extension
 
         if ($config['fake_ip']['enabled']) {
             $definition = $container->getDefinition(FakeIpPlugin::class);
-            $definition->replaceArgument(1, $config['fake_ip']['ip']);
+            $definition->replaceArgument(1, $config['fake_ip']['ip'], $config['use_faker']);
         } else {
             $container->removeDefinition(FakeIpPlugin::class);
         }

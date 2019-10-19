@@ -35,6 +35,7 @@ class ConfigurationTest extends TestCase
         $this->assertTrue($config['profiling']['enabled']);
         $this->assertTrue($config['fake_ip']['enabled']);
         $this->assertEquals('33.33.33.11', $config['fake_ip']['ip']);
+        $this->assertFalse($config['fake_ip']['use_faker']);
     }
 
     public function testGetConfigTreeBuilderNoDebug()

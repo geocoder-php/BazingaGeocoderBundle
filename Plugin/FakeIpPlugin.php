@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Plugin;
 
+use Faker\Factory;
 use Geocoder\Plugin\Plugin;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\Query;
@@ -33,10 +34,16 @@ class FakeIpPlugin implements Plugin
      */
     private $replacement;
 
-    public function __construct(string $needle, string $replacement)
+    /**
+     * @var bool
+     */
+    private $useFaker;
+
+    public function __construct(string $needle, string $replacement = null, bool $useFaker = false)
     {
         $this->needle = $needle;
         $this->replacement = $replacement;
+        $this->useFaker = $useFaker;
     }
 
     /**
@@ -48,7 +55,14 @@ class FakeIpPlugin implements Plugin
             return $next($query);
         }
 
-        $text = str_replace($this->needle, $this->replacement, $query->getText(), $count);
+        $replacement = $this->replacement;
+
+        if ($this->useFaker) {
+            $faker = Factory::create();
+            $replacement = $faker->ipv4;
+        }
+
+        $text = str_replace($this->needle, $replacement, $query->getText(), $count);
         if ($count > 0) {
             $query = $query->withText($text);
         }
