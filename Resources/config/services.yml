@@ -1,27 +1,15 @@
 services:
-    Geocoder\Dumper\GeoArray:
-        public: true
-        tags: ['bazinga_geocoder.dumper']
+    _instanceof:
+        Geocoder\Dumper\Dumper:
+            tags: ['bazinga_geocoder.dumper']
+            public: true
 
-    Geocoder\Dumper\GeoJson:
-        public: true
-        tags: ['bazinga_geocoder.dumper']
-
-    Geocoder\Dumper\Gpx:
-        public: true
-        tags: ['bazinga_geocoder.dumper']
-
-    Geocoder\Dumper\Kml:
-        public: true
-        tags: ['bazinga_geocoder.dumper']
-
-    Geocoder\Dumper\Wkb:
-        public: true
-        tags: ['bazinga_geocoder.dumper']
-
-    Geocoder\Dumper\Wkt:
-        public: true
-        tags: ['bazinga_geocoder.dumper']
+    Geocoder\Dumper\GeoArray: ~
+    Geocoder\Dumper\GeoJson: ~
+    Geocoder\Dumper\Gpx: ~
+    Geocoder\Dumper\Kml: ~
+    Geocoder\Dumper\Wkb: ~
+    Geocoder\Dumper\Wkt: ~
 
     Bazinga\GeocoderBundle\ProviderFactory\:
         resource: '../../ProviderFactory'

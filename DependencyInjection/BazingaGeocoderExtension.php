@@ -18,6 +18,7 @@ use Bazinga\GeocoderBundle\Plugin\FakeIpPlugin;
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
 use Bazinga\GeocoderBundle\ProviderFactory\PluginProviderFactory;
 use Bazinga\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
+use Geocoder\Dumper\Dumper;
 use Geocoder\Plugin\Plugin\CachePlugin;
 use Geocoder\Plugin\Plugin\LimitPlugin;
 use Geocoder\Plugin\Plugin\LocalePlugin;
@@ -59,6 +60,9 @@ class BazingaGeocoderExtension extends Extension
         }
 
         $this->loadProviders($container, $config);
+
+        $container->registerForAutoconfiguration(Dumper::class)
+            ->addTag('bazinga_geocoder.dumper');
     }
 
     private function loadProviders(ContainerBuilder $container, array $config)
