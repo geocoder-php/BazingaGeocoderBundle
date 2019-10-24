@@ -18,6 +18,7 @@ use Bazinga\GeocoderBundle\Plugin\FakeIpPlugin;
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
 use Bazinga\GeocoderBundle\ProviderFactory\PluginProviderFactory;
 use Bazinga\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
+use Faker\Generator;
 use Geocoder\Plugin\Plugin\CachePlugin;
 use Geocoder\Plugin\Plugin\LimitPlugin;
 use Geocoder\Plugin\Plugin\LocalePlugin;
@@ -55,6 +56,10 @@ class BazingaGeocoderExtension extends Extension
             $definition = $container->getDefinition(FakeIpPlugin::class);
             $definition->replaceArgument(1, $config['fake_ip']['ip']);
             $definition->replaceArgument(2, $config['fake_ip']['use_faker']);
+
+            if ($config['fake_ip']['use_faker'] && !class_exists(Generator::class)) {
+                throw new \LogicException('To enable this option, you must install fzaninotto/faker package.');
+            }
         } else {
             $container->removeDefinition(FakeIpPlugin::class);
         }
