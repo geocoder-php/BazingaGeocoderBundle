@@ -237,41 +237,53 @@ Read more about cache [here](cache.md).
 If you need to dump your geocoded data to a specific format, you can use the
 __Dumper__ component. The following dumper's are supported:
 
- * Geojson
+ * GeoArray
+ * GeoJson
  * GPX
- * KMP
+ * KML
  * WKB
  * WKT
 
-Here is an example:
+Here is an example if you are using autowiring:
 
 ```php
 <?php
 
-public function geocodeAction(Request $request)
+namespace App\Controller;
+
+use Geocoder\Dumper\GeoJson;
+use Geocoder\Provider\Provider;
+use Geocoder\Query\GeocodeQuery;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+
+class AcmeController
 {
-    $result = $this->container
-        ->get('bazinga_geocoder.provider.acme')
-        ->geocodeQuery(GeocodeQuery::create($request->server->get('REMOTE_ADDR')));
+    private $acmeGeocoder;
+    private $geoJsonDumper;
 
-    $body = $this->container
-        ->get('Geocoder\Dumper\GeoJson')
-        ->dump($result);
+    public function __construct(Provider $acmeGeocoder, GeoJson $dumper)
+    {
+        $this->acmeGeocoder = $acmeGeocoder;
+        $this->geoJsonDumper = $dumper;
+    }
 
-    $response = new Response();
-    $response->setContent($body);
+    public function geocodeAction(Request $request)
+    {
+        $result = $this->acmeGeocoder->geocodeQuery(GeocodeQuery::create($request->server->get('REMOTE_ADDR')));
 
-    return $response;
+        $body = $this->geoJsonDumper->dump($result);
+
+        return new JsonResponse($body);
+    }
 }
 ```
 
-To register a new dumper, you must tag it with `bazinga_geocoder.dumper`.
-
-```xml
-<service id="some.dumper" class="%some.dumper.class">
-    <tag name="bazinga_geocoder.dumper" alias="custom" />
-</service>
-```
+Each dumper service if it implements `Geocoder\Dumper\Dumper` interface will be
+tagged with `bazinga_geocoder.dumper` tag. Each dumper can be used with autowiring
+providing the dumper class name as the argument.
+Also If you want to inject all the tagged dumpers to your service you can provide
+your service argument as: `!tagged bazinga_geocoder.dumper`.
 
 ### Custom HTTP Client
 
