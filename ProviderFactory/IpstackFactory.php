@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\Provider;
 use Geocoder\Provider\Ipstack\Ipstack;
+use Geocoder\Provider\Provider;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 

@@ -13,12 +13,12 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Plugin;
 
 use Geocoder\Collection;
+use Geocoder\Exception\Exception;
 use Geocoder\Exception\LogicException;
 use Geocoder\Plugin\Plugin;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\Query;
 use Geocoder\Query\ReverseQuery;
-use Geocoder\Exception\Exception;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>

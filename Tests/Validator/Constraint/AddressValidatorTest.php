@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\Tests\Validator\Constraint;
 
 use Bazinga\GeocoderBundle\Validator\Constraint\Address;
 use Bazinga\GeocoderBundle\Validator\Constraint\AddressValidator;
-use Http\Client\Curl\Client;
 use Geocoder\Provider\Nominatim\Nominatim;
+use Http\Client\Curl\Client;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class AddressValidatorTest extends ConstraintValidatorTestCase

@@ -75,13 +75,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     {
         foreach (static::$dependencies as $dependency) {
             if (!class_exists($dependency['requiredClass'])) {
-                throw new \LogicException(
-                    sprintf(
-                        'You must install the "%s" package to use the "%s" factory.',
-                        $dependency['packageName'],
-                        static::class
-                    )
-                );
+                throw new \LogicException(sprintf('You must install the "%s" package to use the "%s" factory.', $dependency['packageName'], static::class));
             }
         }
     }
