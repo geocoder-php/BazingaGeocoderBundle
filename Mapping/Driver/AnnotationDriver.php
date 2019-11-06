@@ -40,9 +40,7 @@ class AnnotationDriver implements DriverInterface
     {
         $reflection = new \ReflectionObject($object);
         if (!$annotation = $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class)) {
-            throw new Exception\MappingException(sprintf(
-                'The class %s is not geocodeable', get_class($object)
-            ));
+            throw new Exception\MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
         }
 
         $metadata = new ClassMetadata();
