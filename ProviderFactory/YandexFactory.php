@@ -27,7 +27,7 @@ final class YandexFactory extends AbstractFactory
     {
         $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
 
-        return new Yandex($httplug, $config['toponym']);
+        return new Yandex($httplug, $config['toponym'], $config['api_key']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
@@ -35,9 +35,11 @@ final class YandexFactory extends AbstractFactory
         $resolver->setDefaults([
             'httplug_client' => null,
             'toponym' => null,
+            'api_key' => null,
         ]);
 
         $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('toponym', ['string', 'null']);
+        $resolver->setAllowedTypes('api_key', ['string', 'null']);
     }
 }
