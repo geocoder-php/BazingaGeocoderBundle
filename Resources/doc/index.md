@@ -207,6 +207,13 @@ bazinga_geocoder:
 
 If set, the parameter will replace all instances of "127.0.0.1" in your queries and replace them with the given one.
 
+You can also let [Faker](https://github.com/fzaninotto/Faker) generate fake ip for you.
+
+```yaml
+bazinga_geocoder:
+    fake_ip:
+        use_faker: true # default false
+```
 
 ### Cache Results
 
