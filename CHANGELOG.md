@@ -2,6 +2,14 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.9.0
+
+### Added
+
+- Auto tag dumpers with `bazinga_geocoder.dumper`
+- Add api_key for the YandexFactory
+- Add option to use Faker library for FakeIpPlugin
+
 ## Version 5.8.0
 
 ### Added
