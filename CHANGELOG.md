@@ -2,6 +2,12 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.9.1
+
+### Fixed
+
+- Fix extension cannot replace non-defined argument
+
 ## Version 5.9.0
 
 ### Added
