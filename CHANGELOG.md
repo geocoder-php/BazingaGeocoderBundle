@@ -2,6 +2,12 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions. 
 
+## Version 5.9.2
+
+### Fixed
+
+- Only trigger provider deprecation notices when they are explicitly configured
+
 ## Version 5.9.1
 
 ### Fixed
