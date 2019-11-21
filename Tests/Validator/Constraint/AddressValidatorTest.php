@@ -16,6 +16,7 @@ use Bazinga\GeocoderBundle\Validator\Constraint\Address;
 use Bazinga\GeocoderBundle\Validator\Constraint\AddressValidator;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
+use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class AddressValidatorTest extends ConstraintValidatorTestCase
@@ -41,11 +42,10 @@ class AddressValidatorTest extends ConstraintValidatorTestCase
         $this->assertNoViolation();
     }
 
-    /**
-     * @expectedException \Symfony\Component\Validator\Exception\UnexpectedTypeException
-     */
     public function testExpectsStringCompatibleType()
     {
+        $this->expectException(UnexpectedTypeException::class);
+
         $this->validator->validate(new \stdClass(), new Address());
     }
 

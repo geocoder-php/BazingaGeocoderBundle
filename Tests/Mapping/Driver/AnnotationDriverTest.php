@@ -13,16 +13,20 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Mapping\Driver;
 
 use Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver;
+use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use PHPUnit\Framework\TestCase;
+use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
 class AnnotationDriverTest extends TestCase
 {
+    use SetUpTearDownTrait;
+
     /**
      * @var AnnotationDriver
      */
@@ -33,7 +37,7 @@ class AnnotationDriverTest extends TestCase
      */
     private $reader;
 
-    protected function setUp()
+    protected function doSetUp(): void
     {
         AnnotationRegistry::registerLoader('class_exists');
 
@@ -53,11 +57,11 @@ class AnnotationDriverTest extends TestCase
         $this->assertInstanceOf('ReflectionProperty', $metadata->longitudeProperty);
     }
 
-    /**
-     * @expectedException \Bazinga\GeocoderBundle\Mapping\Exception\MappingException
-     */
     public function testLoadMetadataFromWrongObject()
     {
+        $this->expectException(MappingException::class);
+        $this->expectExceptionMessage('The class '.Dummy2::class.' is not geocodeable');
+
         $this->driver->loadMetadataFromObject(new Dummy2());
     }
 

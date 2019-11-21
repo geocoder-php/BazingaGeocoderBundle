@@ -42,12 +42,14 @@ use Geocoder\Provider\Yandex\Yandex;
 use Nyholm\BundleTest\BaseBundleTestCase;
 use Nyholm\BundleTest\CompilerPass\PublicServicePass;
 use Nyholm\NSA;
+use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 class ProviderFactoryTest extends BaseBundleTestCase
 {
-    protected function setUp()
+    use SetUpTearDownTrait;
+
+    protected function doSetUp(): void
     {
-        parent::setUp();
         $this->addCompilerPass(new PublicServicePass('|bazinga.*|'));
     }
 

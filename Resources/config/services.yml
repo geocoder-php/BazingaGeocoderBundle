@@ -25,12 +25,11 @@ services:
 
     Bazinga\GeocoderBundle\Command\GeocodeCommand:
         arguments: ['@Geocoder\ProviderAggregator']
-        tags: [{ name: 'console.command' }]
+        tags: ['console.command']
 
     Bazinga\GeocoderBundle\Validator\Constraint\AddressValidator:
         arguments: ['@geocoder']
-        tags:
-            - { name: 'validator.constraint_validator' }
+        tags: ['validator.constraint_validator']
 
     # Keep these aliases for BC purpose
     bazinga_geocoder.geocoder:
