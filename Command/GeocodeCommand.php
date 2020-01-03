@@ -92,6 +92,8 @@ HELP
                 is_array($value) ? json_encode($value) : $value
             ));
         }
+
+        return 0;
     }
 
     private function humanize(string $text): string

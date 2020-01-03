@@ -27,12 +27,14 @@ use Geocoder\ProviderAggregator;
 use Nyholm\BundleTest\BaseBundleTestCase;
 use Nyholm\BundleTest\CompilerPass\PublicServicePass;
 use Nyholm\NSA;
+use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 class BundleInitializationTest extends BaseBundleTestCase
 {
-    protected function setUp()
+    use SetUpTearDownTrait;
+
+    protected function doSetUp(): void
     {
-        parent::setUp();
         $this->addCompilerPass(new PublicServicePass('|[Bb]azinga:*|'));
         $this->addCompilerPass(new PublicServicePass('|[gG]eocoder:*|'));
     }
@@ -50,9 +52,9 @@ class BundleInitializationTest extends BaseBundleTestCase
         // Get the container
         $container = $this->getContainer();
 
-        // Test if you services exists
-        $this->assertTrue($container->has('Geocoder\ProviderAggregator'));
-        $service = $container->get('Geocoder\ProviderAggregator');
+        // Test if services exists
+        $this->assertTrue($container->has(ProviderAggregator::class));
+        $service = $container->get(ProviderAggregator::class);
         $this->assertInstanceOf(ProviderAggregator::class, $service);
     }
 

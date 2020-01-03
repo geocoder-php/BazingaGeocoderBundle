@@ -23,12 +23,15 @@ use Doctrine\Tests\DoctrineTestCase;
 use Doctrine\Tests\OrmTestCase;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
+use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
 class GeocoderListenerTest extends OrmTestCase
 {
+    use SetUpTearDownTrait;
+
     /**
      * @var EntityManager
      */
@@ -39,7 +42,7 @@ class GeocoderListenerTest extends OrmTestCase
      */
     private $listener;
 
-    public static function setUpBeforeClass()
+    public static function doSetUpBeforeClass(): void
     {
         if (!class_exists(DoctrineTestCase::class)) {
             /*
@@ -48,10 +51,9 @@ class GeocoderListenerTest extends OrmTestCase
              */
             static::fail('Doctrine\Tests\OrmTestCase was not found.');
         }
-        parent::setUpBeforeClass();
     }
 
-    protected function setUp()
+    protected function doSetUp(): void
     {
         AnnotationRegistry::registerLoader('class_exists');
 
