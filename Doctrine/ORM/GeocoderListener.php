@@ -100,7 +100,7 @@ class GeocoderListener implements EventSubscriber
 
         $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($address));
 
-        if (!empty($results)) {
+        if (!$results->isEmpty()) {
             $result = $results->first();
             $metadata->latitudeProperty->setValue($entity, $result->getCoordinates()->getLatitude());
             $metadata->longitudeProperty->setValue($entity, $result->getCoordinates()->getLongitude());
