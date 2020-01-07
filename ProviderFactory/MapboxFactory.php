@@ -23,7 +23,7 @@ final class MapboxFactory extends AbstractFactory
 
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new Mapbox($httplug, $config['api_key'], $config['country'], $config['mode']);
     }
