@@ -30,7 +30,7 @@ final class MapzenFactory extends AbstractFactory
     {
         @trigger_error('Bazinga\GeocoderBundle\ProviderFactory\MapzenFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/808', E_USER_DEPRECATED);
 
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new Mapzen($httplug, $config['api_key']);
     }

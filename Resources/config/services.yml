@@ -14,6 +14,7 @@ services:
     Bazinga\GeocoderBundle\ProviderFactory\:
         resource: '../../ProviderFactory'
         public: false
+        autowire: true
         autoconfigure: true
 
     Geocoder\ProviderAggregator:

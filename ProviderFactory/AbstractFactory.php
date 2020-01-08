@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,6 +26,13 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract class AbstractFactory implements ProviderFactoryInterface
 {
     protected static $dependencies = [];
+
+    protected $httpClient;
+
+    public function __construct(HttpClient $httpClient = null)
+    {
+        $this->httpClient = $httpClient;
+    }
 
     abstract protected function getProvider(array $config): Provider;
 

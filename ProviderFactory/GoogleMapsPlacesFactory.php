@@ -25,7 +25,7 @@ final class GoogleMapsPlacesFactory extends AbstractFactory
 
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new GoogleMapsPlaces($httplug, $config['api_key']);
     }

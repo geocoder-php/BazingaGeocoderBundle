@@ -25,7 +25,7 @@ final class HereFactory extends AbstractFactory
 
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new Here($httplug, $config['app_id'], $config['app_code'], $config['use_cit']);
     }
