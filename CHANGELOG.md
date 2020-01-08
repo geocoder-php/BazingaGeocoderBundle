@@ -2,6 +2,17 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.11.0
+
+### Added
+
+- Allow an HTTP client to be injected via the constructor of providers
+- Add MapboxFactory to docs
+
+### Fixed
+
+- replace empty() check
+
 ## Version 5.10.0
 
 ### Added
