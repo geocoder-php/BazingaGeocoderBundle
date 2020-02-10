@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
+use Geocoder\Provider\AlgoliaPlaces\AlgoliaPlaces;
 use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
 use Geocoder\Provider\BingMaps\BingMaps;
 use Geocoder\Provider\Chain\Chain;
@@ -23,10 +24,13 @@ use Geocoder\Provider\GeoIPs\GeoIPs;
 use Geocoder\Provider\Geonames\Geonames;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
+use Geocoder\Provider\GoogleMapsPlaces\GoogleMapsPlaces;
+use Geocoder\Provider\Here\Here;
 use Geocoder\Provider\HostIp\HostIp;
 use Geocoder\Provider\IpInfo\IpInfo;
 use Geocoder\Provider\IpInfoDb\IpInfoDb;
 use Geocoder\Provider\Ipstack\Ipstack;
+use Geocoder\Provider\Mapbox\Mapbox;
 use Geocoder\Provider\MapQuest\MapQuest;
 use Geocoder\Provider\Mapzen\Mapzen;
 use Geocoder\Provider\MaxMind\MaxMind;
@@ -39,12 +43,14 @@ use Geocoder\Provider\Yandex\Yandex;
 use Nyholm\BundleTest\BaseBundleTestCase;
 use Nyholm\BundleTest\CompilerPass\PublicServicePass;
 use Nyholm\NSA;
+use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 class ProviderFactoryTest extends BaseBundleTestCase
 {
-    protected function setUp()
+    use SetUpTearDownTrait;
+
+    protected function doSetUp(): void
     {
-        parent::setUp();
         $this->addCompilerPass(new PublicServicePass('|bazinga.*|'));
     }
 
@@ -56,6 +62,7 @@ class ProviderFactoryTest extends BaseBundleTestCase
     public function getProviders()
     {
         return [
+            [AlgoliaPlaces::class, ['empty', 'acme']],
             [ArcGISOnline::class, ['empty', 'acme']],
             [BingMaps::class, ['acme']],
             [Chain::class, ['acme']],
@@ -66,10 +73,13 @@ class ProviderFactoryTest extends BaseBundleTestCase
             [Geonames::class, ['acme']],
             [GeoPlugin::class, ['empty']],
             [GoogleMaps::class, ['empty']],
+            [GoogleMapsPlaces::class, ['acme']],
+            [Here::class, ['acme']],
             [HostIp::class, ['empty']],
             [IpInfo::class, ['acme']],
             [IpInfoDb::class, ['empty', 'acme']],
             [Ipstack::class, ['acme']],
+            [Mapbox::class, ['acme']],
             [MapQuest::class, ['acme']],
             [Mapzen::class, ['acme']],
             [MaxMind::class, ['acme']],

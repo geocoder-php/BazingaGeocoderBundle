@@ -40,9 +40,7 @@ class AnnotationDriver implements DriverInterface
     {
         $reflection = new \ReflectionObject($object);
         if (!$annotation = $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class)) {
-            throw new Exception\MappingException(sprintf(
-                'The class %s is not geocodeable', get_class($object)
-            ));
+            throw new Exception\MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
         }
 
         $metadata = new ClassMetadata();
@@ -59,6 +57,16 @@ class AnnotationDriver implements DriverInterface
                     $property->setAccessible(true);
                     $metadata->addressProperty = $property;
                 }
+            }
+        }
+
+        foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
+            if ($this->reader->getMethodAnnotation($method, Annotations\Address::class)) {
+                if (0 !== $method->getNumberOfRequiredParameters()) {
+                    throw new \Exception('You can not use a method requiring parameters with @Address annotation!');
+                }
+
+                $metadata->addressGetter = $method;
             }
         }
 

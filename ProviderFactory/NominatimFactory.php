@@ -25,7 +25,7 @@ final class NominatimFactory extends AbstractFactory
 
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new Nominatim($httplug, $config['root_url'], $config['user_agent']);
     }

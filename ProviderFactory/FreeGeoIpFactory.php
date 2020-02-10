@@ -25,7 +25,7 @@ final class FreeGeoIpFactory extends AbstractFactory
 
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new FreeGeoIp($httplug, $config['base_url']);
     }
@@ -34,7 +34,7 @@ final class FreeGeoIpFactory extends AbstractFactory
     {
         $resolver->setDefaults([
             'httplug_client' => null,
-            'base_url' => 'https://freegeoip.net/json/%s',
+            'base_url' => 'https://freegeoip.app/json/%s',
         ]);
 
         $resolver->setAllowedTypes('httplug_client', ['object', 'null']);

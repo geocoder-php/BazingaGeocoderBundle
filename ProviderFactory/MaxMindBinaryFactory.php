@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\MaxMind\MaxMind;
 use Geocoder\Provider\MaxMindBinary\MaxMindBinary;
 use Geocoder\Provider\Provider;
 use Symfony\Component\OptionsResolver\OptionsResolver;

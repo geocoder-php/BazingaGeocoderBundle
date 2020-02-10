@@ -17,6 +17,9 @@ use Geocoder\Provider\Provider;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/808
+ */
 final class MapzenFactory extends AbstractFactory
 {
     protected static $dependencies = [
@@ -25,7 +28,9 @@ final class MapzenFactory extends AbstractFactory
 
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        @trigger_error('Bazinga\GeocoderBundle\ProviderFactory\MapzenFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/808', E_USER_DEPRECATED);
+
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new Mapzen($httplug, $config['api_key']);
     }

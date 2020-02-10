@@ -1,23 +1,36 @@
 services:
-    Geocoder\Dumper\:
-        resource: '%kernel.project_dir%/vendor/willdurand/geocoder/Dumper'
-        public: true
-        tags: ['bazinga_geocoder.dumper']
+    _instanceof:
+        Geocoder\Dumper\Dumper:
+            tags: ['bazinga_geocoder.dumper']
+            public: true
+
+    Geocoder\Dumper\GeoArray: ~
+    Geocoder\Dumper\GeoJson: ~
+    Geocoder\Dumper\Gpx: ~
+    Geocoder\Dumper\Kml: ~
+    Geocoder\Dumper\Wkb: ~
+    Geocoder\Dumper\Wkt: ~
 
     Bazinga\GeocoderBundle\ProviderFactory\:
         resource: '../../ProviderFactory'
         public: false
+        autowire: true
+        autoconfigure: true
 
     Geocoder\ProviderAggregator:
         class: Geocoder\ProviderAggregator
 
     Bazinga\GeocoderBundle\Plugin\FakeIpPlugin:
         class: Bazinga\GeocoderBundle\Plugin\FakeIpPlugin
-        arguments: ['127.0.0.1', ~]
+        arguments: ['127.0.0.1', ~, false]
 
     Bazinga\GeocoderBundle\Command\GeocodeCommand:
         arguments: ['@Geocoder\ProviderAggregator']
-        tags: [{ name: 'console.command' }]
+        tags: ['console.command']
+
+    Bazinga\GeocoderBundle\Validator\Constraint\AddressValidator:
+        arguments: ['@geocoder']
+        tags: ['validator.constraint_validator']
 
     # Keep these aliases for BC purpose
     bazinga_geocoder.geocoder:

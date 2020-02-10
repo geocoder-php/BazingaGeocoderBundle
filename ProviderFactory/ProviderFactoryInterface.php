@@ -19,11 +19,6 @@ use Geocoder\Provider\Provider;
  */
 interface ProviderFactoryInterface
 {
-    /**
-     * @param array $options
-     *
-     * @return Provider
-     */
     public function createProvider(array $options = []): Provider;
 
     /**

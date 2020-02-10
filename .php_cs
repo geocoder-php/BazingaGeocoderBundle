@@ -1,13 +1,13 @@
 <?php
 
-/*
- * In order to make it work, fabpot/php-cs-fixer and sllh/php-cs-fixer-styleci-bridge must be installed globally
- * with composer.
- *
- * @link https://github.com/Soullivaneuh/php-cs-fixer-styleci-bridge
- * @link https://github.com/FriendsOfPHP/PHP-CS-Fixer
- */
-
-use SLLH\StyleCIBridge\ConfigBridge;
-
-return ConfigBridge::create();
+$finder = PhpCsFixer\Finder::create()
+    ->in(__DIR__)
+    ->exclude(__DIR__.'/vendor')
+;
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+        'array_syntax' => ['syntax' => 'short'],
+    ])
+    ->setFinder($finder)
+;

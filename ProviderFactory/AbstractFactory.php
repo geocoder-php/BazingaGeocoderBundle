@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Symfony\Component\Config\Definition\Exception\InvalidConfigurationException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,11 +27,13 @@ abstract class AbstractFactory implements ProviderFactoryInterface
 {
     protected static $dependencies = [];
 
-    /**
-     * @param array $config
-     *
-     * @return Provider
-     */
+    protected $httpClient;
+
+    public function __construct(HttpClient $httpClient = null)
+    {
+        $this->httpClient = $httpClient;
+    }
+
     abstract protected function getProvider(array $config): Provider;
 
     /**
@@ -80,13 +83,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     {
         foreach (static::$dependencies as $dependency) {
             if (!class_exists($dependency['requiredClass'])) {
-                throw new \LogicException(
-                    sprintf(
-                        'You must install the "%s" package to use the "%s" factory.',
-                        $dependency['packageName'],
-                        static::class
-                    )
-                );
+                throw new \LogicException(sprintf('You must install the "%s" package to use the "%s" factory.', $dependency['packageName'], static::class));
             }
         }
     }
@@ -94,8 +91,6 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * By default we do not have any options to configure. A factory should override this function and confgure
      * the options resolver.
-     *
-     * @param OptionsResolver $resolver
      */
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {

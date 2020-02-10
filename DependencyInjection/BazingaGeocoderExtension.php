@@ -18,11 +18,14 @@ use Bazinga\GeocoderBundle\Plugin\FakeIpPlugin;
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
 use Bazinga\GeocoderBundle\ProviderFactory\PluginProviderFactory;
 use Bazinga\GeocoderBundle\ProviderFactory\ProviderFactoryInterface;
+use Faker\Generator;
+use Geocoder\Dumper\Dumper;
 use Geocoder\Plugin\Plugin\CachePlugin;
 use Geocoder\Plugin\Plugin\LimitPlugin;
 use Geocoder\Plugin\Plugin\LocalePlugin;
 use Geocoder\Plugin\Plugin\LoggerPlugin;
 use Geocoder\Plugin\PluginProvider;
+use Geocoder\Provider\Provider;
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -30,9 +33,10 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
- * William Durand <william.durand1@gmail.com>.
+ * @author William Durand <william.durand1@gmail.com>.
  */
 class BazingaGeocoderExtension extends Extension
 {
@@ -52,11 +56,19 @@ class BazingaGeocoderExtension extends Extension
         if ($config['fake_ip']['enabled']) {
             $definition = $container->getDefinition(FakeIpPlugin::class);
             $definition->replaceArgument(1, $config['fake_ip']['ip']);
+            $definition->replaceArgument(2, $config['fake_ip']['use_faker']);
+
+            if ($config['fake_ip']['use_faker'] && !class_exists(Generator::class)) {
+                throw new \LogicException('To enable this option, you must install fzaninotto/faker package.');
+            }
         } else {
             $container->removeDefinition(FakeIpPlugin::class);
         }
 
         $this->loadProviders($container, $config);
+
+        $container->registerForAutoconfiguration(Dumper::class)
+            ->addTag('bazinga_geocoder.dumper');
     }
 
     private function loadProviders(ContainerBuilder $container, array $config)
@@ -65,7 +77,7 @@ class BazingaGeocoderExtension extends Extension
             try {
                 $factoryService = $container->getDefinition($providerConfig['factory']);
                 $factoryClass = $factoryService->getClass() ?: $providerConfig['factory'];
-                if (!$this->implementsPoviderFactory($factoryClass)) {
+                if (!$this->implementsProviderFactory($factoryClass)) {
                     throw new \LogicException(sprintf('Provider factory "%s" must implement ProviderFactoryInterface', $providerConfig['factory']));
                 }
                 // See if any option has a service reference
@@ -90,17 +102,15 @@ class BazingaGeocoderExtension extends Extension
             foreach ($providerConfig['aliases'] as $alias) {
                 $container->setAlias($alias, $serviceId);
             }
+
+            if (Kernel::VERSION_ID > 40200) {
+                $container->registerAliasForArgument($serviceId, Provider::class, "{$providerName}Geocoder");
+            }
         }
     }
 
     /**
      * Configure plugins for a client.
-     *
-     * @param ContainerBuilder $container
-     * @param array            $config
-     * @param string           $providerServiceId
-     *
-     * @return array
      */
     public function configureProviderPlugins(ContainerBuilder $container, array $config, string $providerServiceId): array
     {
@@ -112,6 +122,8 @@ class BazingaGeocoderExtension extends Extension
         }
 
         if (isset($config['cache']) || isset($config['cache_lifetime']) || isset($config['cache_precision'])) {
+            $cacheLifetime = isset($config['cache_lifetime']) ? (int) $config['cache_lifetime'] : null;
+
             if (null === $cacheServiceId = $config['cache']) {
                 if (!$container->has('app.cache')) {
                     throw new \LogicException('You need to specify a service for cache.');
@@ -121,7 +133,7 @@ class BazingaGeocoderExtension extends Extension
             $plugins[] = $providerServiceId.'.cache';
             $container->register($providerServiceId.'.cache', CachePlugin::class)
                 ->setPublic(false)
-                ->setArguments([new Reference($cacheServiceId), (int) $config['cache_lifetime'], $config['cache_precision']]);
+                ->setArguments([new Reference($cacheServiceId), $cacheLifetime, $config['cache_precision']]);
         }
 
         if (isset($config['limit'])) {
@@ -170,11 +182,6 @@ class BazingaGeocoderExtension extends Extension
         return new Configuration($container->getParameter('kernel.debug'));
     }
 
-    /**
-     * @param array $options
-     *
-     * @return array
-     */
     private function findReferences(array $options): array
     {
         foreach ($options as $key => $value) {
@@ -190,15 +197,13 @@ class BazingaGeocoderExtension extends Extension
 
     /**
      * @param mixed $factoryClass
-     *
-     * @return bool
      */
-    private function implementsPoviderFactory($factoryClass): bool
+    private function implementsProviderFactory($factoryClass): bool
     {
         if (false === $interfaces = class_implements($factoryClass)) {
             return false;
         }
 
-        return in_array(ProviderFactoryInterface::class, $interfaces);
+        return in_array(ProviderFactoryInterface::class, $interfaces, true);
     }
 }

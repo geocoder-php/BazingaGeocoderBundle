@@ -22,6 +22,8 @@ use Geocoder\Query\GeocodeQuery;
 use PHPUnit\Framework\TestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
+use Symfony\Component\DependencyInjection\Container;
+use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
@@ -44,18 +46,16 @@ class GeocodeCommandTest extends TestCase
             'countryCode' => $country->getCode(),
         ]);
 
-        $geocoder = $this->getMockBuilder(ProviderAggregator::class)->getMock();
+        $geocoder = $this->createMock(ProviderAggregator::class);
         $query = GeocodeQuery::create(self::$address);
         $geocoder->expects($this->once())
             ->method('geocodeQuery')
             ->with($query)
-            ->will($this->returnValue(new AddressCollection([$address])));
+            ->willReturn(new AddressCollection([$address]));
 
-        $container = $this->getMockBuilder('Symfony\\Component\\DependencyInjection\\Container')->getMock();
+        $container = $this->createMock(Container::class);
 
-        $kernel = $this->getMockBuilder('Symfony\\Component\\HttpKernel\\Kernel')
-            ->disableOriginalConstructor()
-            ->getMock();
+        $kernel = $this->createMock(Kernel::class);
 
         $kernel->expects($this->any())
             ->method('getContainer')
@@ -63,7 +63,7 @@ class GeocodeCommandTest extends TestCase
 
         $kernel->expects($this->any())
             ->method('getBundles')
-            ->will($this->returnValue([]));
+            ->willReturn([]);
 
         $app = new Application($kernel);
         $app->add(new GeocodeCommand($geocoder));

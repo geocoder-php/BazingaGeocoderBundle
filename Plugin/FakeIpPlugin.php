@@ -12,6 +12,8 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Plugin;
 
+use Faker\Generator;
+use Faker\Provider\Internet;
 use Geocoder\Plugin\Plugin;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\Query;
@@ -34,13 +36,25 @@ class FakeIpPlugin implements Plugin
     private $replacement;
 
     /**
-     * @param string $needle
-     * @param string $replacement
+     * @var bool
      */
-    public function __construct(string $needle, string $replacement)
+    private $useFaker;
+
+    /**
+     * @var Generator|null
+     */
+    private $faker;
+
+    public function __construct(string $needle, string $replacement = null, bool $useFaker = false)
     {
         $this->needle = $needle;
         $this->replacement = $replacement;
+        $this->useFaker = $useFaker;
+
+        if ($useFaker) {
+            $this->faker = new Generator();
+            $this->faker->addProvider(new Internet($this->faker));
+        }
     }
 
     /**
@@ -52,7 +66,13 @@ class FakeIpPlugin implements Plugin
             return $next($query);
         }
 
-        $text = str_replace($this->needle, $this->replacement, $query->getText(), $count);
+        $replacement = $this->replacement;
+
+        if (null !== $this->faker) {
+            $replacement = $this->faker->ipv4;
+        }
+
+        $text = str_replace($this->needle, $replacement, $query->getText(), $count);
         if ($count > 0) {
             $query = $query->withText($text);
         }

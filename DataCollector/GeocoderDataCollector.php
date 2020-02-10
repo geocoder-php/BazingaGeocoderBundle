@@ -13,8 +13,6 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\DataCollector;
 
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
@@ -22,6 +20,8 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  */
 class GeocoderDataCollector extends DataCollector
 {
+    use DataCollectorSymfonyCompatibilityTrait;
+
     /**
      * @var ProfilingPlugin[]
      */
@@ -44,27 +44,7 @@ class GeocoderDataCollector extends DataCollector
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public function collect(Request $request, Response $response, \Exception $exception = null)
-    {
-        if (!empty($this->data['queries'])) {
-            // To avoid collection more that once.
-            return;
-        }
-        foreach ($this->instances as $instance) {
-            foreach ($instance->getQueries() as $query) {
-                $query['query'] = $this->cloneVar($query['query']);
-                $query['result'] = $this->cloneVar($query['result']);
-                $this->data['queries'][] = $query;
-            }
-        }
-    }
-
-    /**
      * Returns an array of collected requests.
-     *
-     * @return array
      */
     public function getQueries(): array
     {
@@ -73,8 +53,6 @@ class GeocoderDataCollector extends DataCollector
 
     /**
      * Returns the execution time of all collected requests in seconds.
-     *
-     * @return float
      */
     public function getTotalDuration(): float
     {
@@ -86,19 +64,11 @@ class GeocoderDataCollector extends DataCollector
         return $time;
     }
 
-    /**
-     * @return array
-     */
     public function getProviders(): array
     {
         return $this->data['providers'];
     }
 
-    /**
-     * @param string $provider
-     *
-     * @return array
-     */
     public function getProviderQueries(string $provider): array
     {
         return array_filter($this->data['queries'], function ($data) use ($provider) {
@@ -106,9 +76,6 @@ class GeocoderDataCollector extends DataCollector
         });
     }
 
-    /**
-     * @param ProfilingPlugin $instance
-     */
     public function addInstance(ProfilingPlugin $instance)
     {
         $this->instances[] = $instance;

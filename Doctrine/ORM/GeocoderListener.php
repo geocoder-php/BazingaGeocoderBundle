@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Doctrine\ORM;
 
+use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
 use Bazinga\GeocoderBundle\Mapping\Driver\DriverInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
@@ -84,11 +85,22 @@ class GeocoderListener implements EventSubscriber
 
     private function geocodeEntity($entity)
     {
+        /** @var ClassMetadata $metadata */
         $metadata = $this->driver->loadMetadataFromObject($entity);
-        $address = $metadata->addressProperty->getValue($entity);
+
+        if (null !== $metadata->addressGetter) {
+            $address = $metadata->addressGetter->invoke($entity);
+        } else {
+            $address = $metadata->addressProperty->getValue($entity);
+        }
+
+        if (empty($address)) {
+            return;
+        }
+
         $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($address));
 
-        if (!empty($results)) {
+        if (!$results->isEmpty()) {
             $result = $results->first();
             $metadata->latitudeProperty->setValue($entity, $result->getCoordinates()->getLatitude());
             $metadata->longitudeProperty->setValue($entity, $result->getCoordinates()->getLongitude());

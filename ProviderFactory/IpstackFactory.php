@@ -12,8 +12,8 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\Provider;
 use Geocoder\Provider\Ipstack\Ipstack;
+use Geocoder\Provider\Provider;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,7 +25,7 @@ final class IpstackFactory extends AbstractFactory
 
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new Ipstack($httplug, $config['api_key']);
     }

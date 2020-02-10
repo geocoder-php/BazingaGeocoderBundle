@@ -17,6 +17,9 @@ use Geocoder\Provider\Provider;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
+/**
+ * @deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/965
+ */
 final class GeoIPsFactory extends AbstractFactory
 {
     protected static $dependencies = [
@@ -25,7 +28,9 @@ final class GeoIPsFactory extends AbstractFactory
 
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: HttpClientDiscovery::find();
+        @trigger_error('Bazinga\GeocoderBundle\ProviderFactory\GeoIPsFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/965', E_USER_DEPRECATED);
+
+        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
         return new GeoIPs($httplug, $config['api_key']);
     }

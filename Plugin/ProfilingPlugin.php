@@ -13,12 +13,12 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Plugin;
 
 use Geocoder\Collection;
+use Geocoder\Exception\Exception;
 use Geocoder\Exception\LogicException;
 use Geocoder\Plugin\Plugin;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\Query;
 use Geocoder\Query\ReverseQuery;
-use Geocoder\Exception\Exception;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -35,9 +35,6 @@ class ProfilingPlugin implements Plugin
      */
     private $name;
 
-    /**
-     * @param string $name
-     */
     public function __construct(string $name)
     {
         $this->name = $name;
@@ -61,8 +58,6 @@ class ProfilingPlugin implements Plugin
     }
 
     /**
-     * @param Query                $query
-     * @param float                $duration geocoding duration
      * @param Collection|Exception $result
      */
     private function logQuery(Query $query, float $duration, $result = null)
@@ -85,17 +80,11 @@ class ProfilingPlugin implements Plugin
         ];
     }
 
-    /**
-     * @return array
-     */
     public function getQueries(): array
     {
         return $this->queries;
     }
 
-    /**
-     * @return string
-     */
     public function getName(): string
     {
         return $this->name;
