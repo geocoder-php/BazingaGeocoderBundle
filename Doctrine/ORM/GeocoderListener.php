@@ -17,6 +17,7 @@ use Bazinga\GeocoderBundle\Mapping\Driver\DriverInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\UnitOfWork;
 use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
 
@@ -61,7 +62,10 @@ class GeocoderListener implements EventSubscriber
                 continue;
             }
 
-            $this->geocodeEntity($entity);
+            /** @var ClassMetadata $metadata */
+            $metadata = $this->driver->loadMetadataFromObject($entity);
+
+            $this->geocodeEntity($metadata, $entity);
 
             $uow->recomputeSingleEntityChangeSet(
                 $em->getClassMetadata(get_class($entity)),
@@ -74,7 +78,14 @@ class GeocoderListener implements EventSubscriber
                 continue;
             }
 
-            $this->geocodeEntity($entity);
+            /** @var ClassMetadata $metadata */
+            $metadata = $this->driver->loadMetadataFromObject($entity);
+
+            if (!$this->shouldGeocode($metadata, $uow, $entity)) {
+                continue;
+            }
+
+            $this->geocodeEntity($metadata, $entity);
 
             $uow->recomputeSingleEntityChangeSet(
                 $em->getClassMetadata(get_class($entity)),
@@ -83,11 +94,11 @@ class GeocoderListener implements EventSubscriber
         }
     }
 
-    private function geocodeEntity($entity)
+    /**
+     * @param object $entity
+     */
+    private function geocodeEntity(ClassMetadata $metadata, $entity)
     {
-        /** @var ClassMetadata $metadata */
-        $metadata = $this->driver->loadMetadataFromObject($entity);
-
         if (null !== $metadata->addressGetter) {
             $address = $metadata->addressGetter->invoke($entity);
         } else {
@@ -105,5 +116,19 @@ class GeocoderListener implements EventSubscriber
             $metadata->latitudeProperty->setValue($entity, $result->getCoordinates()->getLatitude());
             $metadata->longitudeProperty->setValue($entity, $result->getCoordinates()->getLongitude());
         }
+    }
+
+    /**
+     * @param object $entity
+     */
+    private function shouldGeocode(ClassMetadata $metadata, UnitOfWork $unitOfWork, $entity): bool
+    {
+        if (null !== $metadata->addressGetter) {
+            return true;
+        }
+
+        $changeSet = $unitOfWork->getEntityChangeSet($entity);
+
+        return isset($changeSet[$metadata->addressProperty->getName()]);
     }
 }
