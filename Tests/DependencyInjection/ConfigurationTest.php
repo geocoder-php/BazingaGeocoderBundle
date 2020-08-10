@@ -34,6 +34,7 @@ class ConfigurationTest extends TestCase
 
         $this->assertTrue($config['profiling']['enabled']);
         $this->assertTrue($config['fake_ip']['enabled']);
+        $this->assertSame('192.168.99.1', $config['fake_ip']['local_ip']);
         $this->assertSame('33.33.33.11', $config['fake_ip']['ip']);
     }
 

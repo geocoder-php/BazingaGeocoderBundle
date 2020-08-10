@@ -206,6 +206,14 @@ bazinga_geocoder:
 ```
 
 If set, the parameter will replace all instances of "127.0.0.1" in your queries and replace them with the given one.
+If you'd like to replace other ip instead of "127.0.0.1" (e.g. when using localhost inside a VM) you can set the optional `local_ip` parameter:
+
+```yaml
+bazinga_geocoder:
+    fake_ip:
+        local_ip: 192.168.99.1 # default 127.0.0.1
+        ip: 123.123.123.123
+```
 
 You can also let [Faker](https://github.com/fzaninotto/Faker) generate fake ip for you.
 
