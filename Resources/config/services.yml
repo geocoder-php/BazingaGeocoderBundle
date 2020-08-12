@@ -22,7 +22,7 @@ services:
 
     Bazinga\GeocoderBundle\Plugin\FakeIpPlugin:
         class: Bazinga\GeocoderBundle\Plugin\FakeIpPlugin
-        arguments: ['127.0.0.1', ~, false]
+        arguments: [~, ~, false]
 
     Bazinga\GeocoderBundle\Command\GeocodeCommand:
         arguments: ['@Geocoder\ProviderAggregator']

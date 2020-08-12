@@ -1,5 +1,6 @@
 bazinga_geocoder:
     fake_ip:
+        local_ip: 192.168.99.1
         ip: 33.33.33.11
     providers:
         bing_maps:
