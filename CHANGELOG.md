@@ -2,6 +2,16 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.12.0
+
+### Added
+
+- Allow configuring local IP when using FakeIpPlugin
+
+### Changed
+
+- Skip geocoding if address has not changed
+
 ## Version 5.11.0
 
 ### Added
