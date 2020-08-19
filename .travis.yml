@@ -15,17 +15,16 @@ matrix:
     fast_finish: true
     include:
           # Minimum supported dependencies with the oldest PHP version
-        - php: 7.1
+        - php: 7.2
           env: COMPOSER_FLAGS="--prefer-stable --prefer-lowest" SYMFONY_PHPUNIT_VERSION=7.5
 
           # Test the latest stable release
-        - php: 7.1
         - php: 7.2
         - php: 7.3
         - php: 7.4
           env: COVERAGE=true PHPUNIT_FLAGS="-v --testsuite main --coverage-text --coverage-clover=build/coverage.xml"
 
-        - php: 7.1
+        - php: 7.2
           # We need `--prefer-source`, otherwise the `Doctrine\Tests\OrmTestCase` class won't be found.
           env: PHPUNIT_FLAGS="-v --testsuite doctrine" COMPOSER_FLAGS="--prefer-source" SYMFONY_VERSION=3.4.* SYMFONY_PHPUNIT_VERSION=7.5
         - php: 7.4
