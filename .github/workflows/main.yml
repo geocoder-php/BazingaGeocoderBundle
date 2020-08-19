@@ -1,5 +1,7 @@
 on: [push,pull_request]
-name: Static analysis
+name: CI
+env:
+    SYMFONY_DEPRECATIONS_HELPER: max[self]=2
 jobs:
     phpstan:
         name: PHPStan
@@ -22,3 +24,101 @@ jobs:
               uses: docker://oskarstark/php-cs-fixer-ga
               with:
                 args: --dry-run --diff-format udiff
+
+    phpunit:
+        name: PHPUnit (main testsuite) (PHP ${{ matrix.php-version }}) (Symfony ${{ matrix.SYMFONY_REQUIRE }})
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                include:
+                    - php-version: 7.4
+                      SYMFONY_REQUIRE: 3.4.*
+                    - php-version: 7.4
+                      SYMFONY_REQUIRE: 4.4.*
+                    - php-version: 7.4
+                      SYMFONY_REQUIRE: 5.1.*
+                      coverage: true
+                    - php-version: 7.4
+                      stability: dev
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@v2.0.0
+            - name: "Setup PHP"
+              uses: shivammathur/setup-php@2.4.2
+              with:
+                tools: flex
+                coverage: none
+                php-version: ${{ matrix.php-version }}
+            - name: "Configure composer minimum stability"
+              if: ${{ matrix.stability == 'dev' }}
+              run: composer config minimum-stability ${{ matrix.stability }}
+            - name: "Install dependencies with composer"
+              run: composer update --prefer-dist --no-interaction
+            - name: "Install symfony/phpunit-bridge"
+              run: vendor/bin/simple-phpunit install
+            - name: "Run tests with symfony/phpunit-bridge"
+              run: vendor/bin/simple-phpunit -v --testsuite main
+            - name: Code coverage
+              if: ${{ matrix.coverage == true }}
+              run: |
+                wget https://scrutinizer-ci.com/ocular.phar
+                php ocular.phar code-coverage:upload --format=php-clover build/coverage.xml
+              continue-on-error: true
+
+    phpunit-lowest-deps:
+        name: PHPUnit (main testsuite) (PHP ${{ matrix.php-version }}) (lowest dependencies)
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                include:
+                    - php-version: 7.2
+                      phpunit-version: 7.5
+                    - php-version: 7.3
+                      phpunit-version: 8.5
+                    - php-version: 7.4
+                      phpunit-version: 8.5
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@v2.0.0
+            - name: "Setup PHP"
+              uses: shivammathur/setup-php@2.4.2
+              with:
+                  tools: flex
+                  coverage: none
+                  php-version: ${{ matrix.php-version }}
+                  env:
+                      SYMFONY_PHPUNIT_VERSION: ${{ matrix.phpunit-version }}
+            - name: "Install dependencies with composer"
+              run: composer update --prefer-stable --prefer-lowest --prefer-dist --no-interaction
+            - name: "Install symfony/phpunit-bridge"
+              run: vendor/bin/simple-phpunit install
+            - name: "Run tests with symfony/phpunit-bridge"
+              run: vendor/bin/simple-phpunit -v --testsuite main
+
+    phpunit-doctrine:
+        name: PHPUnit (doctrine testsuite) (PHP ${{ matrix.php }}) (Symfony ${{ matrix.SYMFONY_REQUIRE }})
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                include:
+                    - php-version: 7.2
+                      SYMFONY_REQUIRE: 3.4.*
+                    - php-version: 7.3
+                      SYMFONY_REQUIRE: 4.4.*
+                    - php-version: 7.4
+                      SYMFONY_REQUIRE: 5.1.*
+        steps:
+            - name: "Checkout"
+              uses: actions/checkout@v2.0.0
+            - name: "Setup PHP"
+              uses: shivammathur/setup-php@2.4.2
+              with:
+                  tools: flex
+                  coverage: none
+                  php-version: ${{ matrix.php-version }}
+            - name: "Install dependencies with composer"
+              run: composer update --prefer-source --no-interaction
+            - name: "Install symfony/phpunit-bridge"
+              run: vendor/bin/simple-phpunit install
+            - name: "Run tests with symfony/phpunit-bridge"
+              run: vendor/bin/simple-phpunit -v --testsuite doctrine

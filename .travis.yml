@@ -26,15 +26,13 @@ matrix:
 
         - php: 7.2
           # We need `--prefer-source`, otherwise the `Doctrine\Tests\OrmTestCase` class won't be found.
-          env: PHPUNIT_FLAGS="-v --testsuite doctrine" COMPOSER_FLAGS="--prefer-source" SYMFONY_VERSION=3.4.* SYMFONY_PHPUNIT_VERSION=7.5
+          env: PHPUNIT_FLAGS="-v --testsuite doctrine" COMPOSER_FLAGS="--prefer-source" SYMFONY_VERSION=3.4.*
         - php: 7.4
           env: SYMFONY_VERSION=3.4.*
         - php: 7.4
-          env: SYMFONY_VERSION=4.3.*
-        - php: 7.4
           env: SYMFONY_VERSION=4.4.*
         - php: 7.4
-          env: SYMFONY_VERSION=5.0.*
+          env: SYMFONY_VERSION=5.1.*
 
           # Latest commit to master
         - php: 7.4
