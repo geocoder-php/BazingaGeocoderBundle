@@ -57,7 +57,7 @@
     "php-http/curl-client": "^1.7",
     "php-http/message": "^1.5",
     "symfony/config": ">=3.4.31",
-    "symfony/phpunit-bridge": "^4.4",
+    "symfony/phpunit-bridge": "^5.1",
     "symfony/validator": "^3.4 || ^4.2 || ^5.0",
     "symfony/yaml": "^3.4 || ^4.2 || ^5.0"
   },

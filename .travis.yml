@@ -34,7 +34,7 @@ matrix:
         - php: 7.4
           env: SYMFONY_VERSION=4.4.*
         - php: 7.4
-          env: SYMFONY_VERSION=5.0.*
+          env: SYMFONY_VERSION=5.1.*
 
           # Latest commit to master
         - php: 7.4
