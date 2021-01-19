@@ -27,6 +27,18 @@ final class HereFactory extends AbstractFactory
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
 
+        if (empty($config['app_key']) && empty($config['app_id']) && empty($config['app_code'])) {
+            throw new \InvalidArgumentException('No authentication key provided. Here requires app_key or app_code and app_id.');
+        }
+
+        if (!empty($config['app_key'])) {
+            if (!method_exists(Here::class, 'createUsingApiKey')) {
+                throw new \InvalidArgumentException('Here provider has no support for `creatingUsingApiKey` method.');
+            }
+
+            return Here::createUsingApiKey($httplug, $config['app_key'], $config['use_cit']);
+        }
+
         return new Here($httplug, $config['app_id'], $config['app_code'], $config['use_cit']);
     }
 
@@ -35,10 +47,15 @@ final class HereFactory extends AbstractFactory
         $resolver->setDefaults([
             'httplug_client' => null,
             'use_cit' => false,
+            'app_key' => null,
+            'app_id' => null,
+            'app_code' => null,
         ]);
 
         $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('app_key', ['string', 'null']);
+        $resolver->setAllowedTypes('app_id', ['string', 'null']);
+        $resolver->setAllowedTypes('app_code', ['string', 'null']);
         $resolver->setAllowedTypes('use_cit', ['bool', 'false']);
-        $resolver->setRequired(['app_id', 'app_code']);
     }
 }

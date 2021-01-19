@@ -35,7 +35,7 @@
     "geocoder-php/geonames-provider": "^4.0",
     "geocoder-php/google-maps-places-provider": "^1.0",
     "geocoder-php/google-maps-provider": "^4.0",
-    "geocoder-php/here-provider": "^0.2",
+    "geocoder-php/here-provider": "^0.4|^0.5|^0.6",
     "geocoder-php/host-ip-provider": "^4.0",
     "geocoder-php/ip-info-db-provider": "^4.0",
     "geocoder-php/ip-info-provider": "^0.1",
