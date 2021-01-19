@@ -2,6 +2,12 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.13.0
+
+### Added
+
+- Add support for api-key based authentication in here factory
+
 ## Version 5.12.0
 
 ### Added
