@@ -39,20 +39,6 @@ class Configuration implements ConfigurationInterface
     }
 
     /**
-     * Proxy to get root node for Symfony < 4.2.
-     *
-     * @return ArrayNodeDefinition
-     */
-    protected function getRootNode(TreeBuilder $treeBuilder, string $name)
-    {
-        if (\method_exists($treeBuilder, 'getRootNode')) {
-            return $treeBuilder->getRootNode();
-        } else {
-            return $treeBuilder->root($name);
-        }
-    }
-
-    /**
      * Generates the configuration tree builder.
      *
      * @return TreeBuilder The tree builder
@@ -60,8 +46,10 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder('bazinga_geocoder');
+        $rootNode = $treeBuilder->getRootNode();
+        assert($rootNode instanceof ArrayNodeDefinition);
 
-        $this->getRootNode($treeBuilder, 'bazinga_geocoder')
+        $rootNode
             ->children()
             ->append($this->getProvidersNode())
             ->arrayNode('profiling')
@@ -103,8 +91,10 @@ class Configuration implements ConfigurationInterface
     private function getProvidersNode()
     {
         $treeBuilder = new TreeBuilder('providers');
+        $rootNode = $treeBuilder->getRootNode();
+        assert($rootNode instanceof ArrayNodeDefinition);
 
-        return $this->getRootNode($treeBuilder, 'providers')
+        $rootNode
             ->requiresAtLeastOneElement()
             ->useAttributeAsKey('name')
             ->arrayPrototype()
@@ -127,6 +117,8 @@ class Configuration implements ConfigurationInterface
                     ->append($this->createClientPluginNode())
                 ->end()
             ->end();
+
+        return $rootNode;
     }
 
     /**
@@ -136,11 +128,12 @@ class Configuration implements ConfigurationInterface
      */
     private function createClientPluginNode()
     {
-        $builder = new TreeBuilder('plugins');
-        $node = $this->getRootNode($builder, 'plugins');
+        $treeBuilder = new TreeBuilder('plugins');
+        $rootNode = $treeBuilder->getRootNode();
+        assert($rootNode instanceof ArrayNodeDefinition);
 
         /** @var ArrayNodeDefinition $pluginList */
-        $pluginList = $node
+        $pluginList = $rootNode
             ->info('A list of plugin service ids. The order is important.')
             ->arrayPrototype()
         ;
@@ -178,6 +171,6 @@ class Configuration implements ConfigurationInterface
             ->end()
         ->end();
 
-        return $node;
+        return $rootNode;
     }
 }
