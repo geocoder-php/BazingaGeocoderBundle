@@ -2,6 +2,21 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.14.0
+
+### Added
+
+- Add support for PHP 8.0
+
+### Changed
+
+- Upgrade dependencies to up to date versions
+
+### Removed
+
+- Remove PHP 7.2 support
+- Remove Symfony 3.4 support
+
 ## Version 5.13.0
 
 ### Added
