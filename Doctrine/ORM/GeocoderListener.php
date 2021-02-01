@@ -25,12 +25,11 @@ class GeocoderListener extends GeocodeEntityListener
     {
         @trigger_error(sprintf('The class "%s" is deprecated and will be removed from a future version. Please remove it from your service definition.', self::class));
 
-        $locator = new ServiceLocator(array(
-            'bazinga_geocoder.provider.' =>
-            function () use ($geocoder) {
+        $locator = new ServiceLocator([
+            'bazinga_geocoder.provider.' => function () use ($geocoder) {
                 return $geocoder;
-            }
-        ));
+            },
+        ]);
 
         parent::__construct($locator, $driver);
     }

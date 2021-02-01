@@ -12,11 +12,7 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Mapping\Driver;
 
-use Bazinga\GeocoderBundle\Mapping\Annotations;
-use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
-use Bazinga\GeocoderBundle\Mapping\Exception;
 use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
-use Doctrine\Common\Annotations\Reader;
 
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
