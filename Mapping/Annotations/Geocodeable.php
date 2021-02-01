@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Mapping\Annotations;
 
+#[\Attribute(\Attribute::TARGET_CLASS)]
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  *
