@@ -4,10 +4,10 @@ services:
         arguments:
             - '@annotations.reader'
         tags:
-            - { name: bazinga_geocoder.metadata.driver }
+            - bazinga_geocoder.metadata.driver
 
-    Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener:
-        class: Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener
+    Bazinga\GeocoderBundle\Doctrine\ORM\GeocodeEntityListener:
+        class: Bazinga\GeocoderBundle\Doctrine\ORM\GeocodeEntityListener
         arguments:
             - !tagged_locator 'bazinga_geocoder.provider'
             - '@Bazinga\GeocoderBundle\Mapping\Driver\DriverInterface'
