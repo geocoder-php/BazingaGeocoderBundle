@@ -66,6 +66,18 @@ final class Configuration implements ConfigurationInterface
                     ->scalarNode('ip')->defaultNull()->end()
                     ->booleanNode('use_faker')->defaultFalse()->end()
                 ->end()
+            ->end()
+            ->arrayNode('orm')
+                ->addDefaultsIfNotSet()
+                ->treatFalseLike(['enabled' => false])
+                ->treatTrueLike(['enabled' => true])
+                ->treatNullLike(['enabled' => true])
+                ->children()
+                    ->booleanNode('enabled')
+                        ->info('Turn the Doctrine ORM listener on or off.')
+                        ->defaultValue(false)
+                    ->end()
+                ->end()
             ->end();
 
         return $treeBuilder;

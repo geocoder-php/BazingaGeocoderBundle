@@ -35,7 +35,7 @@ use Symfony\Component\HttpKernel\KernelInterface;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-final class GeocoderListenerTest extends KernelTestCase
+final class GeocodeEntityListenerTest extends KernelTestCase
 {
     protected function tearDown(): void
     {
@@ -112,7 +112,6 @@ final class GeocoderListenerTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_php8.yml');
         }]);
 
         $container = self::getContainer();
@@ -152,7 +151,6 @@ final class GeocoderListenerTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
@@ -192,7 +190,6 @@ final class GeocoderListenerTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
@@ -232,7 +229,6 @@ final class GeocoderListenerTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
@@ -265,7 +261,6 @@ final class GeocoderListenerTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
@@ -298,7 +293,6 @@ final class GeocoderListenerTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $httpRequests = 0;

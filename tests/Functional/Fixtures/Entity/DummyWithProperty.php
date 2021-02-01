@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 
 #[Entity]
-#[Geocodeable]
+#[Geocodeable(provider: 'acme')]
 class DummyWithProperty
 {
     #[Id]

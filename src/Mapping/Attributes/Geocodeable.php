@@ -18,4 +18,11 @@ namespace Bazinga\GeocoderBundle\Mapping\Attributes;
 #[\Attribute(\Attribute::TARGET_CLASS)]
 class Geocodeable
 {
+    /**
+     * @param non-empty-string $provider
+     */
+    public function __construct(
+        public readonly string $provider,
+    ) {
+    }
 }

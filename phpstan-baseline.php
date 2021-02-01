@@ -131,6 +131,12 @@ $ignoreErrors[] = [
 ];
 $ignoreErrors[] = [
     // identifier: argument.type
+    'message' => '#^Parameter \\#2 \\$array of function array_key_exists expects array, array\\|bool\\|float\\|int\\|string\\|UnitEnum\\|null given\\.$#',
+    'count' => 1,
+    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
+];
+$ignoreErrors[] = [
+    // identifier: argument.type
     'message' => '#^Parameter \\#2 \\$config of method Bazinga\\\\GeocoderBundle\\\\DependencyInjection\\\\BazingaGeocoderExtension\\:\\:configureProviderPlugins\\(\\) expects array, mixed given\\.$#',
     'count' => 1,
     'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
@@ -151,13 +157,19 @@ $ignoreErrors[] = [
     // identifier: method.nonObject
     'message' => '#^Cannot call method getLatitude\\(\\) on Geocoder\\\\Model\\\\Coordinates\\|null\\.$#',
     'count' => 1,
-    'path' => __DIR__.'/src/Doctrine/ORM/GeocoderListener.php',
+    'path' => __DIR__.'/src/Doctrine/ORM/GeocodeEntityListener.php',
 ];
 $ignoreErrors[] = [
     // identifier: method.nonObject
     'message' => '#^Cannot call method getLongitude\\(\\) on Geocoder\\\\Model\\\\Coordinates\\|null\\.$#',
     'count' => 1,
-    'path' => __DIR__.'/src/Doctrine/ORM/GeocoderListener.php',
+    'path' => __DIR__.'/src/Doctrine/ORM/GeocodeEntityListener.php',
+];
+$ignoreErrors[] = [
+    // identifier: argument.missing
+    'message' => '#^Missing parameter \\$provider \\(string\\) in call to Bazinga\\\\GeocoderBundle\\\\Mapping\\\\ClassMetadata constructor\\.$#',
+    'count' => 1,
+    'path' => __DIR__.'/src/Mapping/Driver/AttributeDriver.php',
 ];
 $ignoreErrors[] = [
     // identifier: argument.type

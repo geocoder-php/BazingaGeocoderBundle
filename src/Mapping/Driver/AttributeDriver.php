@@ -43,7 +43,7 @@ final class AttributeDriver implements DriverInterface
             throw new MappingException(sprintf('The class "%s" is not geocodeable', $object::class));
         }
 
-        $args = [];
+        $args = ['provider' => $attributes[0]->newInstance()->provider];
 
         foreach ($reflection->getProperties() as $property) {
             foreach ($property->getAttributes() as $attribute) {
