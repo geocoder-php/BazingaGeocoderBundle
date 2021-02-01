@@ -20,4 +20,13 @@ namespace Bazinga\GeocoderBundle\Mapping\Annotations;
  */
 class Geocodeable
 {
+    /**
+     * @var string
+     */
+    public $provider = null;
+
+    public function __construct(array $options = [], string $provider = null)
+    {
+        $this->provider = $options['provider'] ?? $provider;
+    }
 }
