@@ -36,4 +36,9 @@ class ClassMetadata
      * @var \ReflectionMethod
      */
     public $addressGetter;
+
+    /**
+     * @var string|null
+     */
+    public $provider = null;
 }

@@ -38,3 +38,15 @@ services:
 
     geocoder:
         alias: "Geocoder\\ProviderAggregator"
+
+    Bazinga\GeocoderBundle\Mapping\Driver\ChainDriver:
+        class: Bazinga\GeocoderBundle\Mapping\Driver\ChainDriver
+        arguments:
+            - !tagged_iterator bazinga_geocoder.metadata.driver
+
+    Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver:
+        class: Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver
+        tags:
+            - { name: bazinga_geocoder.metadata.driver }
+
+    Bazinga\GeocoderBundle\Mapping\Driver\DriverInterface: '@Bazinga\GeocoderBundle\Mapping\Driver\ChainDriver'
