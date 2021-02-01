@@ -96,3 +96,40 @@ $em->flush();
 echo $user->getLatitude(); // will output 52.516325
 echo $user->getLongitude(); // will output 13.377264
 ```
+
+## PHP 8
+
+If you are using PHP 8, you can use [Attributes](https://www.php.net/manual/en/language.attributes.overview.php) in your entity:
+
+```php
+
+use Bazinga\GeocoderBundle\Mapping\Annotations as Geocoder;
+
+#[Geocoder\Geocodeable()]
+class User
+{
+    #[Geocoder\Address()]
+    private $address;
+
+    #[Geocoder\Latitude()]
+    private $latitude;
+
+    #[Geocoder\Longitude()]
+    private $longitude;
+}
+```
+
+Then update your service configuration to register the `AttributeDriver`:
+
+```yaml
+    Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver:
+        class: Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver
+
+    Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener:
+        class: Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener
+        arguments:
+            - '@bazinga_geocoder.provider.acme'
+            - '@Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver'
+        tags:
+            - doctrine.event_subscriber
+```
