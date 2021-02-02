@@ -17,7 +17,6 @@ use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
 use Bazinga\GeocoderBundle\Mapping\Exception;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Util\ClassUtils;
-use Doctrine\Persistence\Proxy;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
