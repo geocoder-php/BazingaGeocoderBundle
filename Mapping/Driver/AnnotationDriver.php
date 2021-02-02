@@ -16,6 +16,7 @@ use Bazinga\GeocoderBundle\Mapping\Annotations;
 use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
 use Bazinga\GeocoderBundle\Mapping\Exception;
 use Doctrine\Common\Annotations\Reader;
+use Doctrine\Common\Util\ClassUtils;
 use Doctrine\Persistence\Proxy;
 
 /**
@@ -32,22 +33,14 @@ class AnnotationDriver implements DriverInterface
 
     public function isGeocodeable($object): bool
     {
-        $reflection = new \ReflectionObject($object);
-
-        if ($object instanceof Proxy) {
-            $reflection = $reflection->getParentClass();
-        }
+        $reflection = ClassUtils::newReflectionObject($object);
 
         return (bool) $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class);
     }
 
     public function loadMetadataFromObject($object)
     {
-        $reflection = new \ReflectionObject($object);
-
-        if ($object instanceof Proxy) {
-            $reflection = $reflection->getParentClass();
-        }
+        $reflection = ClassUtils::newReflectionObject($object);
 
         if (!$annotation = $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class)) {
             throw new Exception\MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
