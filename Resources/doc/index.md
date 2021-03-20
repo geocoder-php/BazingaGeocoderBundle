@@ -37,19 +37,6 @@ and then you may just install the bundle like normal:
 composer require willdurand/geocoder-bundle:^5.0
 ```
 
-Register the bundle in `app/AppKernel.php`:
-
-```php
-// app/AppKernel.php
-public function registerBundles()
-{
-    return array(
-        // ...
-        new Bazinga\GeocoderBundle\BazingaGeocoderBundle(),
-    );
-}
-```
-
 Usage
 -----
 
