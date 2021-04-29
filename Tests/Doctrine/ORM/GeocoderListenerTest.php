@@ -20,7 +20,6 @@ use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\Tests\DoctrineTestCase;
 use Doctrine\Tests\OrmTestCase;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
@@ -47,7 +46,7 @@ class GeocoderListenerTest extends OrmTestCase
 
     public static function doSetUpBeforeClass(): void
     {
-        if (!class_exists(DoctrineTestCase::class)) {
+        if (!class_exists(OrmTestCase::class)) {
             /*
              * We check for DoctrineTestCase because it is in the same package as OrmTestCase and we want to be able to
              * fake OrmTestCase
@@ -65,7 +64,7 @@ class GeocoderListenerTest extends OrmTestCase
             'memory' => true,
         ]);
 
-        $this->em = $this->_getTestEntityManager($conn);
+        $this->em = $this->getTestEntityManager($conn);
 
         $reader = new SimpleAnnotationReader();
         $reader->addNamespace('Bazinga\GeocoderBundle\Mapping\Annotations');
