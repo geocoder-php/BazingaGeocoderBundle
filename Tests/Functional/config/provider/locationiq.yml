@@ -1,0 +1,8 @@
+bazinga_geocoder:
+  profiling:
+    enabled: false
+  providers:
+    acme:
+      factory: Bazinga\GeocoderBundle\ProviderFactory\LocationIQFactory
+      options:
+        api_key: 'foo'
