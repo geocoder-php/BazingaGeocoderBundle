@@ -1,5 +1,5 @@
 {
-  "name": "willdurand/geocoder-bundle",
+  "name": "free-work-agsi/geocoder-bundle",
   "description": "Integration of Geocoder into Symfony",
   "keywords": ["geocoding", "geocoder"],
   "type": "symfony-bundle",
