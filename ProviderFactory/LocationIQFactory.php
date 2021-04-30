@@ -10,7 +10,7 @@
 
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
-use Geocoder\Provider\LocationIq\LocationIq;
+use Geocoder\Provider\LocationIQ\LocationIQ;
 use Geocoder\Provider\Provider;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
