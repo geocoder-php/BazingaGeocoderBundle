@@ -30,6 +30,7 @@ use Geocoder\Provider\HostIp\HostIp;
 use Geocoder\Provider\IpInfo\IpInfo;
 use Geocoder\Provider\IpInfoDb\IpInfoDb;
 use Geocoder\Provider\Ipstack\Ipstack;
+use Geocoder\Provider\LocationIQ\LocationIQ;
 use Geocoder\Provider\Mapbox\Mapbox;
 use Geocoder\Provider\MapQuest\MapQuest;
 use Geocoder\Provider\Mapzen\Mapzen;
@@ -80,6 +81,7 @@ class ProviderFactoryTest extends BaseBundleTestCase
         yield [IpInfo::class, ['acme']];
         yield [IpInfoDb::class, ['empty', 'acme']];
         yield [Ipstack::class, ['acme']];
+        yield [LocationIQ::class, ['acme']];
         yield [Mapbox::class, ['acme']];
         yield [MapQuest::class, ['acme']];
         if (class_exists(Mapzen::class)) {
