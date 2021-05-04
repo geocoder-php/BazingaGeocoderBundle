@@ -27,6 +27,7 @@ Here is a list of all provider factories and their options.
 | `Bazinga\GeocoderBundle\ProviderFactory\IpInfoFactory` | httplug_client
 | `Bazinga\GeocoderBundle\ProviderFactory\IpInfoDbFactory` | httplug_client, api_key, precision
 | `Bazinga\GeocoderBundle\ProviderFactory\IpstackFactory` | httplug_client, api_key
+| `Bazinga\GeocoderBundle\ProviderFactory\LocationIQFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\MapboxFactory` | httplug_client, api_key, country, mode
 | `Bazinga\GeocoderBundle\ProviderFactory\MapQuestFactory` | httplug_client, api_key, licensed
 | `Bazinga\GeocoderBundle\ProviderFactory\MapzenFactory` | httplug_client, api_key

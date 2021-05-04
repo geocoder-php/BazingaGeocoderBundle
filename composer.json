@@ -41,6 +41,7 @@
     "geocoder-php/ip-info-db-provider": "^4.2",
     "geocoder-php/ip-info-provider": "^0.3",
     "geocoder-php/ipstack-provider": "^0.3",
+    "geocoder-php/locationiq-provider": "^1.2",
     "geocoder-php/mapbox-provider": "^1.3",
     "geocoder-php/mapquest-provider": "^4.2",
     "geocoder-php/mapzen-provider": "^4.0",
