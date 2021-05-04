@@ -2,6 +2,22 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.15.0
+
+### Added
+
+- Add locationIQ provider
+- Add support for PHP 8 attributes
+
+### Fixed
+
+- Fix annotation metadata driver with Doctrine proxies
+- Fix ORM tests
+
+### Removed
+
+- Remove unnecessary version check for registerAliasForArgument
+
 ## Version 5.14.0
 
 ### Added
