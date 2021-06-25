@@ -54,7 +54,7 @@ jobs:
             fail-fast: true
             matrix:
                 php: ['7.3', '7.4', '8.0']
-                sf_version: ['4.4.*', '5.1.*', '5.2.*']
+                sf_version: ['4.4.*', '5.2.*', '5.3.*']
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
@@ -84,7 +84,7 @@ jobs:
             fail-fast: true
             matrix:
                 php: ['7.4']
-                sf_version: ['4.4.*', '5.1.*', '5.2.*']
+                sf_version: ['4.4.*', '5.2.*', '5.3.*']
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
@@ -114,7 +114,7 @@ jobs:
             fail-fast: true
             matrix:
                 php: ['7.3', '7.4', '8.0']
-                sf_version: ['4.4.*', '5.1.*', '5.2.*']
+                sf_version: ['4.4.*', '5.2.*', '5.3.*']
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
