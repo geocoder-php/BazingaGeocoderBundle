@@ -35,7 +35,7 @@ class FakeIpPluginTest extends TestCase
 
     /**
      * @testWith [null]
-     *           ['']
+     *           [""]
      */
     public function testEmptyLocalIpQuery(?string $localIp)
     {
