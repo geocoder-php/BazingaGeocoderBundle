@@ -64,8 +64,7 @@
     "symfony/validator": "^4.4 || ^5.0",
     "symfony/yaml": "^4.4 || ^5.0"
   },
-  "conflict":  {
-    "willdurand/geocoder": "3.2",
+  "conflict": {
     "geocoder-php/nominatim-provider": "<5.0"
   },
   "autoload": {
