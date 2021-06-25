@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class Address extends Constraint
 {
-    const INVALID_ADDRESS_ERROR = '2243aa07-2ea7-4eb7-962c-6a9586593f2c';
+    public const INVALID_ADDRESS_ERROR = '2243aa07-2ea7-4eb7-962c-6a9586593f2c';
 
     protected static $errorNames = [
         self::INVALID_ADDRESS_ERROR => 'INVALID_ADDRESS_ERROR',
