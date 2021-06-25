@@ -22,7 +22,7 @@
   "require-dev": {
     "doctrine/cache": "~1.3",
     "doctrine/orm": "~2.8",
-    "fakerphp/faker": "^1.9",
+    "fakerphp/faker": "^1.14",
     "friendsofphp/php-cs-fixer": "^3.0",
     "geocoder-php/algolia-places-provider": "^0.3",
     "geocoder-php/arcgis-online-provider": "^4.3",

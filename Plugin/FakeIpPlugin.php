@@ -26,7 +26,7 @@ use Geocoder\Query\Query;
 class FakeIpPlugin implements Plugin
 {
     /**
-     * @var string
+     * @var string|null
      */
     private $needle;
 
@@ -36,20 +36,14 @@ class FakeIpPlugin implements Plugin
     private $replacement;
 
     /**
-     * @var bool
-     */
-    private $useFaker;
-
-    /**
      * @var Generator|null
      */
     private $faker;
 
-    public function __construct(string $needle, string $replacement = null, bool $useFaker = false)
+    public function __construct(?string $needle, string $replacement = null, bool $useFaker = false)
     {
         $this->needle = $needle;
         $this->replacement = $replacement;
-        $this->useFaker = $useFaker;
 
         if ($useFaker) {
             $this->faker = new Generator();
@@ -69,14 +63,16 @@ class FakeIpPlugin implements Plugin
         $replacement = $this->replacement;
 
         if (null !== $this->faker) {
-            $replacement = $this->faker->ipv4;
+            $replacement = $this->faker->ipv4();
         }
 
-        $text = str_replace($this->needle, $replacement, $query->getText(), $count);
-        if ($count > 0) {
-            $query = $query->withText($text);
-        }
-        if (null === $this->needle || '' === $this->needle) {
+        if (null !== $this->needle && '' !== $this->needle) {
+            $text = str_replace($this->needle, $replacement, $query->getText(), $count);
+
+            if ($count > 0) {
+                $query = $query->withText($text);
+            }
+        } else {
             $query = $query->withText($replacement);
         }
 

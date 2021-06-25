@@ -12,3 +12,6 @@ parameters:
 		-
 			path: %currentWorkingDirectory%/ProviderFactory/GeoipFactory.php
 			message: '#Geocoder\\Provider\\Geoip\\Geoip not found#'
+		-
+			path: %currentWorkingDirectory%/Plugin/FakeIpPlugin.php
+			message: '#Call to an undefined method Faker\\Generator::ipv4\(\)#'
