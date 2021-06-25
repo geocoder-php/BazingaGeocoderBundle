@@ -33,9 +33,13 @@ class FakeIpPluginTest extends TestCase
         $this->assertSame($query->getText(), '123.123.123.123');
     }
 
-    public function testEmptyLocalIpQuery()
+    /**
+     * @testWith [null]
+     *           ['']
+     */
+    public function testEmptyLocalIpQuery(?string $localIp)
     {
-        $fakeIpPlugin = new FakeIpPlugin('', '123.123.123.123');
+        $fakeIpPlugin = new FakeIpPlugin($localIp, '123.123.123.123');
         $query = GeocodeQuery::create('124.124.124.124');
 
         /** @var Query $query */
@@ -43,18 +47,6 @@ class FakeIpPluginTest extends TestCase
 
         $this->assertSame($query->getText(), '123.123.123.123');
     }
-
-    public function testNullLocalIpQuery()
-    {
-        $fakeIpPlugin = new FakeIpPlugin(null, '123.123.123.123');
-        $query = GeocodeQuery::create('124.124.124.124');
-
-        /** @var Query $query */
-        $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
-
-        $this->assertSame($query->getText(), '123.123.123.123');
-    }
-
     public function testHandleQueryUsingFaker()
     {
         $fakeIpPlugin = new FakeIpPlugin('127.0.0.1', '192.168.1.1', true);
