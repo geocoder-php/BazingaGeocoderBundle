@@ -76,6 +76,9 @@ class FakeIpPlugin implements Plugin
         if ($count > 0) {
             $query = $query->withText($text);
         }
+        if (null === $this->needle || '' === $this->needle) {
+            $query = $query->withText($replacement);
+        }
 
         return $next($query);
     }
