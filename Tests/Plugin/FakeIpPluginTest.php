@@ -47,6 +47,7 @@ class FakeIpPluginTest extends TestCase
 
         $this->assertSame($query->getText(), '123.123.123.123');
     }
+
     public function testHandleQueryUsingFaker()
     {
         $fakeIpPlugin = new FakeIpPlugin('127.0.0.1', '192.168.1.1', true);
