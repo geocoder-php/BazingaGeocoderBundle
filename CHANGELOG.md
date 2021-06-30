@@ -2,6 +2,13 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.16.0
+
+### Added
+
+- Allow Address validation constraint as php8 attribute usage
+- Allow fake IP works for all IPs
+
 ## Version 5.15.0
 
 ### Added
