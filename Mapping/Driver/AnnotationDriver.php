@@ -46,6 +46,7 @@ class AnnotationDriver implements DriverInterface
         }
 
         $metadata = new ClassMetadata();
+        $metadata->provider = $annotation->provider;
 
         foreach ($reflection->getProperties() as $property) {
             foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {

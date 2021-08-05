@@ -65,41 +65,7 @@ class User
 }
 ```
 
-Secondly, register the Doctrine event listener and its dependencies in your `services.yaml` file.  
-You have to indicate which provider to use to reverse geocode the address. Here we use `acme` provider we declared in bazinga_geocoder configuration earlier.
-
-```yaml
-    Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver:
-        class: Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver
-        arguments:
-            - '@annotations.reader'
-
-    Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener:
-        class: Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener
-        arguments:
-            - '@bazinga_geocoder.provider.acme'
-            - '@Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver'
-        tags:
-            - doctrine.event_subscriber
-```
-
-It is done!  
-Now you can use it:
-
-```php
-$user = new User();
-$user->setAddress('Brandenburger Tor, Pariser Platz, Berlin');
-
-$em->persist($event);
-$em->flush();
-
-echo $user->getLatitude(); // will output 52.516325
-echo $user->getLongitude(); // will output 13.377264
-```
-
-## PHP 8
-
-If you are using PHP 8, you can use [Attributes](https://www.php.net/manual/en/language.attributes.overview.php) in your entity:
+If you are using PHP 8, then you can use [Attributes](https://www.php.net/manual/en/language.attributes.overview.php) in your entity:
 
 ```php
 
@@ -119,17 +85,15 @@ class User
 }
 ```
 
-Then update your service configuration to register the `AttributeDriver`:
+It is done!  
+Now you can use it:
 
-```yaml
-    Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver:
-        class: Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver
+```php
+$user = new User();
+$user->setAddress('Brandenburger Tor, Pariser Platz, Berlin');
+$em->persist($event);
+$em->flush();
 
-    Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener:
-        class: Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener
-        arguments:
-            - '@bazinga_geocoder.provider.acme'
-            - '@Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver'
-        tags:
-            - doctrine.event_subscriber
+echo $user->getLatitude(); // will output 52.516325
+echo $user->getLongitude(); // will output 13.377264
 ```

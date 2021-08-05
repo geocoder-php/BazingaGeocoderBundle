@@ -51,6 +51,7 @@ final class AttributeDriver implements DriverInterface
         }
 
         $metadata = new ClassMetadata();
+        $metadata->provider = $attributes[0]->newInstance()->provider;
 
         foreach ($reflection->getProperties() as $property) {
             foreach ($property->getAttributes() as $attribute) {

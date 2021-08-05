@@ -52,6 +52,10 @@ class BazingaGeocoderExtension extends Extension
             $loader->load('profiling.yml');
         }
 
+        if (array_key_exists('DoctrineBundle', $container->getParameter('kernel.bundles'))) {
+            $loader->load('doctrine.yml');
+        }
+
         if ($config['fake_ip']['enabled']) {
             $definition = $container->getDefinition(FakeIpPlugin::class);
             $definition->replaceArgument(0, $config['fake_ip']['local_ip']);

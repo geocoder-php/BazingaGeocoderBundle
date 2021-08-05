@@ -1,0 +1,15 @@
+services:
+    Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver:
+        class: Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver
+        arguments:
+            - '@annotations.reader'
+        tags:
+            - bazinga_geocoder.metadata.driver
+
+    Bazinga\GeocoderBundle\Doctrine\ORM\GeocodeEntityListener:
+        class: Bazinga\GeocoderBundle\Doctrine\ORM\GeocodeEntityListener
+        arguments:
+            - !tagged_locator 'bazinga_geocoder.provider'
+            - '@Bazinga\GeocoderBundle\Mapping\Driver\DriverInterface'
+        tags:
+            - doctrine.event_subscriber
