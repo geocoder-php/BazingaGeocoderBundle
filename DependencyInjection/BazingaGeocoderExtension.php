@@ -59,7 +59,7 @@ class BazingaGeocoderExtension extends Extension
             $definition->replaceArgument(2, $config['fake_ip']['use_faker']);
 
             if ($config['fake_ip']['use_faker'] && !class_exists(Generator::class)) {
-                throw new \LogicException('To enable this option, you must install fzaninotto/faker package.');
+                throw new \LogicException('To enable this option, you must install fakerphp/faker package.');
             }
         } else {
             $container->removeDefinition(FakeIpPlugin::class);
@@ -173,7 +173,7 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
-     * {@inheritdoc}
+     * @return Configuration
      */
     public function getConfiguration(array $config, ContainerBuilder $container)
     {

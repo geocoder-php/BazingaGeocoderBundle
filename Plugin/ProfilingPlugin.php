@@ -19,6 +19,7 @@ use Geocoder\Plugin\Plugin;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\Query;
 use Geocoder\Query\ReverseQuery;
+use Http\Promise\Promise;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -40,6 +41,9 @@ class ProfilingPlugin implements Plugin
         $this->name = $name;
     }
 
+    /**
+     * @return Promise
+     */
     public function handleQuery(Query $query, callable $next, callable $first)
     {
         $startTime = microtime(true);

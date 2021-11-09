@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
+use Bazinga\GeocoderBundle\Tests\PublicServicePass;
 use Geocoder\Provider\AlgoliaPlaces\AlgoliaPlaces;
 use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
 use Geocoder\Provider\BingMaps\BingMaps;
@@ -41,26 +42,51 @@ use Geocoder\Provider\OpenCage\OpenCage;
 use Geocoder\Provider\PickPoint\PickPoint;
 use Geocoder\Provider\TomTom\TomTom;
 use Geocoder\Provider\Yandex\Yandex;
-use Nyholm\BundleTest\BaseBundleTestCase;
-use Nyholm\BundleTest\CompilerPass\PublicServicePass;
+use Nyholm\BundleTest\TestKernel;
 use Nyholm\NSA;
-use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 
-class ProviderFactoryTest extends BaseBundleTestCase
+class ProviderFactoryTest extends KernelTestCase
 {
-    use SetUpTearDownTrait;
-
-    protected function doSetUp(): void
+    protected static function getKernelClass(): string
     {
-        $this->addCompilerPass(new PublicServicePass('|bazinga.*|'));
+        return TestKernel::class;
     }
 
-    protected function getBundleClass()
+    protected static function createKernel(array $options = []): KernelInterface
     {
-        return BazingaGeocoderBundle::class;
+        /**
+         * @var TestKernel $kernel
+         */
+        $kernel = parent::createKernel($options);
+        $kernel->addTestBundle(BazingaGeocoderBundle::class);
+        $kernel->addTestCompilerPass(new PublicServicePass('|[Bb]azinga:*|'));
+        $kernel->addTestCompilerPass(new PublicServicePass('|[gG]eocoder:*|'));
+        $kernel->handleOptions($options);
+
+        return $kernel;
     }
 
-    public function getProviders()
+    /**
+     * @dataProvider getProviders
+     */
+    public function testProviderConfiguration($class, $serviceNames): void
+    {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) use ($class) {
+            $kernel->addTestConfig(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\') + 1)).'.yml');
+        }]);
+
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+
+        foreach ($serviceNames as $name) {
+            $this->assertTrue($container->has('bazinga_geocoder.provider.'.$name));
+            $service = $container->get('bazinga_geocoder.provider.'.$name);
+            $this->assertInstanceOf($class, NSA::getProperty($service, 'provider'));
+        }
+    }
+
+    public function getProviders(): iterable
     {
         yield [AlgoliaPlaces::class, ['empty', 'acme']];
         yield [ArcGISOnline::class, ['empty', 'acme']];
@@ -94,27 +120,5 @@ class ProviderFactoryTest extends BaseBundleTestCase
         yield [PickPoint::class, ['acme']];
         yield [TomTom::class, ['acme']];
         yield [Yandex::class, ['empty', 'acme']];
-    }
-
-    /**
-     * @dataProvider getProviders
-     */
-    public function testProviderConfiguration($class, $serviceNames)
-    {
-        // Create a new Kernel
-        $kernel = $this->createKernel();
-
-        // Add some configuration
-        $kernel->addConfigFile(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\') + 1)).'.yml');
-
-        // Boot the kernel as normal ...
-        $this->bootKernel();
-        $container = $this->getContainer();
-
-        foreach ($serviceNames as $name) {
-            $this->assertTrue($container->has('bazinga_geocoder.provider.'.$name));
-            $service = $container->get('bazinga_geocoder.provider.'.$name);
-            $this->assertInstanceOf($class, NSA::getProperty($service, 'provider'));
-        }
     }
 }

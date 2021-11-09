@@ -21,40 +21,64 @@ use Psr\SimpleCache\CacheInterface;
  */
 class CacheHelper implements CacheInterface
 {
+    /**
+     * @return mixed
+     */
     public function get($key, $default = null)
     {
     }
 
+    /**
+     * @return bool
+     */
     public function set($key, $value, $ttl = null)
     {
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function delete($key)
     {
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function clear()
     {
         return true;
     }
 
+    /**
+     * @return iterable
+     */
     public function getMultiple($keys, $default = null)
     {
         return [];
     }
 
+    /**
+     * @return bool
+     */
     public function setMultiple($values, $ttl = null)
     {
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function deleteMultiple($keys)
     {
         return true;
     }
 
+    /**
+     * @return bool
+     */
     public function has($key)
     {
         return false;

@@ -32,7 +32,7 @@ class GeocodeCommandTest extends TestCase
 {
     private static $address = '10 rue Gambetta, Paris, France';
 
-    public function testExecute()
+    public function testExecute(): void
     {
         $coordinates = new Coordinates(1, 2);
         $country = new Country('France', 'FR');
@@ -59,7 +59,7 @@ class GeocodeCommandTest extends TestCase
 
         $kernel->expects($this->any())
             ->method('getContainer')
-            ->will($this->returnValue($container));
+            ->willReturn($container);
 
         $kernel->expects($this->any())
             ->method('getBundles')

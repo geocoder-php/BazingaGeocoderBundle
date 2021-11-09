@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
+use Bazinga\GeocoderBundle\Tests\PublicServicePass;
 use Geocoder\Dumper\GeoArray;
 use Geocoder\Dumper\GeoJson;
 use Geocoder\Dumper\Gpx;
@@ -24,33 +25,37 @@ use Geocoder\Plugin\Plugin\LoggerPlugin;
 use Geocoder\Plugin\PluginProvider;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\ProviderAggregator;
-use Nyholm\BundleTest\BaseBundleTestCase;
-use Nyholm\BundleTest\CompilerPass\PublicServicePass;
+use Nyholm\BundleTest\TestKernel;
 use Nyholm\NSA;
-use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpKernel\KernelInterface;
 
-class BundleInitializationTest extends BaseBundleTestCase
+class BundleInitializationTest extends KernelTestCase
 {
-    use SetUpTearDownTrait;
-
-    protected function doSetUp(): void
+    protected static function getKernelClass(): string
     {
-        $this->addCompilerPass(new PublicServicePass('|[Bb]azinga:*|'));
-        $this->addCompilerPass(new PublicServicePass('|[gG]eocoder:*|'));
+        return TestKernel::class;
     }
 
-    protected function getBundleClass()
+    protected static function createKernel(array $options = []): KernelInterface
     {
-        return BazingaGeocoderBundle::class;
+        /**
+         * @var TestKernel $kernel
+         */
+        $kernel = parent::createKernel($options);
+        $kernel->addTestBundle(BazingaGeocoderBundle::class);
+        $kernel->addTestCompilerPass(new PublicServicePass('|[Bb]azinga:*|'));
+        $kernel->addTestCompilerPass(new PublicServicePass('|[gG]eocoder:*|'));
+        $kernel->handleOptions($options);
+
+        return $kernel;
     }
 
-    public function testInitBundle()
+    public function testInitBundle(): void
     {
-        // Boot the kernel.
-        $this->bootKernel();
+        $kernel = self::bootKernel();
 
-        // Get the container
-        $container = $this->getContainer();
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         // Test if services exists
         $this->assertTrue($container->has(ProviderAggregator::class));
@@ -58,17 +63,13 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(ProviderAggregator::class, $service);
     }
 
-    public function testBundleWithOneProviderConfiguration()
+    public function testBundleWithOneProviderConfiguration(): void
     {
-        // Create a new Kernel
-        $kernel = $this->createKernel();
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/simple.yml');
+        }]);
 
-        // Add some configuration
-        $kernel->addConfigFile(__DIR__.'/config/simple.yml');
-
-        // Boot the kernel as normal ...
-        $this->bootKernel();
-        $container = $this->getContainer();
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
@@ -76,12 +77,13 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(GoogleMaps::class, NSA::getProperty($service, 'provider'));
     }
 
-    public function testBundleWithCachedProvider()
+    public function testBundleWithCachedProvider(): void
     {
-        $kernel = $this->createKernel();
-        $kernel->addConfigFile(__DIR__.'/config/cache.yml');
-        $this->bootKernel();
-        $container = $this->getContainer();
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/cache.yml');
+        }]);
+
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
@@ -91,14 +93,13 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(CachePlugin::class, $plugins[0]);
     }
 
-    public function testCacheLifetimeCanBeNull()
+    public function testCacheLifetimeCanBeNull(): void
     {
-        $kernel = $this->createKernel();
-        $kernel->addConfigFile(__DIR__.'/config/cache_without_lifetime.yml');
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/cache_without_lifetime.yml');
+        }]);
 
-        $this->bootKernel();
-
-        $container = $this->getContainer();
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
 
@@ -116,12 +117,13 @@ class BundleInitializationTest extends BaseBundleTestCase
         self::assertNull($cacheLifeTime);
     }
 
-    public function testBundleWithPluginsYml()
+    public function testBundleWithPluginsYml(): void
     {
-        $kernel = $this->createKernel();
-        $kernel->addConfigFile(__DIR__.'/config/service_plugin.yml');
-        $this->bootKernel();
-        $container = $this->getContainer();
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/service_plugin.yml');
+        }]);
+
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
@@ -131,12 +133,13 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
     }
 
-    public function testBundleWithPluginXml()
+    public function testBundleWithPluginXml(): void
     {
-        $kernel = $this->createKernel();
-        $kernel->addConfigFile(__DIR__.'/config/service_plugin.xml');
-        $this->bootKernel();
-        $container = $this->getContainer();
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/service_plugin.xml');
+        }]);
+
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
@@ -146,10 +149,11 @@ class BundleInitializationTest extends BaseBundleTestCase
         $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
     }
 
-    public function testBundleHasRegisteredDumpers()
+    public function testBundleHasRegisteredDumpers(): void
     {
-        $this->bootKernel();
-        $container = $this->getContainer();
+        $kernel = self::bootKernel();
+
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         $this->assertTrue($container->has(GeoArray::class));
         $this->assertTrue($container->has(GeoJson::class));

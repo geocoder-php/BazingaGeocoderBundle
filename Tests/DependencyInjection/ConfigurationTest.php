@@ -22,7 +22,7 @@ use Symfony\Component\Yaml\Yaml;
  */
 class ConfigurationTest extends TestCase
 {
-    public function testGetConfigTreeBuilder()
+    public function testGetConfigTreeBuilder(): void
     {
         $config = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
 
@@ -38,7 +38,7 @@ class ConfigurationTest extends TestCase
         $this->assertSame('33.33.33.11', $config['fake_ip']['ip']);
     }
 
-    public function testGetConfigTreeBuilderNoDebug()
+    public function testGetConfigTreeBuilderNoDebug(): void
     {
         $config = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
 

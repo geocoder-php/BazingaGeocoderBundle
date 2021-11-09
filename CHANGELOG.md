@@ -2,6 +2,12 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.16.1
+
+### Fixed
+
+- Allow Symfony 6
+
 ## Version 5.16.0
 
 ### Added

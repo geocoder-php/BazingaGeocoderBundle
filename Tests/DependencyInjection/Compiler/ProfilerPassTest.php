@@ -16,26 +16,23 @@ use Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector;
 use Bazinga\GeocoderBundle\DependencyInjection\Compiler\ProfilerPass;
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
 class ProfilerPassTest extends TestCase
 {
-    use SetUpTearDownTrait;
-
     /**
      * @var ProfilerPass
      */
     private $compilerPass;
 
-    protected function doSetUp()
+    protected function setUp(): void
     {
         $this->compilerPass = new ProfilerPass();
     }
 
-    public function testRegistersProviders()
+    public function testRegistersProviders(): void
     {
         $geocoderDataCollectorDefinition = new Definition(GeocoderDataCollector::class);
 

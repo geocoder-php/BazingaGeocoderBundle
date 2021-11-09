@@ -22,7 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class FakeIpPluginTest extends TestCase
 {
-    public function testSimpleHandleQuery()
+    public function testSimpleHandleQuery(): void
     {
         $fakeIpPlugin = new FakeIpPlugin('127.0.0.1', '123.123.123.123');
         $query = GeocodeQuery::create('127.0.0.1');
@@ -37,7 +37,7 @@ class FakeIpPluginTest extends TestCase
      * @testWith [null]
      *           [""]
      */
-    public function testEmptyLocalIpQuery(?string $localIp)
+    public function testEmptyLocalIpQuery(?string $localIp): void
     {
         $fakeIpPlugin = new FakeIpPlugin($localIp, '123.123.123.123');
         $query = GeocodeQuery::create('124.124.124.124');
@@ -48,7 +48,7 @@ class FakeIpPluginTest extends TestCase
         $this->assertSame($query->getText(), '123.123.123.123');
     }
 
-    public function testHandleQueryUsingFaker()
+    public function testHandleQueryUsingFaker(): void
     {
         $fakeIpPlugin = new FakeIpPlugin('127.0.0.1', '192.168.1.1', true);
         $query = GeocodeQuery::create('127.0.0.1');
