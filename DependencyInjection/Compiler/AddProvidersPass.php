@@ -23,11 +23,6 @@ use Symfony\Component\DependencyInjection\Reference;
 class AddProvidersPass implements CompilerPassInterface
 {
     /**
-     * @var \Symfony\Component\DependencyInjection\ContainerBuilder
-     */
-    protected $container;
-
-    /**
      * Get all providers based on their tag (`bazinga_geocoder.provider`) and
      * register them.
      */

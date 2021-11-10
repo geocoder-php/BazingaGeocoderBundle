@@ -14,48 +14,53 @@ namespace Bazinga\GeocoderBundle\Mapping\Driver;
 
 use Bazinga\GeocoderBundle\Mapping\Annotations;
 use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
-use Bazinga\GeocoderBundle\Mapping\Exception;
-use Doctrine\Common\Annotations\Reader;
+use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
 use Doctrine\Common\Util\ClassUtils;
 
 /**
- * @author Markus Bachmann <markus.bachmann@bachi.biz>
+ * @author Pierre du Plessis <pdples@gmail.com>
  */
-class AnnotationDriver implements DriverInterface
+final class AttributeDriver implements DriverInterface
 {
-    private $reader;
-
-    public function __construct(Reader $reader)
-    {
-        $this->reader = $reader;
-    }
-
     public function isGeocodeable($object): bool
     {
+        if (PHP_VERSION_ID < 80000) {
+            return false;
+        }
+
         $reflection = ClassUtils::newReflectionObject($object);
 
-        return (bool) $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class);
+        return count($reflection->getAttributes(Annotations\Geocodeable::class)) > 0;
     }
 
-    public function loadMetadataFromObject($object)
+    /**
+     * @throws MappingException
+     */
+    public function loadMetadataFromObject($object): ClassMetadata
     {
+        if (PHP_VERSION_ID < 80000) {
+            throw new MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
+        }
+
         $reflection = ClassUtils::newReflectionObject($object);
 
-        if (!$annotation = $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class)) {
-            throw new Exception\MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
+        $attributes = $reflection->getAttributes(Annotations\Geocodeable::class);
+
+        if (0 === count($attributes)) {
+            throw new MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
         }
 
         $metadata = new ClassMetadata();
 
         foreach ($reflection->getProperties() as $property) {
-            foreach ($this->reader->getPropertyAnnotations($property) as $annotation) {
-                if ($annotation instanceof Annotations\Latitude) {
+            foreach ($property->getAttributes() as $attribute) {
+                if (Annotations\Latitude::class === $attribute->getName()) {
                     $property->setAccessible(true);
                     $metadata->latitudeProperty = $property;
-                } elseif ($annotation instanceof Annotations\Longitude) {
+                } elseif (Annotations\Longitude::class === $attribute->getName()) {
                     $property->setAccessible(true);
                     $metadata->longitudeProperty = $property;
-                } elseif ($annotation instanceof Annotations\Address) {
+                } elseif (Annotations\Address::class === $attribute->getName()) {
                     $property->setAccessible(true);
                     $metadata->addressProperty = $property;
                 }
@@ -63,9 +68,9 @@ class AnnotationDriver implements DriverInterface
         }
 
         foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
-            if ($this->reader->getMethodAnnotation($method, Annotations\Address::class)) {
+            if (count($method->getAttributes(Annotations\Address::class)) > 0) {
                 if (0 !== $method->getNumberOfRequiredParameters()) {
-                    throw new \Exception('You can not use a method requiring parameters with @Address annotation!');
+                    throw new MappingException('You can not use a method requiring parameters with #[Address] attribute!');
                 }
 
                 $metadata->addressGetter = $method;

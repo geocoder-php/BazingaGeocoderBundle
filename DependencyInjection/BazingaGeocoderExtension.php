@@ -33,7 +33,6 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 use Symfony\Component\DependencyInjection\Reference;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
-use Symfony\Component\HttpKernel\Kernel;
 
 /**
  * @author William Durand <william.durand1@gmail.com>.
@@ -55,6 +54,7 @@ class BazingaGeocoderExtension extends Extension
 
         if ($config['fake_ip']['enabled']) {
             $definition = $container->getDefinition(FakeIpPlugin::class);
+            $definition->replaceArgument(0, $config['fake_ip']['local_ip']);
             $definition->replaceArgument(1, $config['fake_ip']['ip']);
             $definition->replaceArgument(2, $config['fake_ip']['use_faker']);
 
@@ -103,9 +103,7 @@ class BazingaGeocoderExtension extends Extension
                 $container->setAlias($alias, $serviceId);
             }
 
-            if (Kernel::VERSION_ID > 40200) {
-                $container->registerAliasForArgument($serviceId, Provider::class, "{$providerName}Geocoder");
-            }
+            $container->registerAliasForArgument($serviceId, Provider::class, "{$providerName}Geocoder");
         }
     }
 

@@ -2,6 +2,60 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.16.0
+
+### Added
+
+- Allow Address validation constraint as php8 attribute usage
+- Allow fake IP works for all IPs
+
+## Version 5.15.0
+
+### Added
+
+- Add locationIQ provider
+- Add support for PHP 8 attributes
+
+### Fixed
+
+- Fix annotation metadata driver with Doctrine proxies
+- Fix ORM tests
+
+### Removed
+
+- Remove unnecessary version check for registerAliasForArgument
+
+## Version 5.14.0
+
+### Added
+
+- Add support for PHP 8.0
+
+### Changed
+
+- Upgrade dependencies to up to date versions
+
+### Removed
+
+- Remove PHP 7.2 support
+- Remove Symfony 3.4 support
+
+## Version 5.13.0
+
+### Added
+
+- Add support for api-key based authentication in here factory
+
+## Version 5.12.0
+
+### Added
+
+- Allow configuring local IP when using FakeIpPlugin
+
+### Changed
+
+- Skip geocoding if address has not changed
+
 ## Version 5.11.0
 
 ### Added

@@ -18,11 +18,13 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Events;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\Tests\DoctrineTestCase;
 use Doctrine\Tests\OrmTestCase;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
+use Psr\Http\Message\RequestInterface;
+use Psr\Http\Message\ResponseInterface;
 use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 /**
@@ -44,7 +46,7 @@ class GeocoderListenerTest extends OrmTestCase
 
     public static function doSetUpBeforeClass(): void
     {
-        if (!class_exists(DoctrineTestCase::class)) {
+        if (!class_exists(OrmTestCase::class)) {
             /*
              * We check for DoctrineTestCase because it is in the same package as OrmTestCase and we want to be able to
              * fake OrmTestCase
@@ -62,7 +64,7 @@ class GeocoderListenerTest extends OrmTestCase
             'memory' => true,
         ]);
 
-        $this->em = $this->_getTestEntityManager($conn);
+        $this->em = $this->getTestEntityManager($conn);
 
         $reader = new SimpleAnnotationReader();
         $reader->addNamespace('Bazinga\GeocoderBundle\Mapping\Annotations');
@@ -147,6 +149,39 @@ class GeocoderListenerTest extends OrmTestCase
 
         $this->assertNull($dummy->latitude);
         $this->assertNull($dummy->longitude);
+    }
+
+    public function testDoesNotGeocodeIfAddressNotChanged()
+    {
+        $this->em->getEventManager()->removeEventListener(Events::onFlush, $this->listener);
+
+        $reader = new SimpleAnnotationReader();
+        $reader->addNamespace('Bazinga\GeocoderBundle\Mapping\Annotations');
+        $reader->addNamespace('Doctrine\ORM\Mapping');
+
+        $driver = new AnnotationDriver($reader);
+
+        $client = new TrackedCurlClient();
+        $geocoder = Nominatim::withOpenStreetMapServer($client, 'BazingaGeocoderBundle/Test');
+        $listener = new GeocoderListener($geocoder, $driver);
+
+        $this->em->getEventManager()->addEventSubscriber($listener);
+
+        $dummy = new DummyWithProperty();
+        $dummy->address = 'Frankfurt, Germany';
+
+        $this->em->persist($dummy);
+        $this->em->flush();
+
+        $dummy->latitude = 0;
+        $dummy->longitude = 0;
+
+        $this->em->flush();
+
+        $this->assertSame('Frankfurt, Germany', $dummy->address);
+        $this->assertSame(0, $dummy->latitude);
+        $this->assertSame(0, $dummy->longitude);
+        $this->assertCount(1, $client->getResponses());
     }
 }
 
@@ -336,4 +371,19 @@ class DummyWithEmptyProperty
      * @Column
      */
     public $address;
+}
+
+class TrackedCurlClient extends Client
+{
+    private $responses = [];
+
+    public function sendRequest(RequestInterface $request): ResponseInterface
+    {
+        return $this->responses[] = parent::sendRequest($request);
+    }
+
+    public function getResponses(): array
+    {
+        return $this->responses;
+    }
 }

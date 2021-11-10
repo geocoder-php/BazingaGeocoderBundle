@@ -20,9 +20,10 @@ use Symfony\Component\Validator\Constraint;
  *
  * @author Tomas Norkūnas <norkunas.tom@gmail.com>
  */
+#[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD | \Attribute::IS_REPEATABLE)]
 class Address extends Constraint
 {
-    const INVALID_ADDRESS_ERROR = '2243aa07-2ea7-4eb7-962c-6a9586593f2c';
+    public const INVALID_ADDRESS_ERROR = '2243aa07-2ea7-4eb7-962c-6a9586593f2c';
 
     protected static $errorNames = [
         self::INVALID_ADDRESS_ERROR => 'INVALID_ADDRESS_ERROR',
@@ -32,7 +33,14 @@ class Address extends Constraint
 
     public $message = 'Address {{ address }} is not valid.';
 
-    public function validatedBy()
+    public function __construct(array $options = null, string $message = null, array $groups = null, $payload = null)
+    {
+        parent::__construct($options, $groups, $payload);
+
+        $this->message = $message ?? $this->message;
+    }
+
+    public function validatedBy(): string
     {
         return $this->service;
     }

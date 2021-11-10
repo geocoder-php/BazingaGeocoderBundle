@@ -1,0 +1,137 @@
+name: CI
+on: [push, pull_request]
+
+jobs:
+    phpstan:
+        name: "PHPStan"
+        runs-on: ubuntu-latest
+        env:
+            php-version: 8.0
+        steps:
+            - name: "Setup PHP"
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ env.php-version }}
+                  tools: composer:v2, flex, cs2pr
+
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: "Install Composer dependencies"
+              run: |
+                  composer install --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
+
+            - name: "Run PHPStan"
+              run: vendor/bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr
+
+    php-cs-fixer:
+        name: PHP-CS-Fixer
+        runs-on: ubuntu-latest
+        env:
+            php-version: 8.0
+        steps:
+            - name: "Setup PHP"
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ env.php-version }}
+                  tools: composer:v2, flex, cs2pr
+
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: "Install Composer dependencies"
+              run: |
+                  composer install --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
+
+            - name: "Run PHP-CS-Fixer"
+              run: vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --format=checkstyle | cs2pr
+
+    phpunit:
+        name: "PHPUnit"
+        runs-on: ubuntu-latest
+        strategy:
+            max-parallel: 10
+            fail-fast: true
+            matrix:
+                php: ['7.3', '7.4', '8.0']
+                sf_version: ['4.4.*', '5.2.*', '5.3.*']
+        steps:
+            - name: "Setup PHP"
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  tools: composer:v2, flex
+                  coverage: none
+
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: "Install Composer dependencies"
+              env:
+                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
+              run: composer update --no-interaction --optimize-autoloader
+
+            - name: "Run tests"
+              env:
+                  SYMFONY_DEPRECATIONS_HELPER: 'max[self]=2'
+              run: ./vendor/bin/simple-phpunit -v --testsuite main
+
+    phpunit-lowest:
+        name: "PHPUnit (Lowest)"
+        runs-on: ubuntu-latest
+        strategy:
+            max-parallel: 10
+            fail-fast: true
+            matrix:
+                php: ['7.4']
+                sf_version: ['4.4.*', '5.2.*', '5.3.*']
+        steps:
+            - name: "Setup PHP"
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  tools: composer:v2, flex
+                  coverage: none
+
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: "Install Composer dependencies"
+              env:
+                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
+              run: composer update --no-interaction --prefer-stable --prefer-lowest --optimize-autoloader
+
+            - name: "Run tests"
+              env:
+                  SYMFONY_DEPRECATIONS_HELPER: 'max[self]=2'
+              run: ./vendor/bin/simple-phpunit -v --testsuite main
+
+    doctrine:
+        name: "PHPUnit (Doctrine)"
+        runs-on: ubuntu-latest
+        strategy:
+            max-parallel: 10
+            fail-fast: true
+            matrix:
+                php: ['7.3', '7.4', '8.0']
+                sf_version: ['4.4.*', '5.2.*', '5.3.*']
+        steps:
+            - name: "Setup PHP"
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php }}
+                  tools: composer:v2, flex
+                  coverage: none
+
+            - name: "Checkout code"
+              uses: actions/checkout@v2
+
+            - name: "Install Composer dependencies"
+              env:
+                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
+              run: composer update --prefer-source --no-interaction --optimize-autoloader
+
+            - name: "Run tests"
+              env:
+                  SYMFONY_DEPRECATIONS_HELPER: 'max[self]=2'
+              run: ./vendor/bin/simple-phpunit -v --testsuite doctrine

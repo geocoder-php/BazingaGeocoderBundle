@@ -30,6 +30,7 @@ use Geocoder\Provider\HostIp\HostIp;
 use Geocoder\Provider\IpInfo\IpInfo;
 use Geocoder\Provider\IpInfoDb\IpInfoDb;
 use Geocoder\Provider\Ipstack\Ipstack;
+use Geocoder\Provider\LocationIQ\LocationIQ;
 use Geocoder\Provider\Mapbox\Mapbox;
 use Geocoder\Provider\MapQuest\MapQuest;
 use Geocoder\Provider\Mapzen\Mapzen;
@@ -61,35 +62,38 @@ class ProviderFactoryTest extends BaseBundleTestCase
 
     public function getProviders()
     {
-        return [
-            [AlgoliaPlaces::class, ['empty', 'acme']],
-            [ArcGISOnline::class, ['empty', 'acme']],
-            [BingMaps::class, ['acme']],
-            [Chain::class, ['acme']],
-            [FreeGeoIp::class, ['empty', 'acme']],
-            //[Geoip::class, ['empty']],
-            [GeoIP2::class, ['acme']],
-            [GeoIPs::class, ['acme']],
-            [Geonames::class, ['acme']],
-            [GeoPlugin::class, ['empty']],
-            [GoogleMaps::class, ['empty']],
-            [GoogleMapsPlaces::class, ['acme']],
-            [Here::class, ['acme']],
-            [HostIp::class, ['empty']],
-            [IpInfo::class, ['acme']],
-            [IpInfoDb::class, ['empty', 'acme']],
-            [Ipstack::class, ['acme']],
-            [Mapbox::class, ['acme']],
-            [MapQuest::class, ['acme']],
-            [Mapzen::class, ['acme']],
-            [MaxMind::class, ['acme']],
-            [MaxMindBinary::class, ['acme']],
-            [Nominatim::class, ['empty', 'acme']],
-            [OpenCage::class, ['acme']],
-            [PickPoint::class, ['acme']],
-            [TomTom::class, ['acme']],
-            [Yandex::class, ['empty', 'acme']],
-        ];
+        yield [AlgoliaPlaces::class, ['empty', 'acme']];
+        yield [ArcGISOnline::class, ['empty', 'acme']];
+        yield [BingMaps::class, ['acme']];
+        yield [Chain::class, ['acme']];
+        yield [FreeGeoIp::class, ['empty', 'acme']];
+        //yield [Geoip::class, ['empty']];
+        yield [GeoIP2::class, ['acme']];
+        if (class_exists(GeoIPs::class)) {
+            yield [GeoIPs::class, ['acme']];
+        }
+        yield [Geonames::class, ['acme']];
+        yield [GeoPlugin::class, ['empty']];
+        yield [GoogleMaps::class, ['empty']];
+        yield [GoogleMapsPlaces::class, ['acme']];
+        yield [Here::class, ['acme']];
+        yield [HostIp::class, ['empty']];
+        yield [IpInfo::class, ['acme']];
+        yield [IpInfoDb::class, ['empty', 'acme']];
+        yield [Ipstack::class, ['acme']];
+        yield [LocationIQ::class, ['acme']];
+        yield [Mapbox::class, ['acme']];
+        yield [MapQuest::class, ['acme']];
+        if (class_exists(Mapzen::class)) {
+            yield [Mapzen::class, ['acme']];
+        }
+        yield [MaxMind::class, ['acme']];
+        yield [MaxMindBinary::class, ['acme']];
+        yield [Nominatim::class, ['empty', 'acme']];
+        yield [OpenCage::class, ['acme']];
+        yield [PickPoint::class, ['acme']];
+        yield [TomTom::class, ['acme']];
+        yield [Yandex::class, ['empty', 'acme']];
     }
 
     /**

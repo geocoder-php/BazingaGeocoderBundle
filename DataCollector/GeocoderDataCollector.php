@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\DataCollector;
 
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 
 /**
@@ -20,8 +22,6 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
  */
 class GeocoderDataCollector extends DataCollector
 {
-    use DataCollectorSymfonyCompatibilityTrait;
-
     /**
      * @var ProfilingPlugin[]
      */
@@ -41,6 +41,28 @@ class GeocoderDataCollector extends DataCollector
         $this->instances = [];
         $this->data['queries'] = [];
         $this->data['providers'] = [];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    {
+        if (!empty($this->data['queries'])) {
+            // To avoid collection more that once.
+            return;
+        }
+
+        /** @var ProfilingPlugin[] $instances */
+        $instances = $this->instances;
+
+        foreach ($instances as $instance) {
+            foreach ($instance->getQueries() as $query) {
+                $query['query'] = $this->cloneVar($query['query']);
+                $query['result'] = $this->cloneVar($query['result']);
+                $this->data['queries'][] = $query;
+            }
+        }
     }
 
     /**
