@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Mapzen\Mapzen;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,6 +27,9 @@ final class MapzenFactory extends AbstractFactory
         ['requiredClass' => Mapzen::class, 'packageName' => 'geocoder-php/mapzen-provider'],
     ];
 
+    /**
+     * @phpstan-param array{api_key: string, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         @trigger_error('Bazinga\GeocoderBundle\ProviderFactory\MapzenFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/808', E_USER_DEPRECATED);

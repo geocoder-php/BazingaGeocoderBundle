@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +24,9 @@ final class GoogleMapsFactory extends AbstractFactory
         ['requiredClass' => GoogleMaps::class, 'packageName' => 'geocoder-php/google-maps-provider'],
     ];
 
+    /**
+     * @phpstan-param array{api_key: ?string, region: ?string, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();

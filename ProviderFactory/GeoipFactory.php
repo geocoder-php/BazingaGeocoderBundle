@@ -22,6 +22,9 @@ final class GeoipFactory extends AbstractFactory
         ['requiredClass' => Geoip::class, 'packageName' => 'geocoder-php/geoip-provider'],
     ];
 
+    /**
+     * @phpstan-param array{} $config
+     */
     protected function getProvider(array $config): Provider
     {
         return new Geoip();

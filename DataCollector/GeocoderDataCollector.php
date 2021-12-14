@@ -13,6 +13,8 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\DataCollector;
 
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
+use Geocoder\Collection;
+use Geocoder\Query\Query;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\DataCollector\DataCollector;
@@ -34,7 +36,7 @@ class GeocoderDataCollector extends DataCollector
     }
 
     /**
-     * {@inheritdoc}
+     * @return void
      */
     public function reset()
     {
@@ -45,6 +47,8 @@ class GeocoderDataCollector extends DataCollector
 
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
     {
@@ -53,7 +57,6 @@ class GeocoderDataCollector extends DataCollector
             return;
         }
 
-        /** @var ProfilingPlugin[] $instances */
         $instances = $this->instances;
 
         foreach ($instances as $instance) {
@@ -67,6 +70,8 @@ class GeocoderDataCollector extends DataCollector
 
     /**
      * Returns an array of collected requests.
+     *
+     * @phpstan-return array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
     public function getQueries(): array
     {
@@ -86,18 +91,27 @@ class GeocoderDataCollector extends DataCollector
         return $time;
     }
 
+    /**
+     * @return string[]
+     */
     public function getProviders(): array
     {
         return $this->data['providers'];
     }
 
+    /**
+     * @phpstan-return array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
+     */
     public function getProviderQueries(string $provider): array
     {
-        return array_filter($this->data['queries'], function ($data) use ($provider) {
+        return array_filter($this->data['queries'], static function ($data) use ($provider) {
             return $data['providerName'] === $provider;
         });
     }
 
+    /**
+     * @return void
+     */
     public function addInstance(ProfilingPlugin $instance)
     {
         $this->instances[] = $instance;

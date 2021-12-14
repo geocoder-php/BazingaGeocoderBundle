@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\MapQuest\MapQuest;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +24,9 @@ final class MapQuestFactory extends AbstractFactory
         ['requiredClass' => MapQuest::class, 'packageName' => 'geocoder-php/mapquest-provider'],
     ];
 
+    /**
+     * @phpstan-param array{api_key: string, licensed: bool, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();

@@ -25,8 +25,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 abstract class AbstractFactory implements ProviderFactoryInterface
 {
+    /**
+     * @var array<int, array{requiredClass: class-string, packageName: string}>
+     */
     protected static $dependencies = [];
 
+    /**
+     * @var HttpClient|null
+     */
     protected $httpClient;
 
     public function __construct(HttpClient $httpClient = null)
@@ -34,6 +40,9 @@ abstract class AbstractFactory implements ProviderFactoryInterface
         $this->httpClient = $httpClient;
     }
 
+    /**
+     * @phpstan-param array<mixed, mixed> $config
+     */
     abstract protected function getProvider(array $config): Provider;
 
     /**
@@ -77,6 +86,8 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * Make sure that we have the required class and throw and exception if we don't.
      *
+     * @return void
+     *
      * @throws \LogicException
      */
     protected static function verifyDependencies()
@@ -91,6 +102,8 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * By default we do not have any options to configure. A factory should override this function and confgure
      * the options resolver.
+     *
+     * @return void
      */
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {

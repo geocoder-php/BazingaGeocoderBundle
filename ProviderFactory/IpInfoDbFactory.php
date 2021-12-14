@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\IpInfoDb\IpInfoDb;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +24,9 @@ final class IpInfoDbFactory extends AbstractFactory
         ['requiredClass' => IpInfoDb::class, 'packageName' => 'geocoder-php/ip-info-db-provider'],
     ];
 
+    /**
+     * @phpstan-param array{api_key: string, precision: string, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();

@@ -25,6 +25,8 @@ class BazingaGeocoderBundle extends Bundle
 {
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function build(ContainerBuilder $container)
     {

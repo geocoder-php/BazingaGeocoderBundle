@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +24,9 @@ final class FreeGeoIpFactory extends AbstractFactory
         ['requiredClass' => FreeGeoIp::class, 'packageName' => 'geocoder-php/free-geoip-provider'],
     ];
 
+    /**
+     * @phpstan-param array{base_url: string, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();

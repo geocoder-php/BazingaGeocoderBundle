@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Provider;
 use Geocoder\Provider\Yandex\Yandex;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +24,9 @@ final class YandexFactory extends AbstractFactory
         ['requiredClass' => Yandex::class, 'packageName' => 'geocoder-php/yandex-provider'],
     ];
 
+    /**
+     * @phpstan-param array{toponym: ?string, api_key: ?string, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();

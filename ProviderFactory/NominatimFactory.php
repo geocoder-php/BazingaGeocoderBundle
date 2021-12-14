@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Nominatim\Nominatim;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +24,9 @@ final class NominatimFactory extends AbstractFactory
         ['requiredClass' => Nominatim::class, 'packageName' => 'geocoder-php/nominatim-provider'],
     ];
 
+    /**
+     * @phpstan-param array{root_url: string, user_agent: string, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();

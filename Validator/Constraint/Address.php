@@ -25,14 +25,24 @@ class Address extends Constraint
 {
     public const INVALID_ADDRESS_ERROR = '2243aa07-2ea7-4eb7-962c-6a9586593f2c';
 
+    /** @var string[] */
     protected static $errorNames = [
         self::INVALID_ADDRESS_ERROR => 'INVALID_ADDRESS_ERROR',
     ];
 
+    /**
+     * @var string
+     */
     public $service = AddressValidator::class;
 
+    /**
+     * @var string
+     */
     public $message = 'Address {{ address }} is not valid.';
 
+    /**
+     * @param string[]|null $options
+     */
     public function __construct(array $options = null, string $message = null, array $groups = null, $payload = null)
     {
         parent::__construct($options, $groups, $payload);

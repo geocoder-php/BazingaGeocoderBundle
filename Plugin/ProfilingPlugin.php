@@ -28,11 +28,12 @@ class ProfilingPlugin implements Plugin
 {
     /**
      * @var array
+     * @phpstan-var array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
     private $queries = [];
 
     /**
-     * @var string service id of the provider;
+     * @var string service id of the provider
      */
     private $name;
 
@@ -62,7 +63,9 @@ class ProfilingPlugin implements Plugin
     }
 
     /**
-     * @param Collection|Exception $result
+     * @param mixed $result
+     *
+     * @return void
      */
     private function logQuery(Query $query, float $duration, $result = null)
     {
@@ -84,6 +87,9 @@ class ProfilingPlugin implements Plugin
         ];
     }
 
+    /**
+     * @phpstan-return array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
+     */
     public function getQueries(): array
     {
         return $this->queries;

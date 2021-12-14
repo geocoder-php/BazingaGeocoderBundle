@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\ArcGISOnline\ArcGISOnline;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +24,9 @@ final class ArcGISOnlineFactory extends AbstractFactory
         ['requiredClass' => ArcGISOnline::class, 'packageName' => 'geocoder-php/arcgis-online-provider'],
     ];
 
+    /**
+     * @phpstan-param array{source_country: ?string, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();

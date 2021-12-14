@@ -26,6 +26,8 @@ class ProfilerPass implements CompilerPassInterface
 {
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function process(ContainerBuilder $container)
     {

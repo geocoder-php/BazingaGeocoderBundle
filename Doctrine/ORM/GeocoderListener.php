@@ -46,6 +46,7 @@ class GeocoderListener implements EventSubscriber
      * {@inheritdoc}
      *
      * @return array
+     * @phpstan-return list<string>
      */
     public function getSubscribedEvents()
     {
@@ -54,6 +55,9 @@ class GeocoderListener implements EventSubscriber
         ];
     }
 
+    /**
+     * @return void
+     */
     public function onFlush(OnFlushEventArgs $args)
     {
         $em = $args->getEntityManager();
@@ -98,6 +102,8 @@ class GeocoderListener implements EventSubscriber
 
     /**
      * @param object $entity
+     *
+     * @return void
      */
     private function geocodeEntity(ClassMetadata $metadata, $entity)
     {
@@ -107,7 +113,7 @@ class GeocoderListener implements EventSubscriber
             $address = $metadata->addressProperty->getValue($entity);
         }
 
-        if (empty($address)) {
+        if (empty($address) || !is_string($address)) {
             return;
         }
 

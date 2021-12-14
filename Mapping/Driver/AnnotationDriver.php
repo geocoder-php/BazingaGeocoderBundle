@@ -23,6 +23,9 @@ use Doctrine\Common\Util\ClassUtils;
  */
 class AnnotationDriver implements DriverInterface
 {
+    /**
+     * @var Reader
+     */
     private $reader;
 
     public function __construct(Reader $reader)
@@ -30,6 +33,9 @@ class AnnotationDriver implements DriverInterface
         $this->reader = $reader;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function isGeocodeable($object): bool
     {
         $reflection = ClassUtils::newReflectionObject($object);
@@ -37,6 +43,9 @@ class AnnotationDriver implements DriverInterface
         return (bool) $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function loadMetadataFromObject($object)
     {
         $reflection = ClassUtils::newReflectionObject($object);

@@ -16,6 +16,7 @@ use Geocoder\Provider\GeoIP2\GeoIP2;
 use Geocoder\Provider\GeoIP2\GeoIP2Adapter;
 use Geocoder\Provider\Provider;
 use GeoIp2\Database\Reader;
+use GeoIp2\ProviderInterface;
 use GeoIp2\WebService\Client;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,6 +26,9 @@ final class GeoIP2Factory extends AbstractFactory
         ['requiredClass' => GeoIP2::class, 'packageName' => 'geocoder-php/geoip2-provider'],
     ];
 
+    /**
+     * @phpstan-param array{provider: string, provider_service: ?ProviderInterface, model: string, user_id: string|int|null, license_key: string|null, locales: list<string>, webservice_options: array<mixed, mixed>, database_filename: ?string} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $provider = $config['provider'];
