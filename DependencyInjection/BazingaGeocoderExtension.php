@@ -39,6 +39,11 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
  */
 class BazingaGeocoderExtension extends Extension
 {
+    /**
+     * @phpstan-param array<mixed, mixed> $configs
+     *
+     * @return void
+     */
     public function load(array $configs, ContainerBuilder $container)
     {
         $processor = new Processor();
@@ -71,6 +76,11 @@ class BazingaGeocoderExtension extends Extension
             ->addTag('bazinga_geocoder.dumper');
     }
 
+    /**
+     * @phpstan-param array<mixed, mixed> $config
+     *
+     * @return void
+     */
     private function loadProviders(ContainerBuilder $container, array $config)
     {
         foreach ($config['providers'] as $providerName => $providerConfig) {
@@ -109,6 +119,10 @@ class BazingaGeocoderExtension extends Extension
 
     /**
      * Configure plugins for a client.
+     *
+     * @phpstan-param array<mixed, mixed> $config
+     *
+     * @return Reference[]
      */
     public function configureProviderPlugins(ContainerBuilder $container, array $config, string $providerServiceId): array
     {
@@ -173,13 +187,23 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
+     * @phpstan-param array<mixed, mixed> $config
+     *
      * @return Configuration
      */
     public function getConfiguration(array $config, ContainerBuilder $container)
     {
-        return new Configuration($container->getParameter('kernel.debug'));
+        /** @var bool $debug */
+        $debug = $container->getParameter('kernel.debug');
+
+        return new Configuration($debug);
     }
 
+    /**
+     * @phpstan-param array<mixed, mixed> $options
+     *
+     * @phpstan-return array<mixed, mixed>
+     */
     private function findReferences(array $options): array
     {
         foreach ($options as $key => $value) {

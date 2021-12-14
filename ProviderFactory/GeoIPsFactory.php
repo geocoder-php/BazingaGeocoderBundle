@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\GeoIPs\GeoIPs;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -26,6 +27,9 @@ final class GeoIPsFactory extends AbstractFactory
         ['requiredClass' => GeoIPs::class, 'packageName' => 'geocoder-php/geoips-provider'],
     ];
 
+    /**
+     * @phpstan-param array{api_key: string, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         @trigger_error('Bazinga\GeocoderBundle\ProviderFactory\GeoIPsFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/965', E_USER_DEPRECATED);

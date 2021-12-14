@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Here\Here;
 use Geocoder\Provider\Provider;
+use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -23,6 +24,9 @@ final class HereFactory extends AbstractFactory
         ['requiredClass' => Here::class, 'packageName' => 'geocoder-php/here-provider'],
     ];
 
+    /**
+     * @phpstan-param array{app_key: ?string, app_id: ?string, app_code: ?string, use_cit: bool, httplug_client: ?HttpClient} $config
+     */
     protected function getProvider(array $config): Provider
     {
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();

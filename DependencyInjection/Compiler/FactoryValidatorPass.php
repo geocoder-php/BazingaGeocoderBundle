@@ -23,10 +23,15 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  */
 class FactoryValidatorPass implements CompilerPassInterface
 {
+    /**
+     * @var string[]
+     */
     private static $factoryServiceIds = [];
 
     /**
      * {@inheritdoc}
+     *
+     * @return void
      */
     public function process(ContainerBuilder $container)
     {
@@ -38,10 +43,12 @@ class FactoryValidatorPass implements CompilerPassInterface
     }
 
     /**
-     * @param mixed $factoryServiceIds
+     * @param string $factoryServiceId
+     *
+     * @return void
      */
-    public static function addFactoryServiceId($factoryServiceIds)
+    public static function addFactoryServiceId($factoryServiceId)
     {
-        self::$factoryServiceIds[] = $factoryServiceIds;
+        self::$factoryServiceIds[] = $factoryServiceId;
     }
 }

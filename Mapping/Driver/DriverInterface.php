@@ -12,9 +12,19 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Mapping\Driver;
 
+use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
+
 interface DriverInterface
 {
+    /**
+     * @param object $object
+     */
     public function isGeocodeable($object): bool;
 
+    /**
+     * @param object $object
+     *
+     * @return ClassMetadata
+     */
     public function loadMetadataFromObject($object);
 }

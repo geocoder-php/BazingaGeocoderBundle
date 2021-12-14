@@ -22,6 +22,9 @@ final class MaxMindBinaryFactory extends AbstractFactory
         ['requiredClass' => MaxMindBinary::class, 'packageName' => 'geocoder-php/maxmind-binary-provider'],
     ];
 
+    /**
+     * @phpstan-param array{dat_file: string, open_flag: ?int} $config
+     */
     protected function getProvider(array $config): Provider
     {
         return new MaxMindBinary($config['dat_file'], $config['open_flag']);
@@ -35,6 +38,6 @@ final class MaxMindBinaryFactory extends AbstractFactory
 
         $resolver->setRequired('dat_file');
         $resolver->setAllowedTypes('dat_file', ['string']);
-        $resolver->setAllowedTypes('open_flag', ['string', 'null']);
+        $resolver->setAllowedTypes('open_flag', ['int', 'null']);
     }
 }
