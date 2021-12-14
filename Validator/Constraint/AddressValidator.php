@@ -43,11 +43,7 @@ class AddressValidator extends ConstraintValidator
         }
 
         if (!is_scalar($value) && !(\is_object($value) && method_exists($value, '__toString'))) {
-            if (class_exists(UnexpectedValueException::class)) {
-                throw new UnexpectedValueException($value, 'string');
-            } else {
-                throw new UnexpectedTypeException($value, 'string');
-            }
+            throw new UnexpectedValueException($value, 'string');
         }
 
         $value = (string) $value;

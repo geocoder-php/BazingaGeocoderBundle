@@ -16,47 +16,47 @@ use Bazinga\GeocoderBundle\Validator\Constraint\Address;
 use Bazinga\GeocoderBundle\Validator\Constraint\AddressValidator;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
-use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
 class AddressValidatorTest extends ConstraintValidatorTestCase
 {
-    protected function createValidator()
+    protected function createValidator(): AddressValidator
     {
         $geocoder = Nominatim::withOpenStreetMapServer(new Client(), 'BazingaGeocoderBundle/Test');
 
         return new AddressValidator($geocoder);
     }
 
-    public function testNullIsValid()
+    public function testNullIsValid(): void
     {
         $this->validator->validate(null, new Address());
 
         $this->assertNoViolation();
     }
 
-    public function testEmptyStringIsValid()
+    public function testEmptyStringIsValid(): void
     {
         $this->validator->validate('', new Address());
 
         $this->assertNoViolation();
     }
 
-    public function testExpectsStringCompatibleType()
+    public function testExpectsStringCompatibleType(): void
     {
-        $this->expectException(UnexpectedTypeException::class);
+        $this->expectException(UnexpectedValueException::class);
 
         $this->validator->validate(new \stdClass(), new Address());
     }
 
-    public function testValidAddress()
+    public function testValidAddress(): void
     {
         $this->validator->validate('Berlin, Germany', new Address());
 
         $this->assertNoViolation();
     }
 
-    public function testInvalidAddress()
+    public function testInvalidAddress(): void
     {
         $address = 'Bifrost, Nine Realms';
 

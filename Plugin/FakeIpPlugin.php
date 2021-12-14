@@ -17,6 +17,7 @@ use Faker\Provider\Internet;
 use Geocoder\Plugin\Plugin;
 use Geocoder\Query\GeocodeQuery;
 use Geocoder\Query\Query;
+use Http\Promise\Promise;
 
 /**
  * Replace local IP with something better.
@@ -52,7 +53,7 @@ class FakeIpPlugin implements Plugin
     }
 
     /**
-     * {@inheritdoc}
+     * @return Promise
      */
     public function handleQuery(Query $query, callable $next, callable $first)
     {

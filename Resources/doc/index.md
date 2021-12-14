@@ -215,7 +215,7 @@ bazinga_geocoder:
         ip: 123.123.123.123
 ```
 
-You can also let [Faker](https://github.com/fzaninotto/Faker) generate fake ip for you.
+You can also let [Faker](https://github.com/fakerphp/faker) generate fake ip for you.
 
 ```yaml
 bazinga_geocoder:

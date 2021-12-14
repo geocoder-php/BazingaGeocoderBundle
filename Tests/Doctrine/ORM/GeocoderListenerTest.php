@@ -13,27 +13,32 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Doctrine\ORM;
 
 use Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener;
+use Bazinga\GeocoderBundle\Mapping\Annotations\Address;
+use Bazinga\GeocoderBundle\Mapping\Annotations\Geocodeable;
+use Bazinga\GeocoderBundle\Mapping\Annotations\Latitude;
+use Bazinga\GeocoderBundle\Mapping\Annotations\Longitude;
 use Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use Doctrine\DBAL\DriverManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Events;
+use Doctrine\ORM\Mapping\Column;
+use Doctrine\ORM\Mapping\Entity;
+use Doctrine\ORM\Mapping\GeneratedValue;
+use Doctrine\ORM\Mapping\Id;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Tests\OrmTestCase;
 use Geocoder\Provider\Nominatim\Nominatim;
 use Http\Client\Curl\Client;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
-use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
 class GeocoderListenerTest extends OrmTestCase
 {
-    use SetUpTearDownTrait;
-
     /**
      * @var EntityManager
      */
@@ -44,8 +49,10 @@ class GeocoderListenerTest extends OrmTestCase
      */
     private $listener;
 
-    public static function doSetUpBeforeClass(): void
+    public static function setUpBeforeClass(): void
     {
+        parent::setUpBeforeClass();
+
         if (!class_exists(OrmTestCase::class)) {
             /*
              * We check for DoctrineTestCase because it is in the same package as OrmTestCase and we want to be able to
@@ -55,8 +62,10 @@ class GeocoderListenerTest extends OrmTestCase
         }
     }
 
-    protected function doSetUp(): void
+    protected function setUp(): void
     {
+        parent::setUp();
+
         AnnotationRegistry::registerLoader('class_exists');
 
         $conn = DriverManager::getConnection([
@@ -85,7 +94,7 @@ class GeocoderListenerTest extends OrmTestCase
         ]);
     }
 
-    public function testPersistForProperty()
+    public function testPersistForProperty(): void
     {
         $dummy = new DummyWithProperty();
         $dummy->address = 'Berlin, Germany';
@@ -106,7 +115,7 @@ class GeocoderListenerTest extends OrmTestCase
         $this->assertNotEquals($clone->longitude, $dummy->longitude);
     }
 
-    public function testPersistForGetter()
+    public function testPersistForGetter(): void
     {
         $dummy = new DummyWithGetter();
         $dummy->setAddress('Berlin, Germany');
@@ -127,7 +136,7 @@ class GeocoderListenerTest extends OrmTestCase
         $this->assertNotEquals($clone->getLongitude(), $dummy->getLongitude());
     }
 
-    public function testPersistForInvalidGetter()
+    public function testPersistForInvalidGetter(): void
     {
         $dummy = new DummyWithInvalidGetter();
         $dummy->setAddress('Berlin, Germany');
@@ -139,7 +148,7 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em->flush();
     }
 
-    public function testPersistForEmptyProperty()
+    public function testPersistForEmptyProperty(): void
     {
         $dummy = new DummyWithEmptyProperty();
         $dummy->address = '';
@@ -151,7 +160,7 @@ class GeocoderListenerTest extends OrmTestCase
         $this->assertNull($dummy->longitude);
     }
 
-    public function testDoesNotGeocodeIfAddressNotChanged()
+    public function testDoesNotGeocodeIfAddressNotChanged(): void
     {
         $this->em->getEventManager()->removeEventListener(Events::onFlush, $this->listener);
 
@@ -192,14 +201,15 @@ class GeocoderListenerTest extends OrmTestCase
 class DummyWithProperty
 {
     /**
-     * @Id @GeneratedValue
+     * @Id
+     * @GeneratedValue
      * @Column(type="integer")
      */
     public $id;
 
     /**
      * @Latitude
-     * @Column
+     * @Column()
      */
     public $latitude;
 

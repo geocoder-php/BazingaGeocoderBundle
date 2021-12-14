@@ -18,40 +18,34 @@ use Bazinga\GeocoderBundle\Mapping\Annotations\Latitude;
 use Bazinga\GeocoderBundle\Mapping\Annotations\Longitude;
 use Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver;
 use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
-use Doctrine\Common\Annotations\Reader;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
  */
 final class AttributeDriverTest extends TestCase
 {
-    use SetUpTearDownTrait;
-
     /**
      * @var AttributeDriver
      */
     private $driver;
 
-    /**
-     * @var Reader
-     */
-    private $reader;
-
-    public static function doSetUpBeforeClass(): void
+    public static function setUpBeforeClass(): void
     {
         if (PHP_VERSION_ID < 80000) {
             self::markTestSkipped(sprintf('"%s" is only supported on PHP 8', AttributeDriver::class));
         }
     }
 
-    protected function doSetUp(): void
+    protected function setUp(): void
     {
         $this->driver = new AttributeDriver();
     }
 
-    public function testLoadMetadata()
+    /**
+     * @requires PHP 8.0
+     */
+    public function testLoadMetadata(): void
     {
         $obj = new Dummy3();
         $metadata = $this->driver->loadMetadataFromObject($obj);
@@ -61,7 +55,10 @@ final class AttributeDriverTest extends TestCase
         $this->assertInstanceOf('ReflectionProperty', $metadata->longitudeProperty);
     }
 
-    public function testLoadMetadataFromWrongObject()
+    /**
+     * @requires PHP 8.0
+     */
+    public function testLoadMetadataFromWrongObject(): void
     {
         $this->expectException(MappingException::class);
         $this->expectExceptionMessage('The class '.Dummy4::class.' is not geocodeable');
@@ -69,7 +66,10 @@ final class AttributeDriverTest extends TestCase
         $this->driver->loadMetadataFromObject(new Dummy4());
     }
 
-    public function testIsGeocodable()
+    /**
+     * @requires PHP 8.0
+     */
+    public function testIsGeocodable(): void
     {
         $this->assertTrue($this->driver->isGeocodeable(new Dummy3()));
     }

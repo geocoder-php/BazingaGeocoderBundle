@@ -44,6 +44,8 @@ class GeocoderListener implements EventSubscriber
 
     /**
      * {@inheritdoc}
+     *
+     * @return array
      */
     public function getSubscribedEvents()
     {

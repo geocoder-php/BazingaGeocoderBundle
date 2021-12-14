@@ -14,14 +14,11 @@ namespace Bazinga\GeocoderBundle\Tests\DependencyInjection\Compiler;
 
 use Bazinga\GeocoderBundle\DependencyInjection\Compiler\FactoryValidatorPass;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 class FactoryValidatorPassTest extends TestCase
 {
-    use SetUpTearDownTrait;
-
     /**
      * @var FactoryValidatorPass
      */
@@ -32,14 +29,14 @@ class FactoryValidatorPassTest extends TestCase
      */
     private $factoryId;
 
-    protected function doSetUp()
+    protected function setUp(): void
     {
         $this->compilerPass = new FactoryValidatorPass();
         $this->factoryId = 'dummy_factory_id';
         $this->compilerPass::addFactoryServiceId($this->factoryId);
     }
 
-    protected function doTearDown()
+    protected function tearDown(): void
     {
         $reflection = new \ReflectionObject($this->compilerPass);
         $prop = $reflection->getProperty('factoryServiceIds');
@@ -47,7 +44,7 @@ class FactoryValidatorPassTest extends TestCase
         $prop->setValue([]);
     }
 
-    public function testProcessThrows()
+    public function testProcessThrows(): void
     {
         $this->expectException(ServiceNotFoundException::class);
         $this->expectExceptionMessage("Factory with ID \"$this->factoryId\" could not be found");
@@ -65,7 +62,7 @@ class FactoryValidatorPassTest extends TestCase
         $this->compilerPass->process($container);
     }
 
-    public function testProcessDoesntThrowIfAliasExists()
+    public function testProcessDoesntThrowIfAliasExists(): void
     {
         $container = $this->createMock(ContainerBuilder::class);
         $container->expects($this->once())
@@ -80,7 +77,7 @@ class FactoryValidatorPassTest extends TestCase
         $this->compilerPass->process($container);
     }
 
-    public function testProcessDoesntThrowIfDefinitionExists()
+    public function testProcessDoesntThrowIfDefinitionExists(): void
     {
         $container = $this->createMock(ContainerBuilder::class);
         $container->expects($this->once())

@@ -18,15 +18,12 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 use Doctrine\Common\Annotations\Reader;
 use Doctrine\Common\Annotations\SimpleAnnotationReader;
 use PHPUnit\Framework\TestCase;
-use Symfony\Bridge\PhpUnit\SetUpTearDownTrait;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
 class AnnotationDriverTest extends TestCase
 {
-    use SetUpTearDownTrait;
-
     /**
      * @var AnnotationDriver
      */
@@ -37,7 +34,7 @@ class AnnotationDriverTest extends TestCase
      */
     private $reader;
 
-    protected function doSetUp(): void
+    protected function setUp(): void
     {
         AnnotationRegistry::registerLoader('class_exists');
 
@@ -47,7 +44,7 @@ class AnnotationDriverTest extends TestCase
         $this->driver = new AnnotationDriver($this->reader);
     }
 
-    public function testLoadMetadata()
+    public function testLoadMetadata(): void
     {
         $obj = new Dummy();
         $metadata = $this->driver->loadMetadataFromObject($obj);
@@ -57,7 +54,7 @@ class AnnotationDriverTest extends TestCase
         $this->assertInstanceOf('ReflectionProperty', $metadata->longitudeProperty);
     }
 
-    public function testLoadMetadataFromWrongObject()
+    public function testLoadMetadataFromWrongObject(): void
     {
         $this->expectException(MappingException::class);
         $this->expectExceptionMessage('The class '.Dummy2::class.' is not geocodeable');
@@ -65,7 +62,7 @@ class AnnotationDriverTest extends TestCase
         $this->driver->loadMetadataFromObject(new Dummy2());
     }
 
-    public function testIsGeocodable()
+    public function testIsGeocodable(): void
     {
         $this->assertTrue($this->driver->isGeocodeable(new Dummy()));
     }
