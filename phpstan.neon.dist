@@ -10,5 +10,5 @@ parameters:
 			path: %currentWorkingDirectory%/DependencyInjection/Configuration.php
 			message: '#Call to an undefined method Symfony\\Component\\Config\\Definition\\Builder\\NodeParentInterface::(end|variableNode)#'
 		-
-			path: %currentWorkingDirectory%/ProviderFactory/GeoipFactory.php
-			message: '#Geocoder\\Provider\\Geoip\\Geoip#'
+			path: %currentWorkingDirectory%/ProviderFactory/GeoIP2Factory.php
+			message: '#has parameter \$config with no value type specified in iterable type array#'

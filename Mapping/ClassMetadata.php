@@ -23,5 +23,5 @@ class ClassMetadata
 
     public \ReflectionProperty $longitudeProperty;
 
-    public \ReflectionMethod $addressGetter;
+    public ?\ReflectionMethod $addressGetter;
 }

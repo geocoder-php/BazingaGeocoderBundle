@@ -35,7 +35,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     }
 
     /**
-     * @phpstan-param array $config
+     * @phpstan-param array<mixed, mixed> $config
      */
     abstract protected function getProvider(array $config): Provider;
 

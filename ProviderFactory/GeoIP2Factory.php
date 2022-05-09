@@ -28,6 +28,8 @@ final class GeoIP2Factory extends AbstractFactory
 
     /**
      * @phpstan-param array{provider: string, provider_service: ?ProviderInterface, model: string, user_id: string|int|null, license_key: string|null, locales: list<string>, webservice_options: array, database_filename: ?string} $config
+     *
+     * @throws \MaxMind\Db\Reader\InvalidDatabaseException
      */
     protected function getProvider(array $config): Provider
     {

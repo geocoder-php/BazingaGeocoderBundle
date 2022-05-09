@@ -40,7 +40,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class BazingaGeocoderExtension extends Extension
 {
     /**
-     * @phpstan-param array $configs
+     * @phpstan-param array<mixed, mixed> $configs
      */
     public function load(array $configs, ContainerBuilder $container): void
     {
@@ -75,7 +75,7 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
-     * @phpstan-param array $config
+     * @phpstan-param array<mixed, mixed> $config
      */
     private function loadProviders(ContainerBuilder $container, array $config): void
     {
@@ -116,7 +116,7 @@ class BazingaGeocoderExtension extends Extension
     /**
      * Configure plugins for a client.
      *
-     * @phpstan-param array $config
+     * @phpstan-param array<mixed, mixed> $config
      *
      * @return Reference[]
      */
@@ -183,7 +183,7 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
-     * @phpstan-param array $config
+     * @phpstan-param array<mixed, mixed> $config
      */
     public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
@@ -194,9 +194,9 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
-     * @phpstan-param array $options
+     * @phpstan-param array<mixed, mixed> $options
      *
-     * @phpstan-return array
+     * @phpstan-return array<mixed, mixed>
      */
     private function findReferences(array $options): array
     {
