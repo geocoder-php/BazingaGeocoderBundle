@@ -24,7 +24,7 @@ may then use the `QueryDataPlugin`.
 
 ```yaml
 # services.yml
-sevices:
+services:
   app.query_data_plugin:
     class: Geocoder\Plugin\Plugin\QueryDataPlugin
     arguments:
