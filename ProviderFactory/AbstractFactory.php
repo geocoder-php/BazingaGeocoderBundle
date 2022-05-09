@@ -28,20 +28,14 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * @var array<int, array{requiredClass: class-string, packageName: string}>
      */
-    protected static $dependencies = [];
+    protected static array $dependencies = [];
 
-    /**
-     * @var HttpClient|null
-     */
-    protected $httpClient;
-
-    public function __construct(HttpClient $httpClient = null)
+    public function __construct(protected ?HttpClient $httpClient = null)
     {
-        $this->httpClient = $httpClient;
     }
 
     /**
-     * @phpstan-param array<mixed, mixed> $config
+     * @phpstan-param array $config
      */
     abstract protected function getProvider(array $config): Provider;
 
@@ -50,7 +44,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
      */
     public function createProvider(array $options = []): Provider
     {
-        $this->verifyDependencies();
+        self::verifyDependencies();
 
         $resolver = new OptionsResolver();
         static::configureOptionResolver($resolver);
@@ -62,7 +56,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public static function validate(array $options, $providerName)
+    public static function validate(array $options, string $providerName): void
     {
         static::verifyDependencies();
 
@@ -86,11 +80,9 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * Make sure that we have the required class and throw and exception if we don't.
      *
-     * @return void
-     *
      * @throws \LogicException
      */
-    protected static function verifyDependencies()
+    protected static function verifyDependencies(): void
     {
         foreach (static::$dependencies as $dependency) {
             if (!class_exists($dependency['requiredClass'])) {
@@ -100,12 +92,10 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     }
 
     /**
-     * By default we do not have any options to configure. A factory should override this function and confgure
+     * By default we do not have any options to configure. A factory should override this function and configure
      * the options resolver.
-     *
-     * @return void
      */
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
     }
 }

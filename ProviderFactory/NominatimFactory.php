@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class NominatimFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => Nominatim::class, 'packageName' => 'geocoder-php/nominatim-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class NominatimFactory extends AbstractFactory
         return new Nominatim($httplug, $config['root_url'], $config['user_agent']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

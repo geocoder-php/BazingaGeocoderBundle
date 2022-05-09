@@ -12,6 +12,10 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Tests\Mapping\Driver;
 
+use Bazinga\GeocoderBundle\Mapping\Annotations\Address;
+use Bazinga\GeocoderBundle\Mapping\Annotations\Geocodeable;
+use Bazinga\GeocoderBundle\Mapping\Annotations\Latitude;
+use Bazinga\GeocoderBundle\Mapping\Annotations\Longitude;
 use Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver;
 use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
 use Doctrine\Common\Annotations\AnnotationRegistry;
@@ -24,15 +28,9 @@ use PHPUnit\Framework\TestCase;
  */
 class AnnotationDriverTest extends TestCase
 {
-    /**
-     * @var AnnotationDriver
-     */
-    private $driver;
+    private AnnotationDriver $driver;
 
-    /**
-     * @var Reader
-     */
-    private $reader;
+    private SimpleAnnotationReader|Reader $reader;
 
     protected function setUp(): void
     {

@@ -22,31 +22,18 @@ use Doctrine\Common\Util\ClassUtils;
  */
 final class AttributeDriver implements DriverInterface
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function isGeocodeable($object): bool
+    public function isGeocodeable(object $object): bool
     {
-        if (PHP_VERSION_ID < 80000) {
-            return false;
-        }
-
         $reflection = ClassUtils::newReflectionObject($object);
 
         return count($reflection->getAttributes(Annotations\Geocodeable::class)) > 0;
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws MappingException
      */
-    public function loadMetadataFromObject($object): ClassMetadata
+    public function loadMetadataFromObject(object $object): ClassMetadata
     {
-        if (PHP_VERSION_ID < 80000) {
-            throw new MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
-        }
-
         $reflection = ClassUtils::newReflectionObject($object);
 
         $attributes = $reflection->getAttributes(Annotations\Geocodeable::class);

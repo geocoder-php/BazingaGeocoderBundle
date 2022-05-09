@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class YandexFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => Yandex::class, 'packageName' => 'geocoder-php/yandex-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class YandexFactory extends AbstractFactory
         return new Yandex($httplug, $config['toponym'], $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

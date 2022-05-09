@@ -17,7 +17,6 @@ Here is a list of all provider factories and their options.
 | `Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory` | httplug_client, base_url
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoIP2Factory` | provider, database_filename, user_id, license_key, webservice_options, locales, provider_service
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoipFactory` |
-| `Bazinga\GeocoderBundle\ProviderFactory\GeoIPsFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\GeonamesFactory` | httplug_client, username
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoPluginFactory` | httplug_client
 | `Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory` | httplug_client, api_key, region
@@ -30,7 +29,6 @@ Here is a list of all provider factories and their options.
 | `Bazinga\GeocoderBundle\ProviderFactory\LocationIQFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\MapboxFactory` | httplug_client, api_key, country, mode
 | `Bazinga\GeocoderBundle\ProviderFactory\MapQuestFactory` | httplug_client, api_key, licensed
-| `Bazinga\GeocoderBundle\ProviderFactory\MapzenFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\MaxMindBinaryFactory` | dat_file, open_flag
 | `Bazinga\GeocoderBundle\ProviderFactory\MaxMindFactory` | httplug_client, api_key, endpoint
 | `Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory` | httplug_client, root_url

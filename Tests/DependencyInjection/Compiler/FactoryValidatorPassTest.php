@@ -19,15 +19,9 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
 class FactoryValidatorPassTest extends TestCase
 {
-    /**
-     * @var FactoryValidatorPass
-     */
-    private $compilerPass;
+    private FactoryValidatorPass $compilerPass;
 
-    /**
-     * @var string
-     */
-    private $factoryId;
+    private string $factoryId;
 
     protected function setUp(): void
     {

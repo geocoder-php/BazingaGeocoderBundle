@@ -27,24 +27,15 @@ class GeocodeCommand extends Command
 {
     protected static $defaultName = 'geocoder:geocode';
 
-    /**
-     * @var ProviderAggregator
-     */
-    private $geocoder;
-
-    public function __construct(ProviderAggregator $geocoder)
+    public function __construct(private ProviderAggregator $geocoder)
     {
-        $this->geocoder = $geocoder;
-
         parent::__construct();
     }
 
     /**
      * {@inheritdoc}
-     *
-     * @return void
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setName('geocoder:geocode')
@@ -64,10 +55,9 @@ HELP
 
     /**
      * {@inheritdoc}
-     *
-     * @return int
+     * @throws \Geocoder\Exception\Exception
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('provider')) {
             $this->geocoder->using($input->getOption('provider'));

@@ -22,10 +22,7 @@ use Symfony\Component\DependencyInjection\Definition;
 
 class AddProvidersPassTest extends TestCase
 {
-    /**
-     * @var AddProvidersPass
-     */
-    private $compilerPass;
+    private AddProvidersPass $compilerPass;
 
     protected function setUp(): void
     {

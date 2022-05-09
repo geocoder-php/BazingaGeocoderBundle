@@ -2,6 +2,19 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 6.0
+
+### Added
+
+- PHP 8 language features
+- Typehints according to PHP 8
+
+### Removed
+
+- Remove MapzenFactory
+- Remove GeoIPsFactory
+- Remove PHP 7.x support
+
 ## Version 5.16.1
 
 ### Fixed

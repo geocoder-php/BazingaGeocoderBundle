@@ -20,7 +20,7 @@ use Geocoder\Provider\Provider;
 interface ProviderFactoryInterface
 {
     /**
-     * @phpstan-param array<mixed, mixed> $options
+     * @phpstan-param array $options
      */
     public function createProvider(array $options = []): Provider;
 
@@ -29,9 +29,7 @@ interface ProviderFactoryInterface
      *
      * @param array  $options      the options the user has provided
      * @param string $providerName the name the user has chosen for this provider
-     * @phpstan-param array<mixed, mixed> $options
-     *
-     * @return void
+     * @phpstan-param array $options
      *
      * @throws \LogicException                                                        If the factory has missing dependencies
      * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException If an option name is undefined
@@ -41,5 +39,5 @@ interface ProviderFactoryInterface
      * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException     If a lazy option reads an unavailable option
      * @throws \Symfony\Component\OptionsResolver\Exception\AccessException           If called from a lazy option or normalizer
      */
-    public static function validate(array $options, $providerName);
+    public static function validate(array $options, string $providerName): void;
 }

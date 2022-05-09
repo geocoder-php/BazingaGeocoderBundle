@@ -17,23 +17,11 @@ namespace Bazinga\GeocoderBundle\Mapping;
  */
 class ClassMetadata
 {
-    /**
-     * @var \ReflectionProperty
-     */
-    public $addressProperty;
+    public \ReflectionProperty $addressProperty;
 
-    /**
-     * @var \ReflectionProperty
-     */
-    public $latitudeProperty;
+    public \ReflectionProperty $latitudeProperty;
 
-    /**
-     * @var \ReflectionProperty
-     */
-    public $longitudeProperty;
+    public \ReflectionProperty $longitudeProperty;
 
-    /**
-     * @var \ReflectionMethod
-     */
-    public $addressGetter;
+    public \ReflectionMethod $addressGetter;
 }

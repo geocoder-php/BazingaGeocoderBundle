@@ -27,25 +27,18 @@ use Http\Promise\Promise;
 class ProfilingPlugin implements Plugin
 {
     /**
-     * @var array
      * @phpstan-var array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
-    private $queries = [];
+    private array $queries = [];
 
     /**
-     * @var string service id of the provider
+     * @param string $name service id of the provider
      */
-    private $name;
-
-    public function __construct(string $name)
+    public function __construct(private string $name)
     {
-        $this->name = $name;
     }
 
-    /**
-     * @return Promise
-     */
-    public function handleQuery(Query $query, callable $next, callable $first)
+    public function handleQuery(Query $query, callable $next, callable $first): Promise
     {
         $startTime = microtime(true);
 
@@ -62,12 +55,7 @@ class ProfilingPlugin implements Plugin
         });
     }
 
-    /**
-     * @param mixed $result
-     *
-     * @return void
-     */
-    private function logQuery(Query $query, float $duration, $result = null)
+    private function logQuery(Query $query, float $duration, mixed $result = null): void
     {
         if ($query instanceof GeocodeQuery) {
             $queryString = $query->getText();

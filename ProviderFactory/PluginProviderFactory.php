@@ -23,14 +23,13 @@ use Geocoder\Plugin\PluginProvider;
 final class PluginProviderFactory
 {
     /**
-     * @param Plugin[]                          $plugins
-     * @param ProviderFactoryInterface|callable $factory
-     * @param array                             $config                config to the client factory
-     * @param array                             $pluginProviderOptions config forwarded to the PluginProvider
-     * @phpstan-param array<mixed, mixed> $config
-     * @phpstan-param array<mixed, mixed> $pluginProviderOptions
+     * @param Plugin[] $plugins
+     * @param array    $config                config to the client factory
+     * @param array    $pluginProviderOptions config forwarded to the PluginProvider
+     * @phpstan-param array $config
+     * @phpstan-param array $pluginProviderOptions
      */
-    public static function createPluginProvider(array $plugins, $factory, array $config, array $pluginProviderOptions = []): PluginProvider
+    public static function createPluginProvider(array $plugins, callable|ProviderFactoryInterface $factory, array $config, array $pluginProviderOptions = []): PluginProvider
     {
         if ($factory instanceof ProviderFactoryInterface) {
             $client = $factory->createProvider($config);

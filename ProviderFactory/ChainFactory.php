@@ -25,7 +25,7 @@ final class ChainFactory extends AbstractFactory implements LoggerAwareInterface
 {
     use LoggerAwareTrait;
 
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => Chain::class, 'packageName' => 'geocoder-php/chain-provider'],
     ];
 
@@ -45,7 +45,7 @@ final class ChainFactory extends AbstractFactory implements LoggerAwareInterface
     /**
      * {@inheritdoc}
      */
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         parent::configureOptionResolver($resolver);
 

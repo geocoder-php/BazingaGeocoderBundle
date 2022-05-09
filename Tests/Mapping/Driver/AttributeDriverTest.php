@@ -25,17 +25,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class AttributeDriverTest extends TestCase
 {
-    /**
-     * @var AttributeDriver
-     */
-    private $driver;
-
-    public static function setUpBeforeClass(): void
-    {
-        if (PHP_VERSION_ID < 80000) {
-            self::markTestSkipped(sprintf('"%s" is only supported on PHP 8', AttributeDriver::class));
-        }
-    }
+    private AttributeDriver $driver;
 
     protected function setUp(): void
     {
@@ -75,16 +65,16 @@ final class AttributeDriverTest extends TestCase
     }
 }
 
-#[Geocodeable()]
+#[Geocodeable]
 class Dummy3
 {
-    #[Latitude()]
+    #[Latitude]
     public $latitude;
 
-    #[Longitude()]
+    #[Longitude]
     public $longitude;
 
-    #[Address()]
+    #[Address]
     public $address;
 }
 

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class AlgoliaFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => AlgoliaPlaces::class, 'packageName' => 'geocoder-php/algolia-places-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class AlgoliaFactory extends AbstractFactory
         return new AlgoliaPlaces($httplug, $config['api_key'], $config['app_id']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,
