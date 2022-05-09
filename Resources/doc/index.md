@@ -197,7 +197,7 @@ But it won't work on your local environment, that's why this bundle provides
 an easy way to fake this behavior by using a `fake_ip` configuration.
 
 ```yaml
-# config/dev/bazinga_geocoder.yaml or config/dev/config.yaml
+# config/dev/bazinga_geocoder.yaml
 bazinga_geocoder:
     fake_ip:    123.123.123.123
 ```
