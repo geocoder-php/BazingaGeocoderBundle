@@ -26,39 +26,23 @@ use Geocoder\Query\GeocodeQuery;
  */
 class GeocoderListener implements EventSubscriber
 {
-    /**
-     * @var DriverInterface
-     */
-    private $driver;
-
-    /**
-     * @var Provider
-     */
-    private $geocoder;
-
-    public function __construct(Provider $geocoder, DriverInterface $driver)
+    public function __construct(private Provider $geocoder, private DriverInterface $driver)
     {
-        $this->driver = $driver;
-        $this->geocoder = $geocoder;
     }
 
     /**
      * {@inheritdoc}
      *
-     * @return array
      * @phpstan-return list<string>
      */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::onFlush,
         ];
     }
 
-    /**
-     * @return void
-     */
-    public function onFlush(OnFlushEventArgs $args)
+    public function onFlush(OnFlushEventArgs $args): void
     {
         $em = $args->getEntityManager();
         $uow = $em->getUnitOfWork();
@@ -68,7 +52,6 @@ class GeocoderListener implements EventSubscriber
                 continue;
             }
 
-            /** @var ClassMetadata $metadata */
             $metadata = $this->driver->loadMetadataFromObject($entity);
 
             $this->geocodeEntity($metadata, $entity);
@@ -84,7 +67,6 @@ class GeocoderListener implements EventSubscriber
                 continue;
             }
 
-            /** @var ClassMetadata $metadata */
             $metadata = $this->driver->loadMetadataFromObject($entity);
 
             if (!$this->shouldGeocode($metadata, $uow, $entity)) {
@@ -100,12 +82,7 @@ class GeocoderListener implements EventSubscriber
         }
     }
 
-    /**
-     * @param object $entity
-     *
-     * @return void
-     */
-    private function geocodeEntity(ClassMetadata $metadata, $entity)
+    private function geocodeEntity(ClassMetadata $metadata, object $entity): void
     {
         if (null !== $metadata->addressGetter) {
             $address = $metadata->addressGetter->invoke($entity);
@@ -126,10 +103,7 @@ class GeocoderListener implements EventSubscriber
         }
     }
 
-    /**
-     * @param object $entity
-     */
-    private function shouldGeocode(ClassMetadata $metadata, UnitOfWork $unitOfWork, $entity): bool
+    private function shouldGeocode(ClassMetadata $metadata, UnitOfWork $unitOfWork, object $entity): bool
     {
         if (null !== $metadata->addressGetter) {
             return true;

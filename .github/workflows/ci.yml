@@ -54,13 +54,11 @@ jobs:
             fail-fast: true
             matrix:
                 strategy: ['default']
-                php: ['7.3', '7.4', '8.0', '8.1']
+                php: ['8.0', '8.1']
                 include:
-                    - php: '7.3'
+                    - php: '8.0'
                       sf_version: '4.4.*'
                       strategy: 'lowest'
-                    - php: '7.4'
-                      sf_version: '5.4.*'
                     - php: '8.0'
                       sf_version: '5.4.*'
                     - php: '8.1'
@@ -104,18 +102,16 @@ jobs:
             max-parallel: 10
             fail-fast: true
             matrix:
-                php: ['7.4', '8.0', '8.1']
+                php: ['8.0', '8.1']
                 include:
-                    - php: '7.4'
-                      sf_version: '4.4.*'
-                    - php: '7.4'
-                      sf_version: '5.4.*'
                     - php: '8.0'
-                      sf_version: '5.4.*'
-                    - php: '8.1'
+                      sf_version: '4.4.*'
+                    - php: '8.0'
                       sf_version: '5.4.*'
                     - php: '8.0'
                       sf_version: '6.0.*'
+                    - php: '8.1'
+                      sf_version: '5.4.*'
                     - php: '8.1'
                       sf_version: '6.0.*'
         steps:

@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MapboxFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => Mapbox::class, 'packageName' => 'geocoder-php/mapbox-provider'],
     ];
 
@@ -32,7 +32,7 @@ final class MapboxFactory extends AbstractFactory
         return new Mapbox($httplug, $config['api_key'], $config['country'], $config['mode']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

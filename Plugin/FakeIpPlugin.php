@@ -26,36 +26,17 @@ use Http\Promise\Promise;
  */
 class FakeIpPlugin implements Plugin
 {
-    /**
-     * @var string|null
-     */
-    private $needle;
+    private ?Generator $faker = null;
 
-    /**
-     * @var string
-     */
-    private $replacement;
-
-    /**
-     * @var Generator|null
-     */
-    private $faker;
-
-    public function __construct(?string $needle, string $replacement = null, bool $useFaker = false)
+    public function __construct(private ?string $needle, private ?string $replacement = null, bool $useFaker = false)
     {
-        $this->needle = $needle;
-        $this->replacement = $replacement;
-
         if ($useFaker) {
             $this->faker = new Generator();
             $this->faker->addProvider(new Internet($this->faker));
         }
     }
 
-    /**
-     * @return Promise
-     */
-    public function handleQuery(Query $query, callable $next, callable $first)
+    public function handleQuery(Query $query, callable $next, callable $first): Promise|GeocodeQuery
     {
         if (!$query instanceof GeocodeQuery) {
             return $next($query);

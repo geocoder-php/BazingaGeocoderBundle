@@ -16,15 +16,7 @@ use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
 
 interface DriverInterface
 {
-    /**
-     * @param object $object
-     */
-    public function isGeocodeable($object): bool;
+    public function isGeocodeable(object $object): bool;
 
-    /**
-     * @param object $object
-     *
-     * @return ClassMetadata
-     */
-    public function loadMetadataFromObject($object);
+    public function loadMetadataFromObject(object $object): ClassMetadata;
 }

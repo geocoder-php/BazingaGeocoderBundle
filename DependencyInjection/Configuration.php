@@ -25,25 +25,18 @@ class Configuration implements ConfigurationInterface
      * Whether to use the debug mode.
      *
      * @see https://github.com/doctrine/DoctrineBundle/blob/v1.5.2/DependencyInjection/Configuration.php#L31-L41
-     *
-     * @var bool
      */
-    private $debug;
+    private bool $debug;
 
-    /**
-     * @param bool $debug
-     */
-    public function __construct($debug)
+    public function __construct(bool $debug)
     {
-        $this->debug = (bool) $debug;
+        $this->debug = $debug;
     }
 
     /**
      * Generates the configuration tree builder.
-     *
-     * @return TreeBuilder The tree builder
      */
-    public function getConfigTreeBuilder()
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder('bazinga_geocoder');
         $rootNode = $treeBuilder->getRootNode();
@@ -85,10 +78,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @return ArrayNodeDefinition
-     */
-    private function getProvidersNode()
+    private function getProvidersNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('providers');
         $rootNode = $treeBuilder->getRootNode();
@@ -126,13 +116,12 @@ class Configuration implements ConfigurationInterface
      *
      * @return ArrayNodeDefinition The plugin node
      */
-    private function createClientPluginNode()
+    private function createClientPluginNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('plugins');
         $rootNode = $treeBuilder->getRootNode();
         assert($rootNode instanceof ArrayNodeDefinition);
 
-        /** @var ArrayNodeDefinition $pluginList */
         $pluginList = $rootNode
             ->info('A list of plugin service ids. The order is important.')
             ->arrayPrototype()

@@ -39,15 +39,9 @@ use Psr\Http\Message\ResponseInterface;
  */
 class GeocoderListenerTest extends OrmTestCase
 {
-    /**
-     * @var EntityManager
-     */
-    private $em;
+    private EntityManager $em;
 
-    /**
-     * @var GeocoderListener
-     */
-    private $listener;
+    private GeocoderListener $listener;
 
     public static function setUpBeforeClass(): void
     {
@@ -255,7 +249,7 @@ class DummyWithGetter
      */
     private $_address;
 
-    public function setAddress($address)
+    public function setAddress($address): void
     {
         $this->_address = $address;
     }
@@ -273,7 +267,7 @@ class DummyWithGetter
         return $this->latitude;
     }
 
-    public function setLatitude($latitude)
+    public function setLatitude($latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -283,7 +277,7 @@ class DummyWithGetter
         return $this->longitude;
     }
 
-    public function setLongitude($longitude)
+    public function setLongitude($longitude): void
     {
         $this->longitude = $longitude;
     }
@@ -318,7 +312,7 @@ class DummyWithInvalidGetter
      */
     private $_address;
 
-    public function setAddress($address)
+    public function setAddress($address): void
     {
         $this->_address = $address;
     }
@@ -336,7 +330,7 @@ class DummyWithInvalidGetter
         return $this->latitude;
     }
 
-    public function setLatitude($latitude)
+    public function setLatitude($latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -346,7 +340,7 @@ class DummyWithInvalidGetter
         return $this->longitude;
     }
 
-    public function setLongitude($longitude)
+    public function setLongitude($longitude): void
     {
         $this->longitude = $longitude;
     }
@@ -385,7 +379,7 @@ class DummyWithEmptyProperty
 
 class TrackedCurlClient extends Client
 {
-    private $responses = [];
+    private array $responses = [];
 
     public function sendRequest(RequestInterface $request): ResponseInterface
     {

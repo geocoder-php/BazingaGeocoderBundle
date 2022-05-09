@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class GoogleMapsPlacesFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => GoogleMapsPlaces::class, 'packageName' => 'geocoder-php/google-maps-places-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class GoogleMapsPlacesFactory extends AbstractFactory
         return new GoogleMapsPlaces($httplug, $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class IpInfoFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => IpInfo::class, 'packageName' => 'geocoder-php/ip-info-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class IpInfoFactory extends AbstractFactory
         return new IpInfo($httplug);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

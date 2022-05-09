@@ -26,14 +26,12 @@ class FactoryValidatorPass implements CompilerPassInterface
     /**
      * @var string[]
      */
-    private static $factoryServiceIds = [];
+    private static array $factoryServiceIds = [];
 
     /**
      * {@inheritdoc}
-     *
-     * @return void
      */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         foreach (self::$factoryServiceIds as $id) {
             if (!$container->hasAlias($id) && !$container->hasDefinition($id)) {
@@ -42,12 +40,7 @@ class FactoryValidatorPass implements CompilerPassInterface
         }
     }
 
-    /**
-     * @param string $factoryServiceId
-     *
-     * @return void
-     */
-    public static function addFactoryServiceId($factoryServiceId)
+    public static function addFactoryServiceId(string $factoryServiceId): void
     {
         self::$factoryServiceIds[] = $factoryServiceId;
     }

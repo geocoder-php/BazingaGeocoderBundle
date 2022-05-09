@@ -31,8 +31,6 @@ interface ProviderFactoryInterface
      * @param string $providerName the name the user has chosen for this provider
      * @phpstan-param array<mixed, mixed> $options
      *
-     * @return void
-     *
      * @throws \LogicException                                                        If the factory has missing dependencies
      * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException If an option name is undefined
      * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException   If an option doesn't fulfill the specified validation rules
@@ -41,5 +39,5 @@ interface ProviderFactoryInterface
      * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException     If a lazy option reads an unavailable option
      * @throws \Symfony\Component\OptionsResolver\Exception\AccessException           If called from a lazy option or normalizer
      */
-    public static function validate(array $options, $providerName);
+    public static function validate(array $options, string $providerName): void;
 }

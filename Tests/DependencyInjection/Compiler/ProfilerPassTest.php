@@ -22,10 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class ProfilerPassTest extends TestCase
 {
-    /**
-     * @var ProfilerPass
-     */
-    private $compilerPass;
+    private ProfilerPass $compilerPass;
 
     protected function setUp(): void
     {

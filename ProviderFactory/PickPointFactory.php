@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PickPointFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => PickPoint::class, 'packageName' => 'geocoder-php/pickpoint-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class PickPointFactory extends AbstractFactory
         return new PickPoint($httplug, $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

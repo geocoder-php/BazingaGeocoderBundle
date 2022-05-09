@@ -44,7 +44,7 @@ bazinga_geocoder:
 
 ```yaml
 # services.yml
-servies:
+services:
   my_cached_geocoder:
     class: Geocoder\Provider\Cache\ProviderCache
     arguments: ['@bazinga_geocoder.provider.acme', '@any.psr16.service', 3600]

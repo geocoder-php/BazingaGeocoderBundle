@@ -30,15 +30,9 @@ class Address extends Constraint
         self::INVALID_ADDRESS_ERROR => 'INVALID_ADDRESS_ERROR',
     ];
 
-    /**
-     * @var string
-     */
-    public $service = AddressValidator::class;
+    public string $service = AddressValidator::class;
 
-    /**
-     * @var string
-     */
-    public $message = 'Address {{ address }} is not valid.';
+    public string $message = 'Address {{ address }} is not valid.';
 
     /**
      * @param string[]|null $options

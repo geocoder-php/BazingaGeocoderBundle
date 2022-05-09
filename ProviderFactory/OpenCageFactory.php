@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class OpenCageFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => OpenCage::class, 'packageName' => 'geocoder-php/open-cage-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class OpenCageFactory extends AbstractFactory
         return new OpenCage($httplug, $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,
