@@ -20,12 +20,11 @@ Table of contents
   * [Chain providers](#chain-providers)
   * [Fake local ip](#fake-local-ip)
   * [Cache](#cache-results)
-  * [Dumpers](#dumper)
+  * [Dumpers](#dumpers)
   * [Custom HTTP clients](#custom-http-clients)
 * [Reference Configuration](#reference-configuration)
 * [Backwards compatibility](#backwards-compatibility)
 * [Testing](#testing)
-
 
 Installation
 ------------
@@ -37,17 +36,15 @@ and then you may just install the bundle like normal:
 composer require willdurand/geocoder-bundle:^5.0
 ```
 
-Register the bundle in `app/AppKernel.php`:
+If you don't use [Symfony Flex](https://symfony.com/doc/current/setup/flex.html), you must enable the bundle manually in the application:
 
 ```php
-// app/AppKernel.php
-public function registerBundles()
-{
-    return array(
-        // ...
-        new Bazinga\GeocoderBundle\BazingaGeocoderBundle(),
-    );
-}
+// config/bundles.php
+// in older Symfony apps, enable the bundle in app/AppKernel.php
+return [
+    // ...
+    Bazinga\GeocoderBundle\BazingaGeocoderBundle::class => ['all' => true],
+];
 ```
 
 Usage
@@ -200,7 +197,7 @@ But it won't work on your local environment, that's why this bundle provides
 an easy way to fake this behavior by using a `fake_ip` configuration.
 
 ```yaml
-# app/config/config_dev.yml
+# config/dev/bazinga_geocoder.yaml or config/dev/config.yaml
 bazinga_geocoder:
     fake_ip:    123.123.123.123
 ```
@@ -293,7 +290,7 @@ providing the dumper class name as the argument.
 Also If you want to inject all the tagged dumpers to your service you can provide
 your service argument as: `!tagged bazinga_geocoder.dumper`.
 
-### Custom HTTP Client
+### Custom HTTP Clients
 
 The HTTP geocoder providers integrates with [HTTPlug](http://httplug.io/). It will give you all
 the power of the HTTP client. You have to select which one you want to use and how
@@ -376,13 +373,13 @@ composer test
 ### Doctrine test
 
 There is also a test that tests the doctrine integration. It runs automatically on
-Traivs but if you want to run it locally you must do the following.
+[GitHub Actions](https://github.com/geocoder-php/BazingaGeocoderBundle/actions) but if you want to run it locally you must do the following.
 
 ```bash
-composer require phpunit/phpunit:^5.7 --no-update
+composer require phpunit/phpunit:^9.5 --no-update
 composer update --prefer-source
-wget https://phar.phpunit.de/phpunit-5.7.phar
-php phpunit-5.7.phar --testsuit doctrine
+wget https://phar.phpunit.de/phpunit-9.5.phar
+php phpunit-9.5.phar --testsuit doctrine
 ```
 
 **Important:** this command must be run with `--prefer-source`, otherwise the
