@@ -7,14 +7,14 @@ request will be both quicker and free of charge. To get started with caching you
 by default in our configuration.
 
 ```yaml
-# config.yml
+# config/packages/bazinga_geocoder.yaml
 bazinga_geocoder:
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-      cache: 'any.psr16.service'
-      cache_lifetime: 3600
-      cache_precision: ~
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            cache: 'any.psr16.service'
+            cache_lifetime: 3600
+            cache_precision: ~
 ```
 
 If you do a lot of reverse queries it can be useful to cache them with less precision. So if you are interested in only the city,
@@ -35,19 +35,19 @@ composer require geocoder-php/cache-provider
 ```
 
 ```yaml
-# config.yml
+# config/packages/bazinga_geocoder.yaml
 bazinga_geocoder:
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
 ```
 
 ```yaml
-# services.yml
-servies:
-  my_cached_geocoder:
-    class: Geocoder\Provider\Cache\ProviderCache
-    arguments: ['@bazinga_geocoder.provider.acme', '@any.psr16.service', 3600]
+# config/services.yaml
+services:
+    my_cached_geocoder:
+        class: Geocoder\Provider\Cache\ProviderCache
+        arguments: ['@bazinga_geocoder.provider.acme', '@any.psr16.service', 3600]
 ```
 
 ## Installing a PSR16 cache
@@ -60,7 +60,7 @@ Symfony>=3.3 supports SimpleCache thanks to `Symfony\Component\Cache\Simple\Psr6
 Thus a service can be registered like so:
 
 ```yaml
-# services.yml
+# config/services.yaml
 app.simple_cache:
     class: Symfony\Component\Cache\Simple\Psr6Cache
     arguments: ['@app.cache.acme']
@@ -69,7 +69,7 @@ app.simple_cache:
 Then configure the framework and the bundle:
 
 ```yaml
-# config.yml
+# config/packages/cache.yaml
 framework:
     cache:
         app: cache.adapter.redis
@@ -78,13 +78,14 @@ framework:
                 adapter: cache.app
                 default_lifetime: 600
 
+# config/packages/bazinga_geocoder.yaml
 bazinga_geocoder:
-  providers:
-    my_google_maps:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-      cache: 'app.simple_cache'
-      cache_lifetime: 3600
-      cache_precision: 4
+    providers:
+        my_google_maps:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            cache: 'app.simple_cache'
+            cache_lifetime: 3600
+            cache_precision: 4
 ```
 
 For older Symfony version, you can use a bridge between PSR-6 and PSR-16. Install the

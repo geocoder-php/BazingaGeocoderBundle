@@ -54,7 +54,7 @@ class User
      * @Geocoder\Longitude
      */
     private $longitude;
-    
+
     /**
      * @Geocoder\Address
      */
@@ -65,7 +65,7 @@ class User
 }
 ```
 
-Secondly, register the Doctrine event listener and its dependencies in your `services.yaml` file.  
+Secondly, register the Doctrine event listener and its dependencies in your `config/services.yaml` file.
 You have to indicate which provider to use to reverse geocode the address. Here we use `acme` provider we declared in bazinga_geocoder configuration earlier.
 
 ```yaml
@@ -83,7 +83,7 @@ You have to indicate which provider to use to reverse geocode the address. Here 
             - doctrine.event_subscriber
 ```
 
-It is done!  
+It is done!
 Now you can use it:
 
 ```php
