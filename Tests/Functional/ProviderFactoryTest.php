@@ -93,7 +93,7 @@ class ProviderFactoryTest extends KernelTestCase
         yield [BingMaps::class, ['acme']];
         yield [Chain::class, ['acme']];
         yield [FreeGeoIp::class, ['empty', 'acme']];
-        //yield [Geoip::class, ['empty']];
+        // yield [Geoip::class, ['empty']];
         yield [GeoIP2::class, ['acme']];
         if (class_exists(GeoIPs::class)) {
             yield [GeoIPs::class, ['acme']];

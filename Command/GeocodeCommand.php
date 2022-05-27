@@ -25,8 +25,6 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GeocodeCommand extends Command
 {
-    protected static $defaultName = 'geocoder:geocode';
-
     /**
      * @var ProviderAggregator
      */
