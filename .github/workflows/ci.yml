@@ -19,7 +19,7 @@ jobs:
 
             - name: "Install Composer dependencies"
               run: |
-                  composer install --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
+                  composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
 
             - name: "Run PHPStan"
               run: vendor/bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr
@@ -41,7 +41,7 @@ jobs:
 
             - name: "Install Composer dependencies"
               run: |
-                  composer install --prefer-dist --no-progress --no-suggest --no-interaction --optimize-autoloader
+                  composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
 
             - name: "Run PHP-CS-Fixer"
               run: vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --format=checkstyle | cs2pr
