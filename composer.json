@@ -75,6 +75,9 @@
     "test": "vendor/bin/simple-phpunit --testsuite main"
   },
   "config": {
+    "allow-plugins": {
+      "symfony/flex": true
+    },
     "sort-packages": true
   },
   "minimum-stability": "dev",
