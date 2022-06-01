@@ -2,10 +2,12 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
-## Version 5.16.3
+## Version 5.17.0
 
 ### Changed
 
+- Updated PHP requirement to ^7.4
+- Updated minimum required version for some dependencies
 - Deprecate `Address::$errorNames` in favour of `Address::ERROR_NAMES`.
 
 ## Version 5.16.2

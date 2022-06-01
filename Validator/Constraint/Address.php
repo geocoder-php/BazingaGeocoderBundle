@@ -35,7 +35,7 @@ class Address extends Constraint
     /**
      * @var string[]
      *
-     * @deprecated since BazingaGeocoderBundle 5.16, use const ERROR_NAMES instead
+     * @deprecated since BazingaGeocoderBundle 5.17, use const ERROR_NAMES instead
      */
     protected static $errorNames = self::ERROR_NAMES;
 
