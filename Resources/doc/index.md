@@ -20,12 +20,11 @@ Table of contents
   * [Chain providers](#chain-providers)
   * [Fake local ip](#fake-local-ip)
   * [Cache](#cache-results)
-  * [Dumpers](#dumper)
+  * [Dumpers](#dumpers)
   * [Custom HTTP clients](#custom-http-clients)
 * [Reference Configuration](#reference-configuration)
 * [Backwards compatibility](#backwards-compatibility)
 * [Testing](#testing)
-
 
 Installation
 ------------
@@ -37,17 +36,15 @@ and then you may just install the bundle like normal:
 composer require willdurand/geocoder-bundle:^5.0
 ```
 
-Register the bundle in `app/AppKernel.php`:
+If you don't use [Symfony Flex](https://symfony.com/doc/current/setup/flex.html), you must enable the bundle manually in the application:
 
 ```php
-// app/AppKernel.php
-public function registerBundles()
-{
-    return array(
-        // ...
-        new Bazinga\GeocoderBundle\BazingaGeocoderBundle(),
-    );
-}
+// config/bundles.php
+// in older Symfony apps, enable the bundle in app/AppKernel.php
+return [
+    // ...
+    Bazinga\GeocoderBundle\BazingaGeocoderBundle::class => ['all' => true],
+];
 ```
 
 Usage
@@ -59,9 +56,9 @@ using Google Maps.
 
 ```yaml
 bazinga_geocoder:
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
 ```
 
 This will create a service named `bazinga_geocoder.provider.acme` which is a
@@ -72,13 +69,13 @@ provider.
 
 ```yaml
 bazinga_geocoder:
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-      cache: 'any.psr16.service'
-      cache_lifetime: 3600
-      aliases:
-        - my_geocoder
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            cache: 'any.psr16.service'
+            cache_lifetime: 3600
+            aliases:
+                - my_geocoder
 ```
 
 This will create a service named `my_geocoder` that caches the responses for one
@@ -89,13 +86,13 @@ parameters to the constructor of the provider. In the example of Google Maps:
 
 ```yaml
 bazinga_geocoder:
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-      options:
-        httplug_client: '@httplug.client' # When using HTTPlugBundle
-        region: 'Sweden'
-        api_key: 'xxyy'
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            options:
+                httplug_client: '@httplug.client' # When using HTTPlugBundle
+                region: 'Sweden'
+                api_key: 'xxyy'
 ```
 
 ### Chain providers
@@ -104,35 +101,34 @@ Someone was thinking ahead here. Wouldn't it be nice if you could pass your requ
 
 ```yaml
 bazinga_geocoder:
-  providers:
-    acme:
-      aliases:
-        - my_geocoder
-      cache: 'any.psr16.service'
-      cache_lifetime: 3600
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-      options:
-        api_key: 'xxxx'
-    acme_ii:
-      aliases:
-        - my_geocoder_ii
-      factory: Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory
-      options:
-        api_key: 'xxyy'
-        httplug_client: '@httplug.client' # When using HTTPlugBundle
-        region: 'Sweden'
-    chain:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\ChainFactory
-      options:
-        services: ['@bazinga_geocoder.provider.acme', '@bazinga_geocoder.provider.acme_ii']
+    providers:
+        acme:
+            aliases:
+                - my_geocoder
+            cache: 'any.psr16.service'
+            cache_lifetime: 3600
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            options:
+                api_key: 'xxxx'
+        acme_ii:
+            aliases:
+                - my_geocoder_ii
+            factory: Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory
+            options:
+                api_key: 'xxyy'
+                httplug_client: '@httplug.client' # When using HTTPlugBundle
+                region: 'Sweden'
+        chain:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\ChainFactory
+            options:
+                services: ['@bazinga_geocoder.provider.acme', '@bazinga_geocoder.provider.acme_ii']
 ```
 
 The `services` key could also be as follows `services: ['@my_geocoder', '@my_geocoder_ii']`. Notice these are the values from the `aliases` key.
 
 ### Autowiring Providers
 
-If you're using Symfony 4.3 and autowiring you can use bindings provided
-the bundle.
+If you're using autowiring you can use bindings provided the bundle.
 
 ```yaml
 bazinga_geocoder:
@@ -200,27 +196,31 @@ But it won't work on your local environment, that's why this bundle provides
 an easy way to fake this behavior by using a `fake_ip` configuration.
 
 ```yaml
-# app/config/config_dev.yml
-bazinga_geocoder:
-    fake_ip:    123.123.123.123
+# config/packages/bazinga_geocoder.yaml
+
+when@dev:
+    bazinga_geocoder:
+        fake_ip: 123.123.123.123
 ```
 
 If set, the parameter will replace all instances of "127.0.0.1" in your queries and replace them with the given one.
 If you'd like to replace other ip instead of "127.0.0.1" (e.g. when using localhost inside a VM) you can set the optional `local_ip` parameter:
 
 ```yaml
-bazinga_geocoder:
-    fake_ip:
-        local_ip: 192.168.99.1 # default 127.0.0.1
-        ip: 123.123.123.123
+when@dev:
+    bazinga_geocoder:
+        fake_ip:
+            local_ip: 192.168.99.1 # default 127.0.0.1
+            ip: 123.123.123.123
 ```
 
 You can also let [Faker](https://github.com/fakerphp/faker) generate fake ip for you.
 
 ```yaml
-bazinga_geocoder:
-    fake_ip:
-        use_faker: true # default false
+when@dev:
+    bazinga_geocoder:
+        fake_ip:
+            use_faker: true # default false
 ```
 
 ### Cache Results
@@ -231,11 +231,11 @@ service and you are good to go.
 
 ```yaml
 bazinga_geocoder:
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
-      cache: 'any.psr16.service'
-      cache_lifetime: 3600
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            cache: 'any.psr16.service'
+            cache_lifetime: 3600
 ```
 
 Read more about cache [here](cache.md).
@@ -293,7 +293,7 @@ providing the dumper class name as the argument.
 Also If you want to inject all the tagged dumpers to your service you can provide
 your service argument as: `!tagged bazinga_geocoder.dumper`.
 
-### Custom HTTP Client
+### Custom HTTP Clients
 
 The HTTP geocoder providers integrates with [HTTPlug](http://httplug.io/). It will give you all
 the power of the HTTP client. You have to select which one you want to use and how
@@ -314,20 +314,20 @@ Reference Configuration
 You'll find the reference configuration below:
 
 ```yaml
-# app/config/config.yml
+# config/packages/bazinga_geocoder.yaml
 bazinga_geocoder:
     profiling:
-        enabled: ~                # Default is same as kernel.debug
+        enabled: ~ # Default is same as kernel.debug
     fake_ip:
-        enabled:              true
-        ip:                   null
+        enabled: true
+        ip: null
     providers:
         # ...
         acme:
-            factory:  ~           # Required
+            factory: ~ # Required
             cache: 'app.cache'
             cache_lifetime: 3600
-            cache_precision: 4    # Precision of the coordinates to cache.
+            cache_precision: 4 # Precision of the coordinates to cache.
             limit: 5
             locale: 'sv'
             logger: 'logger'
@@ -376,13 +376,13 @@ composer test
 ### Doctrine test
 
 There is also a test that tests the doctrine integration. It runs automatically on
-Traivs but if you want to run it locally you must do the following.
+[GitHub Actions](https://github.com/geocoder-php/BazingaGeocoderBundle/actions) but if you want to run it locally you must do the following.
 
 ```bash
-composer require phpunit/phpunit:^5.7 --no-update
+composer require phpunit/phpunit:^9.5 --no-update
 composer update --prefer-source
-wget https://phar.phpunit.de/phpunit-5.7.phar
-php phpunit-5.7.phar --testsuit doctrine
+wget https://phar.phpunit.de/phpunit-9.5.phar
+php phpunit-9.5.phar --testsuit doctrine
 ```
 
 **Important:** this command must be run with `--prefer-source`, otherwise the
