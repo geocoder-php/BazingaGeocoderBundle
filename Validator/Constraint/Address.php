@@ -25,10 +25,19 @@ class Address extends Constraint
 {
     public const INVALID_ADDRESS_ERROR = '2243aa07-2ea7-4eb7-962c-6a9586593f2c';
 
-    /** @var string[] */
-    protected static $errorNames = [
+    /**
+     * @var string[]
+     */
+    protected const ERROR_NAMES = [
         self::INVALID_ADDRESS_ERROR => 'INVALID_ADDRESS_ERROR',
     ];
+
+    /**
+     * @var string[]
+     *
+     * @deprecated since BazingaGeocoderBundle 5.16, use const ERROR_NAMES instead
+     */
+    protected static $errorNames = self::ERROR_NAMES;
 
     /**
      * @var string

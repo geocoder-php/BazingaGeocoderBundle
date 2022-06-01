@@ -2,7 +2,15 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.16.3
+
+### Changed
+
+- Deprecate `Address::$errorNames` in favour of `Address::ERROR_NAMES`.
+
 ## Version 5.16.2
+
+### Fixed
 
 - Fix deprecations with Symfony 6.1
 
