@@ -1,0 +1,26 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\:\\:end\\(\\)\\.$#"
+			count: 2
+			path: DependencyInjection/Configuration.php
+
+		-
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\:\\:variableNode\\(\\)\\.$#"
+			count: 1
+			path: DependencyInjection/Configuration.php
+
+		-
+			message: "#^Class Geocoder\\\\Provider\\\\Geoip\\\\Geoip not found\\.$#"
+			count: 1
+			path: ProviderFactory/GeoipFactory.php
+
+		-
+			message: "#^Instantiated class Geocoder\\\\Provider\\\\Geoip\\\\Geoip not found\\.$#"
+			count: 1
+			path: ProviderFactory/GeoipFactory.php
+
+		-
+			message: "#^Method Bazinga\\\\GeocoderBundle\\\\ProviderFactory\\\\GeoipFactory\\:\\:getProvider\\(\\) should return Geocoder\\\\Provider\\\\Provider but returns Geocoder\\\\Provider\\\\Geoip\\\\Geoip\\.$#"
+			count: 1
+			path: ProviderFactory/GeoipFactory.php

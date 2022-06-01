@@ -1,18 +1,22 @@
 name: CI
 on: [push, pull_request]
 
+concurrency:
+    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+    cancel-in-progress: true
+
 jobs:
     phpstan:
         name: "PHPStan"
         runs-on: ubuntu-latest
         env:
-            php-version: 8.0
+            php-version: 8.1
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ env.php-version }}
-                  tools: composer:v2, flex, cs2pr
+                  tools: composer:v2, flex
 
             - name: "Checkout code"
               uses: actions/checkout@v2
@@ -22,13 +26,13 @@ jobs:
                   composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
 
             - name: "Run PHPStan"
-              run: vendor/bin/phpstan analyse --no-progress --error-format=checkstyle | cs2pr
+              run: vendor/bin/phpstan analyse --no-progress
 
     php-cs-fixer:
         name: PHP-CS-Fixer
         runs-on: ubuntu-latest
         env:
-            php-version: 8.0
+            php-version: 8.1
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
@@ -54,13 +58,11 @@ jobs:
             fail-fast: true
             matrix:
                 strategy: ['default']
-                php: ['7.3', '7.4', '8.0', '8.1']
+                php: ['7.4', '8.0', '8.1']
                 include:
-                    - php: '7.3'
-                      sf_version: '4.4.*'
-                      strategy: 'lowest'
                     - php: '7.4'
                       sf_version: '5.4.*'
+                      strategy: 'lowest'
                     - php: '8.0'
                       sf_version: '5.4.*'
                     - php: '8.1'
@@ -69,6 +71,8 @@ jobs:
                       sf_version: '6.0.*'
                     - php: '8.1'
                       sf_version: '6.0.*'
+                    - php: '8.1'
+                      sf_version: '6.1.*'
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
@@ -118,6 +122,8 @@ jobs:
                       sf_version: '6.0.*'
                     - php: '8.1'
                       sf_version: '6.0.*'
+                    - php: '8.1'
+                      sf_version: '6.1.*'
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
