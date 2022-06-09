@@ -2,6 +2,12 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.18.0
+
+### Added
+
+- Add OpenRouteService factory
+
 ## Version 5.17.0
 
 ### Changed
