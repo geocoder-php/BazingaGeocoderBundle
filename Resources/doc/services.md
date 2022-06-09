@@ -35,6 +35,7 @@ Here is a list of all provider factories and their options.
 | `Bazinga\GeocoderBundle\ProviderFactory\MaxMindFactory` | httplug_client, api_key, endpoint
 | `Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory` | httplug_client, root_url
 | `Bazinga\GeocoderBundle\ProviderFactory\OpenCageFactory` | httplug_client, api_key
+| `Bazinga\GeocoderBundle\ProviderFactory\OpenRouteServiceFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\PickPointFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory` | httplug_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\YandexFactory` | httplug_client, toponym

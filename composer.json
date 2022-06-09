@@ -48,6 +48,7 @@
     "geocoder-php/maxmind-provider": "^4.3",
     "geocoder-php/nominatim-provider": "^5.4",
     "geocoder-php/open-cage-provider": "^4.5",
+    "geocoder-php/openrouteservice-provider": "^1.2",
     "geocoder-php/pickpoint-provider": "^4.2",
     "geocoder-php/tomtom-provider": "^4.2",
     "geocoder-php/yandex-provider": "^4.4",
