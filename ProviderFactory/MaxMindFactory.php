@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\MaxMind\MaxMind;
 use Geocoder\Provider\Provider;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MaxMindFactory extends AbstractFactory
@@ -25,7 +25,7 @@ final class MaxMindFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{api_key: string, endpoint: string, httplug_client: ?HttpClient} $config
+     * @param array{api_key: string, endpoint: string, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -42,7 +42,7 @@ final class MaxMindFactory extends AbstractFactory
         ]);
 
         $resolver->setRequired('api_key');
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
         $resolver->setAllowedTypes('api_key', ['string']);
         $resolver->setAllowedValues('endpoint', [MaxMind::CITY_EXTENDED_SERVICE, MaxMind::OMNI_SERVICE]);
     }

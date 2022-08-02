@@ -25,10 +25,8 @@ final class PluginProviderFactory
     /**
      * @param Plugin[]                          $plugins
      * @param ProviderFactoryInterface|callable $factory
-     * @param array                             $config                config to the client factory
-     * @param array                             $pluginProviderOptions config forwarded to the PluginProvider
-     * @phpstan-param array<mixed, mixed> $config
-     * @phpstan-param array<mixed, mixed> $pluginProviderOptions
+     * @param array<mixed, mixed>               $config                config to the client factory
+     * @param array<mixed, mixed>               $pluginProviderOptions config forwarded to the PluginProvider
      */
     public static function createPluginProvider(array $plugins, $factory, array $config, array $pluginProviderOptions = []): PluginProvider
     {

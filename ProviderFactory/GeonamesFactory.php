@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Geonames\Geonames;
 use Geocoder\Provider\Provider;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class GeonamesFactory extends AbstractFactory
@@ -25,7 +25,7 @@ final class GeonamesFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{username: string, httplug_client: ?HttpClient} $config
+     * @param array{username: string, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -41,7 +41,7 @@ final class GeonamesFactory extends AbstractFactory
         ]);
 
         $resolver->setRequired('username');
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
         $resolver->setAllowedTypes('username', ['string']);
     }
 }

@@ -12,8 +12,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Mapbox\Mapbox;
 use Geocoder\Provider\Provider;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MapboxFactory extends AbstractFactory
@@ -23,7 +23,7 @@ final class MapboxFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{api_key: string, country: ?string, mode: string, httplug_client: ?HttpClient} $config
+     * @param array{api_key: string, country: ?string, mode: string, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -43,7 +43,7 @@ final class MapboxFactory extends AbstractFactory
         $resolver->setRequired('api_key');
         $resolver->setAllowedTypes('api_key', ['string']);
         $resolver->setAllowedTypes('mode', ['string']);
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
         $resolver->setAllowedTypes('country', ['string', 'null']);
     }
 }

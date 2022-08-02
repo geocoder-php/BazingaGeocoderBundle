@@ -20,16 +20,15 @@ use Geocoder\Provider\Provider;
 interface ProviderFactoryInterface
 {
     /**
-     * @phpstan-param array<mixed, mixed> $options
+     * @param array<mixed, mixed> $options
      */
     public function createProvider(array $options = []): Provider;
 
     /**
      * Make sure the options are valid and the dependencies are met.
      *
-     * @param array  $options      the options the user has provided
-     * @param string $providerName the name the user has chosen for this provider
-     * @phpstan-param array<mixed, mixed> $options
+     * @param array<mixed, mixed> $options      the options the user has provided
+     * @param string              $providerName the name the user has chosen for this provider
      *
      * @return void
      *

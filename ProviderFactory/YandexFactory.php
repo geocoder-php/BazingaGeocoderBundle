@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Provider;
 use Geocoder\Provider\Yandex\Yandex;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class YandexFactory extends AbstractFactory
@@ -25,7 +25,7 @@ final class YandexFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{toponym: ?string, api_key: ?string, httplug_client: ?HttpClient} $config
+     * @param array{toponym: ?string, api_key: ?string, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -42,7 +42,7 @@ final class YandexFactory extends AbstractFactory
             'api_key' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
         $resolver->setAllowedTypes('toponym', ['string', 'null']);
         $resolver->setAllowedTypes('api_key', ['string', 'null']);
     }

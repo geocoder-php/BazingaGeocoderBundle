@@ -27,7 +27,7 @@ final class GeoIP2Factory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{provider: string, provider_service: ?ProviderInterface, model: string, user_id: string|int|null, license_key: string|null, locales: list<string>, webservice_options: array<mixed, mixed>, database_filename: ?string} $config
+     * @param array{provider: string, provider_service: ?ProviderInterface, model: string, user_id: string|int|null, license_key: string|null, locales: list<string>, webservice_options: array<mixed, mixed>, database_filename: ?string} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -61,7 +61,7 @@ final class GeoIP2Factory extends AbstractFactory
 
         $resolver->setRequired('provider');
         $resolver->setAllowedTypes('provider', ['string']);
-        $resolver->setAllowedTypes('provider_service', ['object', 'null']);
+        $resolver->setAllowedTypes('provider_service', [ProviderInterface::class, 'null']);
         $resolver->setAllowedTypes('model', ['string']);
         $resolver->setAllowedTypes('user_id', ['string', 'int', 'null']);
         $resolver->setAllowedTypes('license_key', ['string', 'null']);

@@ -28,13 +28,14 @@ final class MapzenFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{api_key: string, httplug_client: ?HttpClient} $config
+     * @param array{api_key: string, httplug_client: ?HttpClient} $config
      */
     protected function getProvider(array $config): Provider
     {
         @trigger_error('Bazinga\GeocoderBundle\ProviderFactory\MapzenFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/808', E_USER_DEPRECATED);
 
         $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
+        assert($httplug instanceof HttpClient);
 
         return new Mapzen($httplug, $config['api_key']);
     }
@@ -46,7 +47,7 @@ final class MapzenFactory extends AbstractFactory
         ]);
 
         $resolver->setRequired('api_key');
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [HttpClient::class, 'null']);
         $resolver->setAllowedTypes('api_key', ['string']);
     }
 }
