@@ -1,0 +1,6 @@
+services:
+  Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector:
+    class: Bazinga\GeocoderBundle\DataCollector\GeocoderDataCollector
+    public: false
+    tags:
+      - { name: data_collector, template: '@BazingaGeocoder/Collector/geocoder.html.twig', id: 'geocoder' }

@@ -1,9 +1,0 @@
-bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\OpenCageFactory
-      options:
-        api_key: 'foo'
-

@@ -1,9 +1,0 @@
-bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GeonamesFactory
-      options:
-        username: 'foo'
-

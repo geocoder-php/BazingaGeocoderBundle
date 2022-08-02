@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<container xmlns="http://symfony.com/schema/dic/services">
+    <config xmlns="http://example.org/schema/dic/bazinga_geocoder">
+        <profiling enabled="true" />
+        <providers>
+            <acme factory="Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory">
+                <plugin>acme.logger</plugin>
+            </acme>
+        </providers>
+    </config>
+
+    <services>
+        <service id="logger" class="Psr\Log\NullLogger" />
+        <service id="acme.logger" class="Geocoder\Plugin\Plugin\LoggerPlugin">
+            <argument type="service" id="logger" />
+        </service>
+    </services>
+</container>

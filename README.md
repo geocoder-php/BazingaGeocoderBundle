@@ -14,12 +14,10 @@ into Symfony. It integrates seamlessly with the Symfony profiler. You can
 check number of queries executed by each provider, total execution time
 and geocoding results.
 
-![Example
-Toolbar](Resources/doc/toolbar.png)
+![Example Toolbar](doc/toolbar.png)
 
 
-![Example
-Profiler page](Resources/doc/profiler-page.png)
+![Example Profiler page](doc/profiler-page.png)
 
 
 
@@ -28,10 +26,9 @@ Documentation
 
 For documentation, see:
 
-    Resources/doc/
+    doc/
 
-[Read the
-documentation](Resources/doc/index.md)
+[Read the documentation](doc/index.md)
 
 
 Contributing

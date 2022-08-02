@@ -69,7 +69,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Bazinga\\GeocoderBundle\\": ""
+      "Bazinga\\GeocoderBundle\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Bazinga\\GeocoderBundle\\Tests\\": "tests"
     }
   },
   "scripts": {

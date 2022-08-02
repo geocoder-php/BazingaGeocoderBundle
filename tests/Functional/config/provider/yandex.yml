@@ -1,0 +1,10 @@
+bazinga_geocoder:
+    profiling:
+        enabled: false
+    providers:
+        empty:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\YandexFactory
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\YandexFactory
+            options:
+                toponym: 'city'

@@ -1,0 +1,11 @@
+bazinga_geocoder:
+    profiling:
+        enabled: false
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GeoIP2Factory
+            options:
+                provider: 'webservice'
+                user_id: 'foo'
+                license_key: 'bar'
+

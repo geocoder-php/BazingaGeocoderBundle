@@ -1,0 +1,11 @@
+bazinga_geocoder:
+    profiling:
+        enabled: false
+    providers:
+        empty:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
+            options:
+                region: 'foo'
+                api_key: 'bar'

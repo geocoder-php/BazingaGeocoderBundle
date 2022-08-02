@@ -8,6 +8,7 @@ The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" 
 
 - Allow PSR-18 client
 - Updated Geocoder Provider dependency requirements to the latest versions
+- Deprecate `httplug_client` option in most provider factories in favour of `http_client`.
 
 ## Version 5.18.0
 

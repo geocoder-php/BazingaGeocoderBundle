@@ -8,26 +8,26 @@
          convertWarningsToExceptions="true"
          processIsolation="false"
          stopOnFailure="false"
-         bootstrap="Tests/bootstrap.php"
-        >
+         bootstrap="tests/bootstrap.php"
+>
     <testsuites>
         <testsuite name="main">
-            <directory>./Tests</directory>
-            <exclude>./Tests/Doctrine</exclude>
+            <directory>./tests</directory>
+            <exclude>./tests/Doctrine</exclude>
         </testsuite>
+
         <testsuite name="doctrine">
-            <directory>./Tests/Doctrine</directory>
+            <directory>./tests/Doctrine</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>.</directory>
-            <exclude>
-                <directory>./Resources</directory>
-                <directory>./Tests</directory>
-                <directory>./vendor</directory>
-            </exclude>
+            <directory>src</directory>
         </whitelist>
     </filter>
+
+    <listeners>
+        <listener class="Symfony\Bridge\PhpUnit\SymfonyTestsListener" />
+    </listeners>
 </phpunit>
