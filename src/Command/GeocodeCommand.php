@@ -25,10 +25,7 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class GeocodeCommand extends Command
 {
-    /**
-     * @var ProviderAggregator
-     */
-    private $geocoder;
+    private ProviderAggregator $geocoder;
 
     public function __construct(ProviderAggregator $geocoder)
     {

@@ -20,12 +20,9 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 
-class AddProvidersPassTest extends TestCase
+final class AddProvidersPassTest extends TestCase
 {
-    /**
-     * @var AddProvidersPass
-     */
-    private $compilerPass;
+    private AddProvidersPass $compilerPass;
 
     protected function setUp(): void
     {
@@ -46,7 +43,7 @@ class AddProvidersPassTest extends TestCase
         $providerAggregator = $containerBuilder->get(ProviderAggregator::class);
         $providers = $providerAggregator->getProviders();
 
-        $this->assertArrayHasKey('bing_maps', $providers);
-        $this->assertInstanceOf(BingMaps::class, $providers['bing_maps']);
+        self::assertArrayHasKey('bing_maps', $providers);
+        self::assertInstanceOf(BingMaps::class, $providers['bing_maps']);
     }
 }

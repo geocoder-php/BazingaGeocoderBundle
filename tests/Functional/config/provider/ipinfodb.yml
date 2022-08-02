@@ -1,14 +1,13 @@
 bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    empty:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\IpInfoDbFactory
-      options:
-        api_key: 'bar'
-
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\IpInfoDbFactory
-      options:
-        precision: 'country'
-        api_key: 'bar'
+    profiling:
+        enabled: false
+    providers:
+        empty:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\IpInfoDbFactory
+            options:
+                api_key: 'bar'
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\IpInfoDbFactory
+            options:
+                precision: 'country'
+                api_key: 'bar'

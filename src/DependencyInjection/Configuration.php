@@ -21,21 +21,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
  */
 class Configuration implements ConfigurationInterface
 {
-    /**
-     * Whether to use the debug mode.
-     *
-     * @see https://github.com/doctrine/DoctrineBundle/blob/v1.5.2/DependencyInjection/Configuration.php#L31-L41
-     *
-     * @var bool
-     */
-    private $debug;
+    private bool $debug;
 
-    /**
-     * @param bool $debug
-     */
-    public function __construct($debug)
+    public function __construct(bool $debug)
     {
-        $this->debug = (bool) $debug;
+        $this->debug = $debug;
     }
 
     /**

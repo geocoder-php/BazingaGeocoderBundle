@@ -23,10 +23,7 @@ use Doctrine\Common\Util\ClassUtils;
  */
 class AnnotationDriver implements DriverInterface
 {
-    /**
-     * @var Reader
-     */
-    private $reader;
+    private Reader $reader;
 
     public function __construct(Reader $reader)
     {

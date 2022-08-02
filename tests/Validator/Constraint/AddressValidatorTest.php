@@ -19,7 +19,7 @@ use Http\Client\Curl\Client;
 use Symfony\Component\Validator\Exception\UnexpectedValueException;
 use Symfony\Component\Validator\Test\ConstraintValidatorTestCase;
 
-class AddressValidatorTest extends ConstraintValidatorTestCase
+final class AddressValidatorTest extends ConstraintValidatorTestCase
 {
     protected function createValidator(): AddressValidator
     {

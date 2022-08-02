@@ -1,8 +1,8 @@
 bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\MapboxFactory
-      options:
-        api_key: 'bar'
+    profiling:
+        enabled: false
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\MapboxFactory
+            options:
+                api_key: 'bar'

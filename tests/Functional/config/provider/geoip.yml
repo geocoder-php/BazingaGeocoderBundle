@@ -1,6 +1,6 @@
 bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    empty:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\GeoipFactory
+    profiling:
+        enabled: false
+    providers:
+        empty:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\GeoipFactory

@@ -20,11 +20,11 @@ use Symfony\Component\Yaml\Yaml;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class ConfigurationTest extends TestCase
+final class ConfigurationTest extends TestCase
 {
     public function testGetConfigTreeBuilder(): void
     {
-        $config = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
+        $config = Yaml::parseFile(__DIR__.'/Fixtures/config.yml');
 
         $configuration = new Configuration(true);
         $treeBuilder = $configuration->getConfigTreeBuilder();
@@ -32,15 +32,15 @@ class ConfigurationTest extends TestCase
 
         $config = $processor->process($treeBuilder->buildTree(), $config);
 
-        $this->assertTrue($config['profiling']['enabled']);
-        $this->assertTrue($config['fake_ip']['enabled']);
-        $this->assertSame('192.168.99.1', $config['fake_ip']['local_ip']);
-        $this->assertSame('33.33.33.11', $config['fake_ip']['ip']);
+        self::assertTrue($config['profiling']['enabled']);
+        self::assertTrue($config['fake_ip']['enabled']);
+        self::assertSame('192.168.99.1', $config['fake_ip']['local_ip']);
+        self::assertSame('33.33.33.11', $config['fake_ip']['ip']);
     }
 
     public function testGetConfigTreeBuilderNoDebug(): void
     {
-        $config = Yaml::parse(file_get_contents(__DIR__.'/Fixtures/config.yml'));
+        $config = Yaml::parseFile(__DIR__.'/Fixtures/config.yml');
 
         $configuration = new Configuration(false);
         $treeBuilder = $configuration->getConfigTreeBuilder();
@@ -48,6 +48,6 @@ class ConfigurationTest extends TestCase
 
         $config = $processor->process($treeBuilder->buildTree(), $config);
 
-        $this->assertFalse($config['profiling']['enabled']);
+        self::assertFalse($config['profiling']['enabled']);
     }
 }

@@ -17,17 +17,10 @@ use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
 
-class FactoryValidatorPassTest extends TestCase
+final class FactoryValidatorPassTest extends TestCase
 {
-    /**
-     * @var FactoryValidatorPass
-     */
-    private $compilerPass;
-
-    /**
-     * @var string
-     */
-    private $factoryId;
+    private FactoryValidatorPass $compilerPass;
+    private string $factoryId;
 
     protected function setUp(): void
     {

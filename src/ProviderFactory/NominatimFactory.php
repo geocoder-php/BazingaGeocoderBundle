@@ -25,26 +25,30 @@ final class NominatimFactory extends AbstractFactory
     ];
 
     /**
-     * @param array{root_url: string, user_agent: string, httplug_client: ?ClientInterface} $config
+     * @param array{root_url: string, user_agent: string, http_client: ?ClientInterface, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
+        $httpClient = $config['http_client'] ?? $config['httplug_client'] ?? $this->httpClient ?? HttpClientDiscovery::find();
 
-        return new Nominatim($httplug, $config['root_url'], $config['user_agent']);
+        return new Nominatim($httpClient, $config['root_url'], $config['user_agent']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'httplug_client' => null,
+            'http_client' => null,
             'root_url' => 'https://nominatim.openstreetmap.org',
             'user_agent' => 'BazingaGeocoderBundle',
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('http_client', ['object', 'null']);
         $resolver->setAllowedTypes('root_url', ['string']);
         $resolver->setAllowedTypes('user_agent', ['string']);
         $resolver->setRequired('user_agent');
+
+        $resolver->setDeprecated('httplug_client', 'willdurand/geocoder-bundle', '5.19', 'The option "httplug_client" is deprecated, use "http_client" instead.');
     }
 }

@@ -25,23 +25,27 @@ final class ArcGISOnlineFactory extends AbstractFactory
     ];
 
     /**
-     * @param array{source_country: ?string, httplug_client: ?ClientInterface} $config
+     * @param array{source_country: ?string, http_client: ?ClientInterface, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
+        $httpClient = $config['http_client'] ?? $config['httplug_client'] ?? $this->httpClient ?? HttpClientDiscovery::find();
 
-        return new ArcGISOnline($httplug, $config['source_country']);
+        return new ArcGISOnline($httpClient, $config['source_country']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'httplug_client' => null,
+            'http_client' => null,
             'source_country' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('http_client', ['object', 'null']);
         $resolver->setAllowedTypes('source_country', ['string', 'null']);
+
+        $resolver->setDeprecated('httplug_client', 'willdurand/geocoder-bundle', '5.19', 'The option "httplug_client" is deprecated, use "http_client" instead.');
     }
 }

@@ -30,7 +30,7 @@ use Nyholm\NSA;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class BundleInitializationTest extends KernelTestCase
+final class BundleInitializationTest extends KernelTestCase
 {
     protected static function getKernelClass(): string
     {
@@ -60,9 +60,9 @@ class BundleInitializationTest extends KernelTestCase
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         // Test if services exists
-        $this->assertTrue($container->has(ProviderAggregator::class));
+        self::assertTrue($container->has(ProviderAggregator::class));
         $service = $container->get(ProviderAggregator::class);
-        $this->assertInstanceOf(ProviderAggregator::class, $service);
+        self::assertInstanceOf(ProviderAggregator::class, $service);
     }
 
     public function testBundleWithOneProviderConfiguration(): void
@@ -74,10 +74,10 @@ class BundleInitializationTest extends KernelTestCase
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
-        $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
+        self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
-        $this->assertInstanceOf(PluginProvider::class, $service);
-        $this->assertInstanceOf(GoogleMaps::class, NSA::getProperty($service, 'provider'));
+        self::assertInstanceOf(PluginProvider::class, $service);
+        self::assertInstanceOf(GoogleMaps::class, NSA::getProperty($service, 'provider'));
     }
 
     public function testBundleWithCachedProvider(): void
@@ -89,12 +89,12 @@ class BundleInitializationTest extends KernelTestCase
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
-        $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
+        self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
-        $this->assertInstanceOf(PluginProvider::class, $service);
+        self::assertInstanceOf(PluginProvider::class, $service);
         $plugins = NSA::getProperty($service, 'plugins');
-        $this->assertNotEmpty($plugins);
-        $this->assertInstanceOf(CachePlugin::class, $plugins[0]);
+        self::assertNotEmpty($plugins);
+        self::assertInstanceOf(CachePlugin::class, $plugins[0]);
     }
 
     public function testCacheLifetimeCanBeNull(): void
@@ -131,12 +131,12 @@ class BundleInitializationTest extends KernelTestCase
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
-        $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
+        self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
-        $this->assertInstanceOf(PluginProvider::class, $service);
+        self::assertInstanceOf(PluginProvider::class, $service);
         $plugins = NSA::getProperty($service, 'plugins');
-        $this->assertCount(3, $plugins);
-        $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
+        self::assertCount(3, $plugins);
+        self::assertInstanceOf(LoggerPlugin::class, $plugins[0]);
     }
 
     public function testBundleWithPluginXml(): void
@@ -148,12 +148,12 @@ class BundleInitializationTest extends KernelTestCase
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
-        $this->assertTrue($container->has('bazinga_geocoder.provider.acme'));
+        self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
-        $this->assertInstanceOf(PluginProvider::class, $service);
+        self::assertInstanceOf(PluginProvider::class, $service);
         $plugins = NSA::getProperty($service, 'plugins');
-        $this->assertNotEmpty($plugins);
-        $this->assertInstanceOf(LoggerPlugin::class, $plugins[0]);
+        self::assertNotEmpty($plugins);
+        self::assertInstanceOf(LoggerPlugin::class, $plugins[0]);
     }
 
     public function testBundleHasRegisteredDumpers(): void
@@ -164,11 +164,11 @@ class BundleInitializationTest extends KernelTestCase
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
-        $this->assertTrue($container->has(GeoArray::class));
-        $this->assertTrue($container->has(GeoJson::class));
-        $this->assertTrue($container->has(Gpx::class));
-        $this->assertTrue($container->has(Kml::class));
-        $this->assertTrue($container->has(Wkb::class));
-        $this->assertTrue($container->has(Wkt::class));
+        self::assertTrue($container->has(GeoArray::class));
+        self::assertTrue($container->has(GeoJson::class));
+        self::assertTrue($container->has(Gpx::class));
+        self::assertTrue($container->has(Kml::class));
+        self::assertTrue($container->has(Wkb::class));
+        self::assertTrue($container->has(Wkt::class));
     }
 }

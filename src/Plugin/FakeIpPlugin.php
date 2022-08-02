@@ -26,20 +26,9 @@ use Http\Promise\Promise;
  */
 class FakeIpPlugin implements Plugin
 {
-    /**
-     * @var string|null
-     */
-    private $needle;
-
-    /**
-     * @var string
-     */
-    private $replacement;
-
-    /**
-     * @var Generator|null
-     */
-    private $faker;
+    private ?string $needle;
+    private ?string $replacement;
+    private ?Generator $faker = null;
 
     public function __construct(?string $needle, string $replacement = null, bool $useFaker = false)
     {

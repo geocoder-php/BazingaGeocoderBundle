@@ -1,9 +1,9 @@
 bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\HereFactory
-      options:
-        app_id: 'foo'
-        app_code: 'bar'
+    profiling:
+        enabled: false
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\HereFactory
+            options:
+                app_id: 'foo'
+                app_code: 'bar'

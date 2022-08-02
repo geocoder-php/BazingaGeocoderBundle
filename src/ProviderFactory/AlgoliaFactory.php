@@ -25,25 +25,29 @@ final class AlgoliaFactory extends AbstractFactory
     ];
 
     /**
-     * @param array{api_key: ?string, app_id: ?string, httplug_client: ?ClientInterface} $config
+     * @param array{api_key: ?string, app_id: ?string, http_client: ?ClientInterface, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
+        $httpClient = $config['http_client'] ?? $config['httplug_client'] ?? $this->httpClient ?? HttpClientDiscovery::find();
 
-        return new AlgoliaPlaces($httplug, $config['api_key'], $config['app_id']);
+        return new AlgoliaPlaces($httpClient, $config['api_key'], $config['app_id']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'httplug_client' => null,
+            'http_client' => null,
             'api_key' => null,
             'app_id' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('http_client', ['object', 'null']);
         $resolver->setAllowedTypes('api_key', ['string', 'null']);
         $resolver->setAllowedTypes('app_id', ['string', 'null']);
+
+        $resolver->setDeprecated('httplug_client', 'willdurand/geocoder-bundle', '5.19', 'The option "httplug_client" is deprecated, use "http_client" instead.');
     }
 }

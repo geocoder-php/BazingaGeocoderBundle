@@ -20,12 +20,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Reference;
 
-class ProfilerPassTest extends TestCase
+final class ProfilerPassTest extends TestCase
 {
-    /**
-     * @var ProfilerPass
-     */
-    private $compilerPass;
+    private ProfilerPass $compilerPass;
 
     protected function setUp(): void
     {
@@ -44,7 +41,7 @@ class ProfilerPassTest extends TestCase
 
         $this->compilerPass->process($containerBuilder);
 
-        $this->assertTrue($geocoderDataCollectorDefinition->hasMethodCall('addInstance'));
-        $this->assertInstanceOf(Reference::class, $geocoderDataCollectorDefinition->getMethodCalls()[0][1][0]);
+        self::assertTrue($geocoderDataCollectorDefinition->hasMethodCall('addInstance'));
+        self::assertInstanceOf(Reference::class, $geocoderDataCollectorDefinition->getMethodCalls()[0][1][0]);
     }
 }

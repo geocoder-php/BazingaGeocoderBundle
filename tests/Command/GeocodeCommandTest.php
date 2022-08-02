@@ -28,7 +28,7 @@ use Symfony\Component\HttpKernel\Kernel;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class GeocodeCommandTest extends TestCase
+final class GeocodeCommandTest extends TestCase
 {
     private static $address = '10 rue Gambetta, Paris, France';
 

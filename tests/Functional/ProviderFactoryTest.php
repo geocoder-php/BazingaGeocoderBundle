@@ -44,11 +44,14 @@ use Geocoder\Provider\TomTom\TomTom;
 use Geocoder\Provider\Yandex\Yandex;
 use Nyholm\BundleTest\TestKernel;
 use Nyholm\NSA;
+use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class ProviderFactoryTest extends KernelTestCase
+final class ProviderFactoryTest extends KernelTestCase
 {
+    use ExpectDeprecationTrait;
+
     protected static function getKernelClass(): string
     {
         return TestKernel::class;
@@ -69,9 +72,12 @@ class ProviderFactoryTest extends KernelTestCase
     }
 
     /**
+     * @param class-string           $class
+     * @param list<non-empty-string> $serviceNames
+     *
      * @dataProvider getProviders
      */
-    public function testProviderConfiguration($class, $serviceNames): void
+    public function testProviderConfiguration(string $class, array $serviceNames): void
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) use ($class) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
@@ -81,12 +87,15 @@ class ProviderFactoryTest extends KernelTestCase
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
         foreach ($serviceNames as $name) {
-            $this->assertTrue($container->has('bazinga_geocoder.provider.'.$name));
+            self::assertTrue($container->has('bazinga_geocoder.provider.'.$name));
             $service = $container->get('bazinga_geocoder.provider.'.$name);
-            $this->assertInstanceOf($class, NSA::getProperty($service, 'provider'));
+            self::assertInstanceOf($class, NSA::getProperty($service, 'provider'));
         }
     }
 
+    /**
+     * @return iterable<array{0: class-string, 1: list<non-empty-string>}>
+     */
     public function getProviders(): iterable
     {
         yield [AlgoliaPlaces::class, ['empty', 'acme']];
@@ -121,5 +130,23 @@ class ProviderFactoryTest extends KernelTestCase
         yield [PickPoint::class, ['acme']];
         yield [TomTom::class, ['acme']];
         yield [Yandex::class, ['empty', 'acme']];
+    }
+
+    /**
+     * @group legacy
+     */
+    public function testProviderConfigurationWithDeprecatedHttplugClientOption(): void
+    {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+            $kernel->addTestConfig(__DIR__.'/config/deprecated_httplug_client_option.yml');
+        }]);
+
+        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+
+        $this->expectDeprecation('Since willdurand/geocoder-bundle 5.19: The option "httplug_client" is deprecated, use "http_client" instead.');
+
+        self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
+        $container->get('bazinga_geocoder.provider.acme');
     }
 }

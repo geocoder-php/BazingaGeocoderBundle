@@ -26,7 +26,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 abstract class AbstractFactory implements ProviderFactoryInterface
 {
     /**
-     * @var array<int, array{requiredClass: class-string, packageName: string}>
+     * @var list<array{requiredClass: class-string, packageName: string}>
      */
     protected static $dependencies = [];
 
@@ -97,7 +97,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     }
 
     /**
-     * By default we do not have any options to configure. A factory should override this function and confgure
+     * By default, we do not have any options to configure. A factory should override this function and configure
      * the options resolver.
      *
      * @return void

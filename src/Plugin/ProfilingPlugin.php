@@ -27,8 +27,7 @@ use Http\Promise\Promise;
 class ProfilingPlugin implements Plugin
 {
     /**
-     * @var array
-     * @phpstan-var array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
+     * @var list<array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
     private $queries = [];
 
@@ -88,7 +87,7 @@ class ProfilingPlugin implements Plugin
     }
 
     /**
-     * @phpstan-return array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
+     * @return list<array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
     public function getQueries(): array
     {

@@ -26,15 +26,8 @@ use Geocoder\Query\GeocodeQuery;
  */
 class GeocoderListener implements EventSubscriber
 {
-    /**
-     * @var DriverInterface
-     */
-    private $driver;
-
-    /**
-     * @var Provider
-     */
-    private $geocoder;
+    private DriverInterface $driver;
+    private Provider $geocoder;
 
     public function __construct(Provider $geocoder, DriverInterface $driver)
     {
@@ -45,10 +38,9 @@ class GeocoderListener implements EventSubscriber
     /**
      * {@inheritdoc}
      *
-     * @return array
-     * @phpstan-return list<string>
+     * @return list<string>
      */
-    public function getSubscribedEvents()
+    public function getSubscribedEvents(): array
     {
         return [
             Events::onFlush,

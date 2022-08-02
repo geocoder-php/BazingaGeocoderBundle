@@ -26,7 +26,7 @@ class GeocoderDataCollector extends DataCollector
     /**
      * @var ProfilingPlugin[]
      */
-    private $instances = [];
+    private array $instances = [];
 
     public function __construct()
     {
@@ -70,7 +70,7 @@ class GeocoderDataCollector extends DataCollector
     /**
      * Returns an array of collected requests.
      *
-     * @phpstan-return array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
+     * @return list<array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
     public function getQueries(): array
     {
@@ -99,7 +99,7 @@ class GeocoderDataCollector extends DataCollector
     }
 
     /**
-     * @phpstan-return array<int, array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
+     * @return list<array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
     public function getProviderQueries(string $provider): array
     {

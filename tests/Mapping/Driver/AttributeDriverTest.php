@@ -25,10 +25,7 @@ use PHPUnit\Framework\TestCase;
  */
 final class AttributeDriverTest extends TestCase
 {
-    /**
-     * @var AttributeDriver
-     */
-    private $driver;
+    private AttributeDriver $driver;
 
     public static function setUpBeforeClass(): void
     {
@@ -50,9 +47,9 @@ final class AttributeDriverTest extends TestCase
         $obj = new Dummy3();
         $metadata = $this->driver->loadMetadataFromObject($obj);
 
-        $this->assertInstanceOf('ReflectionProperty', $metadata->addressProperty);
-        $this->assertInstanceOf('ReflectionProperty', $metadata->latitudeProperty);
-        $this->assertInstanceOf('ReflectionProperty', $metadata->longitudeProperty);
+        self::assertInstanceOf('ReflectionProperty', $metadata->addressProperty);
+        self::assertInstanceOf('ReflectionProperty', $metadata->latitudeProperty);
+        self::assertInstanceOf('ReflectionProperty', $metadata->longitudeProperty);
     }
 
     /**
@@ -71,7 +68,7 @@ final class AttributeDriverTest extends TestCase
      */
     public function testIsGeocodable(): void
     {
-        $this->assertTrue($this->driver->isGeocodeable(new Dummy3()));
+        self::assertTrue($this->driver->isGeocodeable(new Dummy3()));
     }
 }
 

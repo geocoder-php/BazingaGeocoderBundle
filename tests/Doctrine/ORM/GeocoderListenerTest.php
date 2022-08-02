@@ -37,17 +37,10 @@ use Psr\Http\Message\ResponseInterface;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class GeocoderListenerTest extends OrmTestCase
+final class GeocoderListenerTest extends OrmTestCase
 {
-    /**
-     * @var EntityManager
-     */
-    private $em;
-
-    /**
-     * @var GeocoderListener
-     */
-    private $listener;
+    private EntityManager $em;
+    private GeocoderListener $listener;
 
     public static function setUpBeforeClass(): void
     {
@@ -102,8 +95,8 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em->persist($dummy);
         $this->em->flush();
 
-        $this->assertNotNull($dummy->latitude);
-        $this->assertNotNull($dummy->longitude);
+        self::assertNotNull($dummy->latitude);
+        self::assertNotNull($dummy->longitude);
 
         $clone = clone $dummy;
         $dummy->address = 'Paris, France';
@@ -111,8 +104,8 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em->persist($dummy);
         $this->em->flush();
 
-        $this->assertNotEquals($clone->latitude, $dummy->latitude);
-        $this->assertNotEquals($clone->longitude, $dummy->longitude);
+        self::assertNotEquals($clone->latitude, $dummy->latitude);
+        self::assertNotEquals($clone->longitude, $dummy->longitude);
     }
 
     public function testPersistForGetter(): void
@@ -123,8 +116,8 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em->persist($dummy);
         $this->em->flush();
 
-        $this->assertNotNull($dummy->getLatitude());
-        $this->assertNotNull($dummy->getLongitude());
+        self::assertNotNull($dummy->getLatitude());
+        self::assertNotNull($dummy->getLongitude());
 
         $clone = clone $dummy;
         $dummy->setAddress('Paris, France');
@@ -132,8 +125,8 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em->persist($dummy);
         $this->em->flush();
 
-        $this->assertNotEquals($clone->getLatitude(), $dummy->getLatitude());
-        $this->assertNotEquals($clone->getLongitude(), $dummy->getLongitude());
+        self::assertNotEquals($clone->getLatitude(), $dummy->getLatitude());
+        self::assertNotEquals($clone->getLongitude(), $dummy->getLongitude());
     }
 
     public function testPersistForInvalidGetter(): void
@@ -156,8 +149,8 @@ class GeocoderListenerTest extends OrmTestCase
         $this->em->persist($dummy);
         $this->em->flush();
 
-        $this->assertNull($dummy->latitude);
-        $this->assertNull($dummy->longitude);
+        self::assertNull($dummy->latitude);
+        self::assertNull($dummy->longitude);
     }
 
     public function testDoesNotGeocodeIfAddressNotChanged(): void
@@ -187,10 +180,10 @@ class GeocoderListenerTest extends OrmTestCase
 
         $this->em->flush();
 
-        $this->assertSame('Frankfurt, Germany', $dummy->address);
-        $this->assertSame(0, $dummy->latitude);
-        $this->assertSame(0, $dummy->longitude);
-        $this->assertCount(1, $client->getResponses());
+        self::assertSame('Frankfurt, Germany', $dummy->address);
+        self::assertSame(0, $dummy->latitude);
+        self::assertSame(0, $dummy->longitude);
+        self::assertCount(1, $client->getResponses());
     }
 }
 

@@ -1,9 +1,8 @@
 bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory
-      options:
-        api_key: 'foo'
-
+    profiling:
+        enabled: false
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory
+            options:
+                api_key: 'foo'

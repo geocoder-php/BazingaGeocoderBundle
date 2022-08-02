@@ -1,8 +1,8 @@
 bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\MaxMindBinaryFactory
-      options:
-        dat_file: '%kernel.project_dir%/tests/DependencyInjection/Fixtures/maxmind.dat'
+    profiling:
+        enabled: false
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\MaxMindBinaryFactory
+            options:
+                dat_file: '%kernel.project_dir%/tests/DependencyInjection/Fixtures/maxmind.dat'

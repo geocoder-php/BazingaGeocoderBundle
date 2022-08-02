@@ -1,12 +1,10 @@
 bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    empty:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory
-
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory
-      options:
-        base_url: 'foo'
-
+    profiling:
+        enabled: false
+    providers:
+        empty:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory
+            options:
+                base_url: 'foo'

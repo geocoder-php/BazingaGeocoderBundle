@@ -22,17 +22,10 @@ use PHPUnit\Framework\TestCase;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class AnnotationDriverTest extends TestCase
+final class AnnotationDriverTest extends TestCase
 {
-    /**
-     * @var AnnotationDriver
-     */
-    private $driver;
-
-    /**
-     * @var Reader
-     */
-    private $reader;
+    private AnnotationDriver $driver;
+    private Reader $reader;
 
     protected function setUp(): void
     {
@@ -49,9 +42,9 @@ class AnnotationDriverTest extends TestCase
         $obj = new Dummy();
         $metadata = $this->driver->loadMetadataFromObject($obj);
 
-        $this->assertInstanceOf('ReflectionProperty', $metadata->addressProperty);
-        $this->assertInstanceOf('ReflectionProperty', $metadata->latitudeProperty);
-        $this->assertInstanceOf('ReflectionProperty', $metadata->longitudeProperty);
+        self::assertInstanceOf(\ReflectionProperty::class, $metadata->addressProperty);
+        self::assertInstanceOf(\ReflectionProperty::class, $metadata->latitudeProperty);
+        self::assertInstanceOf(\ReflectionProperty::class, $metadata->longitudeProperty);
     }
 
     public function testLoadMetadataFromWrongObject(): void
@@ -64,7 +57,7 @@ class AnnotationDriverTest extends TestCase
 
     public function testIsGeocodable(): void
     {
-        $this->assertTrue($this->driver->isGeocodeable(new Dummy()));
+        self::assertTrue($this->driver->isGeocodeable(new Dummy()));
     }
 }
 

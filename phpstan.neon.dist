@@ -2,9 +2,9 @@ includes:
 	- phpstan-baseline.neon
 
 parameters:
+	bootstrapFiles:
+		- vendor/bin/.phpunit/phpunit/vendor/autoload.php
 	paths:
-		- %currentWorkingDirectory%
-	excludePaths:
-		- ./vendor/
-		- ./Tests/
-	level: 7
+		- src/
+		#- tests/
+	level: 9

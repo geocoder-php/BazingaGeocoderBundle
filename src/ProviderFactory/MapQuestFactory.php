@@ -25,25 +25,29 @@ final class MapQuestFactory extends AbstractFactory
     ];
 
     /**
-     * @param array{api_key: string, licensed: bool, httplug_client: ?ClientInterface} $config
+     * @param array{api_key: string, licensed: bool, http_client: ?ClientInterface, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
-        $httplug = $config['httplug_client'] ?: $this->httpClient ?? HttpClientDiscovery::find();
+        $httpClient = $config['http_client'] ?? $config['httplug_client'] ?? $this->httpClient ?? HttpClientDiscovery::find();
 
-        return new MapQuest($httplug, $config['api_key'], $config['licensed']);
+        return new MapQuest($httpClient, $config['api_key'], $config['licensed']);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
             'httplug_client' => null,
+            'http_client' => null,
             'licensed' => false,
         ]);
 
         $resolver->setRequired('api_key');
-        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
+        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('http_client', ['object', 'null']);
         $resolver->setAllowedTypes('api_key', ['string']);
         $resolver->setAllowedTypes('licensed', ['boolean']);
+
+        $resolver->setDeprecated('httplug_client', 'willdurand/geocoder-bundle', '5.19', 'The option "httplug_client" is deprecated, use "http_client" instead.');
     }
 }

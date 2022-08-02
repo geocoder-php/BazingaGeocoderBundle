@@ -40,7 +40,7 @@ use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 class BazingaGeocoderExtension extends Extension
 {
     /**
-     * @phpstan-param array<mixed, mixed> $configs
+     * @param array<mixed, mixed> $configs
      *
      * @return void
      */
@@ -77,7 +77,7 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
-     * @phpstan-param array<mixed, mixed> $config
+     * @param array<mixed, mixed> $config
      *
      * @return void
      */
@@ -120,7 +120,7 @@ class BazingaGeocoderExtension extends Extension
     /**
      * Configure plugins for a client.
      *
-     * @phpstan-param array<mixed, mixed> $config
+     * @param array<mixed, mixed> $config
      *
      * @return Reference[]
      */
@@ -181,17 +181,13 @@ class BazingaGeocoderExtension extends Extension
                 ->addTag('bazinga_geocoder.profiling_plugin');
         }
 
-        return array_map(function (string $id) {
-            return new Reference($id);
-        }, $plugins);
+        return array_map(static fn (string $id) => new Reference($id), $plugins);
     }
 
     /**
-     * @phpstan-param array<mixed, mixed> $config
-     *
-     * @return Configuration
+     * @param array<mixed, mixed> $config
      */
-    public function getConfiguration(array $config, ContainerBuilder $container)
+    public function getConfiguration(array $config, ContainerBuilder $container): Configuration
     {
         /** @var bool $debug */
         $debug = $container->getParameter('kernel.debug');
@@ -200,9 +196,9 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
-     * @phpstan-param array<mixed, mixed> $options
+     * @param array<mixed, mixed> $options
      *
-     * @phpstan-return array<mixed, mixed>
+     * @return array<mixed, mixed>
      */
     private function findReferences(array $options): array
     {

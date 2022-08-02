@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 /**
  * @author Quentin Dequippe <quentin@dequippe.tech
  */
-class FakeIpPluginTest extends TestCase
+final class FakeIpPluginTest extends TestCase
 {
     public function testSimpleHandleQuery(): void
     {
@@ -30,7 +30,7 @@ class FakeIpPluginTest extends TestCase
         /** @var Query $query */
         $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
 
-        $this->assertSame($query->getText(), '123.123.123.123');
+        self::assertSame($query->getText(), '123.123.123.123');
     }
 
     /**
@@ -45,7 +45,7 @@ class FakeIpPluginTest extends TestCase
         /** @var Query $query */
         $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
 
-        $this->assertSame($query->getText(), '123.123.123.123');
+        self::assertSame($query->getText(), '123.123.123.123');
     }
 
     public function testHandleQueryUsingFaker(): void
@@ -56,6 +56,6 @@ class FakeIpPluginTest extends TestCase
         /** @var Query $query */
         $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
 
-        $this->assertNotSame($query->getText(), '192.168.1.1');
+        self::assertNotSame($query->getText(), '192.168.1.1');
     }
 }

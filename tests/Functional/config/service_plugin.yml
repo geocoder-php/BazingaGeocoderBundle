@@ -1,38 +1,35 @@
-framework:
-    http_method_override: false
-
 bazinga_geocoder:
-  profiling:
-    enabled: false
-  providers:
-    acme:
-      factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
-      plugins:
-        - acme.logger
-        - acme.2nd_logger
-        - {'reference': {'enabled': false, 'id': acme.3d_logger}}
-        - {'reference': {'enabled': true, 'id': acme.4th_logger}}
+    profiling:
+        enabled: false
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
+            plugins:
+                - acme.logger
+                - acme.2nd_logger
+                - { 'reference': { 'enabled': false, 'id': acme.3d_logger } }
+                - { 'reference': { 'enabled': true, 'id': acme.4th_logger } }
 
 services:
-  logger:
-    class: Psr\Log\NullLogger
+    logger:
+        class: Psr\Log\NullLogger
 
-  acme.logger:
-    class: Geocoder\Plugin\Plugin\LoggerPlugin
-    arguments:
-      - '@logger'
+    acme.logger:
+        class: Geocoder\Plugin\Plugin\LoggerPlugin
+        arguments:
+            - '@logger'
 
-  acme.2nd_logger:
-    class: Geocoder\Plugin\Plugin\LoggerPlugin
-    arguments:
-      - '@logger'
+    acme.2nd_logger:
+        class: Geocoder\Plugin\Plugin\LoggerPlugin
+        arguments:
+            - '@logger'
 
-  acme.3d_logger:
-    class: Geocoder\Plugin\Plugin\LoggerPlugin
-    arguments:
-      - '@logger'
+    acme.3d_logger:
+        class: Geocoder\Plugin\Plugin\LoggerPlugin
+        arguments:
+            - '@logger'
 
-  acme.4th_logger:
-    class: Geocoder\Plugin\Plugin\LoggerPlugin
-    arguments:
-      - '@logger'
+    acme.4th_logger:
+        class: Geocoder\Plugin\Plugin\LoggerPlugin
+        arguments:
+            - '@logger'

@@ -24,17 +24,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  */
 final class PublicServicePass implements CompilerPassInterface
 {
-    /**
-     * A regex to match the services that should be public.
-     *
-     * @var string
-     */
-    private $regex;
+    private string $regex;
 
-    /**
-     * @param string $regex
-     */
-    public function __construct($regex = '|.*|')
+    public function __construct(string $regex = '|.*|')
     {
         $this->regex = $regex;
     }
