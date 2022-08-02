@@ -16,10 +16,10 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ env.php-version }}
-                  tools: composer:v2, flex
+                  tools: flex
 
             - name: "Checkout code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: "Install Composer dependencies"
               run: |
@@ -38,10 +38,10 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ env.php-version }}
-                  tools: composer:v2, flex, cs2pr
+                  tools: flex, cs2pr
 
             - name: "Checkout code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: "Install Composer dependencies"
               run: |
@@ -78,11 +78,11 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php }}
-                  tools: composer:v2, flex
+                  tools: flex
                   coverage: none
 
             - name: "Checkout code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: "Install Composer dependencies (default)"
               if: matrix.strategy != 'lowest'
@@ -129,11 +129,11 @@ jobs:
               uses: shivammathur/setup-php@v2
               with:
                   php-version: ${{ matrix.php }}
-                  tools: composer:v2, flex
+                  tools: flex
                   coverage: none
 
             - name: "Checkout code"
-              uses: actions/checkout@v2
+              uses: actions/checkout@v3
 
             - name: "Install Composer dependencies"
               env:
