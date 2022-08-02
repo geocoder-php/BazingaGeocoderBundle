@@ -14,73 +14,24 @@ namespace Bazinga\GeocoderBundle\Tests\Functional\Helper;
 
 use Psr\SimpleCache\CacheInterface;
 
-/**
- * @internal
- *
- * @author Tobias Nyholm <tobias.nyholm@gmail.com>
- */
-class CacheHelper implements CacheInterface
-{
+if (PHP_VERSION_ID >= 80000) {
     /**
-     * @return mixed
+     * @internal
+     *
+     * @author Tobias Nyholm <tobias.nyholm@gmail.com>
      */
-    public function get($key, $default = null)
+    class CacheHelper implements CacheInterface
     {
+        use CacheHelperV8;
     }
-
+} else {
     /**
-     * @return bool
+     * @internal
+     *
+     * @author Tobias Nyholm <tobias.nyholm@gmail.com>
      */
-    public function set($key, $value, $ttl = null)
+    class CacheHelper implements CacheInterface
     {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function delete($key)
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function clear()
-    {
-        return true;
-    }
-
-    /**
-     * @return iterable
-     */
-    public function getMultiple($keys, $default = null)
-    {
-        return [];
-    }
-
-    /**
-     * @return bool
-     */
-    public function setMultiple($values, $ttl = null)
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function deleteMultiple($keys)
-    {
-        return true;
-    }
-
-    /**
-     * @return bool
-     */
-    public function has($key)
-    {
-        return false;
+        use CacheHelperV7;
     }
 }

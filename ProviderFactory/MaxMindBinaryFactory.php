@@ -23,7 +23,7 @@ final class MaxMindBinaryFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{dat_file: string, open_flag: ?int} $config
+     * @param array{dat_file: string, open_flag: ?int} $config
      */
     protected function getProvider(array $config): Provider
     {

@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Here\Here;
 use Geocoder\Provider\Provider;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class HereFactory extends AbstractFactory
@@ -25,7 +25,7 @@ final class HereFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{app_key: ?string, app_id: ?string, app_code: ?string, use_cit: bool, httplug_client: ?HttpClient} $config
+     * @param array{app_key: ?string, app_id: ?string, app_code: ?string, use_cit: bool, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -56,7 +56,7 @@ final class HereFactory extends AbstractFactory
             'app_code' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
         $resolver->setAllowedTypes('app_key', ['string', 'null']);
         $resolver->setAllowedTypes('app_id', ['string', 'null']);
         $resolver->setAllowedTypes('app_code', ['string', 'null']);

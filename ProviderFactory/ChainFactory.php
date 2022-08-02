@@ -30,7 +30,7 @@ final class ChainFactory extends AbstractFactory implements LoggerAwareInterface
     ];
 
     /**
-     * @phpstan-param array{services: Provider[]} $config
+     * @param array{services: Provider[]} $config
      */
     protected function getProvider(array $config): Provider
     {

@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\IpInfo\IpInfo;
 use Geocoder\Provider\Provider;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class IpInfoFactory extends AbstractFactory
@@ -25,7 +25,7 @@ final class IpInfoFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{httplug_client: ?HttpClient} $config
+     * @param array{httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -40,6 +40,6 @@ final class IpInfoFactory extends AbstractFactory
             'httplug_client' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
     }
 }

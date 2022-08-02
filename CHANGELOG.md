@@ -2,6 +2,13 @@
 
 The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" between versions.
 
+## Version 5.19.0
+
+### Changed
+
+- Allow PSR-18 client
+- Updated Geocoder Provider dependency requirements to the latest versions
+
 ## Version 5.18.0
 
 ### Added

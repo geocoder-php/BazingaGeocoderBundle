@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\PickPoint\PickPoint;
 use Geocoder\Provider\Provider;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class PickPointFactory extends AbstractFactory
@@ -25,7 +25,7 @@ final class PickPointFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{api_key: string, httplug_client: ?HttpClient} $config
+     * @param array{api_key: string, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -41,7 +41,7 @@ final class PickPointFactory extends AbstractFactory
         ]);
 
         $resolver->setRequired('api_key');
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
         $resolver->setAllowedTypes('api_key', ['string']);
     }
 }

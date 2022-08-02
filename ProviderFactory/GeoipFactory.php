@@ -23,7 +23,7 @@ final class GeoipFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{} $config
+     * @param array{} $config
      */
     protected function getProvider(array $config): Provider
     {

@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
 use Geocoder\Provider\Provider;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class FreeGeoIpFactory extends AbstractFactory
@@ -25,7 +25,7 @@ final class FreeGeoIpFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{base_url: string, httplug_client: ?HttpClient} $config
+     * @param array{base_url: string, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -41,7 +41,7 @@ final class FreeGeoIpFactory extends AbstractFactory
             'base_url' => 'https://freegeoip.app/json/%s',
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
         $resolver->setAllowedTypes('base_url', ['string']);
     }
 }

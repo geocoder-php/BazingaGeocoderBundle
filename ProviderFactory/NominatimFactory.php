@@ -14,8 +14,8 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Nominatim\Nominatim;
 use Geocoder\Provider\Provider;
-use Http\Client\HttpClient;
 use Http\Discovery\HttpClientDiscovery;
+use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class NominatimFactory extends AbstractFactory
@@ -25,7 +25,7 @@ final class NominatimFactory extends AbstractFactory
     ];
 
     /**
-     * @phpstan-param array{root_url: string, user_agent: string, httplug_client: ?HttpClient} $config
+     * @param array{root_url: string, user_agent: string, httplug_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -42,7 +42,7 @@ final class NominatimFactory extends AbstractFactory
             'user_agent' => 'BazingaGeocoderBundle',
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
+        $resolver->setAllowedTypes('httplug_client', [ClientInterface::class, 'null']);
         $resolver->setAllowedTypes('root_url', ['string']);
         $resolver->setAllowedTypes('user_agent', ['string']);
         $resolver->setRequired('user_agent');
