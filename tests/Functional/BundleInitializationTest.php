@@ -53,7 +53,9 @@ class BundleInitializationTest extends KernelTestCase
 
     public function testInitBundle(): void
     {
-        $kernel = self::bootKernel();
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+        }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
@@ -66,6 +68,7 @@ class BundleInitializationTest extends KernelTestCase
     public function testBundleWithOneProviderConfiguration(): void
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/simple.yml');
         }]);
 
@@ -80,6 +83,7 @@ class BundleInitializationTest extends KernelTestCase
     public function testBundleWithCachedProvider(): void
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache.yml');
         }]);
 
@@ -96,6 +100,7 @@ class BundleInitializationTest extends KernelTestCase
     public function testCacheLifetimeCanBeNull(): void
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache_without_lifetime.yml');
         }]);
 
@@ -120,6 +125,7 @@ class BundleInitializationTest extends KernelTestCase
     public function testBundleWithPluginsYml(): void
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/service_plugin.yml');
         }]);
 
@@ -136,6 +142,7 @@ class BundleInitializationTest extends KernelTestCase
     public function testBundleWithPluginXml(): void
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/service_plugin.xml');
         }]);
 
@@ -151,7 +158,9 @@ class BundleInitializationTest extends KernelTestCase
 
     public function testBundleHasRegisteredDumpers(): void
     {
-        $kernel = self::bootKernel();
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+        }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 

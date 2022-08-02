@@ -1,6 +1,6 @@
 # Caching the geocoder response
 
-*[<< Back to documentation index](/Resources/doc/index.md)*
+*[<< Back to documentation index](/doc/index.md)*
 
 It is quite rare that a location response gets updated. That is why it is a good idea to cache the responses. The second
 request will be both quicker and free of charge. To get started with caching you may use the `CachePlugin` which is supported

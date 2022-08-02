@@ -1,6 +1,6 @@
 # Plugins
 
-*[<< Back to documentation index](/Resources/doc/index.md)*
+*[<< Back to documentation index](/doc/index.md)*
 
 Plugins lets you modify or take actions the `Query` or the result. There are a few plugins from the `geocoder-php/plugin`
 package like `LimitPlugin`, `LoggerPlugin` and `CachePlugin`. Some of them are supported in the configuration.

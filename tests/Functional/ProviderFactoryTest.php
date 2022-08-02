@@ -74,6 +74,7 @@ class ProviderFactoryTest extends KernelTestCase
     public function testProviderConfiguration($class, $serviceNames): void
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) use ($class) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\') + 1)).'.yml');
         }]);
 

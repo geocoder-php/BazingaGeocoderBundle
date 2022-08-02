@@ -1,6 +1,6 @@
 # Doctrine annotation support
 
-*[<< Back to documentation index](/Resources/doc/index.md)*
+*[<< Back to documentation index](/doc/index.md)*
 
 Wouldn't it be great if you could automatically save the coordinates of a users
 address every time it is updated? Wait not more here is the feature you been always

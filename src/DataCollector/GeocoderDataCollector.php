@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\DataCollector;
 
 use Bazinga\GeocoderBundle\Plugin\ProfilingPlugin;
-use Geocoder\Collection;
 use Geocoder\Query\Query;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

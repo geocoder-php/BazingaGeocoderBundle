@@ -12,7 +12,7 @@ services:
     Geocoder\Dumper\Wkt: ~
 
     Bazinga\GeocoderBundle\ProviderFactory\:
-        resource: '../../ProviderFactory'
+        resource: '../src/ProviderFactory'
         public: false
         autowire: true
         autoconfigure: true

@@ -50,7 +50,7 @@ class BazingaGeocoderExtension extends Extension
         $configuration = $this->getConfiguration($configs, $container);
         $config = $processor->processConfiguration($configuration, $configs);
 
-        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+        $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../../config'));
         $loader->load('services.yml');
 
         if (true === $config['profiling']['enabled']) {

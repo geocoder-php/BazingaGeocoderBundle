@@ -36,4 +36,12 @@ class BazingaGeocoderBundle extends Bundle
         $container->addCompilerPass(new AddProvidersPass());
         $container->addCompilerPass(new FactoryValidatorPass());
     }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
 }
