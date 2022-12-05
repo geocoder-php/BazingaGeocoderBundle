@@ -10,6 +10,10 @@ The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" 
 - Updated Geocoder Provider dependency requirements to the latest versions
 - Deprecate `httplug_client` option in most provider factories in favour of `http_client`.
 
+### Fixed
+
+- Load fakeip plugin before cache
+
 ## Version 5.18.0
 
 ### Added
