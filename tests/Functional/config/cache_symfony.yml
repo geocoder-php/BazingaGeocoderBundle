@@ -1,0 +1,12 @@
+framework:
+    cache:
+        app: cache.adapter.filesystem
+        system: cache.adapter.system
+        pools:
+            app.cache.geoPlugin:
+                adapter: cache.app
+                default_lifetime: 600
+services:
+    app.simple_cache:
+        class: Symfony\Component\Cache\Psr16Cache
+        arguments: ['@app.cache.geoPlugin']
