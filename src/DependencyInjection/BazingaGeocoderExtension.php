@@ -133,6 +133,10 @@ class BazingaGeocoderExtension extends Extension
             }
         }
 
+        if ($container->has(FakeIpPlugin::class)) {
+            $plugins[] = FakeIpPlugin::class;
+        }
+
         if (isset($config['cache']) || isset($config['cache_lifetime']) || isset($config['cache_precision'])) {
             $cacheLifetime = isset($config['cache_lifetime']) ? (int) $config['cache_lifetime'] : null;
 
@@ -167,10 +171,6 @@ class BazingaGeocoderExtension extends Extension
             $container->register($providerServiceId.'.logger', LoggerPlugin::class)
                 ->setPublic(false)
                 ->setArguments([new Reference($config['logger'])]);
-        }
-
-        if ($container->has(FakeIpPlugin::class)) {
-            $plugins[] = FakeIpPlugin::class;
         }
 
         if ($container->has(GeocoderDataCollector::class)) {
