@@ -189,31 +189,37 @@ final class GeocoderListenerTest extends OrmTestCase
 
 /**
  * @Geocodeable
+ *
  * @Entity
  */
 class DummyWithProperty
 {
     /**
      * @Id
+     *
      * @GeneratedValue
+     *
      * @Column(type="integer")
      */
     public $id;
 
     /**
      * @Latitude
+     *
      * @Column()
      */
     public $latitude;
 
     /**
      * @Longitude
+     *
      * @Column
      */
     public $longitude;
 
     /**
      * @Address
+     *
      * @Column
      */
     public $address;
@@ -221,24 +227,28 @@ class DummyWithProperty
 
 /**
  * @Geocodeable
+ *
  * @Entity
  */
 class DummyWithGetter
 {
     /**
      * @Id @GeneratedValue
+     *
      * @Column(type="integer")
      */
     private $id;
 
     /**
      * @Latitude
+     *
      * @Column
      */
     private $latitude;
 
     /**
      * @Longitude
+     *
      * @Column
      */
     private $longitude;
@@ -284,24 +294,28 @@ class DummyWithGetter
 
 /**
  * @Geocodeable
+ *
  * @Entity
  */
 class DummyWithInvalidGetter
 {
     /**
      * @Id @GeneratedValue
+     *
      * @Column(type="integer")
      */
     private $id;
 
     /**
      * @Latitude
+     *
      * @Column
      */
     private $latitude;
 
     /**
      * @Longitude
+     *
      * @Column
      */
     private $longitude;
@@ -347,30 +361,35 @@ class DummyWithInvalidGetter
 
 /**
  * @Geocodeable
+ *
  * @Entity
  */
 class DummyWithEmptyProperty
 {
     /**
      * @Id @GeneratedValue
+     *
      * @Column(type="integer")
      */
     public $id;
 
     /**
      * @Latitude
+     *
      * @Column(nullable=true)
      */
     public $latitude;
 
     /**
      * @Longitude
+     *
      * @Column(nullable=true)
      */
     public $longitude;
 
     /**
      * @Address
+     *
      * @Column
      */
     public $address;
