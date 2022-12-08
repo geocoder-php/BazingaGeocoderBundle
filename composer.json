@@ -59,6 +59,7 @@
     "php-http/curl-client": "^2.2",
     "php-http/message": "^1.13",
     "phpstan/phpstan": "^1.9.2",
+    "symfony/cache": "^4.4 || ^5.0 || ^6.0",
     "symfony/config": "^4.4 || ^5.0 || ^6.0",
     "symfony/phpunit-bridge": "^5.2 || ^6.0",
     "symfony/validator": "^4.4 || ^5.0 || ^6.0",
