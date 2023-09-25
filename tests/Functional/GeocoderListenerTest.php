@@ -17,7 +17,6 @@ use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithEmptyProper
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithGetter;
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithInvalidGetter;
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithProperty;
-use Bazinga\GeocoderBundle\Tests\PublicServicePass;
 use Doctrine\Bundle\DoctrineBundle\ConnectionFactory;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\ORM\Configuration;
@@ -41,9 +40,7 @@ final class GeocoderListenerTest extends KernelTestCase
 {
     protected function tearDown(): void
     {
-        $container = Kernel::VERSION_ID >= 50000 ? self::getContainer() : self::$container;
-
-        $em = $container->get('doctrine.orm.entity_manager');
+        $em = self::getContainer()->get('doctrine.orm.entity_manager');
 
         $tool = new SchemaTool($em);
         $tool->dropSchema($em->getMetadataFactory()->getAllMetadata());
@@ -62,8 +59,6 @@ final class GeocoderListenerTest extends KernelTestCase
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(DoctrineBundle::class);
         $kernel->addTestBundle(BazingaGeocoderBundle::class);
-        $kernel->addTestCompilerPass(new PublicServicePass('|[Bb]azinga:*|'));
-        $kernel->addTestCompilerPass(new PublicServicePass('|[gG]eocoder:*|'));
         if (defined(ConnectionFactory::class.'::DEFAULT_SCHEME_MAP')) {
             $kernel->addTestConfig(static function (ContainerBuilder $container) {
                 $container->prependExtensionConfig('doctrine', [
@@ -98,17 +93,18 @@ final class GeocoderListenerTest extends KernelTestCase
 
     public function testPersistForProperty(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+            }
+
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
-
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
-            }
         }]);
 
-        $container = $kernel::VERSION_ID >= 50000 ? self::getContainer() : self::$container;
+        $container = self::getContainer();
 
         $httpClient = $container->get(Client::class);
         $httpClient->on(new RequestMatcher(), function (RequestInterface $request) {
@@ -175,17 +171,18 @@ final class GeocoderListenerTest extends KernelTestCase
 
     public function testPersistForGetter(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+            }
+
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
-
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
-            }
         }]);
 
-        $container = Kernel::VERSION_ID >= 50000 ? self::getContainer() : self::$container;
+        $container = self::getContainer();
 
         $httpClient = $container->get(Client::class);
         $httpClient->on(new RequestMatcher(), function (RequestInterface $request) {
@@ -252,17 +249,18 @@ final class GeocoderListenerTest extends KernelTestCase
 
     public function testPersistForInvalidGetter(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+            }
+
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
-
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
-            }
         }]);
 
-        $container = Kernel::VERSION_ID >= 50000 ? self::getContainer() : self::$container;
+        $container = self::getContainer();
 
         $em = $container->get('doctrine.orm.entity_manager');
 
@@ -281,17 +279,18 @@ final class GeocoderListenerTest extends KernelTestCase
 
     public function testPersistForEmptyProperty(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+            }
+
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
-
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
-            }
         }]);
 
-        $container = Kernel::VERSION_ID >= 50000 ? self::getContainer() : self::$container;
+        $container = self::getContainer();
 
         $em = $container->get('doctrine.orm.entity_manager');
 
@@ -310,17 +309,18 @@ final class GeocoderListenerTest extends KernelTestCase
 
     public function testDoesNotGeocodeIfAddressNotChanged(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+            }
+
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
-
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
-            }
         }]);
 
-        $container = Kernel::VERSION_ID >= 50000 ? self::getContainer() : self::$container;
+        $container = self::getContainer();
 
         $httpRequests = 0;
         $httpClient = $container->get(Client::class);

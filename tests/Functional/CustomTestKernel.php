@@ -14,10 +14,9 @@ namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Nyholm\BundleTest\TestKernel;
 use Symfony\Component\Config\ConfigCache;
-use Symfony\Component\Debug\DebugClassLoader as LegacyDebugClassLoader;
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 use Symfony\Component\ErrorHandler\DebugClassLoader;
-use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
 
 /*
  * Needed by PluginInteractionTest, so the test uses the cache for geoCoder, and doesn't clear it each time
@@ -114,23 +113,15 @@ class CustomTestKernel extends TestKernel
         } catch (\Throwable $e) {
         }
 
-        $oldContainer = \is_object($this->container) ? new \ReflectionClass($this->container) : $this->container = null;
-
         try {
-            is_dir($buildDir) ?: mkdir($buildDir, 0777, true);
+            is_dir($buildDir) || mkdir($buildDir, 0777, true);
 
             if ($lock = fopen($cachePath.'.lock', 'w')) {
                 if (!flock($lock, \LOCK_EX | \LOCK_NB, $wouldBlock) && !flock($lock, $wouldBlock ? \LOCK_SH : \LOCK_EX)) {
                     fclose($lock);
                     $lock = null;
-                } elseif (true || !\is_object($this->container = include $cachePath)) {
+                } else {
                     $this->container = null;
-                } elseif (!$oldContainer || \get_class($this->container) !== $oldContainer->name) {
-                    flock($lock, \LOCK_UN);
-                    fclose($lock);
-                    $this->container->set('kernel', $this);
-
-                    return;
                 }
             }
         } catch (\Throwable $e) {
@@ -173,7 +164,7 @@ class CustomTestKernel extends TestKernel
 
                 // Remove frames added by DebugClassLoader.
                 for ($i = \count($backtrace) - 2; 0 < $i; --$i) {
-                    if (\in_array($backtrace[$i]['class'] ?? null, [DebugClassLoader::class, LegacyDebugClassLoader::class], true)) {
+                    if ($backtrace[$i]['class'] ?? null === DebugClassLoader::class) {
                         $backtrace = [$backtrace[$i + 1]];
                         break;
                     }
@@ -214,22 +205,6 @@ class CustomTestKernel extends TestKernel
 
         $this->container = require $cachePath;
         $this->container->set('kernel', $this);
-
-        if ($oldContainer && \get_class($this->container) !== $oldContainer->name) {
-            // Because concurrent requests might still be using them,
-            // old container files are not removed immediately,
-            // but on a next dump of the container.
-            static $legacyContainers = [];
-            $oldContainerDir = \dirname($oldContainer->getFileName());
-            $legacyContainers[$oldContainerDir.'.legacy'] = true;
-            foreach (glob(\dirname($oldContainerDir).\DIRECTORY_SEPARATOR.'*.legacy', \GLOB_NOSORT) as $legacyContainer) {
-                if (!isset($legacyContainers[$legacyContainer]) && @unlink($legacyContainer)) {
-                    (new Filesystem())->remove(substr($legacyContainer, 0, -7));
-                }
-            }
-
-            touch($oldContainerDir.'.legacy');
-        }
 
         $preload = $this instanceof WarmableInterface ? (array) $this->warmUp($this->container->getParameter('kernel.cache_dir')) : [];
 
