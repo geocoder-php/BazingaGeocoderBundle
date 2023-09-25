@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
-use Bazinga\GeocoderBundle\Tests\PublicServicePass;
 use Geocoder\Dumper\GeoArray;
 use Geocoder\Dumper\GeoJson;
 use Geocoder\Dumper\Gpx;
@@ -44,8 +43,6 @@ final class BundleInitializationTest extends KernelTestCase
          */
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(BazingaGeocoderBundle::class);
-        $kernel->addTestCompilerPass(new PublicServicePass('|[Bb]azinga:*|'));
-        $kernel->addTestCompilerPass(new PublicServicePass('|[gG]eocoder:*|'));
         $kernel->handleOptions($options);
 
         return $kernel;
@@ -53,15 +50,15 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testInitBundle(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
             }
         }]);
 
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         // Test if services exists
         self::assertTrue($container->has(ProviderAggregator::class));
@@ -71,16 +68,17 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleWithOneProviderConfiguration(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-            $kernel->addTestConfig(__DIR__.'/config/simple.yml');
 
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
             }
+
+            $kernel->addTestConfig(__DIR__.'/config/simple.yml');
         }]);
 
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
@@ -90,16 +88,17 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleWithCachedProvider(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-            $kernel->addTestConfig(__DIR__.'/config/cache.yml');
 
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
             }
+
+            $kernel->addTestConfig(__DIR__.'/config/cache.yml');
         }]);
 
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
@@ -111,16 +110,17 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testCacheLifetimeCanBeNull(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-            $kernel->addTestConfig(__DIR__.'/config/cache_without_lifetime.yml');
 
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
             }
+
+            $kernel->addTestConfig(__DIR__.'/config/cache_without_lifetime.yml');
         }]);
 
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
 
@@ -140,16 +140,17 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleWithPluginsYml(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-            $kernel->addTestConfig(__DIR__.'/config/service_plugin.yml');
 
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
             }
+
+            $kernel->addTestConfig(__DIR__.'/config/service_plugin.yml');
         }]);
 
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
@@ -161,16 +162,17 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleWithPluginXml(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-            $kernel->addTestConfig(__DIR__.'/config/service_plugin.xml');
 
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
             }
+
+            $kernel->addTestConfig(__DIR__.'/config/service_plugin.xml');
         }]);
 
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $service = $container->get('bazinga_geocoder.provider.acme');
@@ -182,15 +184,15 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleHasRegisteredDumpers(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
             }
         }]);
 
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         self::assertTrue($container->has(GeoArray::class));
         self::assertTrue($container->has(GeoJson::class));

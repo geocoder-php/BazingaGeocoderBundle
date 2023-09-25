@@ -7,6 +7,8 @@ doctrine:
                 path: '%kernel.cache_dir%/test.sqlite'
     orm:
         auto_generate_proxy_classes: true
+        validate_xml_mapping: true
+        report_fields_where_declared: true
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: false
 
@@ -20,5 +22,4 @@ bazinga_geocoder:
                 http_client: '@Http\Mock\Client'
 
 services:
-    Http\Mock\Client:
-        public: true
+    Http\Mock\Client: ~
