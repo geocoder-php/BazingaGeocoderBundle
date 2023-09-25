@@ -34,7 +34,7 @@ final class AlgoliaFactory extends AbstractFactory
         return new AlgoliaPlaces($httpClient, $config['api_key'], $config['app_id']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

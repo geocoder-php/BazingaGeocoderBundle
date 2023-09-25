@@ -34,20 +34,14 @@ class GeocoderDataCollector extends DataCollector
         $this->data['providers'] = [];
     }
 
-    /**
-     * @return void
-     */
-    public function reset()
+    public function reset(): void
     {
         $this->instances = [];
         $this->data['queries'] = [];
         $this->data['providers'] = [];
     }
 
-    /**
-     * @return void
-     */
-    public function collect(Request $request, Response $response, ?\Throwable $exception = null)
+    public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
     {
         if (!empty($this->data['queries'])) {
             // To avoid collection more that once.
@@ -101,15 +95,10 @@ class GeocoderDataCollector extends DataCollector
      */
     public function getProviderQueries(string $provider): array
     {
-        return array_filter($this->data['queries'], static function ($data) use ($provider) {
-            return $data['providerName'] === $provider;
-        });
+        return array_filter($this->data['queries'], static fn (array $data): bool => $data['providerName'] === $provider);
     }
 
-    /**
-     * @return void
-     */
-    public function addInstance(ProfilingPlugin $instance)
+    public function addInstance(ProfilingPlugin $instance): void
     {
         $this->instances[] = $instance;
         $this->data['providers'][] = $instance->getName();

@@ -45,10 +45,7 @@ class GeocoderListener implements EventSubscriber
         ];
     }
 
-    /**
-     * @return void
-     */
-    public function onFlush(OnFlushEventArgs $args)
+    public function onFlush(OnFlushEventArgs $args): void
     {
         $em = method_exists($args, 'getObjectManager') ? $args->getObjectManager() : $args->getEntityManager();
         $uow = $em->getUnitOfWork();
@@ -92,10 +89,8 @@ class GeocoderListener implements EventSubscriber
 
     /**
      * @param object $entity
-     *
-     * @return void
      */
-    private function geocodeEntity(ClassMetadata $metadata, $entity)
+    private function geocodeEntity(ClassMetadata $metadata, $entity): void
     {
         if (null !== $metadata->addressGetter) {
             $address = $metadata->addressGetter->invoke($entity);

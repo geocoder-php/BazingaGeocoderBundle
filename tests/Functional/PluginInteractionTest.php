@@ -42,7 +42,7 @@ final class PluginInteractionTest extends KernelTestCase
 
     public function testCachePluginUsesIpFromFakeIpPlugin(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->setClearCacheAfterShutdown(false);
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
@@ -61,7 +61,7 @@ final class PluginInteractionTest extends KernelTestCase
         $country = $result->first()->getCountry()->getCode();
         self::assertEquals('CN', $country);
 
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->setClearCacheAfterShutdown(false);
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 

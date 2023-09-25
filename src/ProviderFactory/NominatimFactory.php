@@ -34,7 +34,7 @@ final class NominatimFactory extends AbstractFactory
         return new Nominatim($httpClient, $config['root_url'], $config['user_agent']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

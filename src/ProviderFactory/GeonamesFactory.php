@@ -34,7 +34,7 @@ final class GeonamesFactory extends AbstractFactory
         return new Geonames($httpClient, $config['username']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

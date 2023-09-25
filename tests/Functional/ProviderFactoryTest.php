@@ -76,7 +76,7 @@ final class ProviderFactoryTest extends KernelTestCase
      */
     public function testProviderConfiguration(string $class, array $serviceNames): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) use ($class) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) use ($class): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
@@ -139,7 +139,7 @@ final class ProviderFactoryTest extends KernelTestCase
      */
     public function testProviderConfigurationWithDeprecatedHttplugClientOption(): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {

@@ -47,7 +47,7 @@ final class GeoIP2Factory extends AbstractFactory
         return new GeoIP2($adapter);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'model' => GeoIP2Adapter::GEOIP2_MODEL_CITY,

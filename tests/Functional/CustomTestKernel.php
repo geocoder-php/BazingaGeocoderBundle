@@ -28,9 +28,9 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
  */
 class CustomTestKernel extends TestKernel
 {
-    private $warmupDir;
+    private ?string $warmupDir = null;
 
-    public function reboot(?string $warmupDir)
+    public function reboot(?string $warmupDir): void
     {
         $this->shutdown();
         $this->warmupDir = $warmupDir;

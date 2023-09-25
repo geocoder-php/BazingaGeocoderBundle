@@ -34,7 +34,7 @@ final class IpstackFactory extends AbstractFactory
         return new Ipstack($httpClient, $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

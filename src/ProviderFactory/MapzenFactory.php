@@ -40,7 +40,7 @@ final class MapzenFactory extends AbstractFactory
         return new Mapzen($httplug, $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

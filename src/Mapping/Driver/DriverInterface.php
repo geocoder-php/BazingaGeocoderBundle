@@ -23,8 +23,6 @@ interface DriverInterface
 
     /**
      * @param object $object
-     *
-     * @return ClassMetadata
      */
-    public function loadMetadataFromObject($object);
+    public function loadMetadataFromObject($object): ClassMetadata;
 }

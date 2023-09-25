@@ -34,7 +34,7 @@ final class MaxMindFactory extends AbstractFactory
         return new MaxMind($httpClient, $config['api_key'], $config['endpoint']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

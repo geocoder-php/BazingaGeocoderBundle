@@ -46,7 +46,7 @@ final class HereFactory extends AbstractFactory
         return new Here($httpClient, $config['app_id'], $config['app_code'], $config['use_cit']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

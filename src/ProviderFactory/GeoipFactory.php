@@ -30,7 +30,7 @@ final class GeoipFactory extends AbstractFactory
         return new Geoip();
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
     }
 }

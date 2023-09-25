@@ -34,7 +34,7 @@ final class YandexFactory extends AbstractFactory
         return new Yandex($httpClient, $config['toponym'], $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,
