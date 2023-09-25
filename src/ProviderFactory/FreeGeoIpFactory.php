@@ -34,7 +34,7 @@ final class FreeGeoIpFactory extends AbstractFactory
         return new FreeGeoIp($httpClient, $config['base_url']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

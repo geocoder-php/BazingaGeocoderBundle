@@ -37,7 +37,7 @@ class AnnotationDriver implements DriverInterface
         return (bool) $this->reader->getClassAnnotation($reflection, Annotations\Geocodeable::class);
     }
 
-    public function loadMetadataFromObject($object)
+    public function loadMetadataFromObject($object): ClassMetadata
     {
         $reflection = ClassUtils::newReflectionObject($object);
 

@@ -79,7 +79,7 @@ final class ProviderFactoryTest extends KernelTestCase
      */
     public function testProviderConfiguration(string $class, array $serviceNames): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) use ($class) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) use ($class): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\') + 1)).'.yml');
         }]);
@@ -137,7 +137,7 @@ final class ProviderFactoryTest extends KernelTestCase
      */
     public function testProviderConfigurationWithDeprecatedHttplugClientOption(): void
     {
-        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/deprecated_httplug_client_option.yml');
         }]);

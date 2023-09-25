@@ -16,7 +16,6 @@ use Symfony\Component\Validator\Constraint;
 
 /**
  * @Annotation
- *
  * @Target({"PROPERTY", "METHOD", "ANNOTATION"})
  *
  * @author Tomas Norkūnas <norkunas.tom@gmail.com>
@@ -50,7 +49,7 @@ class Address extends Constraint
     /**
      * @param string[]|null $options
      */
-    public function __construct(array $options = null, string $message = null, array $groups = null, $payload = null)
+    public function __construct(array $options = null, string $message = null, array $groups = null, mixed $payload = null)
     {
         parent::__construct($options, $groups, $payload);
 
