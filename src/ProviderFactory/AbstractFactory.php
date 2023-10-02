@@ -32,7 +32,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
 
     protected ?ClientInterface $httpClient;
 
-    public function __construct(?ClientInterface $httpClient = null)
+    public function __construct(ClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient;
     }
@@ -42,9 +42,6 @@ abstract class AbstractFactory implements ProviderFactoryInterface
      */
     abstract protected function getProvider(array $config): Provider;
 
-    /**
-     * {@inheritdoc}
-     */
     public function createProvider(array $options = []): Provider
     {
         $this->verifyDependencies();
@@ -56,9 +53,6 @@ abstract class AbstractFactory implements ProviderFactoryInterface
         return $this->getProvider($config);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public static function validate(array $options, $providerName)
     {
         static::verifyDependencies();

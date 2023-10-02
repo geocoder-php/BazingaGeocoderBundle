@@ -13,11 +13,6 @@
     <testsuites>
         <testsuite name="main">
             <directory>./tests</directory>
-            <exclude>./tests/Doctrine</exclude>
-        </testsuite>
-
-        <testsuite name="doctrine">
-            <directory>./tests/Doctrine</directory>
         </testsuite>
     </testsuites>
 

@@ -1,0 +1,42 @@
+doctrine:
+    dbal:
+        default_connection: default
+        connections:
+            default:
+                driver: pdo_sqlite
+                path: '%kernel.cache_dir%/test.sqlite'
+    orm:
+        auto_generate_proxy_classes: true
+        validate_xml_mapping: true
+        report_fields_where_declared: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: attribute
+                dir: '%kernel.project_dir%/tests/Functional/Fixtures/Entity'
+                prefix: 'Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity'
+                alias: App
+
+bazinga_geocoder:
+    profiling:
+        enabled: false
+    providers:
+        acme:
+            factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
+            options:
+                http_client: '@Http\Mock\Client'
+                root_url: 'https://nominatim.openstreetmap.org'
+                user_agent: 'geocoder-php test_suite'
+
+services:
+    Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver: ~
+
+    Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener:
+        class: Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener
+        arguments:
+            - '@bazinga_geocoder.provider.acme'
+            - '@Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver'
+        tags:
+            - { name: doctrine.event_listener, event: onFlush }

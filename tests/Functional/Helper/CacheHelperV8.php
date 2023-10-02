@@ -23,7 +23,7 @@ trait CacheHelperV8
     {
     }
 
-    public function set(string $key, mixed $value, null|int|\DateInterval $ttl = null): bool
+    public function set(string $key, mixed $value, int|\DateInterval $ttl = null): bool
     {
         return true;
     }
@@ -43,7 +43,7 @@ trait CacheHelperV8
         return [];
     }
 
-    public function setMultiple(iterable $values, null|int|\DateInterval $ttl = null): bool
+    public function setMultiple(iterable $values, int|\DateInterval $ttl = null): bool
     {
         return true;
     }

@@ -31,9 +31,6 @@ class CustomTestKernel extends TestKernel
 {
     private $warmupDir;
 
-    /**
-     * {@inheritdoc}
-     */
     public function reboot(?string $warmupDir)
     {
         $this->shutdown();

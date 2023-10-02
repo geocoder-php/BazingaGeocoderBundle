@@ -42,9 +42,6 @@ final class ChainFactory extends AbstractFactory implements LoggerAwareInterface
         return $provider;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
         parent::configureOptionResolver($resolver);

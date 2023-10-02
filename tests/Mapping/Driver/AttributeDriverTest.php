@@ -12,12 +12,10 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Tests\Mapping\Driver;
 
-use Bazinga\GeocoderBundle\Mapping\Annotations\Address;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Geocodeable;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Latitude;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Longitude;
 use Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver;
 use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
+use Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures\Dummy;
+use Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures\Dummy2;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -44,7 +42,7 @@ final class AttributeDriverTest extends TestCase
      */
     public function testLoadMetadata(): void
     {
-        $obj = new Dummy3();
+        $obj = new Dummy();
         $metadata = $this->driver->loadMetadataFromObject($obj);
 
         self::assertInstanceOf('ReflectionProperty', $metadata->addressProperty);
@@ -58,9 +56,9 @@ final class AttributeDriverTest extends TestCase
     public function testLoadMetadataFromWrongObject(): void
     {
         $this->expectException(MappingException::class);
-        $this->expectExceptionMessage('The class '.Dummy4::class.' is not geocodeable');
+        $this->expectExceptionMessage('The class '.Dummy2::class.' is not geocodeable');
 
-        $this->driver->loadMetadataFromObject(new Dummy4());
+        $this->driver->loadMetadataFromObject(new Dummy2());
     }
 
     /**
@@ -68,23 +66,6 @@ final class AttributeDriverTest extends TestCase
      */
     public function testIsGeocodable(): void
     {
-        self::assertTrue($this->driver->isGeocodeable(new Dummy3()));
+        self::assertTrue($this->driver->isGeocodeable(new Dummy()));
     }
-}
-
-#[Geocodeable()]
-class Dummy3
-{
-    #[Latitude()]
-    public $latitude;
-
-    #[Longitude()]
-    public $longitude;
-
-    #[Address()]
-    public $address;
-}
-
-class Dummy4
-{
 }

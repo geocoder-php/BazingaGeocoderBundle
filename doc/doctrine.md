@@ -80,7 +80,7 @@ You have to indicate which provider to use to reverse geocode the address. Here 
             - '@bazinga_geocoder.provider.acme'
             - '@Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver'
         tags:
-            - doctrine.event_subscriber
+            - { name: doctrine.event_listener, event: onFlush }
 ```
 
 It is done!
@@ -131,5 +131,5 @@ Then update your service configuration to register the `AttributeDriver`:
             - '@bazinga_geocoder.provider.acme'
             - '@Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver'
         tags:
-            - doctrine.event_subscriber
+            - { name: doctrine.event_listener, event: onFlush }
 ```
