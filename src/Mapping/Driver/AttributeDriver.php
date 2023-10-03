@@ -22,9 +22,6 @@ use Doctrine\Common\Util\ClassUtils;
  */
 final class AttributeDriver implements DriverInterface
 {
-    /**
-     * {@inheritdoc}
-     */
     public function isGeocodeable($object): bool
     {
         if (PHP_VERSION_ID < 80000) {
@@ -37,8 +34,6 @@ final class AttributeDriver implements DriverInterface
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @throws MappingException
      */
     public function loadMetadataFromObject($object): ClassMetadata

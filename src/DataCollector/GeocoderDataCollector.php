@@ -45,8 +45,6 @@ class GeocoderDataCollector extends DataCollector
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return void
      */
     public function collect(Request $request, Response $response, \Throwable $exception = null)
@@ -117,9 +115,6 @@ class GeocoderDataCollector extends DataCollector
         $this->data['providers'][] = $instance->getName();
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName(): string
     {
         return 'geocoder';

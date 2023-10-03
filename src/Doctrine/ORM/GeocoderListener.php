@@ -36,8 +36,6 @@ class GeocoderListener implements EventSubscriber
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return list<string>
      */
     public function getSubscribedEvents(): array
@@ -52,7 +50,7 @@ class GeocoderListener implements EventSubscriber
      */
     public function onFlush(OnFlushEventArgs $args)
     {
-        $em = $args->getEntityManager();
+        $em = method_exists($args, 'getObjectManager') ? $args->getObjectManager() : $args->getEntityManager();
         $uow = $em->getUnitOfWork();
 
         foreach ($uow->getScheduledEntityInsertions() as $entity) {

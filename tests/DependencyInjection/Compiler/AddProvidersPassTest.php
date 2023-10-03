@@ -15,7 +15,7 @@ namespace Bazinga\GeocoderBundle\Tests\DependencyInjection\Compiler;
 use Bazinga\GeocoderBundle\DependencyInjection\Compiler\AddProvidersPass;
 use Geocoder\Provider\BingMaps\BingMaps;
 use Geocoder\ProviderAggregator;
-use Http\Client\Curl\Client;
+use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;

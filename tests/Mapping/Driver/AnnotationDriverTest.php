@@ -14,9 +14,9 @@ namespace Bazinga\GeocoderBundle\Tests\Mapping\Driver;
 
 use Bazinga\GeocoderBundle\Mapping\Driver\AnnotationDriver;
 use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
-use Doctrine\Common\Annotations\AnnotationRegistry;
-use Doctrine\Common\Annotations\Reader;
-use Doctrine\Common\Annotations\SimpleAnnotationReader;
+use Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures\Dummy;
+use Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures\Dummy2;
+use Doctrine\Common\Annotations\AnnotationReader;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -25,16 +25,10 @@ use PHPUnit\Framework\TestCase;
 final class AnnotationDriverTest extends TestCase
 {
     private AnnotationDriver $driver;
-    private Reader $reader;
 
     protected function setUp(): void
     {
-        AnnotationRegistry::registerLoader('class_exists');
-
-        $this->reader = new SimpleAnnotationReader();
-        $this->reader->addNamespace('Bazinga\GeocoderBundle\Mapping\Annotations');
-
-        $this->driver = new AnnotationDriver($this->reader);
+        $this->driver = new AnnotationDriver(new AnnotationReader());
     }
 
     public function testLoadMetadata(): void
@@ -59,29 +53,4 @@ final class AnnotationDriverTest extends TestCase
     {
         self::assertTrue($this->driver->isGeocodeable(new Dummy()));
     }
-}
-
-/**
- * @Geocodeable
- */
-class Dummy
-{
-    /**
-     * @Latitude
-     */
-    public $latitude;
-
-    /**
-     * @Longitude
-     */
-    public $longitude;
-
-    /**
-     * @Address
-     */
-    public $address;
-}
-
-class Dummy2
-{
 }

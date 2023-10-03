@@ -5,8 +5,8 @@ bazinga_geocoder:
     acme:
       factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
       options:
-          httplug_client: '@test_http_client'
+        httplug_client: '@test_http_client'
 
 services:
-    test_http_client:
-        class: Http\Client\Curl\Client
+  test_http_client:
+    class: Http\Client\Curl\Client

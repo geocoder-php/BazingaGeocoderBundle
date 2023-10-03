@@ -29,8 +29,6 @@ class FactoryValidatorPass implements CompilerPassInterface
     private static $factoryServiceIds = [];
 
     /**
-     * {@inheritdoc}
-     *
      * @return void
      */
     public function process(ContainerBuilder $container)

@@ -10,7 +10,7 @@ jobs:
         name: "PHPStan"
         runs-on: ubuntu-latest
         env:
-            php-version: 8.1
+            php-version: 8.2
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
@@ -19,11 +19,12 @@ jobs:
                   tools: flex
 
             - name: "Checkout code"
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: "Install Composer dependencies"
-              run: |
-                  composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
+              uses: "ramsey/composer-install@v2"
+              with:
+                  composer-options: "--optimize-autoloader"
 
             - name: "Run PHPStan"
               run: |
@@ -34,7 +35,7 @@ jobs:
         name: PHP-CS-Fixer
         runs-on: ubuntu-latest
         env:
-            php-version: 8.1
+            php-version: 8.2
         steps:
             - name: "Setup PHP"
               uses: shivammathur/setup-php@v2
@@ -43,11 +44,12 @@ jobs:
                   tools: flex, cs2pr
 
             - name: "Checkout code"
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: "Install Composer dependencies"
-              run: |
-                  composer install --prefer-dist --no-progress --no-interaction --optimize-autoloader
+              uses: "ramsey/composer-install@v2"
+              with:
+                  composer-options: "--optimize-autoloader"
 
             - name: "Run PHP-CS-Fixer"
               run: vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --format=checkstyle | cs2pr
@@ -59,63 +61,17 @@ jobs:
             max-parallel: 10
             fail-fast: true
             matrix:
-                strategy: ['default']
-                php: ['7.4', '8.0', '8.1', '8.2']
-                include:
-                    - php: '7.4'
-                      sf_version: '5.4.*'
-                      strategy: 'lowest'
-                    - php: '8.0'
-                      sf_version: '5.4.*'
-                    - php: '8.1'
-                      sf_version: '5.4.*'
-                    - php: '8.0'
-                      sf_version: '6.0.*'
-                    - php: '8.1'
-                      sf_version: '6.0.*'
-                    - php: '8.2'
-                      sf_version: '6.2.*'
-        steps:
-            - name: "Setup PHP"
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php }}
-                  tools: flex
-                  coverage: none
-
-            - name: "Checkout code"
-              uses: actions/checkout@v3
-
-            - name: "Install Composer dependencies (default)"
-              if: matrix.strategy != 'lowest'
-              env:
-                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
-              run: composer update --no-interaction --optimize-autoloader
-
-            - name: "Install Composer dependencies (lowest)"
-              if: matrix.strategy == 'lowest'
-              env:
-                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
-              run: composer update --no-interaction --prefer-stable --prefer-lowest --optimize-autoloader
-
-            - name: "Run tests"
-              env:
-                  SYMFONY_DEPRECATIONS_HELPER: 'max[self]=2'
-              run: ./vendor/bin/simple-phpunit -v --testsuite main
-
-    doctrine:
-        name: "PHPUnit (Doctrine)"
-        runs-on: ubuntu-latest
-        strategy:
-            max-parallel: 10
-            fail-fast: true
-            matrix:
+                dependencies: ['highest']
                 php: ['7.4', '8.0', '8.1', '8.2']
                 include:
                     - php: '7.4'
                       sf_version: '4.4.*'
+                      dependencies: 'lowest'
+                    - php: '7.4'
+                      sf_version: '4.4.*'
                     - php: '7.4'
                       sf_version: '5.4.*'
+                      dependencies: 'lowest'
                     - php: '8.0'
                       sf_version: '5.4.*'
                     - php: '8.1'
@@ -135,14 +91,27 @@ jobs:
                   coverage: none
 
             - name: "Checkout code"
-              uses: actions/checkout@v3
+              uses: actions/checkout@v4
 
             - name: "Install Composer dependencies"
-              env:
-                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
-              run: composer update --prefer-source --no-interaction --optimize-autoloader
+              uses: "ramsey/composer-install@v2"
+              with:
+                  composer-options: "--optimize-autoloader"
+                  dependency-versions: "${{ matrix.dependencies }}"
+
+#            - name: "Install Composer dependencies (default)"
+#              if: matrix.strategy != 'lowest'
+#              env:
+#                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
+#              run: composer update --no-interaction --optimize-autoloader
+#
+#            - name: "Install Composer dependencies (lowest)"
+#              if: matrix.strategy == 'lowest'
+#              env:
+#                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
+#              run: composer update --no-interaction --prefer-stable --prefer-lowest --optimize-autoloader
 
             - name: "Run tests"
               env:
-                  SYMFONY_DEPRECATIONS_HELPER: 'max[self]=2'
-              run: ./vendor/bin/simple-phpunit -v --testsuite doctrine
+                  SYMFONY_DEPRECATIONS_HELPER: 'max[self]=3&max[indirect]=1'
+              run: ./vendor/bin/simple-phpunit -v

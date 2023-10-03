@@ -24,8 +24,6 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 class BazingaGeocoderBundle extends Bundle
 {
     /**
-     * {@inheritdoc}
-     *
      * @return void
      */
     public function build(ContainerBuilder $container)
@@ -37,9 +35,6 @@ class BazingaGeocoderBundle extends Bundle
         $container->addCompilerPass(new FactoryValidatorPass());
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getPath(): string
     {
         return \dirname(__DIR__);

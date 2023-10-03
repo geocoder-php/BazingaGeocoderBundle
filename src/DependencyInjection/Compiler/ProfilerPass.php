@@ -25,8 +25,6 @@ use Symfony\Component\DependencyInjection\Reference;
 class ProfilerPass implements CompilerPassInterface
 {
     /**
-     * {@inheritdoc}
-     *
      * @return void
      */
     public function process(ContainerBuilder $container)

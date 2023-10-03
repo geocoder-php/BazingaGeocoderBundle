@@ -35,8 +35,6 @@ class GeocodeCommand extends Command
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return void
      */
     protected function configure()
@@ -58,8 +56,6 @@ HELP
     }
 
     /**
-     * {@inheritdoc}
-     *
      * @return int
      */
     protected function execute(InputInterface $input, OutputInterface $output)
