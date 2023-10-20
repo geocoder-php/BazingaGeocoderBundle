@@ -42,7 +42,7 @@ parameters:
 
 		-
 			message: "#^Cannot access offset 'options' on mixed\\.$#"
-			count: 6
+			count: 4
 			path: src/DependencyInjection/BazingaGeocoderExtension.php
 
 		-
