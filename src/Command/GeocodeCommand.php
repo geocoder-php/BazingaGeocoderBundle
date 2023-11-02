@@ -55,10 +55,7 @@ HELP
             );
     }
 
-    /**
-     * @return int
-     */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         if ($input->getOption('provider')) {
             $this->geocoder->using($input->getOption('provider'));

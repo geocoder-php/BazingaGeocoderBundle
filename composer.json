@@ -15,9 +15,9 @@
     "geocoder-php/plugin": "^1.5",
     "php-http/curl-client": "^2.3",
     "php-http/discovery": "^1.14",
-    "symfony/console": "^4.4 || ^5.0 || ^6.0",
-    "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0",
-    "symfony/options-resolver": "^4.4 || ^5.0 || ^6.0",
+    "symfony/console": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+    "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+    "symfony/options-resolver": "^4.4 || ^5.0 || ^6.0 || ^7.0",
     "willdurand/geocoder": "^4.6"
   },
   "require-dev": {
@@ -63,11 +63,11 @@
     "php-http/message": "^1.13",
     "phpstan/phpstan": "^1.9.2",
     "psr/http-client": "^1.0",
-    "symfony/cache": "^4.4 || ^5.0 || ^6.0",
-    "symfony/config": "^4.4 || ^5.0 || ^6.0",
-    "symfony/phpunit-bridge": "^5.2 || ^6.0",
-    "symfony/validator": "^4.4 || ^5.0 || ^6.0",
-    "symfony/yaml": "^4.4 || ^5.0 || ^6.0"
+    "symfony/cache": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+    "symfony/config": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+    "symfony/phpunit-bridge": "^5.2 || ^6.0 || ^7.0",
+    "symfony/validator": "^4.4 || ^5.0 || ^6.0 || ^7.0",
+    "symfony/yaml": "^4.4 || ^5.0 || ^6.0 || ^7.0"
   },
   "conflict": {
     "geocoder-php/nominatim-provider": "<5.0"
