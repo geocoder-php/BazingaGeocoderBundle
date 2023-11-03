@@ -7,7 +7,7 @@ concurrency:
 
 jobs:
     phpstan:
-        name: "PHPStan"
+        name: PHPStan
         runs-on: ubuntu-latest
         env:
             php-version: 8.2
@@ -55,7 +55,7 @@ jobs:
               run: vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --format=checkstyle | cs2pr
 
     phpunit:
-        name: "PHPUnit"
+        name: PHPUnit (PHP ${{ matrix.php }}) (Symfony ${{ matrix.sf_version }}) (${{ matrix.dependencies }})
         runs-on: ubuntu-latest
         strategy:
             max-parallel: 10
@@ -102,18 +102,6 @@ jobs:
               with:
                   composer-options: "--optimize-autoloader"
                   dependency-versions: "${{ matrix.dependencies }}"
-
-#            - name: "Install Composer dependencies (default)"
-#              if: matrix.strategy != 'lowest'
-#              env:
-#                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
-#              run: composer update --no-interaction --optimize-autoloader
-#
-#            - name: "Install Composer dependencies (lowest)"
-#              if: matrix.strategy == 'lowest'
-#              env:
-#                  SYMFONY_REQUIRE: ${{ matrix.sf_version }}
-#              run: composer update --no-interaction --prefer-stable --prefer-lowest --optimize-autoloader
 
             - name: "Run tests"
               env:
