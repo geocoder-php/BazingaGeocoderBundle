@@ -25,13 +25,13 @@ final class IpInfoFactory extends AbstractFactory
     ];
 
     /**
-     * @param array{http_client: ?ClientInterface, httplug_client: ?ClientInterface} $config
+     * @param array{http_client: ?ClientInterface, httplug_client: ?ClientInterface, api_key: ?string} $config
      */
     protected function getProvider(array $config): Provider
     {
         $httpClient = $config['http_client'] ?? $config['httplug_client'] ?? $this->httpClient ?? HttpClientDiscovery::find();
 
-        return new IpInfo($httpClient);
+        return new IpInfo($httpClient, $config['api_key'] ?? null);
     }
 
     protected static function configureOptionResolver(OptionsResolver $resolver)
