@@ -121,12 +121,12 @@ parameters:
 			path: src/DependencyInjection/BazingaGeocoderExtension.php
 
 		-
-			message: "#^Cannot call method end\\(\\) on Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\|null\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\:\\:end\\(\\)\\.$#"
 			count: 2
 			path: src/DependencyInjection/Configuration.php
 
 		-
-			message: "#^Cannot call method variableNode\\(\\) on Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\|null\\.$#"
+			message: "#^Call to an undefined method Symfony\\\\Component\\\\Config\\\\Definition\\\\Builder\\\\NodeParentInterface\\:\\:variableNode\\(\\)\\.$#"
 			count: 1
 			path: src/DependencyInjection/Configuration.php
 
@@ -141,11 +141,6 @@ parameters:
 			path: src/Doctrine/ORM/GeocoderListener.php
 
 		-
-			message: "#^Method Bazinga\\\\GeocoderBundle\\\\Plugin\\\\FakeIpPlugin\\:\\:handleQuery\\(\\) return type with generic interface Http\\\\Promise\\\\Promise does not specify its types\\: T$#"
-			count: 1
-			path: src/Plugin/FakeIpPlugin.php
-
-		-
 			message: "#^Parameter \\#1 \\$text of method Geocoder\\\\Query\\\\GeocodeQuery\\:\\:withText\\(\\) expects string, string\\|null given\\.$#"
 			count: 1
 			path: src/Plugin/FakeIpPlugin.php
@@ -154,11 +149,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$replace of function str_replace expects array\\|string, string\\|null given\\.$#"
 			count: 1
 			path: src/Plugin/FakeIpPlugin.php
-
-		-
-			message: "#^Method Bazinga\\\\GeocoderBundle\\\\Plugin\\\\ProfilingPlugin\\:\\:handleQuery\\(\\) return type with generic interface Http\\\\Promise\\\\Promise does not specify its types\\: T$#"
-			count: 1
-			path: src/Plugin/ProfilingPlugin.php
 
 		-
 			message: "#^Parameter \\#1 \\$accountId of class GeoIp2\\\\WebService\\\\Client constructor expects int, int\\|null given\\.$#"

@@ -1,109 +1,109 @@
 name: CI
-on: [push, pull_request]
+on: [ push, pull_request ]
 
 concurrency:
-    group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
-    cancel-in-progress: true
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
 
 jobs:
-    phpstan:
-        name: PHPStan
-        runs-on: ubuntu-latest
+  phpstan:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    env:
+      php-version: 8.2
+    steps:
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.php-version }}
+          tools: flex
+
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "Install Composer dependencies"
+        uses: "ramsey/composer-install@v2"
+        with:
+          composer-options: "--optimize-autoloader"
+
+      - name: "Run PHPStan"
+        run: |
+          vendor/bin/simple-phpunit --version
+          vendor/bin/phpstan analyse --no-progress
+
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    env:
+      php-version: 8.2
+    steps:
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.php-version }}
+          tools: flex, cs2pr
+
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "Install Composer dependencies"
+        uses: "ramsey/composer-install@v2"
+        with:
+          composer-options: "--optimize-autoloader"
+
+      - name: "Run PHP-CS-Fixer"
+        run: vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --format=checkstyle | cs2pr
+
+  phpunit:
+    name: PHPUnit (PHP ${{ matrix.php }}) (Symfony ${{ matrix.sf_version }}) (${{ matrix.dependencies }})
+    runs-on: ubuntu-latest
+    strategy:
+      max-parallel: 10
+      fail-fast: false
+      matrix:
+        dependencies: ['highest']
+        php: [ '7.4', '8.0', '8.1', '8.2' ]
+        sf_version: [ '4.4.*', '5.4.*', '6.4.*', '7.0.*' ]
+        include:
+          - php: '7.4'
+            sf_version: '4.4.*'
+            dependencies: 'lowest'
+          - php: '7.4'
+            sf_version: '5.4.*'
+            dependencies: 'lowest'
+        exclude:
+          - php: '7.4'
+            sf_version: '4.4.*'
+          - php: '7.4'
+            sf_version: '6.4.*'
+          - php: '8.0'
+            sf_version: '6.4.*'
+          - php: '7.4'
+            sf_version: '7.0.*'
+          - php: '8.0'
+            sf_version: '7.0.*'
+          - php: '8.1'
+            sf_version: '7.0.*'
+    steps:
+      - name: "Checkout code"
+        uses: actions/checkout@v4
+
+      - name: "Setup PHP"
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          tools: flex
+          coverage: none
+
+      - name: "Install Composer dependencies"
         env:
-            php-version: 8.2
-        steps:
-            - name: "Setup PHP"
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ env.php-version }}
-                  tools: flex
+          SYMFONY_REQUIRE: ${{ matrix.sf_version }}
+        uses: "ramsey/composer-install@v2"
+        with:
+          composer-options: "--optimize-autoloader"
+          dependency-versions: "${{ matrix.dependencies }}"
 
-            - name: "Checkout code"
-              uses: actions/checkout@v4
-
-            - name: "Install Composer dependencies"
-              uses: "ramsey/composer-install@v2"
-              with:
-                  composer-options: "--optimize-autoloader"
-
-            - name: "Run PHPStan"
-              run: |
-                  vendor/bin/simple-phpunit --version
-                  vendor/bin/phpstan analyse --no-progress
-
-    php-cs-fixer:
-        name: PHP-CS-Fixer
-        runs-on: ubuntu-latest
+      - name: "Run tests"
         env:
-            php-version: 8.2
-        steps:
-            - name: "Setup PHP"
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ env.php-version }}
-                  tools: flex, cs2pr
-
-            - name: "Checkout code"
-              uses: actions/checkout@v4
-
-            - name: "Install Composer dependencies"
-              uses: "ramsey/composer-install@v2"
-              with:
-                  composer-options: "--optimize-autoloader"
-
-            - name: "Run PHP-CS-Fixer"
-              run: vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --format=checkstyle | cs2pr
-
-    phpunit:
-        name: PHPUnit (PHP ${{ matrix.php }}) (Symfony ${{ matrix.sf_version }}) (${{ matrix.dependencies }})
-        runs-on: ubuntu-latest
-        strategy:
-            max-parallel: 10
-            fail-fast: true
-            matrix:
-                dependencies: ['highest']
-                php: ['7.4', '8.0', '8.1', '8.2']
-                include:
-                    - php: '7.4'
-                      sf_version: '4.4.*'
-                      dependencies: 'lowest'
-                    - php: '7.4'
-                      sf_version: '4.4.*'
-                    - php: '7.4'
-                      sf_version: '5.4.*'
-                      dependencies: 'lowest'
-                    - php: '8.0'
-                      sf_version: '5.4.*'
-                    - php: '8.1'
-                      sf_version: '5.4.*'
-                    - php: '8.0'
-                      sf_version: '6.0.*'
-                    - php: '8.1'
-                      sf_version: '6.0.*'
-                    - php: '8.2'
-                      sf_version: '6.2.*'
-                    - php: '8.2'
-                      sf_version: '6.4.*'
-                    - php: '8.2'
-                      sf_version: '7.0.*'
-        steps:
-            - name: "Setup PHP"
-              uses: shivammathur/setup-php@v2
-              with:
-                  php-version: ${{ matrix.php }}
-                  tools: flex
-                  coverage: none
-
-            - name: "Checkout code"
-              uses: actions/checkout@v4
-
-            - name: "Install Composer dependencies"
-              uses: "ramsey/composer-install@v2"
-              with:
-                  composer-options: "--optimize-autoloader"
-                  dependency-versions: "${{ matrix.dependencies }}"
-
-            - name: "Run tests"
-              env:
-                  SYMFONY_DEPRECATIONS_HELPER: 'max[self]=3&max[indirect]=1'
-              run: ./vendor/bin/simple-phpunit -v
+          SYMFONY_DEPRECATIONS_HELPER: 'baselineFile=./tests/allowed.json'
+        run: ./vendor/bin/simple-phpunit -v

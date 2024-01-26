@@ -55,6 +55,10 @@ final class BundleInitializationTest extends KernelTestCase
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
@@ -70,6 +74,10 @@ final class BundleInitializationTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/simple.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
@@ -85,6 +93,10 @@ final class BundleInitializationTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
@@ -102,6 +114,10 @@ final class BundleInitializationTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache_without_lifetime.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
@@ -127,6 +143,10 @@ final class BundleInitializationTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/service_plugin.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
@@ -144,6 +164,10 @@ final class BundleInitializationTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/service_plugin.xml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
@@ -160,6 +184,10 @@ final class BundleInitializationTest extends KernelTestCase
     {
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();

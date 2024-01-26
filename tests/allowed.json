@@ -1,0 +1,617 @@
+[
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\ProviderFactoryTest::testProviderConfiguration",
+    "message": "Bazinga\\GeocoderBundle\\ProviderFactory\\GeoIPsFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/965",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\ProviderFactoryTest::testProviderConfiguration",
+    "message": "Bazinga\\GeocoderBundle\\ProviderFactory\\MapzenFactory is deprecated since 5.6, to be removed in 6.0. See https://github.com/geocoder-php/Geocoder/issues/808",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\DependencyInjection\\Compiler\\AddProvidersPassTest::testRegistersProviders",
+    "message": "Class \"Nyholm\\Psr7\\Factory\\HttplugFactory\" is deprecated since version 1.8, use \"Nyholm\\Psr7\\Factory\\Psr17Factory\" instead.",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:166 called by EntityManager.php:178, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:169 called by EntityManager.php:182, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:166 called by EntityManager.php:178, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:169 called by EntityManager.php:182, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:166 called by EntityManager.php:178, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:169 called by EntityManager.php:182, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:166 called by EntityManager.php:178, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:169 called by EntityManager.php:182, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:166 called by EntityManager.php:178, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0. Ensure Doctrine\\ORM\\Configuration::setLazyGhostObjectEnabled(true) is called to enable them. (ProxyFactory.php:169 called by EntityManager.php:182, https://github.com/doctrine/orm/pull/10837/, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Since doctrine/doctrine-bundle 2.11: Not setting \"enable_lazy_ghost_objects\" to true is deprecated.",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Since doctrine/doctrine-bundle 2.11: Not setting \"enable_lazy_ghost_objects\" to true is deprecated.",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Since doctrine/doctrine-bundle 2.11: Not setting \"enable_lazy_ghost_objects\" to true is deprecated.",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Since doctrine/doctrine-bundle 2.11: Not setting \"enable_lazy_ghost_objects\" to true is deprecated.",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Since doctrine/doctrine-bundle 2.11: Not setting \"enable_lazy_ghost_objects\" to true is deprecated.",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:691, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 57
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testIsGeocodable",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:691, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 2
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:691, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 57
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testIsGeocodable",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:691, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 2
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:699, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 16
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:699, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 16
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:717, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 13
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testIsGeocodable",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:717, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 2
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:717, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 13
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testIsGeocodable",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:717, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 2
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:1210, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 13
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testIsGeocodable",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:1210, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 2
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:1210, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 13
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testIsGeocodable",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:1210, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 2
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:1214, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 8
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:1214, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 8
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:700, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 8
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:700, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 8
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:104 called by DocParser.php:1215, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 4
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testLoadMetadata",
+    "message": "Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead (Token.php:108 called by DocParser.php:1215, https://github.com/doctrine/lexer/pull/79, package doctrine/lexer)",
+    "count": 4
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForInvalidGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForEmptyProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForInvalidGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForEmptyProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:221 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by DriverManager.php:197, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4. (Connection.php:226 called by ConnectionFactory.php:113, https://github.com/doctrine/dbal/issues/5812, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForProperty",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForGetter",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForInvalidGetter",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testPersistForEmptyProperty",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Mapping\\Driver\\AnnotationDriverTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "DebugStack is deprecated. (DebugStack.php:38 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "DebugStack is deprecated. (DebugStack.php:38 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "DebugStack is deprecated. (DebugStack.php:38 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "DebugStack is deprecated. (DebugStack.php:38 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "DebugStack is deprecated. (DebugStack.php:38 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "DebugStack is deprecated. (DebugStack.php:41 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "DebugStack is deprecated. (DebugStack.php:41 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "DebugStack is deprecated. (DebugStack.php:41 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "DebugStack is deprecated. (DebugStack.php:41 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "DebugStack is deprecated. (DebugStack.php:41 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:83 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:83 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:83 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:83 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:83 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "DoDoctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "DoDoctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "DoDoctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "DoDoctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "DoDoctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:78 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:78 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:78 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:78 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:78 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode also with the AnnotationDriver today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AnnotationDriver.php:82 called by getDoctrine_Orm_DefaultAnnotationMetadataDriverService.php:9, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode also with the AnnotationDriver today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AnnotationDriver.php:82 called by getDoctrine_Orm_DefaultAnnotationMetadataDriverService.php:9, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode also with the AnnotationDriver today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AnnotationDriver.php:82 called by getDoctrine_Orm_DefaultAnnotationMetadataDriverService.php:9, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode also with the AnnotationDriver today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AnnotationDriver.php:82 called by getDoctrine_Orm_DefaultAnnotationMetadataDriverService.php:9, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode also with the AnnotationDriver today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AnnotationDriver.php:82 called by getDoctrine_Orm_DefaultAnnotationMetadataDriverService.php:9, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:82 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:82 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:82 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:82 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared. This may uncover invalid mapping configurations. To opt into the new mode today, set the \"reportFieldsWhereDeclared\" constructor parameter to true. (AttributeDriver.php:82 called by getDoctrine_Orm_DefaultMetadataDriverService.php:11, https://github.com/doctrine/orm/pull/10455, package doctrine/orm)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:297 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:301 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:301 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:301 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:301 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Doctrine\\DBAL\\Connection::getEventManager is deprecated. (Connection.php:301 called by EntityManager.php:167, https://github.com/doctrine/dbal/issues/5784, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForProperty",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForGetter",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForInvalidGetter",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testPersistForEmptyProperty",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  },
+  {
+    "location": "Bazinga\\GeocoderBundle\\Tests\\Functional\\GeocoderListenerTest::testDoesNotGeocodeIfAddressNotChanged",
+    "message": "Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares() and Logging\\Middleware instead. (Configuration.php:87 called by getDoctrine_Dbal_DefaultConnection_ConfigurationService.php:11, https://github.com/doctrine/dbal/pull/4967, package doctrine/dbal)",
+    "count": 1
+  }
+]
