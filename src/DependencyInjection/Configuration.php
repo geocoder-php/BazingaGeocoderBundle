@@ -56,9 +56,7 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('fake_ip')
                 ->beforeNormalization()
                 ->ifString()
-                    ->then(function ($value) {
-                        return ['ip' => $value];
-                    })
+                    ->then(static fn (string $value): array => ['ip' => $value])
                 ->end()
                 ->canBeEnabled()
                 ->children()
@@ -73,10 +71,7 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @return ArrayNodeDefinition
-     */
-    private function getProvidersNode()
+    private function getProvidersNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('providers');
         $rootNode = $treeBuilder->getRootNode();
@@ -111,10 +106,8 @@ class Configuration implements ConfigurationInterface
 
     /**
      * Create plugin node of a client.
-     *
-     * @return ArrayNodeDefinition The plugin node
      */
-    private function createClientPluginNode()
+    private function createClientPluginNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('plugins');
         $rootNode = $treeBuilder->getRootNode();

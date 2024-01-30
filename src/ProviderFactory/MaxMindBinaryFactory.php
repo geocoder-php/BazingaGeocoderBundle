@@ -30,7 +30,7 @@ final class MaxMindBinaryFactory extends AbstractFactory
         return new MaxMindBinary($config['dat_file'], $config['open_flag']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'open_flag' => null,

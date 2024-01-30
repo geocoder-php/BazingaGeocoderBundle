@@ -41,10 +41,8 @@ class BazingaGeocoderExtension extends Extension
 {
     /**
      * @param array<mixed, mixed> $configs
-     *
-     * @return void
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = $this->getConfiguration($configs, $container);
@@ -78,10 +76,8 @@ class BazingaGeocoderExtension extends Extension
 
     /**
      * @param array<mixed, mixed> $config
-     *
-     * @return void
      */
-    private function loadProviders(ContainerBuilder $container, array $config)
+    private function loadProviders(ContainerBuilder $container, array $config): void
     {
         foreach ($config['providers'] as $providerName => $providerConfig) {
             try {
@@ -181,7 +177,7 @@ class BazingaGeocoderExtension extends Extension
                 ->addTag('bazinga_geocoder.profiling_plugin');
         }
 
-        return array_map(static fn (string $id) => new Reference($id), $plugins);
+        return array_map(static fn (string $id): Reference => new Reference($id), $plugins);
     }
 
     /**

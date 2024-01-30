@@ -29,9 +29,9 @@ use Symfony\Component\Filesystem\Filesystem;
  */
 class CustomTestKernel extends TestKernel
 {
-    private $warmupDir;
+    private ?string $warmupDir = null;
 
-    public function reboot(?string $warmupDir)
+    public function reboot(?string $warmupDir): void
     {
         $this->shutdown();
         $this->warmupDir = $warmupDir;
@@ -80,7 +80,7 @@ class CustomTestKernel extends TestKernel
     /**
      * @internal
      */
-    public function setAnnotatedClassCache(array $annotatedClasses)
+    public function setAnnotatedClassCache(array $annotatedClasses): void
     {
         file_put_contents(($this->warmupDir ?: $this->getBuildDir()).'/annotations.map', sprintf('<?php return %s;', var_export($annotatedClasses, true)));
     }

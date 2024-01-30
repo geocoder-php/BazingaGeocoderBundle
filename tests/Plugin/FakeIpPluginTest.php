@@ -28,7 +28,7 @@ final class FakeIpPluginTest extends TestCase
         $query = GeocodeQuery::create('127.0.0.1');
 
         /** @var Query $query */
-        $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
+        $query = $fakeIpPlugin->handleQuery($query, static fn (Query $query): Query => $query, static function (): void {});
 
         self::assertSame($query->getText(), '123.123.123.123');
     }
@@ -43,7 +43,7 @@ final class FakeIpPluginTest extends TestCase
         $query = GeocodeQuery::create('124.124.124.124');
 
         /** @var Query $query */
-        $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
+        $query = $fakeIpPlugin->handleQuery($query, static fn (Query $query): Query => $query, static function (): void {});
 
         self::assertSame($query->getText(), '123.123.123.123');
     }
@@ -54,7 +54,7 @@ final class FakeIpPluginTest extends TestCase
         $query = GeocodeQuery::create('127.0.0.1');
 
         /** @var Query $query */
-        $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
+        $query = $fakeIpPlugin->handleQuery($query, static fn (Query $query): Query => $query, static function (): void {});
 
         self::assertNotSame($query->getText(), '192.168.1.1');
     }

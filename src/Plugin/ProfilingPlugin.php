@@ -29,31 +29,28 @@ class ProfilingPlugin implements Plugin
     /**
      * @var list<array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
-    private $queries = [];
+    private array $queries = [];
 
     /**
-     * @var string service id of the provider
+     * service id of the provider.
      */
-    private $name;
+    private string $name;
 
     public function __construct(string $name)
     {
         $this->name = $name;
     }
 
-    /**
-     * @return Promise
-     */
-    public function handleQuery(Query $query, callable $next, callable $first)
+    public function handleQuery(Query $query, callable $next, callable $first): Promise
     {
         $startTime = microtime(true);
 
-        return $next($query)->then(function (Collection $result) use ($query, $startTime) {
+        return $next($query)->then(function (Collection $result) use ($query, $startTime): Collection {
             $duration = (microtime(true) - $startTime) * 1000;
             $this->logQuery($query, $duration, $result);
 
             return $result;
-        }, function (Exception $exception) use ($query, $startTime) {
+        }, function (Exception $exception) use ($query, $startTime): void {
             $duration = (microtime(true) - $startTime) * 1000;
             $this->logQuery($query, $duration, $exception);
 
@@ -63,10 +60,8 @@ class ProfilingPlugin implements Plugin
 
     /**
      * @param mixed $result
-     *
-     * @return void
      */
-    private function logQuery(Query $query, float $duration, $result = null)
+    private function logQuery(Query $query, float $duration, $result = null): void
     {
         if ($query instanceof GeocodeQuery) {
             $queryString = $query->getText();

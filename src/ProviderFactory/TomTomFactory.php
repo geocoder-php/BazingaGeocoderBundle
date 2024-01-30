@@ -34,7 +34,7 @@ final class TomTomFactory extends AbstractFactory
         return new TomTom($httpClient, $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,
