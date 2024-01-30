@@ -1,16 +1,5 @@
 doctrine:
-    dbal:
-        default_connection: default
-        connections:
-            default:
-                driver: pdo_sqlite
-                path: '%kernel.cache_dir%/test.sqlite'
     orm:
-        auto_generate_proxy_classes: true
-        validate_xml_mapping: true
-        report_fields_where_declared: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
-        auto_mapping: true
         mappings:
             App:
                 is_bundle: false

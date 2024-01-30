@@ -82,6 +82,10 @@ final class ProviderFactoryTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) use ($class) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\') + 1)).'.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
@@ -140,11 +144,19 @@ final class ProviderFactoryTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/deprecated_httplug_client_option.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
 
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
 
-        $this->expectDeprecation('Since willdurand/geocoder-bundle 5.19: The option "httplug_client" is deprecated, use "http_client" instead.');
+        if ($kernel::VERSION_ID >= 50000) {
+            $this->expectDeprecation('Since willdurand/geocoder-bundle 5.19: The option "httplug_client" is deprecated, use "http_client" instead.');
+        } else {
+            $this->expectDeprecation('willdurand/geocoder-bundle');
+        }
 
         self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
         $container->get('bazinga_geocoder.provider.acme');

@@ -34,7 +34,7 @@ final class FactoryValidatorPassTest extends TestCase
         $reflection = new \ReflectionObject($this->compilerPass);
         $prop = $reflection->getProperty('factoryServiceIds');
         $prop->setAccessible(true);
-        $prop->setValue([]);
+        $prop->setValue(null, []);
     }
 
     public function testProcessThrows(): void

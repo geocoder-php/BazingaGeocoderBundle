@@ -2,7 +2,6 @@ framework:
     http_method_override: false
     secret: 6825c711ef47cfc1530d322b62adac3e2c43844c
     session:
-        storage_factory_id: session.storage.factory.mock_file
         cookie_secure: auto
         cookie_samesite: lax
         handler_id: null

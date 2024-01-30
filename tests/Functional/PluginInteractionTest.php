@@ -50,6 +50,10 @@ final class PluginInteractionTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache_symfony.yml');
             $kernel->addTestConfig(__DIR__.'/config/geo_plugin_fakeip_with_cache_cn.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
         $kernel->setClearCacheAfterShutdown(false);
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
@@ -64,6 +68,10 @@ final class PluginInteractionTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache_symfony.yml');
             $kernel->addTestConfig(__DIR__.'/config/geo_plugin_fakeip_with_cache_fr.yml');
+
+            if ($kernel::VERSION_ID >= 50000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
+            }
         }]);
         $kernel->setClearCacheAfterShutdown(false);
         $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
