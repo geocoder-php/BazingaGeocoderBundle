@@ -80,7 +80,7 @@ class CustomTestKernel extends TestKernel
     /**
      * @internal
      */
-    public function setAnnotatedClassCache(array $annotatedClasses)
+    public function setAnnotatedClassCache(array $annotatedClasses): void
     {
         file_put_contents(($this->warmupDir ?: $this->getBuildDir()).'/annotations.map', sprintf('<?php return %s;', var_export($annotatedClasses, true)));
     }
@@ -91,7 +91,7 @@ class CustomTestKernel extends TestKernel
      * The built version of the service container is used when fresh, otherwise the
      * container is built.
      */
-    protected function initializeContainer()
+    protected function initializeContainer(): void
     {
         $class = $this->getContainerClass();
         $buildDir = $this->warmupDir ?: $this->getBuildDir();

@@ -30,7 +30,7 @@ class FakeIpPlugin implements Plugin
     private ?string $replacement;
     private ?Generator $faker = null;
 
-    public function __construct(?string $needle, string $replacement = null, bool $useFaker = false)
+    public function __construct(?string $needle, ?string $replacement = null, bool $useFaker = false)
     {
         $this->needle = $needle;
         $this->replacement = $replacement;
