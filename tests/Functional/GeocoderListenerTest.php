@@ -28,6 +28,7 @@ use Nyholm\BundleTest\TestKernel;
 use Psr\Http\Message\RequestInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\StreamInterface;
+use Symfony\Bridge\Doctrine\ArgumentResolver\EntityValueResolver;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
@@ -75,6 +76,16 @@ final class GeocoderListenerTest extends KernelTestCase
                     $container->prependExtensionConfig('doctrine', [
                         'orm' => [
                             'enable_lazy_ghost_objects' => true,
+                        ],
+                    ]);
+                }
+
+                if (class_exists(EntityValueResolver::class)) {
+                    $container->prependExtensionConfig('doctrine', [
+                        'orm' => [
+                            'controller_resolver' => [
+                                'auto_mapping' => false,
+                            ],
                         ],
                     ]);
                 }

@@ -47,7 +47,7 @@ class GeocoderDataCollector extends DataCollector
     /**
      * @return void
      */
-    public function collect(Request $request, Response $response, \Throwable $exception = null)
+    public function collect(Request $request, Response $response, ?\Throwable $exception = null)
     {
         if (!empty($this->data['queries'])) {
             // To avoid collection more that once.

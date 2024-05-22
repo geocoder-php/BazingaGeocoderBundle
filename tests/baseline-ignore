@@ -1,0 +1,12 @@
+%Bazinga\\GeocoderBundle\\ProviderFactory\\GeoIPsFactory is deprecated since 5.6, to be removed in 6.0%
+%Bazinga\\GeocoderBundle\\ProviderFactory\\MapzenFactory is deprecated since 5.6, to be removed in 6.0%
+%Since doctrine/doctrine-bundle 2.11: Not setting "enable_lazy_ghost_objects" to true is deprecated%
+%Not configuring a schema manager factory is deprecated. Use Doctrine\\DBAL\\Schema\\DefaultSchemaManagerFactory which is going to be the default in DBAL 4%
+%Doctrine\\DBAL\\Configuration::setSQLLogger is deprecated, use setMiddlewares\(\) and Logging\\Middleware instead%
+%Accessing Doctrine\\Common\\Lexer\\Token properties via ArrayAccess is deprecated, use the value, type or position property instead%
+%Doctrine\\DBAL\\Connection::getEventManager is deprecated%
+%DebugStack is deprecated%
+%In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared%
+%Class "Nyholm\\Psr7\\Factory\\HttplugFactory" is deprecated since version 1.8, use "Nyholm\\Psr7\\Factory\\Psr17Factory" instead%
+%Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0%
+%Since doctrine/doctrine-bundle 2.11: Not setting "doctrine.orm.enable_lazy_ghost_objects" to true is deprecated%
