@@ -99,7 +99,7 @@
                                 {% if query.result.message is defined %}
                                     Exception
                                 {% else %}
-                                    {{ dump(query.resultCount) }} Result(s)
+                                    {{ profiler_dump(query.resultCount) }} Result(s)
                                 {% endif %}
                             </span>
                             <span class="metadata">
