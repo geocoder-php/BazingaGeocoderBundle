@@ -126,6 +126,11 @@ parameters:
 			path: src/DependencyInjection/Configuration.php
 
 		-
+			message: "#^Call to an undefined method Doctrine\\\\ORM\\\\Event\\\\OnFlushEventArgs\\:\\:getEntityManager\\(\\)\\.$#"
+			count: 1
+			path: src/Doctrine/ORM/GeocoderListener.php
+
+		-
 			message: "#^Cannot call method getLatitude\\(\\) on Geocoder\\\\Model\\\\Coordinates\\|null\\.$#"
 			count: 1
 			path: src/Doctrine/ORM/GeocoderListener.php
@@ -134,6 +139,16 @@ parameters:
 			message: "#^Cannot call method getLongitude\\(\\) on Geocoder\\\\Model\\\\Coordinates\\|null\\.$#"
 			count: 1
 			path: src/Doctrine/ORM/GeocoderListener.php
+
+		-
+			message: "#^Method Bazinga\\\\GeocoderBundle\\\\Mapping\\\\Driver\\\\AnnotationDriver\\:\\:getReflection\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#"
+			count: 1
+			path: src/Mapping/Driver/AnnotationDriver.php
+
+		-
+			message: "#^Method Bazinga\\\\GeocoderBundle\\\\Mapping\\\\Driver\\\\AttributeDriver\\:\\:getReflection\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#"
+			count: 1
+			path: src/Mapping/Driver/AttributeDriver.php
 
 		-
 			message: "#^Parameter \\#1 \\$text of method Geocoder\\\\Query\\\\GeocodeQuery\\:\\:withText\\(\\) expects string, string\\|null given\\.$#"

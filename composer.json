@@ -26,7 +26,7 @@
   "require-dev": {
     "doctrine/annotations": "^1.11.1 || ^2.0",
     "doctrine/doctrine-bundle": "^2.3",
-    "doctrine/orm": "^2.8",
+    "doctrine/orm": "^2.8 || ^3.0",
     "fakerphp/faker": "^1.20",
     "friendsofphp/php-cs-fixer": "^3.0",
     "geocoder-php/algolia-places-provider": "^0.4",

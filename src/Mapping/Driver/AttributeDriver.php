@@ -16,6 +16,7 @@ use Bazinga\GeocoderBundle\Mapping\Annotations;
 use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
 use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
 use Doctrine\Common\Util\ClassUtils;
+use Doctrine\ORM\Proxy\DefaultProxyClassNameResolver;
 
 /**
  * @author Pierre du Plessis <pdples@gmail.com>
@@ -28,7 +29,7 @@ final class AttributeDriver implements DriverInterface
             return false;
         }
 
-        $reflection = ClassUtils::newReflectionObject($object);
+        $reflection = self::getReflection($object);
 
         return count($reflection->getAttributes(Annotations\Geocodeable::class)) > 0;
     }
@@ -42,7 +43,7 @@ final class AttributeDriver implements DriverInterface
             throw new MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
         }
 
-        $reflection = ClassUtils::newReflectionObject($object);
+        $reflection = self::getReflection($object);
 
         $attributes = $reflection->getAttributes(Annotations\Geocodeable::class);
 
@@ -78,5 +79,14 @@ final class AttributeDriver implements DriverInterface
         }
 
         return $metadata;
+    }
+
+    private static function getReflection(object $object): \ReflectionClass
+    {
+        if (class_exists(ClassUtils::class)) {
+            return ClassUtils::newReflectionObject($object);
+        }
+
+        return new \ReflectionClass(DefaultProxyClassNameResolver::getClass($object));
     }
 }

@@ -63,7 +63,7 @@ jobs:
       matrix:
         dependencies: ['highest']
         php: [ '7.4', '8.0', '8.1', '8.2' ]
-        sf_version: [ '4.4.*', '5.4.*', '6.4.*', '7.0.*' ]
+        sf_version: [ '4.4.*', '5.4.*', '6.4.*', '7.1.*' ]
 #        include:
 #          - php: '7.4'
 #            sf_version: '4.4.*'
@@ -79,11 +79,11 @@ jobs:
           - php: '8.0'
             sf_version: '6.4.*'
           - php: '7.4'
-            sf_version: '7.0.*'
+            sf_version: '7.1.*'
           - php: '8.0'
-            sf_version: '7.0.*'
+            sf_version: '7.1.*'
           - php: '8.1'
-            sf_version: '7.0.*'
+            sf_version: '7.1.*'
     steps:
       - name: "Checkout code"
         uses: actions/checkout@v4
