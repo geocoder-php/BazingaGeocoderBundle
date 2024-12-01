@@ -1,7 +1,7 @@
 BazingaGeocoderBundle
 =====================
 
-[![Build Status](https://travis-ci.org/geocoder-php/BazingaGeocoderBundle.svg?branch=master)](http://travis-ci.org/geocoder-php/BazingaGeocoderBundle)
+[![Build Status](https://github.com/geocoder-php/BazingaGeocoderBundle/actions/workflows/ci.yml/badge.svg)](https://github.com/geocoder-php/BazingaGeocoderBundle/actions/workflows/ci.yml)
 [![Latest Stable Version](https://poser.pugx.org/willdurand/geocoder-bundle/v/stable)](https://packagist.org/packages/willdurand/geocoder-bundle)
 [![Total Downloads](https://poser.pugx.org/willdurand/geocoder-bundle/downloads)](https://packagist.org/packages/willdurand/geocoder-bundle)
 [![Monthly Downloads](https://poser.pugx.org/willdurand/geocoder-bundle/d/monthly.png)](https://packagist.org/packages/willdurand/geocoder-bundle)
