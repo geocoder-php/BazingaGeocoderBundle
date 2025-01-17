@@ -35,7 +35,7 @@ jobs:
     name: PHP-CS-Fixer
     runs-on: ubuntu-latest
     env:
-      php-version: 8.2
+      php-version: 8.4
       PHP_CS_FIXER_IGNORE_ENV: 1
     steps:
       - name: "Setup PHP"
@@ -56,30 +56,19 @@ jobs:
         run: vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --format=checkstyle | cs2pr
 
   phpunit:
-    name: PHPUnit (PHP ${{ matrix.php }}) (Symfony ${{ matrix.sf_version }}) (${{ matrix.dependencies }})
+    name: PHPUnit (PHP ${{ matrix.php }}) (Symfony ${{ matrix.sf_version }})
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 10
       fail-fast: false
       matrix:
-        dependencies: ['highest']
-        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4']
-        sf_version: ['4.4.*', '5.4.*', '6.4.*', '7.1.*', '7.2.*']
+        php: [ '7.4', '8.0', '8.1', '8.2', '8.3', '8.4' ]
+        sf_version: [ '5.4.*', '6.4.*', '7.2.*' ]
         exclude:
           - php: '7.4'
-            sf_version: '4.4.*'
-          - php: '8.4'
-            sf_version: '4.4.*'
-          - php: '7.4'
             sf_version: '6.4.*'
           - php: '8.0'
             sf_version: '6.4.*'
-          - php: '7.4'
-            sf_version: '7.1.*'
-          - php: '8.0'
-            sf_version: '7.1.*'
-          - php: '8.1'
-            sf_version: '7.1.*'
           - php: '7.4'
             sf_version: '7.2.*'
           - php: '8.0'
@@ -104,7 +93,6 @@ jobs:
         uses: "ramsey/composer-install@v3"
         with:
           composer-options: "--optimize-autoloader"
-          dependency-versions: "${{ matrix.dependencies }}"
 
       - name: "Run tests"
         env:

@@ -13,7 +13,6 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
-use Bazinga\GeocoderBundle\Tests\PublicServicePass;
 use Geocoder\Query\GeocodeQuery;
 use Nyholm\BundleTest\TestKernel;
 use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
@@ -36,8 +35,6 @@ final class PluginInteractionTest extends KernelTestCase
          */
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(BazingaGeocoderBundle::class);
-        $kernel->addTestCompilerPass(new PublicServicePass('|[Bb]azinga:*|'));
-        $kernel->addTestCompilerPass(new PublicServicePass('|[gG]eocoder:*|'));
         $kernel->handleOptions($options);
 
         return $kernel;
@@ -48,15 +45,16 @@ final class PluginInteractionTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->setClearCacheAfterShutdown(false);
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+            }
+
             $kernel->addTestConfig(__DIR__.'/config/cache_symfony.yml');
             $kernel->addTestConfig(__DIR__.'/config/geo_plugin_fakeip_with_cache_cn.yml');
-
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
-            }
         }]);
         $kernel->setClearCacheAfterShutdown(false);
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         $geoPluginGeocoder = $container->get('bazinga_geocoder.provider.geoPlugin');
         $result = $geoPluginGeocoder->geocodeQuery(GeocodeQuery::create('::1'));
@@ -66,15 +64,16 @@ final class PluginInteractionTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->setClearCacheAfterShutdown(false);
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+            }
+
             $kernel->addTestConfig(__DIR__.'/config/cache_symfony.yml');
             $kernel->addTestConfig(__DIR__.'/config/geo_plugin_fakeip_with_cache_fr.yml');
-
-            if ($kernel::VERSION_ID >= 50000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_'.($kernel::VERSION_ID >= 60000 ? 'sf6' : 'sf5').'.yml');
-            }
         }]);
         $kernel->setClearCacheAfterShutdown(false);
-        $container = method_exists(__CLASS__, 'getContainer') ? self::getContainer() : $kernel->getContainer();
+        $container = self::getContainer();
 
         $geoPluginGeocoder = $container->get('bazinga_geocoder.provider.geoPlugin');
         $result = $geoPluginGeocoder->geocodeQuery(GeocodeQuery::create('::1'));
