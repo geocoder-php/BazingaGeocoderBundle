@@ -53,7 +53,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
         return $this->getProvider($config);
     }
 
-    public static function validate(array $options, $providerName)
+    public static function validate(array $options, $providerName): void
     {
         static::verifyDependencies();
 

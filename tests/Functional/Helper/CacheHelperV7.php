@@ -22,30 +22,21 @@ trait CacheHelperV7
     /**
      * @return mixed
      */
-    public function get($key, $default = null)
+    public function get($key, $default = null): void
     {
     }
 
-    /**
-     * @return bool
-     */
-    public function set($key, $value, $ttl = null)
+    public function set($key, $value, $ttl = null): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function delete($key)
+    public function delete($key): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function clear()
+    public function clear(): bool
     {
         return true;
     }
@@ -53,31 +44,22 @@ trait CacheHelperV7
     /**
      * @return iterable
      */
-    public function getMultiple($keys, $default = null)
+    public function getMultiple($keys, $default = null): array
     {
         return [];
     }
 
-    /**
-     * @return bool
-     */
-    public function setMultiple($values, $ttl = null)
+    public function setMultiple($values, $ttl = null): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function deleteMultiple($keys)
+    public function deleteMultiple($keys): bool
     {
         return true;
     }
 
-    /**
-     * @return bool
-     */
-    public function has($key)
+    public function has($key): bool
     {
         return false;
     }

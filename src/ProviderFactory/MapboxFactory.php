@@ -32,7 +32,7 @@ final class MapboxFactory extends AbstractFactory
         return new Mapbox($httpClient, $config['api_key'], $config['country'], $config['mode']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'httplug_client' => null,

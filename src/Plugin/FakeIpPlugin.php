@@ -41,10 +41,7 @@ class FakeIpPlugin implements Plugin
         }
     }
 
-    /**
-     * @return Promise
-     */
-    public function handleQuery(Query $query, callable $next, callable $first)
+    public function handleQuery(Query $query, callable $next, callable $first): Promise
     {
         if (!$query instanceof GeocodeQuery) {
             return $next($query);
