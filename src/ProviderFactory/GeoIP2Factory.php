@@ -27,7 +27,7 @@ final class GeoIP2Factory extends AbstractFactory
     ];
 
     /**
-     * @param array{provider: string, provider_service: ?ProviderInterface, model: string, user_id: string|int|null, license_key: string|null, locales: list<string>, webservice_options: array<mixed, mixed>, database_filename: ?string} $config
+     * @param array{provider: string, provider_service: ?ProviderInterface, model: string, user_id: string|int|null, license_key: string|null, locales: list<string>, webservice_options: array<string, mixed>, database_filename: ?string} $config
      */
     protected function getProvider(array $config): Provider
     {

@@ -21,7 +21,7 @@
     "symfony/console": "^5.4 || ^6.4 || ^7.0",
     "symfony/framework-bundle": "^5.4 || ^6.4 || ^7.0",
     "symfony/options-resolver": "^5.4 || ^6.4 || ^7.0",
-    "willdurand/geocoder": "^4.6"
+    "willdurand/geocoder": "^4.6|^5.0"
   },
   "require-dev": {
     "doctrine/annotations": "^1.11.1 || ^2.0",
