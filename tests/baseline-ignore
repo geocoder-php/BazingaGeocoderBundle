@@ -81,3 +81,4 @@
 %Geocoder\\Model\\Address::__construct\(\): Implicitly marking parameter \$country as nullable is deprecated, the explicit nullable type must be used instead%
 %Geocoder\\Model\\Address::__construct\(\): Implicitly marking parameter \$timezone as nullable is deprecated, the explicit nullable type must be used instead%
 %Geocoder\\ProviderAggregator::__construct\(\): Implicitly marking parameter \$decider as nullable is deprecated, the explicit nullable type must be used instead%
+%Since symfony/var-exporter 7.3: The "Symfony\\Component\\VarExporter\\LazyGhostTrait" trait is deprecated, use native lazy objects instead.%
