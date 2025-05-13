@@ -27,7 +27,7 @@ services:
     Bazinga\GeocoderBundle\Command\GeocodeCommand:
         arguments: ['@Geocoder\ProviderAggregator']
         tags:
-            - { name: 'console.command', command: 'geocoder:geocode' }
+            - { name: 'console.command', command: 'geocoder:geocode', description: 'Geocode an address or a ip address' }
 
     Bazinga\GeocoderBundle\Validator\Constraint\AddressValidator:
         arguments: ['@geocoder']

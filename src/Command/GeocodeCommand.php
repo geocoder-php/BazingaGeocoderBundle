@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\Command;
 
 use Geocoder\ProviderAggregator;
 use Geocoder\Query\GeocodeQuery;
+use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -23,6 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
+#[AsCommand(name: 'geocoder:geocode', description: 'Geocode an address or a ip address')]
 class GeocodeCommand extends Command
 {
     private ProviderAggregator $geocoder;
@@ -40,8 +42,6 @@ class GeocodeCommand extends Command
     protected function configure()
     {
         $this
-            ->setName('geocoder:geocode')
-            ->setDescription('Geocode an address or a ip address')
             ->addArgument('address', InputArgument::REQUIRED, 'The address')
             ->addOption('provider', null, InputOption::VALUE_OPTIONAL)
             ->setHelp(<<<'HELP'
