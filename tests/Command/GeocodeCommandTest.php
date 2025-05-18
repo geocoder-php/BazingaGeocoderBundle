@@ -30,7 +30,7 @@ use Symfony\Component\HttpKernel\Kernel;
  */
 final class GeocodeCommandTest extends TestCase
 {
-    private static $address = '10 rue Gambetta, Paris, France';
+    private static string $address = '10 rue Gambetta, Paris, France';
 
     public function testExecute(): void
     {

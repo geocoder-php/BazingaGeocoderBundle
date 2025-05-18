@@ -50,7 +50,7 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testInitBundle(): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
@@ -68,7 +68,7 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleWithOneProviderConfiguration(): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
@@ -88,7 +88,7 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleWithCachedProvider(): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
@@ -110,7 +110,7 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testCacheLifetimeCanBeNull(): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
@@ -140,7 +140,7 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleWithPluginsYml(): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
@@ -162,7 +162,7 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleWithPluginXml(): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
@@ -184,7 +184,7 @@ final class BundleInitializationTest extends KernelTestCase
 
     public function testBundleHasRegisteredDumpers(): void
     {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
+        $kernel = self::bootKernel(['config' => static function (TestKernel $kernel): void {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
