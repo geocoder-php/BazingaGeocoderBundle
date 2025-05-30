@@ -82,3 +82,4 @@
 %Geocoder\\Model\\Address::__construct\(\): Implicitly marking parameter \$timezone as nullable is deprecated, the explicit nullable type must be used instead%
 %Geocoder\\ProviderAggregator::__construct\(\): Implicitly marking parameter \$decider as nullable is deprecated, the explicit nullable type must be used instead%
 %Since symfony/var-exporter 7.3: The "Symfony\\Component\\VarExporter\\LazyGhostTrait" trait is deprecated, use native lazy objects instead.%
+%Method "Http\\Promise\\Promise::wait\(\)" might add " Resolved value, null if \$unwrap is set to false" as a native return type declaration in the future. Do the same in implementation "Geocoder\\Plugin\\Promise\\GeocoderFulfilledPromise" now to avoid errors or add an explicit @return annotation to suppress this message.%

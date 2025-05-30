@@ -93,10 +93,6 @@ jobs:
           tools: flex
           coverage: none
 
-      - name: Configure minimum stability
-        if: matrix.sf_version == '7.3'
-        run: composer config minimum-stability beta
-
       - name: "Install Composer dependencies"
         env:
           SYMFONY_REQUIRE: ${{ matrix.sf_version }}
