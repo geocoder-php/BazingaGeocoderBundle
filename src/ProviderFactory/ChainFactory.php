@@ -37,6 +37,12 @@ final class ChainFactory extends AbstractFactory implements LoggerAwareInterface
         $provider = new Chain($config['services']);
         if (null !== $this->logger) {
             $provider->setLogger($this->logger);
+            if (isset($config['geocode_log_level'])) {
+                $provder->setGeocodeQueryLogLevel($config['geocode_log_level']);
+            }
+            if (isset($config['reverse_log_level'])) {
+                $provder->setReverseQueryLogLevel($config['reverse_log_level']);
+            }
         }
 
         return $provider;
@@ -48,5 +54,11 @@ final class ChainFactory extends AbstractFactory implements LoggerAwareInterface
 
         $resolver->setRequired('services');
         $resolver->setAllowedTypes('services', ['array']);
+
+        $resolver->setDefault('geocode_log_level', null);
+        $resolver->setAllowedTypes('geocode_log_level', ['string', 'null']);
+
+        $resolver->setDefault('reverse_log_level', null);
+        $resolver->setAllowedTypes('reverse_log_level', ['string', 'null']);
     }
 }
