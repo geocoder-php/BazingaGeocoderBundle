@@ -30,7 +30,7 @@ final class ChainFactory extends AbstractFactory implements LoggerAwareInterface
     ];
 
     /**
-     * @param array{services: Provider[]} $config
+     * @param array{services: Provider[], geocode_log_level?: string|null, reverse_log_level?: string|null} $config
      */
     protected function getProvider(array $config): Provider
     {
