@@ -2,6 +2,10 @@
 
 declare(strict_types=1);
 
+#use Symfony\Component\ErrorHandler\ErrorHandler;
+
+#ErrorHandler::register(null, false);
+
 /*
  * This file is part of the BazingaGeocoderBundle package.
  * For the full copyright and license information, please view the LICENSE

@@ -95,13 +95,7 @@ final class GeocoderListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
-            }
-
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
@@ -173,13 +167,7 @@ final class GeocoderListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
-            }
-
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
@@ -251,13 +239,7 @@ final class GeocoderListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
-            }
-
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
@@ -281,13 +263,7 @@ final class GeocoderListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
-            }
-
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
@@ -311,13 +287,7 @@ final class GeocoderListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
-            }
-
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
         }]);
 
         $container = self::getContainer();
