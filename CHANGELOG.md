@@ -10,7 +10,7 @@ The changelog describes what have been "Added", "Changed", "Removed" or "Fixed" 
 
 ### Removed
 
-- Remove support for PHP < 8.2
+- Remove support for PHP < 8.1
 - Remove MapzenFactory
 - Remove GeoIPsFactory
 

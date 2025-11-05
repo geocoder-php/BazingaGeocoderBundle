@@ -14,7 +14,7 @@
     }
   ],
   "require": {
-    "php": "^8.2",
+    "php": "^8.1",
     "geocoder-php/plugin": "^1.6",
     "php-http/curl-client": "^2.3",
     "php-http/discovery": "^1.20",
