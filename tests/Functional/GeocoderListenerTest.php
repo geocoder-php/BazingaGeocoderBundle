@@ -63,7 +63,7 @@ final class GeocoderListenerTest extends KernelTestCase
             $kernel->addTestConfig(static function (ContainerBuilder $container) {
                 $container->prependExtensionConfig('doctrine', [
                     'orm' => [
-                        'report_fields_where_declared' => true,
+                        #'report_fields_where_declared' => true,
                     ],
                 ]);
 
