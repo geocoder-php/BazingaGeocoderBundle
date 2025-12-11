@@ -5,7 +5,6 @@
 %Doctrine\\DBAL\\Connection::getEventManager is deprecated%
 %DebugStack is deprecated%
 %In ORM 3.0, the AttributeDriver will report fields for the classes where they are declared%
-%Class "Nyholm\\Psr7\\Factory\\HttplugFactory" is deprecated since version 1.8, use "Nyholm\\Psr7\\Factory\\Psr17Factory" instead%
 %Not enabling lazy ghost objects is deprecated and will not be supported in Doctrine ORM 3.0%
 %Since doctrine/doctrine-bundle 2.11: Not setting "doctrine.orm.enable_lazy_ghost_objects" to true is deprecated%
 %Geocoder\\Http\\Provider\\AbstractHttpProvider::createRequest\(\): Implicitly marking parameter \$body as nullable is deprecated, the explicit nullable type must be used instead%

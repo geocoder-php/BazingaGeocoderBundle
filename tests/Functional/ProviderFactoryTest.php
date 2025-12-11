@@ -125,27 +125,4 @@ final class ProviderFactoryTest extends KernelTestCase
         yield [TomTom::class, ['acme']];
         yield [Yandex::class, ['empty', 'acme']];
     }
-
-    /**
-     * @group legacy
-     */
-    public function testProviderConfigurationWithDeprecatedHttplugClientOption(): void
-    {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
-            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
-            }
-
-            $kernel->addTestConfig(__DIR__.'/config/deprecated_httplug_client_option.yml');
-        }]);
-
-        $container = self::getContainer();
-
-        $this->expectDeprecation('Since willdurand/geocoder-bundle 5.19: The option "httplug_client" is deprecated, use "http_client" instead.');
-
-        self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
-        $container->get('bazinga_geocoder.provider.acme');
-    }
 }

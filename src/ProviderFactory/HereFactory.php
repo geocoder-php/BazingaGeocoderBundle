@@ -25,7 +25,7 @@ final class HereFactory extends AbstractFactory
     ];
 
     /**
-     * @param array{app_key: ?string, app_id: ?string, app_code: ?string, use_cit: bool, http_client: ?ClientInterface, httplug_client: ?ClientInterface} $config
+     * @param array{app_key: ?string, app_id: ?string, app_code: ?string, use_cit: bool, http_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
@@ -33,7 +33,7 @@ final class HereFactory extends AbstractFactory
             throw new \InvalidArgumentException('No authentication key provided. Here requires app_key or app_code and app_id.');
         }
 
-        $httpClient = $config['http_client'] ?? $config['httplug_client'] ?? $this->httpClient ?? Psr18ClientDiscovery::find();
+        $httpClient = $config['http_client'] ?? $this->httpClient ?? Psr18ClientDiscovery::find();
 
         if (!empty($config['app_key'])) {
             if (!method_exists(Here::class, 'createUsingApiKey')) {
@@ -49,7 +49,6 @@ final class HereFactory extends AbstractFactory
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'httplug_client' => null,
             'http_client' => null,
             'use_cit' => false,
             'app_key' => null,
@@ -57,13 +56,10 @@ final class HereFactory extends AbstractFactory
             'app_code' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('http_client', ['object', 'null']);
         $resolver->setAllowedTypes('app_key', ['string', 'null']);
         $resolver->setAllowedTypes('app_id', ['string', 'null']);
         $resolver->setAllowedTypes('app_code', ['string', 'null']);
         $resolver->setAllowedTypes('use_cit', ['bool', 'false']);
-
-        $resolver->setDeprecated('httplug_client', 'willdurand/geocoder-bundle', '5.19', 'The option "httplug_client" is deprecated, use "http_client" instead.');
     }
 }
