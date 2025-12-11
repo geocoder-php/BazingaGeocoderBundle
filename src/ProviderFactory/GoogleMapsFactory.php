@@ -14,7 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
 use Geocoder\Provider\Provider;
-use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\Psr18ClientDiscovery;
 use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -29,7 +29,7 @@ final class GoogleMapsFactory extends AbstractFactory
      */
     protected function getProvider(array $config): Provider
     {
-        $httpClient = $config['httplug_client'] ?? $this->httpClient ?? HttpClientDiscovery::find();
+        $httpClient = $config['httplug_client'] ?? $this->httpClient ?? Psr18ClientDiscovery::find();
 
         return new GoogleMaps($httpClient, $config['region'], $config['api_key']);
     }
