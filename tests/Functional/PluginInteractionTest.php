@@ -51,7 +51,7 @@ final class PluginInteractionTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/cache_symfony.yml');
-            $kernel->addTestConfig(__DIR__.'/config/geo_plugin_fakeip_with_cache_cn.yml');
+            $kernel->addTestConfig(__DIR__.'/config/fakeip_with_cache_cn.yml');
         }]);
         $kernel->setClearCacheAfterShutdown(false);
         $container = self::getContainer();
@@ -70,7 +70,7 @@ final class PluginInteractionTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/cache_symfony.yml');
-            $kernel->addTestConfig(__DIR__.'/config/geo_plugin_fakeip_with_cache_fr.yml');
+            $kernel->addTestConfig(__DIR__.'/config/fakeip_with_cache_fr.yml');
         }]);
         $kernel->setClearCacheAfterShutdown(false);
         $container = self::getContainer();
