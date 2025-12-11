@@ -12,3 +12,8 @@ bazinga_geocoder:
             cache: 'app.simple_cache'
             cache_lifetime: 42
             cache_precision: ~
+            options:
+                http_client: '@Http\Mock\Client'
+
+services:
+    Http\Mock\Client: ~
