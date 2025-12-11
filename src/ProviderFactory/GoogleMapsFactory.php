@@ -25,11 +25,11 @@ final class GoogleMapsFactory extends AbstractFactory
     ];
 
     /**
-     * @param array{api_key: ?string, region: ?string, http_client: ?ClientInterface, httplug_client: ?ClientInterface} $config
+     * @param array{api_key: ?string, region: ?string, http_client: ?ClientInterface} $config
      */
     protected function getProvider(array $config): Provider
     {
-        $httpClient = $config['httplug_client'] ?? $this->httpClient ?? Psr18ClientDiscovery::find();
+        $httpClient = $config['http_client'] ?? $this->httpClient ?? Psr18ClientDiscovery::find();
 
         return new GoogleMaps($httpClient, $config['region'], $config['api_key']);
     }
@@ -37,17 +37,13 @@ final class GoogleMapsFactory extends AbstractFactory
     protected static function configureOptionResolver(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'httplug_client' => null,
             'http_client' => null,
             'region' => null,
             'api_key' => null,
         ]);
 
-        $resolver->setAllowedTypes('httplug_client', ['object', 'null']);
         $resolver->setAllowedTypes('http_client', ['object', 'null']);
         $resolver->setAllowedTypes('region', ['string', 'null']);
         $resolver->setAllowedTypes('api_key', ['string', 'null']);
-
-        $resolver->setDeprecated('httplug_client', 'willdurand/geocoder-bundle', '5.19', 'The option "%name%" is deprecated, use "http_client" instead.');
     }
 }

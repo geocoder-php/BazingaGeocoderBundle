@@ -90,7 +90,7 @@ bazinga_geocoder:
         acme:
             factory: Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory
             options:
-                httplug_client: '@httplug.client' # When using HTTPlugBundle
+                http_client: '@any.psr18.client'
                 region: 'Sweden'
                 api_key: 'xxyy'
 ```
@@ -116,7 +116,7 @@ bazinga_geocoder:
             factory: Bazinga\GeocoderBundle\ProviderFactory\TomTomFactory
             options:
                 api_key: 'xxyy'
-                httplug_client: '@httplug.client' # When using HTTPlugBundle
+                http_client: '@any.psr18.client'
                 region: 'Sweden'
         chain:
             factory: Bazinga\GeocoderBundle\ProviderFactory\ChainFactory
@@ -295,17 +295,27 @@ your service argument as: `!tagged bazinga_geocoder.dumper`.
 
 ### Custom HTTP Clients
 
-The HTTP geocoder providers integrates with [HTTPlug](http://httplug.io/). It will give you all
-the power of the HTTP client. You have to select which one you want to use and how
-you want to configure it.
-
-Read their [usage page](http://docs.php-http.org/en/latest/httplug/users.html), you
-may also be interested in checking out the [HTTPlugBundle](https://github.com/php-http/HttplugBundle).
-
-An example, if you want to use Guzzle6.
+The HTTP geocoder allows to use any [PSR-18](https://www.php-fig.org/psr/psr-18/) compatible client.
+In Symfony apps it is recommended to use `symfony/http-client`, but if you want to use Guzzle,
+just require it in your dependencies:
 
 ```bash
-composer require php-http/guzzle6-adapter php-http/message
+composer require guzzlehttp/guzzle http-interop/http-factory-guzzle
+```
+
+And configure your provider to use it:
+
+```yaml
+services:
+    guzzle.client:
+        class: GuzzleHttp\Client
+
+bazinga_geocoder:
+    providers:
+        acme:
+            factory: ...
+            options:
+                http_client: '@guzzle.client'
 ```
 
 Reference Configuration
@@ -372,19 +382,3 @@ Setup the test suite using [Composer](http://getcomposer.org/):
 composer update
 composer test
 ```
-
-### Doctrine test
-
-There is also a test that tests the doctrine integration. It runs automatically on
-[GitHub Actions](https://github.com/geocoder-php/BazingaGeocoderBundle/actions) but if you want to run it locally you must do the following.
-
-```bash
-composer require phpunit/phpunit:^9.5 --no-update
-composer update --prefer-source
-wget https://phar.phpunit.de/phpunit-9.5.phar
-php phpunit-9.5.phar --testsuit doctrine
-```
-
-**Important:** this command must be run with `--prefer-source`, otherwise the
-`Doctrine\Tests\OrmTestCase` class won't be found.
-
