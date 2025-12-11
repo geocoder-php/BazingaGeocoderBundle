@@ -20,7 +20,6 @@ use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
 use Geocoder\Provider\Geoip\Geoip;
 use Geocoder\Provider\GeoIP2\GeoIP2;
-use Geocoder\Provider\GeoIPs\GeoIPs;
 use Geocoder\Provider\Geonames\Geonames;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
@@ -33,7 +32,6 @@ use Geocoder\Provider\Ipstack\Ipstack;
 use Geocoder\Provider\LocationIQ\LocationIQ;
 use Geocoder\Provider\Mapbox\Mapbox;
 use Geocoder\Provider\MapQuest\MapQuest;
-use Geocoder\Provider\Mapzen\Mapzen;
 use Geocoder\Provider\MaxMind\MaxMind;
 use Geocoder\Provider\MaxMindBinary\MaxMindBinary;
 use Geocoder\Provider\Nominatim\Nominatim;
@@ -107,9 +105,6 @@ final class ProviderFactoryTest extends KernelTestCase
         yield [FreeGeoIp::class, ['empty', 'acme']];
         // yield [Geoip::class, ['empty']];
         yield [GeoIP2::class, ['acme']];
-        if (class_exists(GeoIPs::class)) {
-            yield [GeoIPs::class, ['acme']];
-        }
         yield [Geonames::class, ['acme']];
         yield [GeoPlugin::class, ['empty']];
         yield [GoogleMaps::class, ['empty']];
@@ -122,9 +117,6 @@ final class ProviderFactoryTest extends KernelTestCase
         yield [LocationIQ::class, ['acme']];
         yield [Mapbox::class, ['acme']];
         yield [MapQuest::class, ['acme']];
-        if (class_exists(Mapzen::class)) {
-            yield [Mapzen::class, ['acme']];
-        }
         yield [MaxMind::class, ['acme']];
         yield [MaxMindBinary::class, ['acme']];
         yield [Nominatim::class, ['empty', 'acme']];
