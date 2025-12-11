@@ -14,7 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Here\Here;
 use Geocoder\Provider\Provider;
-use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\Psr18ClientDiscovery;
 use Psr\Http\Client\ClientInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -33,7 +33,7 @@ final class HereFactory extends AbstractFactory
             throw new \InvalidArgumentException('No authentication key provided. Here requires app_key or app_code and app_id.');
         }
 
-        $httpClient = $config['http_client'] ?? $config['httplug_client'] ?? $this->httpClient ?? HttpClientDiscovery::find();
+        $httpClient = $config['http_client'] ?? $config['httplug_client'] ?? $this->httpClient ?? Psr18ClientDiscovery::find();
 
         if (!empty($config['app_key'])) {
             if (!method_exists(Here::class, 'createUsingApiKey')) {
