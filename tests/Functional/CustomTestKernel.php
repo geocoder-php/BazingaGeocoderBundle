@@ -45,6 +45,11 @@ class CustomTestKernel extends TestKernel
         return realpath(sys_get_temp_dir()).'/NyholmBundleTest/cachePluginInteractionTest';
     }
 
+    public function getShareDir(): ?string
+    {
+        return $this->getCacheDir();
+    }
+
     /**
      * Returns the kernel parameters.
      */
@@ -77,8 +82,7 @@ class CustomTestKernel extends TestKernel
             'kernel.bundles_metadata' => $bundlesMetadata,
             'kernel.charset' => $this->getCharset(),
             'kernel.container_class' => $this->getContainerClass(),
-            'kernel.share_dir' => realpath($this->getProjectDir()) ?: $this->getProjectDir(),
-        ];
+        ] + (null !== ($dir = $this->getShareDir()) ? ['kernel.share_dir' => realpath($dir) ?: $dir] : []);
     }
 
     /**
