@@ -14,6 +14,8 @@ namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Nyholm\BundleTest\TestKernel;
 use Symfony\Component\Config\ConfigCache;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 use Symfony\Component\ErrorHandler\DebugClassLoader;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
@@ -26,7 +28,7 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
  * the methods using it (reboot() and getKernelParameters() and setAnnotatedClassCache() ) therefore needed to be redeclared, in order
  * for them to have a correct value in it.
  */
-class CustomTestKernel extends TestKernel
+class CustomTestKernel extends TestKernel implements CompilerPassInterface
 {
     private $warmupDir;
 
@@ -91,6 +93,21 @@ class CustomTestKernel extends TestKernel
     public function setAnnotatedClassCache(array $annotatedClasses): void
     {
         file_put_contents(($this->warmupDir ?: $this->getBuildDir()).'/annotations.map', sprintf('<?php return %s;', var_export($annotatedClasses, true)));
+    }
+
+    // Can be removed after dropping Symfony 5.4
+    public function process(ContainerBuilder $container): void
+    {
+        $container
+            ->getDefinition('http_client')
+            ->setPublic(true);
+    }
+
+    protected function build(ContainerBuilder $container): void
+    {
+        parent::build($container);
+
+        $container->addCompilerPass($this);
     }
 
     /**

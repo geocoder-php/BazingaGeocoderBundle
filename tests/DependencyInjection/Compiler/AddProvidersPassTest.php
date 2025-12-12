@@ -15,10 +15,11 @@ namespace Bazinga\GeocoderBundle\Tests\DependencyInjection\Compiler;
 use Bazinga\GeocoderBundle\DependencyInjection\Compiler\AddProvidersPass;
 use Geocoder\Provider\BingMaps\BingMaps;
 use Geocoder\ProviderAggregator;
-use Http\Mock\Client;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Definition;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Psr18Client;
 
 final class AddProvidersPassTest extends TestCase
 {
@@ -34,7 +35,7 @@ final class AddProvidersPassTest extends TestCase
         $containerBuilder = new ContainerBuilder();
         $containerBuilder->setDefinition(ProviderAggregator::class, new Definition(ProviderAggregator::class));
 
-        $bing = $containerBuilder->setDefinition('bing_maps', new Definition(BingMaps::class, [new Client(), 'apikey']));
+        $bing = $containerBuilder->setDefinition('bing_maps', new Definition(BingMaps::class, [new Psr18Client(new MockHttpClient()), 'apikey']));
         $bing->addTag('bazinga_geocoder.provider');
 
         $this->compilerPass->process($containerBuilder);
