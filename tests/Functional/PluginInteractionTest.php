@@ -14,14 +14,13 @@ namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Bazinga\GeocoderBundle\BazingaGeocoderBundle;
 use Geocoder\Query\GeocodeQuery;
-use Http\Message\RequestMatcher\RequestMatcher;
-use Http\Mock\Client;
 use Nyholm\BundleTest\TestKernel;
-use Psr\Http\Message\RequestInterface;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\StreamInterface;
 use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
+use Symfony\Component\HttpClient\MockHttpClient;
+use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 final class PluginInteractionTest extends KernelTestCase
@@ -40,6 +39,14 @@ final class PluginInteractionTest extends KernelTestCase
          */
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(BazingaGeocoderBundle::class);
+        $kernel->addTestCompilerPass(new class implements CompilerPassInterface {
+            public function process(ContainerBuilder $container): void
+            {
+                $container
+                    ->getDefinition('http_client')
+                    ->setPublic(true);
+            }
+        });
         $kernel->handleOptions($options);
 
         return $kernel;
@@ -61,27 +68,12 @@ final class PluginInteractionTest extends KernelTestCase
         $kernel->setClearCacheAfterShutdown(false);
         $container = self::getContainer();
 
-        $httpClient = $container->get(Client::class);
-        $httpClient->on(new RequestMatcher(), function (RequestInterface $request) {
-            if ('https://freegeoip.app/json/123.123.123.128' === (string) $request->getUri()) {
-                $stream = $this->createMock(StreamInterface::class);
-                $stream->expects(self::once())
-                    ->method('__toString')
-                    ->willReturn('{"ip":"123.123.123.128","country_code":"CN","country_name":"China","region_code":"CN-BJ","region_name":"Beijing","city":"Beijing","zip_code":"100006","time_zone":"Asia\/Shanghai","latitude":39.907501220703125,"longitude":116.39710235595703,"metro_code":0}');
+        $container->set('http_client', new MockHttpClient(static function (string $method, string $url): MockResponse {
+            self::assertSame('GET', $method);
+            self::assertSame('https://freegeoip.app/json/123.123.123.128', $url);
 
-                $response = $this->createMock(ResponseInterface::class);
-                $response->expects(self::once())
-                    ->method('getStatusCode')
-                    ->willReturn(200);
-                $response->expects(self::once())
-                    ->method('getBody')
-                    ->willReturn($stream);
-
-                return $response;
-            }
-
-            self::fail(sprintf('Unexpected http call "%s %s".', $request->getMethod(), (string) $request->getUri()));
-        });
+            return new MockResponse('{"ip":"123.123.123.128","country_code":"CN","country_name":"China","region_code":"CN-BJ","region_name":"Beijing","city":"Beijing","zip_code":"100006","time_zone":"Asia\/Shanghai","latitude":39.907501220703125,"longitude":116.39710235595703,"metro_code":0}', ['response_headers' => ['content-type' => 'application-json']]);
+        }));
 
         $geoPluginGeocoder = $container->get('bazinga_geocoder.provider.geoPlugin');
         $result = $geoPluginGeocoder->geocodeQuery(GeocodeQuery::create('::1'));
@@ -102,27 +94,12 @@ final class PluginInteractionTest extends KernelTestCase
         $kernel->setClearCacheAfterShutdown(false);
         $container = self::getContainer();
 
-        $httpClient = $container->get(Client::class);
-        $httpClient->on(new RequestMatcher(), function (RequestInterface $request) {
-            if ('https://freegeoip.app/json/87.98.128.10' === (string) $request->getUri()) {
-                $stream = $this->createMock(StreamInterface::class);
-                $stream->expects(self::once())
-                    ->method('__toString')
-                    ->willReturn('{"ip":"87.98.128.10","country_code":"FR","country_name":"France","region_code":null,"region_name":"Nord","city":"Roubaix","zip_code":"59100","time_zone":"Europe\/Paris","latitude":50.69371032714844,"longitude":3.174438953399658,"metro_code":0}');
+        $container->set('http_client', new MockHttpClient(static function (string $method, string $url): MockResponse {
+            self::assertSame('GET', $method);
+            self::assertSame('https://freegeoip.app/json/87.98.128.10', $url);
 
-                $response = $this->createMock(ResponseInterface::class);
-                $response->expects(self::once())
-                    ->method('getStatusCode')
-                    ->willReturn(200);
-                $response->expects(self::once())
-                    ->method('getBody')
-                    ->willReturn($stream);
-
-                return $response;
-            }
-
-            self::fail(sprintf('Unexpected http call "%s %s".', $request->getMethod(), (string) $request->getUri()));
-        });
+            return new MockResponse('{"ip":"87.98.128.10","country_code":"FR","country_name":"France","region_code":null,"region_name":"Nord","city":"Roubaix","zip_code":"59100","time_zone":"Europe\/Paris","latitude":50.69371032714844,"longitude":3.174438953399658,"metro_code":0}', ['response_headers' => ['content-type' => 'application-json']]);
+        }));
 
         $geoPluginGeocoder = $container->get('bazinga_geocoder.provider.geoPlugin');
         $result = $geoPluginGeocoder->geocodeQuery(GeocodeQuery::create('::1'));

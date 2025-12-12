@@ -18,8 +18,3 @@ bazinga_geocoder:
     providers:
         acme:
             factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
-            options:
-                http_client: '@Http\Mock\Client'
-
-services:
-    Http\Mock\Client: ~
