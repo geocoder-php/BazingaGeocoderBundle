@@ -74,9 +74,6 @@
     "symfony/var-exporter": "^5.4 || ^6.4 || ^7.0",
     "symfony/yaml": "^5.4 || ^6.4 || ^7.0"
   },
-  "conflict": {
-    "geocoder-php/nominatim-provider": "<5.0"
-  },
   "autoload": {
     "psr-4": {
       "Bazinga\\GeocoderBundle\\": "src/"
@@ -88,7 +85,7 @@
     }
   },
   "scripts": {
-    "test": "vendor/bin/simple-phpunit --testsuite main"
+    "test": "SYMFONY_DEPRECATIONS_HELPER=ignoreFile='./tests/baseline-ignore' vendor/bin/simple-phpunit --testsuite main"
   },
   "config": {
     "allow-plugins": {
