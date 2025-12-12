@@ -88,3 +88,4 @@
 %Not enabling native lazy objects is deprecated and will be impossible in Doctrine ORM 4.0%
 %Not setting "doctrine.orm.enable_native_lazy_objects" to true is deprecated%
 %Disabling native lazy objects is deprecated and will be impossible in Doctrine ORM 4.0%
+%Class "Nyholm\\Psr7\\Factory\\HttplugFactory" is deprecated since version 1.8, use "Nyholm\\Psr7\\Factory\\Psr17Factory" instead%
