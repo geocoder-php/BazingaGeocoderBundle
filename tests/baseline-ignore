@@ -83,3 +83,10 @@
 %Geocoder\\ProviderAggregator::__construct\(\): Implicitly marking parameter \$decider as nullable is deprecated, the explicit nullable type must be used instead%
 %Since symfony/var-exporter 7.3: The "Symfony\\Component\\VarExporter\\LazyGhostTrait" trait is deprecated, use native lazy objects instead.%
 %Method "Http\\Promise\\Promise::wait\(\)" might add " Resolved value, null if \$unwrap is set to false" as a native return type declaration in the future. Do the same in implementation "Geocoder\\Plugin\\Promise\\GeocoderFulfilledPromise" now to avoid errors or add an explicit @return annotation to suppress this message.%
+%The "report_fields_where_declared" configuration option is deprecated and will be removed in DoctrineBundle 3.0. When using ORM 3, report_fields_where_declared will always be true%
+%Class "Doctrine\\ORM\\Proxy\\DefaultProxyClassNameResolver" is deprecated. Use native lazy objects instead%
+%Calling Doctrine\\ORM\\Configuration::(getProxyDir|setProxyDir|getAutoGenerateProxyClasses|setAutoGenerateProxyClasses|setProxyNamespace|getProxyNamespace) is deprecated and will not be possible in Doctrine ORM 4.0%
+%Class "Doctrine\\ORM\\Proxy\\Autoloader" is deprecated. Use native lazy objects instead%
+%Not enabling native lazy objects is deprecated and will be impossible in Doctrine ORM 4.0%
+%Not setting "doctrine.orm.enable_native_lazy_objects" to true is deprecated%
+%Disabling native lazy objects is deprecated and will be impossible in Doctrine ORM 4.0%

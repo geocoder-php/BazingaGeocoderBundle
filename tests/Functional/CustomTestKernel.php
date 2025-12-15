@@ -13,6 +13,7 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Nyholm\BundleTest\TestKernel;
+use Nyholm\NSA;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 use Symfony\Component\ErrorHandler\DebugClassLoader;
@@ -28,60 +29,12 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
  */
 class CustomTestKernel extends TestKernel
 {
-    private $warmupDir;
-
-    public function reboot(?string $warmupDir)
-    {
-        $this->shutdown();
-        $this->warmupDir = $warmupDir;
-        $this->boot();
-    }
-
     /*
      * Needed, otherwise the used cache is different on each kernel boot, which is a big issue in PluginInteractionTest
      */
     public function getCacheDir(): string
     {
         return realpath(sys_get_temp_dir()).'/NyholmBundleTest/cachePluginInteractionTest';
-    }
-
-    /**
-     * Returns the kernel parameters.
-     */
-    protected function getKernelParameters(): array
-    {
-        $bundles = [];
-        $bundlesMetadata = [];
-
-        foreach ($this->bundles as $name => $bundle) {
-            $bundles[$name] = \get_class($bundle);
-            $bundlesMetadata[$name] = [
-                'path' => $bundle->getPath(),
-                'namespace' => $bundle->getNamespace(),
-            ];
-        }
-
-        return [
-            'kernel.project_dir' => realpath($this->getProjectDir()) ?: $this->getProjectDir(),
-            'kernel.environment' => $this->environment,
-            'kernel.runtime_environment' => '%env(default:kernel.environment:APP_RUNTIME_ENV)%',
-            'kernel.debug' => $this->debug,
-            'kernel.build_dir' => realpath($buildDir = $this->warmupDir ?: $this->getBuildDir()) ?: $buildDir,
-            'kernel.cache_dir' => realpath($cacheDir = ($this->getCacheDir() === $this->getBuildDir() ? ($this->warmupDir ?: $this->getCacheDir()) : $this->getCacheDir())) ?: $cacheDir,
-            'kernel.logs_dir' => realpath($this->getLogDir()) ?: $this->getLogDir(),
-            'kernel.bundles' => $bundles,
-            'kernel.bundles_metadata' => $bundlesMetadata,
-            'kernel.charset' => $this->getCharset(),
-            'kernel.container_class' => $this->getContainerClass(),
-        ];
-    }
-
-    /**
-     * @internal
-     */
-    public function setAnnotatedClassCache(array $annotatedClasses): void
-    {
-        file_put_contents(($this->warmupDir ?: $this->getBuildDir()).'/annotations.map', sprintf('<?php return %s;', var_export($annotatedClasses, true)));
     }
 
     /**
@@ -92,8 +45,10 @@ class CustomTestKernel extends TestKernel
      */
     protected function initializeContainer(): void
     {
+        $warmupDir = NSA::getProperty($this, 'warmupDir');
+
         $class = $this->getContainerClass();
-        $buildDir = $this->warmupDir ?: $this->getBuildDir();
+        $buildDir = $warmupDir ?: $this->getBuildDir();
         $cache = new ConfigCache($buildDir.'/'.$class.'.php', $this->debug);
         $cachePath = $cache->getPath();
 
