@@ -2,13 +2,18 @@
 bazinga_geocoder:
     # The local IP (127.0.0.1) will be replaced by the fake_ip
     # see https://github.com/geocoder-php/BazingaGeocoderBundle/blob/5.0.0/Resources/doc/index.md#fake-local-ip
-    fake_ip: 
+    fake_ip:
         local_ip: ::1
-        ip: 87.98.128.10
-        # this ip is in france
+        ip: 123.123.123.128
+        # this ip is in china
     providers:
         geoPlugin:
-            factory: Bazinga\GeocoderBundle\ProviderFactory\GeoPluginFactory
+            factory: Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory
             cache: 'app.simple_cache'
             cache_lifetime: 42
             cache_precision: ~
+            options:
+                http_client: '@Http\Mock\Client'
+
+services:
+    Http\Mock\Client: ~
