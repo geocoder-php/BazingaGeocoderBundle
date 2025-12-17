@@ -12,6 +12,15 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures;
 
-final class Dummy2
+use Bazinga\GeocoderBundle\Mapping\Attributes\Address;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Geocodeable;
+
+#[Geocodeable]
+final class DummyWithAddressGetter
 {
+    #[Address]
+    public function getAddress(): string
+    {
+        return 'address';
+    }
 }
