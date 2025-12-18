@@ -142,12 +142,6 @@ $ignoreErrors[] = [
     'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
 ];
 $ignoreErrors[] = [
-    // identifier: method.notFound
-    'message' => '#^Call to an undefined method Doctrine\\\\ORM\\\\Event\\\\OnFlushEventArgs\\:\\:getEntityManager\\(\\)\\.$#',
-    'count' => 1,
-    'path' => __DIR__.'/src/Doctrine/ORM/GeocoderListener.php',
-];
-$ignoreErrors[] = [
     // identifier: method.nonObject
     'message' => '#^Cannot call method getLatitude\\(\\) on Geocoder\\\\Model\\\\Coordinates\\|null\\.$#',
     'count' => 1,
@@ -158,18 +152,6 @@ $ignoreErrors[] = [
     'message' => '#^Cannot call method getLongitude\\(\\) on Geocoder\\\\Model\\\\Coordinates\\|null\\.$#',
     'count' => 1,
     'path' => __DIR__.'/src/Doctrine/ORM/GeocoderListener.php',
-];
-$ignoreErrors[] = [
-    // identifier: missingType.generics
-    'message' => '#^Method Bazinga\\\\GeocoderBundle\\\\Mapping\\\\Driver\\\\AnnotationDriver\\:\\:getReflection\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#',
-    'count' => 1,
-    'path' => __DIR__.'/src/Mapping/Driver/AnnotationDriver.php',
-];
-$ignoreErrors[] = [
-    // identifier: missingType.generics
-    'message' => '#^Method Bazinga\\\\GeocoderBundle\\\\Mapping\\\\Driver\\\\AttributeDriver\\:\\:getReflection\\(\\) return type with generic class ReflectionClass does not specify its types\\: T$#',
-    'count' => 1,
-    'path' => __DIR__.'/src/Mapping/Driver/AttributeDriver.php',
 ];
 $ignoreErrors[] = [
     // identifier: argument.type

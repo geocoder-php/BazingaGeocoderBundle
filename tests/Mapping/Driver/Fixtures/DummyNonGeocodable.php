@@ -10,13 +10,8 @@ declare(strict_types=1);
  * @license    MIT License
  */
 
-namespace Bazinga\GeocoderBundle\Mapping\Driver;
+namespace Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures;
 
-use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
-
-interface DriverInterface
+final class DummyNonGeocodable
 {
-    public function isGeocodeable(object $object): bool;
-
-    public function loadMetadataFromObject(object $object): ClassMetadata;
 }

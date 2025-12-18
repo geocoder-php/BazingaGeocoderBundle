@@ -10,14 +10,12 @@ declare(strict_types=1);
  * @license    MIT License
  */
 
-namespace Bazinga\GeocoderBundle\Mapping\Annotations;
+namespace Bazinga\GeocoderBundle\Mapping\Attributes;
 
-#[\Attribute(\Attribute::TARGET_PROPERTY | \Attribute::TARGET_METHOD)]
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
- *
- * @Annotation
  */
-class Address
+#[\Attribute(\Attribute::TARGET_CLASS)]
+class Geocodeable
 {
 }

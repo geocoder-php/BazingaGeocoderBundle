@@ -10,14 +10,12 @@ declare(strict_types=1);
  * @license    MIT License
  */
 
-namespace Bazinga\GeocoderBundle\Mapping\Annotations;
+namespace Bazinga\GeocoderBundle\Mapping\Attributes;
 
-#[\Attribute(\Attribute::TARGET_PROPERTY)]
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
- *
- * @Annotation
  */
-class Latitude
+#[\Attribute(\Attribute::TARGET_PROPERTY)]
+class Longitude
 {
 }
