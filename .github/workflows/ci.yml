@@ -19,7 +19,7 @@ jobs:
           tools: flex
 
       - name: "Checkout code"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: "Install Composer dependencies"
         uses: "ramsey/composer-install@v3"
@@ -45,7 +45,7 @@ jobs:
           tools: flex, cs2pr
 
       - name: "Checkout code"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: "Install Composer dependencies"
         uses: "ramsey/composer-install@v3"
@@ -78,7 +78,7 @@ jobs:
 
     steps:
       - name: "Checkout code"
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
