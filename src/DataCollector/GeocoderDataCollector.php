@@ -34,20 +34,14 @@ class GeocoderDataCollector extends DataCollector
         $this->data['providers'] = [];
     }
 
-    /**
-     * @return void
-     */
-    public function reset()
+    public function reset(): void
     {
         $this->instances = [];
         $this->data['queries'] = [];
         $this->data['providers'] = [];
     }
 
-    /**
-     * @return void
-     */
-    public function collect(Request $request, Response $response, ?\Throwable $exception = null)
+    public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
     {
         if (!empty($this->data['queries'])) {
             // To avoid collection more that once.

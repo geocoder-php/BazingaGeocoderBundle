@@ -12,7 +12,7 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Mapping\Driver;
 
-use Bazinga\GeocoderBundle\Mapping\Annotations;
+use Bazinga\GeocoderBundle\Mapping\Attributes;
 use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
 use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
 use Doctrine\Common\Util\ClassUtils;
@@ -23,70 +23,68 @@ use Doctrine\ORM\Proxy\DefaultProxyClassNameResolver;
  */
 final class AttributeDriver implements DriverInterface
 {
-    public function isGeocodeable($object): bool
+    public function isGeocodeable(object $object): bool
     {
-        if (PHP_VERSION_ID < 80000) {
-            return false;
-        }
-
         $reflection = self::getReflection($object);
 
-        return count($reflection->getAttributes(Annotations\Geocodeable::class)) > 0;
+        return [] !== $reflection->getAttributes(Attributes\Geocodeable::class);
     }
 
     /**
      * @throws MappingException
      */
-    public function loadMetadataFromObject($object): ClassMetadata
+    public function loadMetadataFromObject(object $object): ClassMetadata
     {
-        if (PHP_VERSION_ID < 80000) {
-            throw new MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
-        }
-
         $reflection = self::getReflection($object);
 
-        $attributes = $reflection->getAttributes(Annotations\Geocodeable::class);
+        $attributes = $reflection->getAttributes(Attributes\Geocodeable::class);
 
-        if (0 === count($attributes)) {
-            throw new MappingException(sprintf('The class %s is not geocodeable', get_class($object)));
+        if ([] === $attributes) {
+            throw new MappingException(sprintf('The class "%s" is not geocodeable', get_class($object)));
         }
 
-        $metadata = new ClassMetadata();
+        $args = [];
 
         foreach ($reflection->getProperties() as $property) {
             foreach ($property->getAttributes() as $attribute) {
-                if (Annotations\Latitude::class === $attribute->getName()) {
-                    $property->setAccessible(true);
-                    $metadata->latitudeProperty = $property;
-                } elseif (Annotations\Longitude::class === $attribute->getName()) {
-                    $property->setAccessible(true);
-                    $metadata->longitudeProperty = $property;
-                } elseif (Annotations\Address::class === $attribute->getName()) {
-                    $property->setAccessible(true);
-                    $metadata->addressProperty = $property;
+                if (Attributes\Latitude::class === $attribute->getName()) {
+                    $args['latitudeProperty'] = $property;
+                } elseif (Attributes\Longitude::class === $attribute->getName()) {
+                    $args['longitudeProperty'] = $property;
+                } elseif (Attributes\Address::class === $attribute->getName()) {
+                    $args['addressProperty'] = $property;
                 }
             }
         }
 
         foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
-            if (count($method->getAttributes(Annotations\Address::class)) > 0) {
+            if ([] !== $method->getAttributes(Attributes\Address::class)) {
                 if (0 !== $method->getNumberOfRequiredParameters()) {
                     throw new MappingException('You can not use a method requiring parameters with #[Address] attribute!');
                 }
 
-                $metadata->addressGetter = $method;
+                $args['addressGetter'] = $method;
             }
         }
 
-        return $metadata;
+        return new ClassMetadata(...$args);
     }
 
+    /**
+     * @template T of object
+     *
+     * @param T $object
+     *
+     * @return \ReflectionClass<T>
+     */
     private static function getReflection(object $object): \ReflectionClass
     {
         if (class_exists(ClassUtils::class)) {
+            /** @var \ReflectionClass<T> */
             return ClassUtils::newReflectionObject($object);
         }
 
+        /** @var \ReflectionClass<T> */
         return new \ReflectionClass(DefaultProxyClassNameResolver::getClass($object));
     }
 }

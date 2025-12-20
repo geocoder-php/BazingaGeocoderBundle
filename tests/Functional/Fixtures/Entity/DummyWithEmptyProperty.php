@@ -12,58 +12,33 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity;
 
-use Bazinga\GeocoderBundle\Mapping\Annotations\Address;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Geocodeable;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Latitude;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Longitude;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Address;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Geocodeable;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Latitude;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Longitude;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 
-/**
- * @Geocodeable
- *
- * @Entity
- */
 #[Entity]
 #[Geocodeable]
 class DummyWithEmptyProperty
 {
-    /**
-     * @Id @GeneratedValue
-     *
-     * @Column(type="integer")
-     */
     #[Id]
     #[GeneratedValue]
     #[Column(type: Types::INTEGER)]
     public $id;
 
-    /**
-     * @Latitude
-     *
-     * @Column(nullable=true)
-     */
     #[Column(nullable: true)]
     #[Latitude]
     public $latitude;
 
-    /**
-     * @Longitude
-     *
-     * @Column(nullable=true)
-     */
     #[Column(nullable: true)]
     #[Longitude]
     public $longitude;
 
-    /**
-     * @Address
-     *
-     * @Column
-     */
     #[Column]
     #[Address]
     public $address;

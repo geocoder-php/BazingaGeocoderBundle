@@ -15,7 +15,8 @@ namespace Bazinga\GeocoderBundle\Tests\Mapping\Driver;
 use Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver;
 use Bazinga\GeocoderBundle\Mapping\Exception\MappingException;
 use Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures\Dummy;
-use Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures\Dummy2;
+use Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures\DummyNonGeocodable;
+use Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures\DummyWithAddressGetter;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -25,45 +26,39 @@ final class AttributeDriverTest extends TestCase
 {
     private AttributeDriver $driver;
 
-    public static function setUpBeforeClass(): void
-    {
-        if (PHP_VERSION_ID < 80000) {
-            self::markTestSkipped(sprintf('"%s" is only supported on PHP 8', AttributeDriver::class));
-        }
-    }
-
     protected function setUp(): void
     {
         $this->driver = new AttributeDriver();
     }
 
-    /**
-     * @requires PHP 8.0
-     */
     public function testLoadMetadata(): void
     {
-        $obj = new Dummy();
-        $metadata = $this->driver->loadMetadataFromObject($obj);
+        $metadata = $this->driver->loadMetadataFromObject(new Dummy());
 
-        self::assertInstanceOf('ReflectionProperty', $metadata->addressProperty);
-        self::assertInstanceOf('ReflectionProperty', $metadata->latitudeProperty);
-        self::assertInstanceOf('ReflectionProperty', $metadata->longitudeProperty);
+        self::assertNotNull($metadata->addressProperty);
+        self::assertSame('address', $metadata->addressProperty->getName());
+        self::assertNotNull($metadata->latitudeProperty);
+        self::assertSame('latitude', $metadata->latitudeProperty->getName());
+        self::assertNotNull($metadata->longitudeProperty);
+        self::assertSame('longitude', $metadata->longitudeProperty->getName());
     }
 
-    /**
-     * @requires PHP 8.0
-     */
+    public function testLoadMetadataWithAddressGetter(): void
+    {
+        $metadata = $this->driver->loadMetadataFromObject(new DummyWithAddressGetter());
+
+        self::assertNotNull($metadata->addressGetter);
+        self::assertSame('getAddress', $metadata->addressGetter->getName());
+    }
+
     public function testLoadMetadataFromWrongObject(): void
     {
         $this->expectException(MappingException::class);
-        $this->expectExceptionMessage('The class '.Dummy2::class.' is not geocodeable');
+        $this->expectExceptionMessage('The class "'.DummyNonGeocodable::class.'" is not geocodeable');
 
-        $this->driver->loadMetadataFromObject(new Dummy2());
+        $this->driver->loadMetadataFromObject(new DummyNonGeocodable());
     }
 
-    /**
-     * @requires PHP 8.0
-     */
     public function testIsGeocodable(): void
     {
         self::assertTrue($this->driver->isGeocodeable(new Dummy()));
