@@ -15,7 +15,6 @@ bazinga_geocoder:
         acme:
             factory: Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory
             options:
-                http_client: '@Http\Mock\Client'
                 root_url: 'https://nominatim.openstreetmap.org'
                 user_agent: 'geocoder-php test_suite'
 

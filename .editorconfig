@@ -8,5 +8,18 @@ indent_style = space
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.{yml,yaml}]
+[.github/**/*.{yml,yaml}]
 indent_size = 2
+
+[*.{yml,yaml}]
+trim_trailing_whitespace = false
+
+[**.md]
+indent_size = unset
+indent_style = unset
+
+[*.json]
+insert_final_newline = false
+
+[*.{neon,neon.dist}]
+indent_style = tab

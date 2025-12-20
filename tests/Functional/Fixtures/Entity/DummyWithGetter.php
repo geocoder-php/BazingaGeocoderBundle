@@ -12,67 +12,41 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity;
 
-use Bazinga\GeocoderBundle\Mapping\Annotations\Address;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Geocodeable;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Latitude;
-use Bazinga\GeocoderBundle\Mapping\Annotations\Longitude;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Address;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Geocodeable;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Latitude;
+use Bazinga\GeocoderBundle\Mapping\Attributes\Longitude;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
 use Doctrine\ORM\Mapping\GeneratedValue;
 use Doctrine\ORM\Mapping\Id;
 
-/**
- * @Geocodeable
- *
- * @Entity
- */
 #[Entity]
 #[Geocodeable]
 class DummyWithGetter
 {
-    /**
-     * @Id @GeneratedValue
-     *
-     * @Column(type="integer")
-     */
     #[Id]
     #[GeneratedValue]
     #[Column(type: Types::INTEGER)]
     private $id;
 
-    /**
-     * @Latitude
-     *
-     * @Column
-     */
     #[Column]
     #[Latitude]
     private $latitude;
 
-    /**
-     * @Longitude
-     *
-     * @Column
-     */
     #[Column]
     #[Longitude]
     private $longitude;
 
-    /**
-     * @Column
-     */
     #[Column]
     private $_address;
 
-    public function setAddress($address)
+    public function setAddress($address): void
     {
         $this->_address = $address;
     }
 
-    /**
-     * @Address
-     */
     #[Address]
     public function getAddress()
     {
@@ -84,7 +58,7 @@ class DummyWithGetter
         return $this->latitude;
     }
 
-    public function setLatitude($latitude)
+    public function setLatitude($latitude): void
     {
         $this->latitude = $latitude;
     }
@@ -94,7 +68,7 @@ class DummyWithGetter
         return $this->longitude;
     }
 
-    public function setLongitude($longitude)
+    public function setLongitude($longitude): void
     {
         $this->longitude = $longitude;
     }

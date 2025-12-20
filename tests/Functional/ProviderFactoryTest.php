@@ -20,7 +20,6 @@ use Geocoder\Provider\Chain\Chain;
 use Geocoder\Provider\FreeGeoIp\FreeGeoIp;
 use Geocoder\Provider\Geoip\Geoip;
 use Geocoder\Provider\GeoIP2\GeoIP2;
-use Geocoder\Provider\GeoIPs\GeoIPs;
 use Geocoder\Provider\Geonames\Geonames;
 use Geocoder\Provider\GeoPlugin\GeoPlugin;
 use Geocoder\Provider\GoogleMaps\GoogleMaps;
@@ -33,7 +32,6 @@ use Geocoder\Provider\Ipstack\Ipstack;
 use Geocoder\Provider\LocationIQ\LocationIQ;
 use Geocoder\Provider\Mapbox\Mapbox;
 use Geocoder\Provider\MapQuest\MapQuest;
-use Geocoder\Provider\Mapzen\Mapzen;
 use Geocoder\Provider\MaxMind\MaxMind;
 use Geocoder\Provider\MaxMindBinary\MaxMindBinary;
 use Geocoder\Provider\Nominatim\Nominatim;
@@ -107,9 +105,6 @@ final class ProviderFactoryTest extends KernelTestCase
         yield [FreeGeoIp::class, ['empty', 'acme']];
         // yield [Geoip::class, ['empty']];
         yield [GeoIP2::class, ['acme']];
-        if (class_exists(GeoIPs::class)) {
-            yield [GeoIPs::class, ['acme']];
-        }
         yield [Geonames::class, ['acme']];
         yield [GeoPlugin::class, ['empty']];
         yield [GoogleMaps::class, ['empty']];
@@ -122,9 +117,6 @@ final class ProviderFactoryTest extends KernelTestCase
         yield [LocationIQ::class, ['acme']];
         yield [Mapbox::class, ['acme']];
         yield [MapQuest::class, ['acme']];
-        if (class_exists(Mapzen::class)) {
-            yield [Mapzen::class, ['acme']];
-        }
         yield [MaxMind::class, ['acme']];
         yield [MaxMindBinary::class, ['acme']];
         yield [Nominatim::class, ['empty', 'acme']];
@@ -132,28 +124,5 @@ final class ProviderFactoryTest extends KernelTestCase
         yield [PickPoint::class, ['acme']];
         yield [TomTom::class, ['acme']];
         yield [Yandex::class, ['empty', 'acme']];
-    }
-
-    /**
-     * @group legacy
-     */
-    public function testProviderConfigurationWithDeprecatedHttplugClientOption(): void
-    {
-        self::bootKernel(['config' => static function (TestKernel $kernel) {
-            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
-            }
-
-            $kernel->addTestConfig(__DIR__.'/config/deprecated_httplug_client_option.yml');
-        }]);
-
-        $container = self::getContainer();
-
-        $this->expectDeprecation('Since willdurand/geocoder-bundle 5.19: The option "httplug_client" is deprecated, use "http_client" instead.');
-
-        self::assertTrue($container->has('bazinga_geocoder.provider.acme'));
-        $container->get('bazinga_geocoder.provider.acme');
     }
 }

@@ -24,7 +24,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-#[AsCommand(name: 'geocoder:geocode', description: 'Geocode an address or a ip address')]
+#[AsCommand(name: 'geocoder:geocode', description: 'Geocode an address or an IP address')]
 class GeocodeCommand extends Command
 {
     private ProviderAggregator $geocoder;

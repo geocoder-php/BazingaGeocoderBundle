@@ -14,6 +14,8 @@ namespace Bazinga\GeocoderBundle\Tests\Functional;
 
 use Nyholm\BundleTest\TestKernel;
 use Symfony\Component\Config\ConfigCache;
+use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
+use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Dumper\Preloader;
 use Symfony\Component\ErrorHandler\DebugClassLoader;
 use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
@@ -26,11 +28,11 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
  * the methods using it (reboot() and getKernelParameters() and setAnnotatedClassCache() ) therefore needed to be redeclared, in order
  * for them to have a correct value in it.
  */
-class CustomTestKernel extends TestKernel
+class CustomTestKernel extends TestKernel implements CompilerPassInterface
 {
     private $warmupDir;
 
-    public function reboot(?string $warmupDir)
+    public function reboot(?string $warmupDir): void
     {
         $this->shutdown();
         $this->warmupDir = $warmupDir;
@@ -43,6 +45,11 @@ class CustomTestKernel extends TestKernel
     public function getCacheDir(): string
     {
         return realpath(sys_get_temp_dir()).'/NyholmBundleTest/cachePluginInteractionTest';
+    }
+
+    public function getShareDir(): ?string
+    {
+        return $this->getCacheDir();
     }
 
     /**
@@ -65,6 +72,10 @@ class CustomTestKernel extends TestKernel
             'kernel.project_dir' => realpath($this->getProjectDir()) ?: $this->getProjectDir(),
             'kernel.environment' => $this->environment,
             'kernel.runtime_environment' => '%env(default:kernel.environment:APP_RUNTIME_ENV)%',
+            'kernel.runtime_mode' => '%env(query_string:default:container.runtime_mode:APP_RUNTIME_MODE)%',
+            'kernel.runtime_mode.web' => '%env(bool:default::key:web:default:kernel.runtime_mode:)%',
+            'kernel.runtime_mode.cli' => '%env(not:default:kernel.runtime_mode.web:)%',
+            'kernel.runtime_mode.worker' => '%env(bool:default::key:worker:default:kernel.runtime_mode:)%',
             'kernel.debug' => $this->debug,
             'kernel.build_dir' => realpath($buildDir = $this->warmupDir ?: $this->getBuildDir()) ?: $buildDir,
             'kernel.cache_dir' => realpath($cacheDir = ($this->getCacheDir() === $this->getBuildDir() ? ($this->warmupDir ?: $this->getCacheDir()) : $this->getCacheDir())) ?: $cacheDir,
@@ -73,7 +84,7 @@ class CustomTestKernel extends TestKernel
             'kernel.bundles_metadata' => $bundlesMetadata,
             'kernel.charset' => $this->getCharset(),
             'kernel.container_class' => $this->getContainerClass(),
-        ];
+        ] + (null !== ($dir = $this->getShareDir()) ? ['kernel.share_dir' => realpath($dir) ?: $dir] : []);
     }
 
     /**
@@ -82,6 +93,21 @@ class CustomTestKernel extends TestKernel
     public function setAnnotatedClassCache(array $annotatedClasses): void
     {
         file_put_contents(($this->warmupDir ?: $this->getBuildDir()).'/annotations.map', sprintf('<?php return %s;', var_export($annotatedClasses, true)));
+    }
+
+    // Can be removed after dropping Symfony 5.4
+    public function process(ContainerBuilder $container): void
+    {
+        $container
+            ->getDefinition('http_client')
+            ->setPublic(true);
+    }
+
+    protected function build(ContainerBuilder $container): void
+    {
+        parent::build($container);
+
+        $container->addCompilerPass($this);
     }
 
     /**

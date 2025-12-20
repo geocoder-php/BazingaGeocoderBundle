@@ -30,13 +30,6 @@ class Address extends Constraint
     ];
 
     /**
-     * @var array<string, string>
-     *
-     * @deprecated since BazingaGeocoderBundle 5.17, use const ERROR_NAMES instead
-     */
-    protected static $errorNames = self::ERROR_NAMES;
-
-    /**
      * @var string
      */
     public $service = AddressValidator::class;
