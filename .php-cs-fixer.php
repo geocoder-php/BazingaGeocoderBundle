@@ -3,6 +3,7 @@
 $finder = (new PhpCsFixer\Finder())
     ->in(__DIR__)
     ->exclude(__DIR__.'/vendor')
+    ->exclude(__DIR__.'/phpstan-baseline.php')
 ;
 
 return (new PhpCsFixer\Config())
