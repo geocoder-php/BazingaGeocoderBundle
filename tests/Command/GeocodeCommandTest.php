@@ -66,7 +66,12 @@ final class GeocodeCommandTest extends TestCase
             ->willReturn([]);
 
         $app = new Application($kernel);
-        $app->addCommand((new GeocodeCommand($geocoder))->setName('geocoder:geocode'));
+        if (method_exists($app, 'addCommand')) {
+            // since Symfony 8
+            $app->addCommand((new GeocodeCommand($geocoder))->setName('geocoder:geocode'));
+        } else {
+            $app->add(new GeocodeCommand($geocoder));
+        }
 
         $command = $app->find('geocoder:geocode');
 
