@@ -10,7 +10,6 @@ return (new PhpCsFixer\Config())
         '@Symfony' => true,
         'no_superfluous_phpdoc_tags' => false,
         'phpdoc_to_comment' => ['ignored_tags' => ['var']], // phpstan errors pops up without this
-        'unsupportedPhpVersionAllowed' => true,
     ])
     ->setFinder($finder)
 ;
