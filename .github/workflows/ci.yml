@@ -36,7 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       php-version: 8.4
-      PHP_CS_FIXER_IGNORE_ENV: 1
     steps:
       - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
