@@ -78,9 +78,7 @@ final class AddressValidatorTest extends ConstraintValidatorTestCase
     {
         $address = 'Bifrost, Nine Realms';
 
-        $constraint = new Address([
-            'message' => 'myMessage {{ address }}',
-        ]);
+        $constraint = new Address(message: 'myMessage {{ address }}');
 
         $this->validator->validate($address, $constraint);
 
