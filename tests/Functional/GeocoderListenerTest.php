@@ -109,7 +109,7 @@ final class GeocoderListenerTest extends KernelTestCase
             }
 
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
-            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
+            $kernel->addTestConfig(__DIR__.'/config/listener_php8.yml');
         }]);
 
         $container = self::getContainer();
