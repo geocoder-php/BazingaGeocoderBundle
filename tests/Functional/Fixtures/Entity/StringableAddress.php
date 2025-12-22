@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 
 #[Embeddable]
-final class StringableAddress implements \Stringable
+class StringableAddress implements \Stringable
 {
     public function __construct(
         #[Column]

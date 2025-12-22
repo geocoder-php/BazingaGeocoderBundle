@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping\Id;
 
 #[Entity]
 #[Geocodeable]
-final class DummyWithStringableGetter
+class DummyWithStringableGetter
 {
     #[Id]
     #[GeneratedValue]
