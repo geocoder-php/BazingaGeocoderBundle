@@ -36,7 +36,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       php-version: 8.4
-      PHP_CS_FIXER_IGNORE_ENV: 1
     steps:
       - name: "Setup PHP"
         uses: shivammathur/setup-php@v2
@@ -53,7 +52,7 @@ jobs:
           composer-options: "--optimize-autoloader"
 
       - name: "Run PHP-CS-Fixer"
-        run: vendor/bin/php-cs-fixer fix -v --dry-run --using-cache=no --format=checkstyle | cs2pr
+        run: vendor/bin/php-cs-fixer fix -v --dry-run --allow-unsupported-php-version=yes --using-cache=no --format=checkstyle | cs2pr
 
   phpunit:
     name: PHPUnit (PHP ${{ matrix.php }}) (Symfony ${{ matrix.sf_version }})
