@@ -29,7 +29,6 @@ Here is a list of all provider factories and their options.
 | `Bazinga\GeocoderBundle\ProviderFactory\MapboxFactory` | http_client, api_key, country, mode
 | `Bazinga\GeocoderBundle\ProviderFactory\MapQuestFactory` | http_client, api_key, licensed
 | `Bazinga\GeocoderBundle\ProviderFactory\MapzenFactory` | http_client, api_key
-| `Bazinga\GeocoderBundle\ProviderFactory\MaxMindBinaryFactory` | dat_file, open_flag
 | `Bazinga\GeocoderBundle\ProviderFactory\MaxMindFactory` | http_client, api_key, endpoint
 | `Bazinga\GeocoderBundle\ProviderFactory\NominatimFactory` | http_client, root_url
 | `Bazinga\GeocoderBundle\ProviderFactory\OpenCageFactory` | http_client, api_key
