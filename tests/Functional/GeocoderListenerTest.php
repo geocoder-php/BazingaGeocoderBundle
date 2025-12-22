@@ -77,7 +77,9 @@ final class GeocoderListenerTest extends KernelTestCase
                     $orm['controller_resolver']['auto_mapping'] = false;
                     $orm['report_fields_where_declared'] = true;
                 }
-                if (method_exists(Configuration::class, 'setLazyGhostObjectEnabled') && Kernel::VERSION_ID >= 60100) {
+                if (method_exists(Configuration::class, 'setLazyGhostObjectEnabled')
+                    && Kernel::VERSION_ID >= 60100
+                    && version_compare($doctrineBundleVersion, '2.8.0', '>=')) {
                     $orm['enable_lazy_ghost_objects'] = true;
                 }
                 if (\PHP_VERSION_ID >= 80400
