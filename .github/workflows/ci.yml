@@ -52,7 +52,7 @@ jobs:
           composer-options: "--optimize-autoloader"
 
       - name: "Run PHP-CS-Fixer"
-        run: vendor/bin/php-cs-fixer fix -v --dry-run --allow-unsupported-php-version=yes --using-cache=no --format=checkstyle | cs2pr
+        run: vendor/bin/php-cs-fixer fix -v --dry-run --diff --allow-unsupported-php-version=yes --using-cache=no --format=checkstyle | cs2pr
 
   phpunit:
     name: PHPUnit (PHP ${{ matrix.php }}) (Symfony ${{ matrix.sf_version }})
