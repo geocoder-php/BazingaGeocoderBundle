@@ -46,7 +46,6 @@
     "geocoder-php/locationiq-provider": "^1.4",
     "geocoder-php/mapbox-provider": "^1.4",
     "geocoder-php/mapquest-provider": "^4.3",
-    "geocoder-php/maxmind-binary-provider": "^4.4",
     "geocoder-php/maxmind-provider": "^4.5",
     "geocoder-php/nominatim-provider": "^5.8",
     "geocoder-php/open-cage-provider": "^4.7",
