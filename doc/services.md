@@ -16,8 +16,6 @@ Here is a list of all provider factories and their options.
 | `Bazinga\GeocoderBundle\ProviderFactory\ChainFactory` | services
 | `Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory` | http_client, base_url
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoIP2Factory` | provider, database_filename, user_id, license_key, webservice_options, locales, provider_service
-| `Bazinga\GeocoderBundle\ProviderFactory\GeoipFactory` |
-| `Bazinga\GeocoderBundle\ProviderFactory\GeoIPsFactory` | http_client, api_key
 | `Bazinga\GeocoderBundle\ProviderFactory\GeonamesFactory` | http_client, username
 | `Bazinga\GeocoderBundle\ProviderFactory\GeoPluginFactory` | http_client
 | `Bazinga\GeocoderBundle\ProviderFactory\GoogleMapsFactory` | http_client, api_key, region
