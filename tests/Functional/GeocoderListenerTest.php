@@ -17,6 +17,8 @@ use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithEmptyProper
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithGetter;
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithInvalidGetter;
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithProperty;
+use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithStringableGetter;
+use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\StringableAddress;
 use Doctrine\Bundle\DoctrineBundle\ConnectionFactory;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\ORM\Configuration;
@@ -175,6 +177,46 @@ final class GeocoderListenerTest extends KernelTestCase
 
         self::assertNotEquals($clone->getLatitude(), $dummy->getLatitude());
         self::assertNotEquals($clone->getLongitude(), $dummy->getLongitude());
+    }
+
+    public function testPersistForStringableGetter(): void
+    {
+        self::bootKernel(['config' => static function (TestKernel $kernel) {
+            $kernel->addTestConfig(__DIR__.'/config/framework.yml');
+
+            if ($kernel::VERSION_ID >= 60000) {
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+            }
+
+            $kernel->addTestConfig(__DIR__.'/config/listener.yml');
+            $kernel->addTestConfig(__DIR__.'/config/listener_'.(PHP_VERSION_ID >= 80000 ? 'php8' : 'php7').'.yml');
+        }]);
+
+        $container = self::getContainer();
+        $container->set('http_client', self::createHttpClientForBerlinQuery());
+
+        $em = $container->get('doctrine.orm.entity_manager');
+
+        $tool = new SchemaTool($em);
+        $tool->createSchema($em->getMetadataFactory()->getAllMetadata());
+
+        $dummy = new DummyWithStringableGetter();
+        $dummy->setAddress(new StringableAddress('Berlin, Germany'));
+
+        $em->persist($dummy);
+        $em->flush();
+
+        self::assertNotNull($dummy->latitude);
+        self::assertNotNull($dummy->longitude);
+
+        $clone = clone $dummy;
+        $dummy->setAddress(new StringableAddress('Paris, France'));
+
+        $em->persist($dummy);
+        $em->flush();
+
+        self::assertNotEquals($clone->latitude, $dummy->latitude);
+        self::assertNotEquals($clone->longitude, $dummy->longitude);
     }
 
     public function testPersistForInvalidGetter(): void
