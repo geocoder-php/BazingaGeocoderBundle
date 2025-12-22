@@ -71,14 +71,14 @@ final class GeocoderListenerTest extends KernelTestCase
             $kernel->addTestConfig(static function (ContainerBuilder $container) {
                 $container->prependExtensionConfig('doctrine', [
                     'orm' => [
-                        'report_fields_where_declared' => true,
+                        //'report_fields_where_declared' => true,
                     ],
                 ]);
 
                 if (method_exists(Configuration::class, 'setLazyGhostObjectEnabled') && Kernel::VERSION_ID >= 60100) {
                     $container->prependExtensionConfig('doctrine', [
                         'orm' => [
-                            'enable_lazy_ghost_objects' => true,
+                            //'enable_lazy_ghost_objects' => true,
                         ],
                     ]);
                 }
@@ -87,7 +87,7 @@ final class GeocoderListenerTest extends KernelTestCase
                     $container->prependExtensionConfig('doctrine', [
                         'orm' => [
                             'controller_resolver' => [
-                                'auto_mapping' => false,
+                                //'auto_mapping' => false,
                             ],
                         ],
                     ]);

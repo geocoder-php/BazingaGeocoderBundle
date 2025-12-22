@@ -23,7 +23,7 @@
     "willdurand/geocoder": "^4.6|^5.0"
   },
   "require-dev": {
-    "doctrine/doctrine-bundle": "^2.3",
+    "doctrine/doctrine-bundle": "^2.18 || ^3.0",
     "doctrine/orm": "^2.20 || ^3.0",
     "fakerphp/faker": "^1.20",
     "friendsofphp/php-cs-fixer": "^3.13",
