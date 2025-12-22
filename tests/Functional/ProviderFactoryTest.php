@@ -78,7 +78,7 @@ final class ProviderFactoryTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             }
 
             $kernel->addTestConfig(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\') + 1)).'.yml');
