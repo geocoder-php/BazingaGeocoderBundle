@@ -54,7 +54,7 @@ final class BundleInitializationTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             }
         }]);
 
@@ -72,7 +72,7 @@ final class BundleInitializationTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             }
 
             $kernel->addTestConfig(__DIR__.'/config/simple.yml');
@@ -92,7 +92,7 @@ final class BundleInitializationTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             }
 
             $kernel->addTestConfig(__DIR__.'/config/cache.yml');
@@ -114,7 +114,7 @@ final class BundleInitializationTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             }
 
             $kernel->addTestConfig(__DIR__.'/config/cache_without_lifetime.yml');
@@ -144,7 +144,7 @@ final class BundleInitializationTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             }
 
             $kernel->addTestConfig(__DIR__.'/config/service_plugin.yml');
@@ -166,7 +166,7 @@ final class BundleInitializationTest extends KernelTestCase
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
 
             if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf6.yml');
+                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             }
         }]);
 
