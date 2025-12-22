@@ -20,7 +20,6 @@ use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithProperty;
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithStringableGetter;
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\StringableAddress;
 use Composer\InstalledVersions;
-use Doctrine\Bundle\DoctrineBundle\ConnectionFactory;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\ORM\Tools\SchemaTool;
 use Nyholm\BundleTest\TestKernel;
@@ -65,7 +64,6 @@ final class GeocoderListenerTest extends KernelTestCase
                     ->setPublic(true);
             }
         });
-
         $kernel->addTestConfig(static function (ContainerBuilder $container) {
             $orm = [];
             // doctrine-bundle
@@ -75,11 +73,9 @@ final class GeocoderListenerTest extends KernelTestCase
                     $orm['auto_generate_proxy_classes'] = true;
                     $orm['controller_resolver']['auto_mapping'] = true;
                 }
-
                 if (version_compare($doctrineBundleVersion, '2.8.0', '>=') && version_compare($doctrineBundleVersion, '3.0.0', '<')) {
                     $orm['enable_lazy_ghost_objects'] = true;
                 }
-
                 if (\PHP_VERSION_ID >= 80400 && version_compare($doctrineBundleVersion, '2.15.0', '>=') && version_compare($doctrineBundleVersion, '3.1.0', '<')) {
                     $orm['enable_native_lazy_objects'] = true;
                 }
