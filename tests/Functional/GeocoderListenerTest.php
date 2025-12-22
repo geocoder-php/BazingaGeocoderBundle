@@ -65,34 +65,30 @@ final class GeocoderListenerTest extends KernelTestCase
                     ->setPublic(true);
             }
         });
-        if (defined(ConnectionFactory::class.'::DEFAULT_SCHEME_MAP')) {
-            $kernel->addTestConfig(static function (ContainerBuilder $container) {
 
-                $orm = [];
-
-                // doctrine-bundle
-                if (null !== $doctrineBundleVersion = InstalledVersions::getVersion('doctrine/doctrine-bundle')) {
-                    // v2
-                    if (version_compare($doctrineBundleVersion, '3.0.0', '<')) {
-                        $orm['auto_generate_proxy_classes'] = true;
-                        $orm['report_fields_where_declared'] = true;
-                        $orm['controller_resolver']['auto_mapping'] = true;
-                    }
-
-                    if (version_compare($doctrineBundleVersion, '2.8.0', '>=') && version_compare($doctrineBundleVersion, '3.0.0', '<')) {
-                        $orm['enable_lazy_ghost_objects'] = true;
-                    }
-
-                    if (\PHP_VERSION_ID >= 80400 && version_compare($doctrineBundleVersion, '2.15.0', '>=') && version_compare($doctrineBundleVersion, '3.1.0', '<')) {
-                        $orm['enable_native_lazy_objects'] = true;
-                    }
+        $kernel->addTestConfig(static function (ContainerBuilder $container) {
+            $orm = [];
+            // doctrine-bundle
+            if (null !== $doctrineBundleVersion = InstalledVersions::getVersion('doctrine/doctrine-bundle')) {
+                // v2
+                if (version_compare($doctrineBundleVersion, '3.0.0', '<')) {
+                    $orm['auto_generate_proxy_classes'] = true;
+                    $orm['controller_resolver']['auto_mapping'] = true;
                 }
 
-                $container->prependExtensionConfig('doctrine', [
-                    'orm' => $orm,
-                ]);
-            });
-        }
+                if (version_compare($doctrineBundleVersion, '2.8.0', '>=') && version_compare($doctrineBundleVersion, '3.0.0', '<')) {
+                    $orm['enable_lazy_ghost_objects'] = true;
+                }
+
+                if (\PHP_VERSION_ID >= 80400 && version_compare($doctrineBundleVersion, '2.15.0', '>=') && version_compare($doctrineBundleVersion, '3.1.0', '<')) {
+                    $orm['enable_native_lazy_objects'] = true;
+                }
+            }
+            $container->prependExtensionConfig('doctrine', [
+                'orm' => $orm,
+            ]);
+        });
+
         $kernel->handleOptions($options);
 
         return $kernel;
