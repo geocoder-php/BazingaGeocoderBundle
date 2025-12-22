@@ -57,7 +57,7 @@ class GeocoderListener implements EventSubscriber
             $this->geocodeEntity($metadata, $entity);
 
             $uow->recomputeSingleEntityChangeSet(
-                $em->getClassMetadata(get_class($entity)),
+                $em->getClassMetadata($entity::class),
                 $entity
             );
         }
@@ -76,7 +76,7 @@ class GeocoderListener implements EventSubscriber
             $this->geocodeEntity($metadata, $entity);
 
             $uow->recomputeSingleEntityChangeSet(
-                $em->getClassMetadata(get_class($entity)),
+                $em->getClassMetadata($entity::class),
                 $entity
             );
         }
@@ -92,11 +92,16 @@ class GeocoderListener implements EventSubscriber
             $address = '';
         }
 
-        if (empty($address) || !is_string($address)) {
+        if (!is_string($address) && !$address instanceof \Stringable) {
             return;
         }
 
-        $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($address));
+        $addressString = (string) $address;
+        if ('' === $addressString) {
+            return;
+        }
+
+        $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($addressString));
 
         if (!$results->isEmpty()) {
             $result = $results->first();

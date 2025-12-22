@@ -40,7 +40,7 @@ final class AttributeDriver implements DriverInterface
         $attributes = $reflection->getAttributes(Attributes\Geocodeable::class);
 
         if ([] === $attributes) {
-            throw new MappingException(sprintf('The class "%s" is not geocodeable', get_class($object)));
+            throw new MappingException(sprintf('The class "%s" is not geocodeable', $object::class));
         }
 
         $args = [];
