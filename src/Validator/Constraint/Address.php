@@ -51,6 +51,10 @@ class Address extends Constraint
      */
     public function __construct(?array $options = null, ?string $message = null, ?array $groups = null, $payload = null)
     {
+        if (\is_array($options)) {
+            trigger_deprecation('willdurand/geocoder-bundle', '5.24', 'Passing an array of options to configure the "%s" constraint is deprecated, use named arguments instead.', static::class);
+        }
+
         parent::__construct($options, $groups, $payload);
 
         $this->message = $message ?? $this->message;
