@@ -28,10 +28,7 @@ class FactoryValidatorPass implements CompilerPassInterface
      */
     private static $factoryServiceIds = [];
 
-    /**
-     * @return void
-     */
-    public function process(ContainerBuilder $container)
+    public function process(ContainerBuilder $container): void
     {
         foreach (self::$factoryServiceIds as $id) {
             if (!$container->hasAlias($id) && !$container->hasDefinition($id)) {

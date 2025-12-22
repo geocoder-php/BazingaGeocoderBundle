@@ -31,7 +31,7 @@ final class AttributeDriver implements DriverInterface
     }
 
     /**
-     * @throws MappingException
+     * @throws MappingException|\ReflectionException
      */
     public function loadMetadataFromObject(object $object): ClassMetadata
     {
@@ -76,6 +76,8 @@ final class AttributeDriver implements DriverInterface
      * @param T $object
      *
      * @return \ReflectionClass<T>
+     *
+     * @throws \ReflectionException
      */
     private static function getReflection(object $object): \ReflectionClass
     {
@@ -84,7 +86,12 @@ final class AttributeDriver implements DriverInterface
             return ClassUtils::newReflectionObject($object);
         }
 
+        if (PHP_VERSION_ID < 80400) {
+            /** @var \ReflectionClass<T> */
+            return new \ReflectionClass(DefaultProxyClassNameResolver::getClass($object));
+        }
+
         /** @var \ReflectionClass<T> */
-        return new \ReflectionClass(DefaultProxyClassNameResolver::getClass($object));
+        return new \ReflectionClass($object);
     }
 }

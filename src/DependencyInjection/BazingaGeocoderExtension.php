@@ -41,10 +41,8 @@ class BazingaGeocoderExtension extends Extension
 {
     /**
      * @param array<mixed, mixed> $configs
-     *
-     * @return void
      */
-    public function load(array $configs, ContainerBuilder $container)
+    public function load(array $configs, ContainerBuilder $container): void
     {
         $processor = new Processor();
         $configuration = $this->getConfiguration($configs, $container);

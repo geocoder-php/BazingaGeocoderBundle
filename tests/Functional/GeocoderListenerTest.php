@@ -19,12 +19,11 @@ use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithInvalidGett
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithProperty;
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithStringableGetter;
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\StringableAddress;
-use Doctrine\Bundle\DoctrineBundle\ConnectionFactory;
+use Composer\InstalledVersions;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\Tools\SchemaTool;
 use Nyholm\BundleTest\TestKernel;
-use Symfony\Bridge\Doctrine\ArgumentResolver\EntityValueResolver;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -67,33 +66,37 @@ final class GeocoderListenerTest extends KernelTestCase
                     ->setPublic(true);
             }
         });
-        if (defined(ConnectionFactory::class.'::DEFAULT_SCHEME_MAP')) {
-            $kernel->addTestConfig(static function (ContainerBuilder $container) {
-                $container->prependExtensionConfig('doctrine', [
-                    'orm' => [
-                        'report_fields_where_declared' => true,
-                    ],
-                ]);
-
-                if (method_exists(Configuration::class, 'setLazyGhostObjectEnabled') && Kernel::VERSION_ID >= 60100) {
-                    $container->prependExtensionConfig('doctrine', [
-                        'orm' => [
-                            'enable_lazy_ghost_objects' => true,
-                        ],
-                    ]);
+        $kernel->addTestConfig(static function (ContainerBuilder $container) {
+            $orm = [];
+            $ormVersion = InstalledVersions::getVersion('doctrine/orm');
+            // doctrine-bundle
+            if (null !== $doctrineBundleVersion = InstalledVersions::getVersion('doctrine/doctrine-bundle')) {
+                // v2
+                if (version_compare($doctrineBundleVersion, '3.0.0', '<')) {
+                    $orm['auto_generate_proxy_classes'] = true;
+                    $orm['controller_resolver']['auto_mapping'] = false;
+                    $orm['report_fields_where_declared'] = true;
                 }
-
-                if (class_exists(EntityValueResolver::class)) {
-                    $container->prependExtensionConfig('doctrine', [
-                        'orm' => [
-                            'controller_resolver' => [
-                                'auto_mapping' => false,
-                            ],
-                        ],
-                    ]);
+                if (method_exists(Configuration::class, 'setLazyGhostObjectEnabled')
+                    && Kernel::VERSION_ID >= 60100
+                    && version_compare($doctrineBundleVersion, '2.8.0', '>=')
+                    && version_compare($ormVersion, '3.0', '<=')
+                ) {
+                    $orm['enable_lazy_ghost_objects'] = true;
                 }
-            });
-        }
+                if (\PHP_VERSION_ID >= 80400
+                && version_compare($doctrineBundleVersion, '2.15.0', '>=')
+                && version_compare($doctrineBundleVersion, '3.1.0', '<')
+                && version_compare($ormVersion, '3.4.0', '>=')
+                ) {
+                    $orm['enable_native_lazy_objects'] = true;
+                }
+            }
+            $container->prependExtensionConfig('doctrine', [
+                'orm' => $orm,
+            ]);
+        });
+
         $kernel->handleOptions($options);
 
         return $kernel;
