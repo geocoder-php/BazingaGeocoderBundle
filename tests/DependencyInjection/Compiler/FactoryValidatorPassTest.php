@@ -33,7 +33,9 @@ final class FactoryValidatorPassTest extends TestCase
     {
         $reflection = new \ReflectionObject($this->compilerPass);
         $prop = $reflection->getProperty('factoryServiceIds');
-        $prop->setAccessible(true);
+        if (PHP_VERSION_ID < 80100) {
+            $prop->setAccessible(true);
+        }
         $prop->setValue(null, []);
     }
 
