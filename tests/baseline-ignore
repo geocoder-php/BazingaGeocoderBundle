@@ -90,3 +90,7 @@
 %Not enabling native lazy objects is deprecated and will be impossible in Doctrine ORM 4.0%
 %Not setting "doctrine.orm.enable_native_lazy_objects" to true is deprecated%
 %Disabling native lazy objects is deprecated and will be impossible in Doctrine ORM 4.0%
+%Passing an array of options to configure the "Bazinga\\GeocoderBundle\\Validator\\Constraint\\Address" constraint is deprecated, use named arguments instead%
+%The "Symfony\\Bundle\\FrameworkBundle\\Console\\Application::add\(\)" method is deprecated and will be removed in Symfony 8.0, use "Symfony\\Bundle\\FrameworkBundle\\Console\\Application::addCommand\(\)" instead%
+%XML configuration format is deprecated, use YAML or PHP instead%
+%Support for evaluating options in the base Constraint class is deprecated. Initialize properties in the constructor of Bazinga\\GeocoderBundle\\Validator\\Constraint\\Address instead%
