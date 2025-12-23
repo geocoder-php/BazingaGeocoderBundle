@@ -35,6 +35,7 @@ final class AttributeDriverTest extends TestCase
     {
         $metadata = $this->driver->loadMetadataFromObject(new Dummy());
 
+        self::assertSame('acme', $metadata->provider);
         self::assertNotNull($metadata->addressProperty);
         self::assertSame('address', $metadata->addressProperty->getName());
         self::assertNotNull($metadata->latitudeProperty);
@@ -47,6 +48,7 @@ final class AttributeDriverTest extends TestCase
     {
         $metadata = $this->driver->loadMetadataFromObject(new DummyWithAddressGetter());
 
+        self::assertSame('acme', $metadata->provider);
         self::assertNotNull($metadata->addressGetter);
         self::assertSame('getAddress', $metadata->addressGetter->getName());
     }

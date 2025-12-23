@@ -1,10 +1,10 @@
-# Doctrine annotation support
+# Doctrine support
 
 *[<< Back to documentation index](/doc/index.md)*
 
-Wouldn't it be great if you could automatically save the coordinates of a users
-address every time it is updated? Wait not more here is the feature you been always
-wanted.
+Wouldn't it be great if you could automatically save the coordinates of a user's
+address every time it is updated? Well, wait no more—here is the feature you've
+always wanted!
 
 First of all, update your entity:
 
@@ -12,7 +12,7 @@ First of all, update your entity:
 
 use Bazinga\GeocoderBundle\Mapping\Attributes as Geocoder;
 
-#[Geocoder\Geocodeable()]
+#[Geocoder\Geocodeable(provider: 'acme')]
 class User
 {
     #[Geocoder\Address()]
@@ -32,7 +32,7 @@ Instead of annotating a property, you can also annotate a getter:
 
 use Bazinga\GeocoderBundle\Mapping\Attributes as Geocoder;
 
-#[Geocoder\Geocodeable()]
+#[Geocoder\Geocodeable(provider: 'acme')]
 class User
 {
     #[Geocoder\Latitude()]
@@ -42,36 +42,28 @@ class User
     private $longitude;
 
     #[Geocoder\Address()]
-    public function getAddress(): string
+    public function getAddress(): \Stringable|string
     {
         // Your code...
     }
 }
 ```
 
-Secondly, register the Doctrine event listener and its dependencies in your `config/services.yaml` or `config/services.php` file.
-You have to indicate which provider to use to reverse geocode the address. Here we use `acme` provider we declared in bazinga_geocoder configuration earlier.
+Secondly, enable Doctrine ORM listener in the configuration:
 
 ```yaml
-    Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver: ~
-
-    Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener:
-        class: Bazinga\GeocoderBundle\Doctrine\ORM\GeocoderListener
-        arguments:
-            - '@bazinga_geocoder.provider.acme'
-            - '@Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver'
-        tags:
-            - { name: doctrine.event_listener, event: onFlush }
+bazinga_geocoder:
+    orm:
+        enabled: true
 ```
 
-It is done!
-Now you can use it:
+That's it! Now you can use it:
 
 ```php
 $user = new User();
 $user->setAddress('Brandenburger Tor, Pariser Platz, Berlin');
 
-$em->persist($event);
+$em->persist($user);
 $em->flush();
 
 echo $user->getLatitude(); // will output 52.516325

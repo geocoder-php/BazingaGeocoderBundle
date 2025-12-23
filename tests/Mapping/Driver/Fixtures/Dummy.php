@@ -17,7 +17,7 @@ use Bazinga\GeocoderBundle\Mapping\Attributes\Geocodeable;
 use Bazinga\GeocoderBundle\Mapping\Attributes\Latitude;
 use Bazinga\GeocoderBundle\Mapping\Attributes\Longitude;
 
-#[Geocodeable]
+#[Geocodeable(provider: 'acme')]
 final class Dummy
 {
     #[Latitude]

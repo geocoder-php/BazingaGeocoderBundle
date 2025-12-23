@@ -17,7 +17,11 @@ namespace Bazinga\GeocoderBundle\Mapping;
  */
 final class ClassMetadata
 {
+    /**
+     * @param non-empty-string $provider
+     */
     public function __construct(
+        public readonly string $provider,
         public readonly ?\ReflectionProperty $addressProperty = null,
         public readonly ?\ReflectionProperty $latitudeProperty = null,
         public readonly ?\ReflectionProperty $longitudeProperty = null,

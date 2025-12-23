@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
 use Bazinga\GeocoderBundle\Command\GeocodeCommand;
+use Bazinga\GeocoderBundle\Mapping\Driver\AttributeDriver;
+use Bazinga\GeocoderBundle\Mapping\Driver\ChainDriver;
+use Bazinga\GeocoderBundle\Mapping\Driver\DriverInterface;
 use Bazinga\GeocoderBundle\Plugin\FakeIpPlugin;
 use Bazinga\GeocoderBundle\Validator\Constraint\AddressValidator;
 use Geocoder\Dumper\Dumper;
@@ -49,5 +52,15 @@ return static function (ContainerConfigurator $container) {
                 service(ProviderAggregator::class),
             ])
             ->tag('validator.constraint_validator')
+
+        ->set(ChainDriver::class)
+            ->args([
+                tagged_iterator('bazinga_geocoder.metadata.driver', exclude: [ChainDriver::class]),
+            ])
+            ->tag('bazinga_geocoder.metadata.driver')
+        ->alias(DriverInterface::class, ChainDriver::class)
+
+        ->set(AttributeDriver::class)
+            ->tag('bazinga_geocoder.metadata.driver')
     ;
 };

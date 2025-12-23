@@ -55,6 +55,14 @@ class BazingaGeocoderExtension extends Extension
             $loader->load('profiling.php');
         }
 
+        if (\array_key_exists('DoctrineBundle', $container->getParameter('kernel.bundles'))) {
+            if (true === $config['orm']['enabled']) {
+                $loader->load('orm.php');
+            }
+        } elseif (true === $config['orm']['enabled']) {
+            throw new \LogicException('Doctrine ORM listener cannot be enabled when `doctrine/doctrine-bundle` is not installed.');
+        }
+
         if ($config['fake_ip']['enabled']) {
             $definition = $container->getDefinition(FakeIpPlugin::class);
             $definition->replaceArgument(0, $config['fake_ip']['local_ip']);

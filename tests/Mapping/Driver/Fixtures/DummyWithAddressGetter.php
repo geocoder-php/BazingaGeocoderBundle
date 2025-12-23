@@ -15,7 +15,7 @@ namespace Bazinga\GeocoderBundle\Tests\Mapping\Driver\Fixtures;
 use Bazinga\GeocoderBundle\Mapping\Attributes\Address;
 use Bazinga\GeocoderBundle\Mapping\Attributes\Geocodeable;
 
-#[Geocodeable]
+#[Geocodeable(provider: 'acme')]
 final class DummyWithAddressGetter
 {
     #[Address]

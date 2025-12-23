@@ -14,32 +14,26 @@ namespace Bazinga\GeocoderBundle\Doctrine\ORM;
 
 use Bazinga\GeocoderBundle\Mapping\ClassMetadata;
 use Bazinga\GeocoderBundle\Mapping\Driver\DriverInterface;
-use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\OnFlushEventArgs;
-use Doctrine\ORM\Events;
 use Doctrine\ORM\UnitOfWork;
 use Geocoder\Provider\Provider;
 use Geocoder\Query\GeocodeQuery;
+use Symfony\Component\DependencyInjection\ServiceLocator;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
+ * @author Pierre du Plessis <pdples@gmail.com>
  */
-final class GeocoderListener implements EventSubscriber
+final class GeocodeEntityListener
 {
+    /**
+     * @param ServiceLocator<Provider> $providerLocator
+     * @param DriverInterface          $driver
+     */
     public function __construct(
-        private readonly Provider $geocoder,
+        private readonly ServiceLocator $providerLocator,
         private readonly DriverInterface $driver,
     ) {
-    }
-
-    /**
-     * @return list<string>
-     */
-    public function getSubscribedEvents(): array
-    {
-        return [
-            Events::onFlush,
-        ];
     }
 
     public function onFlush(OnFlushEventArgs $args): void
@@ -58,7 +52,7 @@ final class GeocoderListener implements EventSubscriber
 
             $uow->recomputeSingleEntityChangeSet(
                 $em->getClassMetadata($entity::class),
-                $entity
+                $entity,
             );
         }
 
@@ -77,7 +71,7 @@ final class GeocoderListener implements EventSubscriber
 
             $uow->recomputeSingleEntityChangeSet(
                 $em->getClassMetadata($entity::class),
-                $entity
+                $entity,
             );
         }
     }
@@ -101,7 +95,13 @@ final class GeocoderListener implements EventSubscriber
             return;
         }
 
-        $results = $this->geocoder->geocodeQuery(GeocodeQuery::create($addressString));
+        $serviceId = \sprintf('bazinga_geocoder.provider.%s', $metadata->provider);
+
+        if (!$this->providerLocator->has($serviceId)) {
+            throw new \RuntimeException(\sprintf('The provider "%s" is invalid for object "%s".', $metadata->provider, $entity::class));
+        }
+
+        $results = $this->providerLocator->get($serviceId)->geocodeQuery(GeocodeQuery::create($addressString));
 
         if (!$results->isEmpty()) {
             $result = $results->first();
