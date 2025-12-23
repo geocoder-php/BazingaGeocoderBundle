@@ -18,7 +18,7 @@ use Geocoder\Query\Query;
 use PHPUnit\Framework\TestCase;
 
 /**
- * @author Quentin Dequippe <quentin@dequippe.tech
+ * @author Quentin Dequippe <quentin@dequippe.tech>
  */
 final class FakeIpPluginTest extends TestCase
 {

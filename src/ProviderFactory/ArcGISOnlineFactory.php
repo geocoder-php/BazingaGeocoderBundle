@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ArcGISOnlineFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => ArcGISOnline::class, 'packageName' => 'geocoder-php/arcgis-online-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class ArcGISOnlineFactory extends AbstractFactory
         return new ArcGISOnline($httpClient, $config['source_country']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'http_client' => null,

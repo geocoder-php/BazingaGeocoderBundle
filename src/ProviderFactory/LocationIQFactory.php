@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class LocationIQFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => LocationIQ::class, 'packageName' => 'geocoder-php/locationiq-provider'],
     ];
 
@@ -32,7 +32,7 @@ final class LocationIQFactory extends AbstractFactory
         return new LocationIQ($httpClient, $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'http_client' => null,

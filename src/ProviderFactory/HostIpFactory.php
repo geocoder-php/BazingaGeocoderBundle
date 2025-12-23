@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class HostIpFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => HostIp::class, 'packageName' => 'geocoder-php/host-ip-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class HostIpFactory extends AbstractFactory
         return new HostIp($httpClient);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'http_client' => null,

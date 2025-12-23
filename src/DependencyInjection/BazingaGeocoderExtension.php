@@ -76,10 +76,8 @@ class BazingaGeocoderExtension extends Extension
 
     /**
      * @param array<mixed, mixed> $config
-     *
-     * @return void
      */
-    private function loadProviders(ContainerBuilder $container, array $config)
+    private function loadProviders(ContainerBuilder $container, array $config): void
     {
         foreach ($config['providers'] as $providerName => $providerConfig) {
             try {
@@ -91,7 +89,7 @@ class BazingaGeocoderExtension extends Extension
                 // See if any option has a service reference
                 $providerConfig['options'] = $this->findReferences($providerConfig['options']);
                 $factoryClass::validate($providerConfig['options'], $providerName);
-            } catch (ServiceNotFoundException $e) {
+            } catch (ServiceNotFoundException) {
                 // Assert: We are using a custom factory. If invalid config, it will be caught in FactoryValidatorPass
                 $providerConfig['options'] = $this->findReferences($providerConfig['options']);
                 FactoryValidatorPass::addFactoryServiceId($providerConfig['factory']);
@@ -118,9 +116,9 @@ class BazingaGeocoderExtension extends Extension
     /**
      * Configure plugins for a client.
      *
-     * @param array<mixed, mixed> $config
+     * @param array<mixed> $config
      *
-     * @return Reference[]
+     * @return list<Reference>
      */
     public function configureProviderPlugins(ContainerBuilder $container, array $config, string $providerServiceId): array
     {

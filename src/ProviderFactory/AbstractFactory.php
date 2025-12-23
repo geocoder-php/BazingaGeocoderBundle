@@ -28,17 +28,15 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * @var list<array{requiredClass: class-string, packageName: string}>
      */
-    protected static $dependencies = [];
+    protected static array $dependencies = [];
 
-    protected ?ClientInterface $httpClient;
-
-    public function __construct(?ClientInterface $httpClient = null)
-    {
-        $this->httpClient = $httpClient;
+    public function __construct(
+        protected ?ClientInterface $httpClient = null,
+    ) {
     }
 
     /**
-     * @param array<mixed, mixed> $config
+     * @param array<mixed> $config
      */
     abstract protected function getProvider(array $config): Provider;
 
@@ -53,7 +51,7 @@ abstract class AbstractFactory implements ProviderFactoryInterface
         return $this->getProvider($config);
     }
 
-    public static function validate(array $options, $providerName)
+    public static function validate(array $options, string $providerName): void
     {
         static::verifyDependencies();
 
@@ -77,11 +75,9 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * Make sure that we have the required class and throw and exception if we don't.
      *
-     * @return void
-     *
      * @throws \LogicException
      */
-    protected static function verifyDependencies()
+    protected static function verifyDependencies(): void
     {
         foreach (static::$dependencies as $dependency) {
             if (!class_exists($dependency['requiredClass'])) {
@@ -93,10 +89,8 @@ abstract class AbstractFactory implements ProviderFactoryInterface
     /**
      * By default, we do not have any options to configure. A factory should override this function and configure
      * the options resolver.
-     *
-     * @return void
      */
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
     }
 }

@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MaxMindFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => MaxMind::class, 'packageName' => 'geocoder-php/maxmind-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class MaxMindFactory extends AbstractFactory
         return new MaxMind($httpClient, $config['api_key'], $config['endpoint']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'http_client' => null,

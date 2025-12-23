@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class GeoPluginFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => GeoPlugin::class, 'packageName' => 'geocoder-php/geo-plugin-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class GeoPluginFactory extends AbstractFactory
         return new GeoPlugin($httpClient);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'http_client' => null,

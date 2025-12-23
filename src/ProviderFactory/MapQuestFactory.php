@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class MapQuestFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => MapQuest::class, 'packageName' => 'geocoder-php/mapquest-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class MapQuestFactory extends AbstractFactory
         return new MapQuest($httpClient, $config['api_key'], $config['licensed']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'http_client' => null,

@@ -24,7 +24,7 @@ use Geocoder\Query\GeocodeQuery;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-class GeocoderListener implements EventSubscriber
+final class GeocoderListener implements EventSubscriber
 {
     public function __construct(
         private readonly Provider $geocoder,

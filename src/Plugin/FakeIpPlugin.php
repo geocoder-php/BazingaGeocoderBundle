@@ -24,17 +24,15 @@ use Http\Promise\Promise;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class FakeIpPlugin implements Plugin
+final class FakeIpPlugin implements Plugin
 {
-    private ?string $needle;
-    private ?string $replacement;
     private ?Generator $faker = null;
 
-    public function __construct(?string $needle, ?string $replacement = null, bool $useFaker = false)
-    {
-        $this->needle = $needle;
-        $this->replacement = $replacement;
-
+    public function __construct(
+        private readonly ?string $needle,
+        private readonly ?string $replacement = null,
+        bool $useFaker = false,
+    ) {
         if ($useFaker) {
             $this->faker = new Generator();
             $this->faker->addProvider(new Internet($this->faker));

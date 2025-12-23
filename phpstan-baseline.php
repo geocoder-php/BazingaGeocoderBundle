@@ -95,7 +95,7 @@ $ignoreErrors[] = [
 ];
 $ignoreErrors[] = [
     // identifier: argument.type
-    'message' => '#^Parameter \\#1 \\$factoryServiceId of static method Bazinga\\\\GeocoderBundle\\\\DependencyInjection\\\\Compiler\\\\FactoryValidatorPass\\:\\:addFactoryServiceId\\(\\) expects string, mixed given\\.$#',
+    'message' => '#^Parameter \\#1 \\$factoryServiceId of static method Bazinga\\\\GeocoderBundle\\\\DependencyInjection\\\\Compiler\\\\FactoryValidatorPass\\:\\:addFactoryServiceId\\(\\) expects non\\-empty\\-string, mixed given\\.$#',
     'count' => 1,
     'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
 ];
@@ -131,7 +131,7 @@ $ignoreErrors[] = [
 ];
 $ignoreErrors[] = [
     // identifier: argument.type
-    'message' => '#^Parameter \\#2 \\$config of method Bazinga\\\\GeocoderBundle\\\\DependencyInjection\\\\BazingaGeocoderExtension\\:\\:configureProviderPlugins\\(\\) expects array\\<int\\|string, mixed\\>, mixed given\\.$#',
+    'message' => '#^Parameter \\#2 \\$config of method Bazinga\\\\GeocoderBundle\\\\DependencyInjection\\\\BazingaGeocoderExtension\\:\\:configureProviderPlugins\\(\\) expects array, mixed given\\.$#',
     'count' => 1,
     'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
 ];

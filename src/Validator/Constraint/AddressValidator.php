@@ -23,22 +23,14 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 /**
  * @author Tomas Norkūnas <norkunas.tom@gmail.com>
  */
-class AddressValidator extends ConstraintValidator
+final class AddressValidator extends ConstraintValidator
 {
-    /**
-     * @var Provider
-     */
-    protected $addressGeocoder;
-
-    public function __construct(Provider $addressGeocoder)
-    {
-        $this->addressGeocoder = $addressGeocoder;
+    public function __construct(
+        private readonly Provider $addressGeocoder,
+    ) {
     }
 
-    /**
-     * @param mixed $value
-     */
-    public function validate($value, Constraint $constraint): void
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof Address) {
             throw new UnexpectedTypeException($constraint, Address::class);
@@ -65,10 +57,7 @@ class AddressValidator extends ConstraintValidator
         }
     }
 
-    /**
-     * @return void
-     */
-    private function buildViolation(Address $constraint, string $address)
+    private function buildViolation(Address $constraint, string $address): void
     {
         $this->context->buildViolation($constraint->message)
             ->setParameter('{{ address }}', $this->formatValue($address))
