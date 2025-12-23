@@ -24,15 +24,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
  */
-#[AsCommand(name: 'geocoder:geocode', description: 'Geocode an address or an IP address')]
-class GeocodeCommand extends Command
+#[AsCommand(
+    name: 'geocoder:geocode',
+    description: 'Geocode an address or an IP address',
+)]
+final class GeocodeCommand extends Command
 {
-    private ProviderAggregator $geocoder;
-
-    public function __construct(ProviderAggregator $geocoder)
-    {
-        $this->geocoder = $geocoder;
-
+    public function __construct(
+        private readonly ProviderAggregator $geocoder,
+    ) {
         parent::__construct();
     }
 
@@ -48,8 +48,7 @@ and longitude from the given address.
 You can force a provider with the "provider" option.
 
 <info>php bin/console geocoder:geocoder "Eiffel Tower" --provider=yahoo</info>
-HELP
-            );
+HELP);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int

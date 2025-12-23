@@ -20,7 +20,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class IpstackFactory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => Ipstack::class, 'packageName' => 'geocoder-php/ipstack-provider'],
     ];
 
@@ -34,7 +34,7 @@ final class IpstackFactory extends AbstractFactory
         return new Ipstack($httpClient, $config['api_key']);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'http_client' => null,

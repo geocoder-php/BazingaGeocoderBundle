@@ -21,7 +21,7 @@ use Symfony\Component\HttpKernel\DataCollector\DataCollector;
 /**
  * @author Michal Dabrowski <dabrowski@brillante.pl>
  */
-class GeocoderDataCollector extends DataCollector
+final class GeocoderDataCollector extends DataCollector
 {
     /**
      * @var ProfilingPlugin[]
@@ -43,7 +43,7 @@ class GeocoderDataCollector extends DataCollector
 
     public function collect(Request $request, Response $response, ?\Throwable $exception = null): void
     {
-        if (!empty($this->data['queries'])) {
+        if ([] !== $this->data['queries']) {
             // To avoid collection more that once.
             return;
         }
@@ -100,10 +100,7 @@ class GeocoderDataCollector extends DataCollector
         });
     }
 
-    /**
-     * @return void
-     */
-    public function addInstance(ProfilingPlugin $instance)
+    public function addInstance(ProfilingPlugin $instance): void
     {
         $this->instances[] = $instance;
         $this->data['providers'][] = $instance->getName();

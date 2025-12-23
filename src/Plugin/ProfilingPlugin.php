@@ -24,27 +24,22 @@ use Http\Promise\Promise;
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ProfilingPlugin implements Plugin
+final class ProfilingPlugin implements Plugin
 {
     /**
      * @var list<array{query: Query, queryString: string, duration: float, providerName: string, result: mixed, resultCount: int}>
      */
-    private $queries = [];
+    private array $queries = [];
 
     /**
-     * @var string service id of the provider
+     * @param non-empty-string $name service id of the provider
      */
-    private $name;
-
-    public function __construct(string $name)
-    {
-        $this->name = $name;
+    public function __construct(
+        private readonly string $name,
+    ) {
     }
 
-    /**
-     * @return Promise
-     */
-    public function handleQuery(Query $query, callable $next, callable $first)
+    public function handleQuery(Query $query, callable $next, callable $first): Promise
     {
         $startTime = microtime(true);
 
@@ -61,12 +56,7 @@ class ProfilingPlugin implements Plugin
         });
     }
 
-    /**
-     * @param mixed $result
-     *
-     * @return void
-     */
-    private function logQuery(Query $query, float $duration, $result = null)
+    private function logQuery(Query $query, float $duration, mixed $result = null): void
     {
         if ($query instanceof GeocodeQuery) {
             $queryString = $query->getText();
@@ -94,6 +84,9 @@ class ProfilingPlugin implements Plugin
         return $this->queries;
     }
 
+    /**
+     * @return non-empty-string
+     */
     public function getName(): string
     {
         return $this->name;

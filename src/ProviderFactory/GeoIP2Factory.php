@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class GeoIP2Factory extends AbstractFactory
 {
-    protected static $dependencies = [
+    protected static array $dependencies = [
         ['requiredClass' => GeoIP2::class, 'packageName' => 'geocoder-php/geoip2-provider'],
     ];
 
@@ -47,7 +47,7 @@ final class GeoIP2Factory extends AbstractFactory
         return new GeoIP2($adapter);
     }
 
-    protected static function configureOptionResolver(OptionsResolver $resolver)
+    protected static function configureOptionResolver(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'model' => GeoIP2Adapter::GEOIP2_MODEL_CITY,

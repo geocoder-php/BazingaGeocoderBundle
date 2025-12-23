@@ -13,6 +13,12 @@ declare(strict_types=1);
 namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Provider\Provider;
+use Symfony\Component\OptionsResolver\Exception\AccessException;
+use Symfony\Component\OptionsResolver\Exception\InvalidOptionsException;
+use Symfony\Component\OptionsResolver\Exception\MissingOptionsException;
+use Symfony\Component\OptionsResolver\Exception\NoSuchOptionException;
+use Symfony\Component\OptionsResolver\Exception\OptionDefinitionException;
+use Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException;
 
 /**
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
@@ -20,25 +26,23 @@ use Geocoder\Provider\Provider;
 interface ProviderFactoryInterface
 {
     /**
-     * @param array<mixed, mixed> $options
+     * @param array<mixed> $options
      */
     public function createProvider(array $options = []): Provider;
 
     /**
      * Make sure the options are valid and the dependencies are met.
      *
-     * @param array<mixed, mixed> $options      the options the user has provided
-     * @param string              $providerName the name the user has chosen for this provider
+     * @param array<mixed>     $options      the options the user has provided
+     * @param non-empty-string $providerName the name the user has chosen for this provider
      *
-     * @return void
-     *
-     * @throws \LogicException                                                        If the factory has missing dependencies
-     * @throws \Symfony\Component\OptionsResolver\Exception\UndefinedOptionsException If an option name is undefined
-     * @throws \Symfony\Component\OptionsResolver\Exception\InvalidOptionsException   If an option doesn't fulfill the specified validation rules
-     * @throws \Symfony\Component\OptionsResolver\Exception\MissingOptionsException   If a required option is missing
-     * @throws \Symfony\Component\OptionsResolver\Exception\OptionDefinitionException If there is a cyclic dependency between lazy options and/or normalizers
-     * @throws \Symfony\Component\OptionsResolver\Exception\NoSuchOptionException     If a lazy option reads an unavailable option
-     * @throws \Symfony\Component\OptionsResolver\Exception\AccessException           If called from a lazy option or normalizer
+     * @throws \LogicException           If the factory has missing dependencies
+     * @throws UndefinedOptionsException If an option name is undefined
+     * @throws InvalidOptionsException   If an option doesn't fulfill the specified validation rules
+     * @throws MissingOptionsException   If a required option is missing
+     * @throws OptionDefinitionException If there is a cyclic dependency between lazy options and/or normalizers
+     * @throws NoSuchOptionException     If a lazy option reads an unavailable option
+     * @throws AccessException           If called from a lazy option or normalizer
      */
-    public static function validate(array $options, $providerName);
+    public static function validate(array $options, string $providerName): void;
 }

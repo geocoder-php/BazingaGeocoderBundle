@@ -21,11 +21,8 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 /**
  * @author William Durand <william.durand1@gmail.com>
  */
-class BazingaGeocoderBundle extends Bundle
+final class BazingaGeocoderBundle extends Bundle
 {
-    /**
-     * @return void
-     */
     public function build(ContainerBuilder $container): void
     {
         parent::build($container);

@@ -19,13 +19,11 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * @author William Durand <william.durand1@gmail.com>
  */
-class Configuration implements ConfigurationInterface
+final class Configuration implements ConfigurationInterface
 {
-    private bool $debug;
-
-    public function __construct(bool $debug)
-    {
-        $this->debug = $debug;
+    public function __construct(
+        private readonly bool $debug,
+    ) {
     }
 
     /**
