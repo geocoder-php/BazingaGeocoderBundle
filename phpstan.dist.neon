@@ -8,3 +8,4 @@ parameters:
 		- src/
 		#- tests/
 	level: 9
+	treatPhpDocTypesAsCertain: false

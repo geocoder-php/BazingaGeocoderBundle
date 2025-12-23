@@ -54,7 +54,7 @@ final class FakeIpPlugin implements Plugin
             $replacement = $this->faker->ipv4();
         }
 
-        if (null !== $this->needle && '' !== $this->needle) {
+        if (null !== $this->needle && '' !== $this->needle && $replacement) {
             $text = str_replace($this->needle, $replacement, $query->getText(), $count);
 
             if ($count > 0) {

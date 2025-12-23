@@ -36,10 +36,6 @@ final class HereFactory extends AbstractFactory
         $httpClient = $config['http_client'] ?? $this->httpClient ?? Psr18ClientDiscovery::find();
 
         if (!empty($config['app_key'])) {
-            if (!method_exists(Here::class, 'createUsingApiKey')) {
-                throw new \InvalidArgumentException('Here provider has no support for `creatingUsingApiKey` method.');
-            }
-
             return Here::createUsingApiKey($httpClient, $config['app_key'], $config['use_cit']);
         }
 
