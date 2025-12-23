@@ -209,7 +209,7 @@ class BazingaGeocoderExtension extends Extension
         foreach ($options as $key => $value) {
             if (is_array($value)) {
                 $options[$key] = $this->findReferences($value);
-            } elseif ('_service' === substr((string) $key, -8) || 0 === strpos((string) $value, '@') || 'service' === $key) {
+            } elseif (str_ends_with((string) $key, '_service') || str_starts_with((string) $value, '@') || 'service' === $key) {
                 $options[$key] = new Reference(ltrim($value, '@'));
             }
         }
@@ -217,10 +217,7 @@ class BazingaGeocoderExtension extends Extension
         return $options;
     }
 
-    /**
-     * @param mixed $factoryClass
-     */
-    private function implementsProviderFactory($factoryClass): bool
+    private function implementsProviderFactory(mixed $factoryClass): bool
     {
         if (false === $interfaces = class_implements($factoryClass)) {
             return false;

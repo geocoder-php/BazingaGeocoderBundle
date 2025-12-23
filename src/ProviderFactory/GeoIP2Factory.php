@@ -18,6 +18,7 @@ use Geocoder\Provider\Provider;
 use GeoIp2\Database\Reader;
 use GeoIp2\ProviderInterface;
 use GeoIp2\WebService\Client;
+use MaxMind\Db\Reader\InvalidDatabaseException;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class GeoIP2Factory extends AbstractFactory
@@ -28,6 +29,8 @@ final class GeoIP2Factory extends AbstractFactory
 
     /**
      * @param array{provider: string, provider_service: ?ProviderInterface, model: string, user_id: string|int|null, license_key: string|null, locales: list<string>, webservice_options: array<string, mixed>, database_filename: ?string} $config
+     *
+     * @throws InvalidDatabaseException
      */
     protected function getProvider(array $config): Provider
     {
