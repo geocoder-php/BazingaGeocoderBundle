@@ -24,10 +24,10 @@ use Geocoder\Provider\Provider;
 final class PluginProviderFactory
 {
     /**
-     * @param Plugin[]                                          $plugins
-     * @param callable(array):Provider|ProviderFactoryInterface $factory
-     * @param array<mixed>                                      $config                config to the client factory
-     * @param array{max_restarts?: int<0, max>}                 $pluginProviderOptions config forwarded to the PluginProvider
+     * @param Plugin[]                                                 $plugins
+     * @param callable(array<mixed>):Provider|ProviderFactoryInterface $factory
+     * @param array<mixed>                                             $config                config to the client factory
+     * @param array{max_restarts?: int<0, max>}                        $pluginProviderOptions config forwarded to the PluginProvider
      */
     public static function createPluginProvider(array $plugins, callable|ProviderFactoryInterface $factory, array $config, array $pluginProviderOptions = []): PluginProvider
     {
