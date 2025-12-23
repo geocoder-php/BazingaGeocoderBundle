@@ -31,16 +31,9 @@ class Address extends Constraint
 
     public string $service = AddressValidator::class;
 
-    public string $message = 'Address {{ address }} is not valid.';
-
-    /**
-     * @param string[]|null $options
-     */
-    public function __construct(?array $options = null, ?string $message = null, ?array $groups = null, $payload = null)
+    public function __construct(public string $message = 'Address {{ address }} is not valid.', ?array $groups = null, $payload = null)
     {
-        parent::__construct($options, $groups, $payload);
-
-        $this->message = $message ?? $this->message;
+        parent::__construct(null, $groups, $payload);
     }
 
     public function validatedBy(): string

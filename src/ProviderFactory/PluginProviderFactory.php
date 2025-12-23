@@ -14,6 +14,7 @@ namespace Bazinga\GeocoderBundle\ProviderFactory;
 
 use Geocoder\Plugin\Plugin;
 use Geocoder\Plugin\PluginProvider;
+use Geocoder\Provider\Provider;
 
 /**
  * This factory creates a PluginProvider.
@@ -23,19 +24,17 @@ use Geocoder\Plugin\PluginProvider;
 final class PluginProviderFactory
 {
     /**
-     * @param Plugin[]                          $plugins
-     * @param callable|ProviderFactoryInterface $factory
-     * @param array<mixed>                      $config                config to the client factory
-     * @param array{max_restarts?: int<0, max>} $pluginProviderOptions config forwarded to the PluginProvider
+     * @param Plugin[]                                          $plugins
+     * @param callable(array):Provider|ProviderFactoryInterface $factory
+     * @param array<mixed>                                      $config                config to the client factory
+     * @param array{max_restarts?: int<0, max>}                 $pluginProviderOptions config forwarded to the PluginProvider
      */
     public static function createPluginProvider(array $plugins, callable|ProviderFactoryInterface $factory, array $config, array $pluginProviderOptions = []): PluginProvider
     {
         if ($factory instanceof ProviderFactoryInterface) {
             $client = $factory->createProvider($config);
-        } elseif (is_callable($factory)) {
-            $client = $factory($config);
         } else {
-            throw new \RuntimeException(sprintf('Second argument to PluginProviderFactory::createPluginProvider must be a "%s" or a callable.', ProviderFactoryInterface::class));
+            $client = $factory($config);
         }
 
         return new PluginProvider($client, $plugins, $pluginProviderOptions);
