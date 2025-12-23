@@ -79,7 +79,8 @@
   },
   "scripts": {
     "test": "SYMFONY_DEPRECATIONS_HELPER=ignoreFile='./tests/baseline-ignore' vendor/bin/simple-phpunit --testsuite main",
-    "phpstan": "vendor/bin/phpstan --memory-limit=1024m"
+    "phpstan": "vendor/bin/phpstan analyse --memory-limit=1024m",
+    "phpstan-baseline": "vendor/bin/phpstan analyse --generate-baseline phpstan-baseline.php --memory-limit=1024m"
   },
   "config": {
     "allow-plugins": {
