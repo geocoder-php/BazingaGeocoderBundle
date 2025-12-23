@@ -29,9 +29,7 @@ class Address extends Constraint
         self::INVALID_ADDRESS_ERROR => 'INVALID_ADDRESS_ERROR',
     ];
 
-    public string $service = AddressValidator::class;
-
-    public function __construct(public string $message = 'Address {{ address }} is not valid.', ?array $groups = null, $payload = null)
+    public function __construct(public string $service = AddressValidator::class, public string $message = 'Address {{ address }} is not valid.', ?array $groups = null, $payload = null)
     {
         parent::__construct(null, $groups, $payload);
     }
