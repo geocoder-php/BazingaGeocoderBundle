@@ -74,11 +74,7 @@ final class ProviderFactoryTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) use ($class) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/provider/'.strtolower(substr($class, strrpos($class, '\\') + 1)).'.yml');
         }]);
 
@@ -94,7 +90,7 @@ final class ProviderFactoryTest extends KernelTestCase
     /**
      * @return iterable<array{0: class-string, 1: list<non-empty-string>}>
      */
-    public function getProviders(): iterable
+    public static function getProviders(): iterable
     {
         yield [AlgoliaPlaces::class, ['empty', 'acme']];
         yield [ArcGISOnline::class, ['empty', 'acme']];

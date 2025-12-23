@@ -24,11 +24,11 @@ final class PluginProviderFactory
 {
     /**
      * @param Plugin[]                          $plugins
-     * @param ProviderFactoryInterface|callable $factory
+     * @param callable|ProviderFactoryInterface $factory
      * @param array<mixed>                      $config                config to the client factory
      * @param array{max_restarts?: int<0, max>} $pluginProviderOptions config forwarded to the PluginProvider
      */
-    public static function createPluginProvider(array $plugins, $factory, array $config, array $pluginProviderOptions = []): PluginProvider
+    public static function createPluginProvider(array $plugins, callable|ProviderFactoryInterface $factory, array $config, array $pluginProviderOptions = []): PluginProvider
     {
         if ($factory instanceof ProviderFactoryInterface) {
             $client = $factory->createProvider($config);

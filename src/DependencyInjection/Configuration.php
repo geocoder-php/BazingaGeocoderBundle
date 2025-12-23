@@ -83,10 +83,7 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    /**
-     * @return ArrayNodeDefinition
-     */
-    private function getProvidersNode()
+    private function getProvidersNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('providers');
         $rootNode = $treeBuilder->getRootNode();
@@ -121,16 +118,13 @@ final class Configuration implements ConfigurationInterface
 
     /**
      * Create plugin node of a client.
-     *
-     * @return ArrayNodeDefinition The plugin node
      */
-    private function createClientPluginNode()
+    private function createClientPluginNode(): ArrayNodeDefinition
     {
         $treeBuilder = new TreeBuilder('plugins');
         $rootNode = $treeBuilder->getRootNode();
         assert($rootNode instanceof ArrayNodeDefinition);
 
-        /** @var ArrayNodeDefinition $pluginList */
         $pluginList = $rootNode
             ->info('A list of plugin service ids. The order is important.')
             ->arrayPrototype()

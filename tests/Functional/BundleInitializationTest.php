@@ -52,10 +52,7 @@ final class BundleInitializationTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
         }]);
 
         $container = self::getContainer();
@@ -70,11 +67,7 @@ final class BundleInitializationTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/simple.yml');
         }]);
 
@@ -90,11 +83,7 @@ final class BundleInitializationTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache.yml');
         }]);
 
@@ -112,11 +101,7 @@ final class BundleInitializationTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache_without_lifetime.yml');
         }]);
 
@@ -142,11 +127,7 @@ final class BundleInitializationTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/service_plugin.yml');
         }]);
 
@@ -164,10 +145,7 @@ final class BundleInitializationTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
         }]);
 
         $container = self::getContainer();

@@ -57,11 +57,7 @@ final class PluginInteractionTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->setClearCacheAfterShutdown(false);
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache_symfony.yml');
             $kernel->addTestConfig(__DIR__.'/config/fakeip_with_cache_cn.yml');
         }]);
@@ -83,11 +79,7 @@ final class PluginInteractionTest extends KernelTestCase
         $kernel = self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->setClearCacheAfterShutdown(false);
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/cache_symfony.yml');
             $kernel->addTestConfig(__DIR__.'/config/fakeip_with_cache_fr.yml');
         }]);

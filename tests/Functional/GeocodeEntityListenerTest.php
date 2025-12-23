@@ -106,11 +106,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
         }]);
 
@@ -145,11 +141,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
         }]);
 
@@ -184,11 +176,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
         }]);
 
@@ -223,11 +211,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
         }]);
 
@@ -255,11 +239,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
         }]);
 
@@ -287,11 +267,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
     {
         self::bootKernel(['config' => static function (TestKernel $kernel) {
             $kernel->addTestConfig(__DIR__.'/config/framework.yml');
-
-            if ($kernel::VERSION_ID >= 60000) {
-                $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
-            }
-
+            $kernel->addTestConfig(__DIR__.'/config/framework_sf'.$kernel::MAJOR_VERSION.'.yml');
             $kernel->addTestConfig(__DIR__.'/config/listener.yml');
         }]);
 

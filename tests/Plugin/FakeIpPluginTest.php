@@ -30,7 +30,7 @@ final class FakeIpPluginTest extends TestCase
         /** @var Query $query */
         $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
 
-        self::assertSame($query->getText(), '123.123.123.123');
+        self::assertSame('123.123.123.123', $query->getText());
     }
 
     /**
@@ -45,7 +45,7 @@ final class FakeIpPluginTest extends TestCase
         /** @var Query $query */
         $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
 
-        self::assertSame($query->getText(), '123.123.123.123');
+        self::assertSame('123.123.123.123', $query->getText());
     }
 
     public function testHandleQueryUsingFaker(): void
@@ -56,6 +56,6 @@ final class FakeIpPluginTest extends TestCase
         /** @var Query $query */
         $query = $fakeIpPlugin->handleQuery($query, function (Query $query) { return $query; }, function () {});
 
-        self::assertNotSame($query->getText(), '192.168.1.1');
+        self::assertNotSame('192.168.1.1', $query->getText());
     }
 }
