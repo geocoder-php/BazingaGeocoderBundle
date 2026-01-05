@@ -22,7 +22,7 @@ use Symfony\Component\DependencyInjection\Reference;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class ProfilerPass implements CompilerPassInterface
+final class ProfilerPass implements CompilerPassInterface
 {
     public function process(ContainerBuilder $container): void
     {

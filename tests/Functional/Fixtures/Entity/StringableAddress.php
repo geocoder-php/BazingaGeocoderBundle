@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity;
 
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Embeddable;
 
@@ -19,8 +20,8 @@ use Doctrine\ORM\Mapping\Embeddable;
 class StringableAddress implements \Stringable
 {
     public function __construct(
-        #[Column]
-        private string $address,
+        #[Column(type: Types::STRING)]
+        private readonly string $address,
     ) {
     }
 

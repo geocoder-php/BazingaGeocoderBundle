@@ -30,18 +30,23 @@ class DummyWithStringableGetter
     #[Id]
     #[GeneratedValue]
     #[Column(type: Types::INTEGER)]
-    public $id;
+    public ?int $id = null;
 
-    #[Column]
+    #[Column(type: Types::FLOAT)]
     #[Latitude]
-    public $latitude;
+    public ?float $latitude = null;
 
-    #[Column]
+    #[Column(type: Types::FLOAT)]
     #[Longitude]
-    public $longitude;
+    public ?float $longitude = null;
 
     #[Embedded]
     public StringableAddress $address;
+
+    public function __construct(StringableAddress $address)
+    {
+        $this->address = $address;
+    }
 
     public function setAddress(StringableAddress $address): void
     {

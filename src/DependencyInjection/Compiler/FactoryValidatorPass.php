@@ -21,7 +21,7 @@ use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
  *
  * @author Tobias Nyholm <tobias.nyholm@gmail.com>
  */
-class FactoryValidatorPass implements CompilerPassInterface
+final class FactoryValidatorPass implements CompilerPassInterface
 {
     /**
      * @var list<non-empty-string>

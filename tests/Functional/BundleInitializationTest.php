@@ -27,7 +27,6 @@ use Geocoder\ProviderAggregator;
 use Nyholm\BundleTest\TestKernel;
 use Nyholm\NSA;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class BundleInitializationTest extends KernelTestCase
 {
@@ -36,11 +35,12 @@ final class BundleInitializationTest extends KernelTestCase
         return TestKernel::class;
     }
 
-    protected static function createKernel(array $options = []): KernelInterface
+    /**
+     * @param array<mixed> $options
+     */
+    protected static function createKernel(array $options = []): TestKernel
     {
-        /**
-         * @var TestKernel $kernel
-         */
+        /** @var TestKernel $kernel */
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(BazingaGeocoderBundle::class);
         $kernel->handleOptions($options);
@@ -93,6 +93,7 @@ final class BundleInitializationTest extends KernelTestCase
         $service = $container->get('bazinga_geocoder.provider.acme');
         self::assertInstanceOf(PluginProvider::class, $service);
         $plugins = NSA::getProperty($service, 'plugins');
+        self::assertIsArray($plugins);
         self::assertNotEmpty($plugins);
         self::assertInstanceOf(CachePlugin::class, $plugins[0]);
     }
@@ -114,6 +115,7 @@ final class BundleInitializationTest extends KernelTestCase
         self::assertInstanceOf(PluginProvider::class, $service);
 
         $plugins = NSA::getProperty($service, 'plugins');
+        self::assertIsArray($plugins);
         self::assertCount(1, $plugins);
 
         $cachePlugin = array_shift($plugins);
@@ -137,6 +139,7 @@ final class BundleInitializationTest extends KernelTestCase
         $service = $container->get('bazinga_geocoder.provider.acme');
         self::assertInstanceOf(PluginProvider::class, $service);
         $plugins = NSA::getProperty($service, 'plugins');
+        self::assertIsArray($plugins);
         self::assertCount(3, $plugins);
         self::assertInstanceOf(LoggerPlugin::class, $plugins[0]);
     }

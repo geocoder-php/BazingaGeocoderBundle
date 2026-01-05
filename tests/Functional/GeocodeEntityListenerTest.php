@@ -22,6 +22,7 @@ use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\StringableAddress;
 use Composer\InstalledVersions;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Doctrine\ORM\Configuration;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
 use Nyholm\BundleTest\TestKernel;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -30,7 +31,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpClient\MockHttpClient;
 use Symfony\Component\HttpClient\Response\MockResponse;
 use Symfony\Component\HttpKernel\Kernel;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 /**
  * @author Markus Bachmann <markus.bachmann@bachi.biz>
@@ -39,6 +39,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
 {
     protected function tearDown(): void
     {
+        /** @var EntityManagerInterface $em */
         $em = self::getContainer()->get('doctrine.orm.entity_manager');
 
         $tool = new SchemaTool($em);
@@ -50,7 +51,10 @@ final class GeocodeEntityListenerTest extends KernelTestCase
         return TestKernel::class;
     }
 
-    protected static function createKernel(array $options = []): KernelInterface
+    /**
+     * @param array<mixed> $options
+     */
+    protected static function createKernel(array $options = []): TestKernel
     {
         /**
          * @var TestKernel $kernel
@@ -116,6 +120,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
         $dummy = new DummyWithProperty();
         $dummy->address = 'Berlin, Germany';
 
+        /** @var EntityManagerInterface $em */
         $em = $container->get('doctrine.orm.entity_manager');
 
         $tool = new SchemaTool($em);
@@ -148,6 +153,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
         $container = self::getContainer();
         $container->set('http_client', self::createHttpClientForBerlinQuery());
 
+        /** @var EntityManagerInterface $em */
         $em = $container->get('doctrine.orm.entity_manager');
 
         $tool = new SchemaTool($em);
@@ -183,13 +189,13 @@ final class GeocodeEntityListenerTest extends KernelTestCase
         $container = self::getContainer();
         $container->set('http_client', self::createHttpClientForBerlinQuery());
 
+        /** @var EntityManagerInterface $em */
         $em = $container->get('doctrine.orm.entity_manager');
 
         $tool = new SchemaTool($em);
         $tool->createSchema($em->getMetadataFactory()->getAllMetadata());
 
-        $dummy = new DummyWithStringableGetter();
-        $dummy->setAddress(new StringableAddress('Berlin, Germany'));
+        $dummy = new DummyWithStringableGetter(new StringableAddress('Berlin, Germany'));
 
         $em->persist($dummy);
         $em->flush();
@@ -220,6 +226,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
             self::fail('I shall not be called');
         }));
 
+        /** @var EntityManagerInterface $em */
         $em = $container->get('doctrine.orm.entity_manager');
 
         $tool = new SchemaTool($em);
@@ -248,6 +255,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
             self::fail('I shall not be called');
         }));
 
+        /** @var EntityManagerInterface $em */
         $em = $container->get('doctrine.orm.entity_manager');
 
         $tool = new SchemaTool($em);
@@ -276,6 +284,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
         $container = self::getContainer();
         $container->set('http_client', self::createHttpClientForFrankfurtQuery($httpRequests));
 
+        /** @var EntityManagerInterface $em */
         $em = $container->get('doctrine.orm.entity_manager');
 
         $tool = new SchemaTool($em);
@@ -293,8 +302,8 @@ final class GeocodeEntityListenerTest extends KernelTestCase
         $em->flush();
 
         self::assertSame('Frankfurt, Germany', $dummy->address);
-        self::assertSame(0, $dummy->latitude);
-        self::assertSame(0, $dummy->longitude);
+        self::assertSame(0.0, $dummy->latitude);
+        self::assertSame(0.0, $dummy->longitude);
         self::assertSame(1, $httpRequests);
     }
 

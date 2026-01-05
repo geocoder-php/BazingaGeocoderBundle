@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Bazinga\GeocoderBundle\DependencyInjection;
 
+use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -42,7 +43,7 @@ final class Configuration implements ConfigurationInterface
                 ->addDefaultsIfNotSet()
                 ->treatFalseLike(['enabled' => false])
                 ->treatTrueLike(['enabled' => true])
-                ->treatNullLike(['enabled' => $this->debug])
+                ->treatNullLike(['enabled' => \class_exists(DoctrineBundle::class)])
                 ->info('Extend the debug profiler with information about requests.')
                 ->children()
                     ->booleanNode('enabled')
@@ -54,7 +55,7 @@ final class Configuration implements ConfigurationInterface
             ->arrayNode('fake_ip')
                 ->beforeNormalization()
                 ->ifString()
-                    ->then(function ($value) {
+                    ->then(function (string $value): array {
                         return ['ip' => $value];
                     })
                 ->end()
@@ -132,7 +133,7 @@ final class Configuration implements ConfigurationInterface
         $pluginList
             // support having just a service id in the list
             ->beforeNormalization()
-                ->always(function ($plugin) {
+                ->always(function (array|string $plugin) {
                     if (is_string($plugin)) {
                         return [
                             'reference' => [
