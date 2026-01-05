@@ -29,17 +29,17 @@ class DummyWithEmptyProperty
     #[Id]
     #[GeneratedValue]
     #[Column(type: Types::INTEGER)]
-    public $id;
+    public ?int $id = null;
 
-    #[Column(nullable: true)]
+    #[Column(type: Types::FLOAT, nullable: true)]
     #[Latitude]
-    public $latitude;
+    public ?float $latitude = null;
 
-    #[Column(nullable: true)]
+    #[Column(type: Types::FLOAT, nullable: true)]
     #[Longitude]
-    public $longitude;
+    public ?float $longitude = null;
 
-    #[Column]
+    #[Column(type: Types::STRING)]
     #[Address]
-    public $address;
+    public ?string $address = null;
 }

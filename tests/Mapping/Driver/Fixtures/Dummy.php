@@ -21,11 +21,11 @@ use Bazinga\GeocoderBundle\Mapping\Attributes\Longitude;
 final class Dummy
 {
     #[Latitude]
-    public $latitude;
+    public ?float $latitude;
 
     #[Longitude]
-    public $longitude;
+    public ?float $longitude;
 
     #[Address]
-    public $address;
+    public ?string $address;
 }

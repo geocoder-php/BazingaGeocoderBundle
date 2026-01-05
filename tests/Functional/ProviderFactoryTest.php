@@ -41,7 +41,6 @@ use Nyholm\BundleTest\TestKernel;
 use Nyholm\NSA;
 use Symfony\Bridge\PhpUnit\ExpectDeprecationTrait;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\HttpKernel\KernelInterface;
 
 final class ProviderFactoryTest extends KernelTestCase
 {
@@ -52,11 +51,12 @@ final class ProviderFactoryTest extends KernelTestCase
         return TestKernel::class;
     }
 
-    protected static function createKernel(array $options = []): KernelInterface
+    /**
+     * @param array<mixed> $options
+     */
+    protected static function createKernel(array $options = []): TestKernel
     {
-        /**
-         * @var TestKernel $kernel
-         */
+        /** @var TestKernel $kernel */
         $kernel = parent::createKernel($options);
         $kernel->addTestBundle(BazingaGeocoderBundle::class);
         $kernel->handleOptions($options);

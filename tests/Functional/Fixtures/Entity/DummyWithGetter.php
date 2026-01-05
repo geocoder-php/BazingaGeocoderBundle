@@ -29,46 +29,51 @@ class DummyWithGetter
     #[Id]
     #[GeneratedValue]
     #[Column(type: Types::INTEGER)]
-    private $id;
+    private ?int $id = null;
 
-    #[Column]
+    #[Column(type: Types::FLOAT)]
     #[Latitude]
-    private $latitude;
+    private ?float $latitude = null;
 
-    #[Column]
+    #[Column(type: Types::FLOAT)]
     #[Longitude]
-    private $longitude;
+    private ?float $longitude = null;
 
-    #[Column]
-    private $_address;
+    #[Column(type: Types::STRING)]
+    private ?string $_address = null;
 
-    public function setAddress($address): void
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function setAddress(string $address): void
     {
         $this->_address = $address;
     }
 
     #[Address]
-    public function getAddress()
+    public function getAddress(): ?string
     {
         return $this->_address;
     }
 
-    public function getLatitude()
+    public function getLatitude(): ?float
     {
         return $this->latitude;
     }
 
-    public function setLatitude($latitude): void
+    public function setLatitude(float $latitude): void
     {
         $this->latitude = $latitude;
     }
 
-    public function getLongitude()
+    public function getLongitude(): ?float
     {
         return $this->longitude;
     }
 
-    public function setLongitude($longitude): void
+    public function setLongitude(float $longitude): void
     {
         $this->longitude = $longitude;
     }

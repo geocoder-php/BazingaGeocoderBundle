@@ -9,6 +9,6 @@ bazinga_geocoder:
     providers:
         geoPlugin:
             factory: Bazinga\GeocoderBundle\ProviderFactory\FreeGeoIpFactory
-            cache: 'app.simple_cache'
+            cache: 'acme.cache'
             cache_lifetime: 42
             cache_precision: ~

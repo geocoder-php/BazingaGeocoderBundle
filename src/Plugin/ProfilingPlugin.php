@@ -43,12 +43,12 @@ final class ProfilingPlugin implements Plugin
     {
         $startTime = microtime(true);
 
-        return $next($query)->then(function (Collection $result) use ($query, $startTime) {
+        return $next($query)->then(function (Collection $result) use ($query, $startTime): Collection {
             $duration = (microtime(true) - $startTime) * 1000;
             $this->logQuery($query, $duration, $result);
 
             return $result;
-        }, function (Exception $exception) use ($query, $startTime) {
+        }, function (Exception $exception) use ($query, $startTime): void {
             $duration = (microtime(true) - $startTime) * 1000;
             $this->logQuery($query, $duration, $exception);
 

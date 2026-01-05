@@ -30,7 +30,7 @@ use Symfony\Component\HttpKernel\CacheWarmer\WarmableInterface;
  */
 class CustomTestKernel extends TestKernel implements CompilerPassInterface
 {
-    private $warmupDir;
+    private ?string $warmupDir = null;
 
     public function reboot(?string $warmupDir): void
     {
@@ -54,6 +54,8 @@ class CustomTestKernel extends TestKernel implements CompilerPassInterface
 
     /**
      * Returns the kernel parameters.
+     *
+     * @return array<string, mixed>
      */
     protected function getKernelParameters(): array
     {
@@ -85,14 +87,6 @@ class CustomTestKernel extends TestKernel implements CompilerPassInterface
             'kernel.charset' => $this->getCharset(),
             'kernel.container_class' => $this->getContainerClass(),
         ] + (null !== ($dir = $this->getShareDir()) ? ['kernel.share_dir' => realpath($dir) ?: $dir] : []);
-    }
-
-    /**
-     * @internal
-     */
-    public function setAnnotatedClassCache(array $annotatedClasses): void
-    {
-        file_put_contents(($this->warmupDir ?: $this->getBuildDir()).'/annotations.map', sprintf('<?php return %s;', var_export($annotatedClasses, true)));
     }
 
     // Can be removed after dropping Symfony 5.4

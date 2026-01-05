@@ -25,6 +25,7 @@ final class ConfigurationTest extends TestCase
     public function testGetConfigTreeBuilder(): void
     {
         $config = Yaml::parseFile(__DIR__.'/Fixtures/config.yml');
+        self::assertIsArray($config);
 
         $configuration = new Configuration(true);
         $treeBuilder = $configuration->getConfigTreeBuilder();
@@ -41,6 +42,7 @@ final class ConfigurationTest extends TestCase
     public function testGetConfigTreeBuilderNoDebug(): void
     {
         $config = Yaml::parseFile(__DIR__.'/Fixtures/config.yml');
+        self::assertIsArray($config);
 
         $configuration = new Configuration(false);
         $treeBuilder = $configuration->getConfigTreeBuilder();
