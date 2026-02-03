@@ -26,6 +26,16 @@ final class ClassMetadata
         public readonly ?\ReflectionProperty $latitudeProperty = null,
         public readonly ?\ReflectionProperty $longitudeProperty = null,
         public readonly ?\ReflectionMethod $addressGetter = null,
+        public readonly ?\ReflectionProperty $northProperty = null,
+        public readonly ?\ReflectionProperty $southProperty = null,
+        public readonly ?\ReflectionProperty $eastProperty = null,
+        public readonly ?\ReflectionProperty $westProperty = null,
+        public readonly ?\ReflectionProperty $streetNumberProperty = null,
+        public readonly ?\ReflectionProperty $streetNameProperty = null,
+        public readonly ?\ReflectionProperty $localityProperty = null,
+        public readonly ?\ReflectionProperty $postalCodeProperty = null,
+        public readonly ?\ReflectionProperty $subLocalityProperty = null,
+        public readonly ?\ReflectionProperty $countryProperty = null,
     ) {
     }
 }
