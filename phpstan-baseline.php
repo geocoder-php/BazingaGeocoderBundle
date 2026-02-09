@@ -207,5 +207,12 @@ $ignoreErrors[] = [
     'count' => 1,
     'path' => __DIR__.'/src/ProviderFactory/GeoIP2Factory.php',
 ];
+// See https://github.com/phpstan/phpstan/issues/14067
+$ignoreErrors[] = [
+    'message' => '#^Parameter \\#1 \\$provider of class Bazinga\\\\GeocoderBundle\\\\Mapping\\\\ClassMetadata constructor expects non-empty-string, ReflectionMethod\\|ReflectionProperty\\|non-empty-string given\\.$#',
+    'identifier' => 'argument.type',
+    'count' => 1,
+    'path' => __DIR__.'/src/Mapping/Driver/AttributeDriver.php',
+];
 
 return ['parameters' => ['ignoreErrors' => $ignoreErrors]];

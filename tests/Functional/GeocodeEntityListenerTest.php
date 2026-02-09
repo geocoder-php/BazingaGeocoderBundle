@@ -92,9 +92,9 @@ final class GeocodeEntityListenerTest extends KernelTestCase
                     $orm['enable_lazy_ghost_objects'] = true;
                 }
                 if (\PHP_VERSION_ID >= 80400
-                && version_compare($doctrineBundleVersion, '2.15.0', '>=')
-                && version_compare($doctrineBundleVersion, '3.1.0', '<')
-                && version_compare($ormVersion, '3.4.0', '>=')
+                    && version_compare($doctrineBundleVersion, '2.15.0', '>=')
+                    && version_compare($doctrineBundleVersion, '3.1.0', '<')
+                    && version_compare($ormVersion, '3.4.0', '>=')
                 ) {
                     $orm['enable_native_lazy_objects'] = true;
                 }
@@ -105,6 +105,7 @@ final class GeocodeEntityListenerTest extends KernelTestCase
         });
 
         $kernel->handleOptions($options);
+        $kernel->setClearCacheAfterShutdown(false);
 
         return $kernel;
     }
