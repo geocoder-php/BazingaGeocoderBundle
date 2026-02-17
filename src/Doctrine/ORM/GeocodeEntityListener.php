@@ -107,6 +107,16 @@ final class GeocodeEntityListener
             $result = $results->first();
             $metadata->latitudeProperty?->setValue($entity, $result->getCoordinates()->getLatitude());
             $metadata->longitudeProperty?->setValue($entity, $result->getCoordinates()->getLongitude());
+            $metadata->northProperty?->setValue($entity, $result->getBounds()?->getNorth());
+            $metadata->southProperty?->setValue($entity, $result->getBounds()?->getSouth());
+            $metadata->eastProperty?->setValue($entity, $result->getBounds()?->getEast());
+            $metadata->westProperty?->setValue($entity, $result->getBounds()?->getWest());
+            $metadata->streetNumberProperty?->setValue($entity, $result->getStreetNumber());
+            $metadata->streetNameProperty?->setValue($entity, $result->getStreetName());
+            $metadata->localityProperty?->setValue($entity, $result->getLocality());
+            $metadata->postalCodeProperty?->setValue($entity, $result->getPostalCode());
+            $metadata->subLocalityProperty?->setValue($entity, $result->getSubLocality());
+            $metadata->countryProperty?->setValue($entity, $result->getCountry());
         }
     }
 

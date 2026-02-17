@@ -23,6 +23,22 @@ use Doctrine\ORM\Proxy\DefaultProxyClassNameResolver;
  */
 final class AttributeDriver implements DriverInterface
 {
+    private const PROPERTY_MATRIX = [
+        Attributes\Latitude::class => 'latitudeProperty',
+        Attributes\Longitude::class => 'longitudeProperty',
+        Attributes\Address::class => 'addressProperty',
+        Attributes\North::class => 'northProperty',
+        Attributes\South::class => 'southProperty',
+        Attributes\East::class => 'eastProperty',
+        Attributes\West::class => 'westProperty',
+        Attributes\StreetNumber::class => 'streetNumberProperty',
+        Attributes\StreetName::class => 'streetNameProperty',
+        Attributes\Locality::class => 'localityProperty',
+        Attributes\PostalCode::class => 'postalCodeProperty',
+        Attributes\SubLocality::class => 'subLocalityProperty',
+        Attributes\Country::class => 'countryProperty',
+    ];
+
     public function isGeocodeable(object $object): bool
     {
         $reflection = self::getReflection($object);
@@ -47,12 +63,8 @@ final class AttributeDriver implements DriverInterface
 
         foreach ($reflection->getProperties() as $property) {
             foreach ($property->getAttributes() as $attribute) {
-                if (Attributes\Latitude::class === $attribute->getName()) {
-                    $args['latitudeProperty'] = $property;
-                } elseif (Attributes\Longitude::class === $attribute->getName()) {
-                    $args['longitudeProperty'] = $property;
-                } elseif (Attributes\Address::class === $attribute->getName()) {
-                    $args['addressProperty'] = $property;
+                if (isset(self::PROPERTY_MATRIX[$attribute->getName()])) {
+                    $args[self::PROPERTY_MATRIX[$attribute->getName()]] = $property;
                 }
             }
         }

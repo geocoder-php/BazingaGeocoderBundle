@@ -42,6 +42,26 @@ final class AttributeDriverTest extends TestCase
         self::assertSame('latitude', $metadata->latitudeProperty->getName());
         self::assertNotNull($metadata->longitudeProperty);
         self::assertSame('longitude', $metadata->longitudeProperty->getName());
+        self::assertNotNull($metadata->northProperty);
+        self::assertSame('north', $metadata->northProperty->getName());
+        self::assertNotNull($metadata->southProperty);
+        self::assertSame('south', $metadata->southProperty->getName());
+        self::assertNotNull($metadata->eastProperty);
+        self::assertSame('east', $metadata->eastProperty->getName());
+        self::assertNotNull($metadata->westProperty);
+        self::assertSame('west', $metadata->westProperty->getName());
+        self::assertNotNull($metadata->streetNumberProperty);
+        self::assertSame('streetNumber', $metadata->streetNumberProperty->getName());
+        self::assertNotNull($metadata->streetNameProperty);
+        self::assertSame('streetName', $metadata->streetNameProperty->getName());
+        self::assertNotNull($metadata->localityProperty);
+        self::assertSame('locality', $metadata->localityProperty->getName());
+        self::assertNotNull($metadata->postalCodeProperty);
+        self::assertSame('postalCode', $metadata->postalCodeProperty->getName());
+        self::assertNotNull($metadata->subLocalityProperty);
+        self::assertSame('subLocality', $metadata->subLocalityProperty->getName());
+        self::assertNotNull($metadata->countryProperty);
+        self::assertSame('country', $metadata->countryProperty->getName());
     }
 
     public function testLoadMetadataWithAddressGetter(): void
