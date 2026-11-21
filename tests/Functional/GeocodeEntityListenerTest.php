@@ -72,6 +72,16 @@ final class GeocodeEntityListenerTest extends KernelTestCase
                 $container
                     ->getDefinition('http_client')
                     ->setPublic(true);
+
+                // doctrine/doctrine-bundle < 3.4 has no "use_schema_editor_api" option
+                if (method_exists(Configuration::class, 'setUseSchemaEditorApi')
+                    && method_exists(Schema::class, 'edit')
+                ) {
+                    $container
+                        ->getDefinition('doctrine.orm.default_configuration')
+                        ->removeMethodCall('setUseSchemaEditorApi')
+                        ->addMethodCall('setUseSchemaEditorApi', [true]);
+                }
             }
         });
         $kernel->addTestConfig(static function (ContainerBuilder $container) {
@@ -98,12 +108,6 @@ final class GeocodeEntityListenerTest extends KernelTestCase
                     && version_compare($ormVersion, '3.4.0', '>=')
                 ) {
                     $orm['enable_native_lazy_objects'] = true;
-                }
-                if (method_exists(Configuration::class, 'setUseSchemaEditorApi')
-                    && method_exists(Schema::class, 'edit')
-                    && version_compare($doctrineBundleVersion, '3.4.0', '>=')
-                ) {
-                    $orm['use_schema_editor_api'] = true;
                 }
             }
             $container->prependExtensionConfig('doctrine', [
