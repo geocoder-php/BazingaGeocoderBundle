@@ -21,6 +21,7 @@ use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithStringableG
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\StringableAddress;
 use Composer\InstalledVersions;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -97,6 +98,12 @@ final class GeocodeEntityListenerTest extends KernelTestCase
                     && version_compare($ormVersion, '3.4.0', '>=')
                 ) {
                     $orm['enable_native_lazy_objects'] = true;
+                }
+                if (method_exists(Configuration::class, 'setUseSchemaEditorApi')
+                    && method_exists(Schema::class, 'edit')
+                    && version_compare($doctrineBundleVersion, '3.4.0', '>=')
+                ) {
+                    $orm['use_schema_editor_api'] = true;
                 }
             }
             $container->prependExtensionConfig('doctrine', [

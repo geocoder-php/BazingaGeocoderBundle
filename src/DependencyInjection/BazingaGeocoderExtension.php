@@ -36,6 +36,26 @@ use Symfony\Component\DependencyInjection\Reference;
 
 /**
  * @author William Durand <william.durand1@gmail.com>.
+ *
+ * @phpstan-type PluginConfig array{reference: array{enabled: bool, id: non-empty-string}}
+ * @phpstan-type ProviderConfig array{
+ *     factory: non-empty-string,
+ *     options: array<mixed>,
+ *     cache: string|null,
+ *     cache_lifetime: int|string|null,
+ *     cache_precision: int|string|null,
+ *     limit: int|string|null,
+ *     locale: string|null,
+ *     logger: string|null,
+ *     aliases: list<string>,
+ *     plugins: list<PluginConfig>,
+ * }
+ * @phpstan-type BundleConfig array{
+ *     providers: array<string, ProviderConfig>,
+ *     profiling: array{enabled: bool},
+ *     fake_ip: array{enabled: bool, local_ip: string|null, ip: string|null, use_faker: bool},
+ *     orm: array{enabled: bool},
+ * }
  */
 class BazingaGeocoderExtension extends Extension
 {
@@ -46,6 +66,7 @@ class BazingaGeocoderExtension extends Extension
     {
         $processor = new Processor();
         $configuration = $this->getConfiguration($configs, $container);
+        /** @var BundleConfig $config */
         $config = $processor->processConfiguration($configuration, $configs);
 
         $loader = new PhpFileLoader($container, new FileLocator(__DIR__.'/../../config'));
@@ -83,7 +104,7 @@ class BazingaGeocoderExtension extends Extension
     }
 
     /**
-     * @param array<mixed, mixed> $config
+     * @param BundleConfig $config
      */
     private function loadProviders(ContainerBuilder $container, array $config): void
     {
@@ -124,7 +145,7 @@ class BazingaGeocoderExtension extends Extension
     /**
      * Configure plugins for a client.
      *
-     * @param array<mixed> $config
+     * @param ProviderConfig $config
      *
      * @return list<Reference>
      */
