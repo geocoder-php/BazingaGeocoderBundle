@@ -21,6 +21,7 @@ use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\DummyWithStringableG
 use Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity\StringableAddress;
 use Composer\InstalledVersions;
 use Doctrine\Bundle\DoctrineBundle\DoctrineBundle;
+use Doctrine\DBAL\Schema\Schema;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\SchemaTool;
@@ -71,6 +72,16 @@ final class GeocodeEntityListenerTest extends KernelTestCase
                 $container
                     ->getDefinition('http_client')
                     ->setPublic(true);
+
+                // doctrine/doctrine-bundle < 3.4 has no "use_schema_editor_api" option
+                if (method_exists(Configuration::class, 'setUseSchemaEditorApi')
+                    && method_exists(Schema::class, 'edit')
+                ) {
+                    $container
+                        ->getDefinition('doctrine.orm.default_configuration')
+                        ->removeMethodCall('setUseSchemaEditorApi')
+                        ->addMethodCall('setUseSchemaEditorApi', [true]);
+                }
             }
         });
         $kernel->addTestConfig(static function (ContainerBuilder $container) {

@@ -34,92 +34,8 @@ $ignoreErrors[] = [
     'path' => __DIR__.'/src/DataCollector/GeocoderDataCollector.php',
 ];
 $ignoreErrors[] = [
-    'message' => '#^Argument of an invalid type mixed supplied for foreach, only iterables are supported\\.$#',
-    'identifier' => 'foreach.nonIterable',
-    'count' => 3,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Binary operation "\\." between \'bazinga_geocoder…\' and mixed results in an error\\.$#',
-    'identifier' => 'binaryOp.invalid',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Cannot access offset \'aliases\' on mixed\\.$#',
-    'identifier' => 'offsetAccess.nonOffsetAccessible',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Cannot access offset \'enabled\' on mixed\\.$#',
-    'identifier' => 'offsetAccess.nonOffsetAccessible',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Cannot access offset \'factory\' on mixed\\.$#',
-    'identifier' => 'offsetAccess.nonOffsetAccessible',
-    'count' => 5,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Cannot access offset \'id\' on mixed\\.$#',
-    'identifier' => 'offsetAccess.nonOffsetAccessible',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Cannot access offset \'options\' on mixed\\.$#',
-    'identifier' => 'offsetAccess.nonOffsetAccessible',
-    'count' => 4,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Cannot access offset \'reference\' on mixed\\.$#',
-    'identifier' => 'offsetAccess.nonOffsetAccessible',
-    'count' => 2,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Cannot call static method validate\\(\\) on mixed\\.$#',
-    'identifier' => 'staticMethod.nonObject',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
     'message' => '#^Cannot cast mixed to string\\.$#',
     'identifier' => 'cast.string',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#1 \\$alias of method Symfony\\\\Component\\\\DependencyInjection\\\\ContainerBuilder\\:\\:setAlias\\(\\) expects string, mixed given\\.$#',
-    'identifier' => 'argument.type',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#1 \\$callback of function array_map expects \\(callable\\(mixed\\)\\: mixed\\)\\|null, Closure\\(string\\)\\: Symfony\\\\Component\\\\DependencyInjection\\\\Reference given\\.$#',
-    'identifier' => 'argument.type',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#1 \\$factoryServiceId of static method Bazinga\\\\GeocoderBundle\\\\DependencyInjection\\\\Compiler\\\\FactoryValidatorPass\\:\\:addFactoryServiceId\\(\\) expects non\\-empty\\-string, mixed given\\.$#',
-    'identifier' => 'argument.type',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#1 \\$id of class Symfony\\\\Component\\\\DependencyInjection\\\\Reference constructor expects string, mixed given\\.$#',
-    'identifier' => 'argument.type',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#1 \\$id of method Symfony\\\\Component\\\\DependencyInjection\\\\ContainerBuilder\\:\\:getDefinition\\(\\) expects string, mixed given\\.$#',
-    'identifier' => 'argument.type',
     'count' => 1,
     'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
 ];
@@ -127,12 +43,6 @@ $ignoreErrors[] = [
     'message' => '#^Parameter \\#1 \\$object_or_class of function class_implements expects object\\|string, mixed given\\.$#',
     'identifier' => 'argument.type',
     'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#1 \\$options of method Bazinga\\\\GeocoderBundle\\\\DependencyInjection\\\\BazingaGeocoderExtension\\:\\:findReferences\\(\\) expects array\\<mixed\\>, mixed given\\.$#',
-    'identifier' => 'argument.type',
-    'count' => 2,
     'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
 ];
 $ignoreErrors[] = [
@@ -144,24 +54,6 @@ $ignoreErrors[] = [
 $ignoreErrors[] = [
     'message' => '#^Parameter \\#2 \\$array of function array_key_exists expects array, array\\|bool\\|float\\|int\\|string\\|UnitEnum\\|null given\\.$#',
     'identifier' => 'argument.type',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#2 \\$config of method Bazinga\\\\GeocoderBundle\\\\DependencyInjection\\\\BazingaGeocoderExtension\\:\\:configureProviderPlugins\\(\\) expects array\\<mixed\\>, mixed given\\.$#',
-    'identifier' => 'argument.type',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, mixed given\\.$#',
-    'identifier' => 'argument.type',
-    'count' => 1,
-    'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
-];
-$ignoreErrors[] = [
-    'message' => '#^Part \\$providerName \\(mixed\\) of encapsed string cannot be cast to string\\.$#',
-    'identifier' => 'encapsedStringPart.nonString',
     'count' => 1,
     'path' => __DIR__.'/src/DependencyInjection/BazingaGeocoderExtension.php',
 ];
@@ -206,13 +98,6 @@ $ignoreErrors[] = [
     'identifier' => 'argument.type',
     'count' => 1,
     'path' => __DIR__.'/src/ProviderFactory/GeoIP2Factory.php',
-];
-// See https://github.com/phpstan/phpstan/issues/14067
-$ignoreErrors[] = [
-    'message' => '#^Parameter \\#1 \\$provider of class Bazinga\\\\GeocoderBundle\\\\Mapping\\\\ClassMetadata constructor expects non-empty-string, ReflectionMethod\\|ReflectionProperty\\|non-empty-string given\\.$#',
-    'identifier' => 'argument.type',
-    'count' => 1,
-    'path' => __DIR__.'/src/Mapping/Driver/AttributeDriver.php',
 ];
 
 return ['parameters' => ['ignoreErrors' => $ignoreErrors]];

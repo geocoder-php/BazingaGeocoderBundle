@@ -15,7 +15,6 @@ doctrine:
                 type: attribute
                 dir: '%kernel.project_dir%/tests/Functional/Fixtures/Entity'
                 prefix: 'Bazinga\GeocoderBundle\Tests\Functional\Fixtures\Entity'
-                alias: App
 
 bazinga_geocoder:
     profiling:
